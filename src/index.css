@@ -1,3 +1,10 @@
 body {
+  margin: 0;
+  padding: 0;
   background-color: #202026;
+  font-family: Roboto;
+}
+
+.primary-text-color {
+  color: #6f6f6f;
 }

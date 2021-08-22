@@ -1,9 +1,11 @@
 import "./App.css";
 
+import Homepage from "./pages/homepage.jsx";
+
 function App() {
   return (
     <div className="App">
-      <h1>App loading...</h1>
+      <Homepage />
     </div>
   );
 }
