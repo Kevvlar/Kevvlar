@@ -22,4 +22,9 @@
   padding: 10px 24px;
   background-color: transparent;
   color: #fff;
+  text-decoration: none;
+}
+
+.navbar-button:hover {
+  background-color: rgb(29, 29, 29);
 }

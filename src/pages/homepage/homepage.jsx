@@ -1,7 +1,7 @@
 import React from "react";
 
-import NavBar from "../components/navbar/navbar.component";
-import Directory from "../components/directory/directory.component";
+import NavBar from "../../components/navbar/navbar.component";
+import Directory from "../../components/directory/directory.component";
 
 import "./homepage.styles.css";
 

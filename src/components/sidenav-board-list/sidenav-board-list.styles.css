@@ -1,0 +1,19 @@
+.side-nav-board-list {
+  overflow: "auto";
+  display: "flex";
+  flex-direction: column-reverse;
+}
+
+.sidenav-add-new-board-button {
+  font-size: 14px;
+  border-radius: 10px;
+  margin: 15px;
+  color: #fff;
+  padding: 15px;
+  background-color: #2e8e6e;
+  text-align: center;
+}
+
+.sidenav-add-new-board-button:hover {
+  background-color: #3bc768;
+}
