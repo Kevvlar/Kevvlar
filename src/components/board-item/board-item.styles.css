@@ -1,0 +1,10 @@
+.sidenav-board-item {
+  padding: 15px;
+  max-width: 200px;
+  overflow: hidden;
+  color: #fff;
+}
+
+.sidenav-board-item:hover {
+  background-color: #296dce;
+}
