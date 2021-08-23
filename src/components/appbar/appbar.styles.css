@@ -31,11 +31,12 @@
 }
 
 .appbar-input {
-  color: #fff;
+  color: #dedede;
   border: none;
-  font-size: 14px;
+  font-size: 16px;
   border-radius: 3px;
   background: transparent;
+  padding: 0;
 }
 
 .appbar-logo {
