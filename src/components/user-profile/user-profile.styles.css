@@ -2,12 +2,14 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-left: 10px;
 }
 .user-profile-image {
   width: 25px;
   height: 25px;
   margin-right: 10px;
   border-radius: 15px;
+  background-color: tomato;
 }
 
 .user-profile-name {
