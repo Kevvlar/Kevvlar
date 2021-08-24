@@ -1,0 +1,23 @@
+.notification-icon:hover {
+  color: red;
+}
+
+.notification-icon {
+  font-size: 30px;
+  color: #636a71;
+}
+
+.notification-icon-number {
+  position: absolute;
+  top: 1px;
+  right: 156px;
+  padding: 5px 10px;
+  border-radius: 100%;
+  background: red;
+  color: white;
+  font-size: 13px;
+}
+
+.notification-icon-number:empty {
+  display: none;
+}
