@@ -43,3 +43,9 @@
   font-weight: 700;
   color: #ffffff3b;
 }
+
+.appbar-user-menu-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
