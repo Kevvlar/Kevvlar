@@ -46,5 +46,7 @@
 }
 
 .appbar-user-menu-container {
-  right: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
