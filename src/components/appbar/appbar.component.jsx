@@ -2,6 +2,7 @@ import React from "react";
 import { FaBars } from "react-icons/fa";
 
 import NotificationIcon from "../notification-icon/notification-icon.component";
+import UserProfile from "../user-profile/user-profile.component";
 
 import "./appbar.styles.css";
 
@@ -19,7 +20,7 @@ const AppBar = ({ onClick }) => (
       <p className="appbar-logo primary-text-color">KEVVLAR</p>
       <div className="appbar-user-menu-container">
         <NotificationIcon />
-        <p className="appbar-logo primary-text-color">Profile</p>
+        <UserProfile />
       </div>
     </div>
   </header>
