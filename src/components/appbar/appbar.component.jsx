@@ -13,11 +13,9 @@ const AppBar = ({ onClick }) => (
         <div onClick={onClick} className="appbar-ham-icon-container">
           <FaBars className="appbar-ham-icon" />
         </div>
-        <p>
-          <input className="appbar-input" type="text" value="Some text here" />
-        </p>
+        <input className="appbar-input" type="text" placeholder="Enter Board" />
       </div>
-      <p className="appbar-logo primary-text-color">KEVVLAR</p>
+      <div className="appbar-logo primary-text-color">KEVVLAR</div>
       <div className="appbar-user-menu-container">
         <NotificationIcon />
         <UserProfile />
