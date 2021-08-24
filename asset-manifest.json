@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Kevvlar/static/css/main.ca051b23.chunk.css",
+    "main.css": "/Kevvlar/static/css/main.a1dcb2cb.chunk.css",
     "main.js": "/Kevvlar/static/js/main.ba2ff402.chunk.js",
     "main.js.map": "/Kevvlar/static/js/main.ba2ff402.chunk.js.map",
     "runtime-main.js": "/Kevvlar/static/js/runtime-main.4f37c43a.js",
@@ -8,13 +8,13 @@
     "static/js/2.ed721a2f.chunk.js": "/Kevvlar/static/js/2.ed721a2f.chunk.js",
     "static/js/2.ed721a2f.chunk.js.map": "/Kevvlar/static/js/2.ed721a2f.chunk.js.map",
     "index.html": "/Kevvlar/index.html",
-    "static/css/main.ca051b23.chunk.css.map": "/Kevvlar/static/css/main.ca051b23.chunk.css.map",
+    "static/css/main.a1dcb2cb.chunk.css.map": "/Kevvlar/static/css/main.a1dcb2cb.chunk.css.map",
     "static/js/2.ed721a2f.chunk.js.LICENSE.txt": "/Kevvlar/static/js/2.ed721a2f.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.4f37c43a.js",
     "static/js/2.ed721a2f.chunk.js",
-    "static/css/main.ca051b23.chunk.css",
+    "static/css/main.a1dcb2cb.chunk.css",
     "static/js/main.ba2ff402.chunk.js"
   ]
 }
