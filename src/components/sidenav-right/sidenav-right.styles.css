@@ -88,12 +88,6 @@
   position: relative;
 }
 
-.sidenav-right-task-holder {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .sidenav-right-logout {
   cursor: pointer;
   bottom: 0;
@@ -102,21 +96,4 @@
   margin: 10px;
   color: #fff;
   border-bottom: 1px solid #a5a5a5;
-}
-
-.task-item {
-  color: #fff;
-  padding: 10px;
-  font-size: 14px;
-}
-
-.task-item-board {
-  color: #03a9f4;
-  font-size: 12px;
-}
-
-.task-cancel-icon {
-  color: red;
-  cursor: pointer;
-  padding-right: 10px;
 }

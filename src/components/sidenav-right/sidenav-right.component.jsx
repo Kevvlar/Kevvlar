@@ -1,6 +1,8 @@
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { FaEllipsisH, FaThLarge, FaMinus, FaTimes } from "react-icons/fa";
+import { FaEllipsisH, FaThLarge, FaMinus } from "react-icons/fa";
+
+import TaskItem from "../task-item/task-item.component";
 
 import "./sidenav-right.styles.css";
 
@@ -21,76 +23,13 @@ const RightSideNav = () => (
     <div className="sidenav-right-menu-activity">
       <div className="sidenav-right-activity-title">Tasks due</div>
       <InfiniteScroll dataLength={35} hasMore={true} height={350}>
-        <div className="sidenav-right-task-holder">
-          <div className="task-item">
-            Card title - 08/17/2021
-            <div className="task-item-board">Feature 3</div>
-          </div>
-          <FaTimes className="task-cancel-icon" />
-        </div>
-        <div className="sidenav-right-task-holder">
-          <div className="task-item">
-            Card title - 08/17/2021
-            <div className="task-item-board">Feature 3</div>
-          </div>
-          <FaTimes className="task-cancel-icon" />
-        </div>
-        <div className="sidenav-right-task-holder">
-          <div className="task-item">
-            Card title - 08/17/2021
-            <div className="task-item-board">Feature 3</div>
-          </div>
-          <FaTimes className="task-cancel-icon" />
-        </div>
-        <div className="sidenav-right-task-holder">
-          <div className="task-item">
-            Card title - 08/17/2021
-            <div className="task-item-board">Feature 3</div>
-          </div>
-          <FaTimes className="task-cancel-icon" />
-        </div>
-        <div className="sidenav-right-task-holder">
-          <div className="task-item">
-            Card title - 08/17/2021
-            <div className="task-item-board">Feature 3</div>
-          </div>
-          <FaTimes className="task-cancel-icon" />
-        </div>
-        <div className="sidenav-right-task-holder">
-          <div className="task-item">
-            Card title - 08/17/2021
-            <div className="task-item-board">Feature 3</div>
-          </div>
-          <FaTimes className="task-cancel-icon" />
-        </div>
-        <div className="sidenav-right-task-holder">
-          <div className="task-item">
-            Card title - 08/17/2021
-            <div className="task-item-board">Feature 3</div>
-          </div>
-          <FaTimes className="task-cancel-icon" />
-        </div>
-        <div className="sidenav-right-task-holder">
-          <div className="task-item">
-            Card title - 08/17/2021
-            <div className="task-item-board">Feature 3</div>
-          </div>
-          <FaTimes className="task-cancel-icon" />
-        </div>
-        <div className="sidenav-right-task-holder">
-          <div className="task-item">
-            Card title - 08/17/2021
-            <div className="task-item-board">Feature 3</div>
-          </div>
-          <FaTimes className="task-cancel-icon" />
-        </div>
-        <div className="sidenav-right-task-holder">
-          <div className="task-item">
-            Card title - 08/17/2021
-            <div className="task-item-board">Feature 3</div>
-          </div>
-          <FaTimes className="task-cancel-icon" />
-        </div>
+        <TaskItem />
+        <TaskItem />
+        <TaskItem />
+        <TaskItem />
+        <TaskItem />
+        <TaskItem />
+        <TaskItem />
       </InfiniteScroll>
       <div className="sidenav-right-logout">Log out</div>
     </div>
