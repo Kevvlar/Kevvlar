@@ -35,6 +35,10 @@
   outline: none;
 }
 
+.sidenav-right-more-icon:hover {
+  color: #747474;
+}
+
 .sidenav-right-grid-icon {
   font-size: 20px;
   font-weight: 800;
@@ -46,6 +50,10 @@
   outline: none;
 }
 
+.sidenav-right-grid-icon:hover {
+  color: #747474;
+}
+
 .sidenav-right-minus-icon {
   font-size: 20px;
   font-weight: 800;
@@ -55,6 +63,10 @@
   background: none;
   border: none;
   outline: none;
+}
+
+.sidenav-right-minus-icon:hover {
+  color: #747474;
 }
 
 .sidenav-right-menu-activity {
