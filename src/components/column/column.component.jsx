@@ -8,7 +8,7 @@ import "./column.styles.css";
 const Column = ({ length }) => (
   <div className="column">
     <ColumnHeader />
-    <div>
+    <div className="card-container">
       <Card />
       <Card />
       <Card />
