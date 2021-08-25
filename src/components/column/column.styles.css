@@ -1,4 +1,6 @@
 .column {
-  padding: 15px;
-  overflow: auto;
+  height: 100%;
+  display: inline-block;
+  vertical-align: top;
+  white-space: normal;
 }
