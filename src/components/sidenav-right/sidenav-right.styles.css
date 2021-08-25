@@ -1,0 +1,11 @@
+.sidenav-right-container {
+  position: fixed;
+  right: 0;
+  top: 50px;
+  height: 80%;
+  background-color: #2a323a;
+  transition: right 300ms ease-out;
+  display: flex;
+  flex-direction: column;
+  width: 290px;
+}
