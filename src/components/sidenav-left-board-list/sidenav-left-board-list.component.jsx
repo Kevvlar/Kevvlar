@@ -3,10 +3,10 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 import BoardItem from "../board-item/board-item.component";
 
-import "./sidenav-board-list.styles.css";
+import "./sidenav-left-board-list.styles.css";
 
-const SideNavBoardList = () => (
-  <div className="side-nav-board-list">
+const LeftSideNavBoardList = () => (
+  <div className="sidenav-left-board-list">
     <InfiniteScroll dataLength={35} hasMore={true} height={300}>
       <BoardItem boardName="Board 1" />
       <BoardItem boardName="Board 2" />
@@ -21,8 +21,8 @@ const SideNavBoardList = () => (
       <BoardItem boardName="Board 11" />
       <BoardItem boardName="Board 12" />
     </InfiniteScroll>
-    <div className="sidenav-add-new-board-button">+ Add new board</div>
+    <div className="sidenav-left-add-new-board-button">+ Add new board</div>
   </div>
 );
 
-export default SideNavBoardList;
+export default LeftSideNavBoardList;

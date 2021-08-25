@@ -1,10 +1,10 @@
-.side-nav-board-list {
+.sidenav-left-board-list {
   overflow: "auto";
   display: "flex";
   flex-direction: column-reverse;
 }
 
-.sidenav-add-new-board-button {
+.sidenav-left-add-new-board-button {
   font-size: 14px;
   border-radius: 10px;
   margin: 15px;
@@ -14,6 +14,6 @@
   text-align: center;
 }
 
-.sidenav-add-new-board-button:hover {
+.sidenav-left-add-new-board-button:hover {
   background-color: #3bc768;
 }

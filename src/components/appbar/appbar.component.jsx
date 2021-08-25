@@ -6,11 +6,11 @@ import UserProfile from "../user-profile/user-profile.component";
 
 import "./appbar.styles.css";
 
-const AppBar = ({ onClick }) => (
+const AppBar = ({ onClickMenu }) => (
   <header>
     <div className="appbar-container">
       <div className="appbar-menu-container">
-        <div onClick={onClick} className="appbar-ham-icon-container">
+        <div onClick={onClickMenu} className="appbar-ham-icon-container">
           <FaBars className="appbar-ham-icon" />
         </div>
         <input className="appbar-input" type="text" placeholder="Enter Board" />
