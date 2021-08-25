@@ -1,6 +1,7 @@
 .column {
   height: 100%;
-  display: inline-block;
-  vertical-align: top;
-  white-space: normal;
+  display: flex;
+  width: 300px;
+  flex-direction: column;
+  padding: 15px;
 }
