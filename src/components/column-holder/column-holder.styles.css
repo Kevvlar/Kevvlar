@@ -1,5 +1,7 @@
 .column-holder {
+  height: 590px;
+  width: 500px;
   display: flex;
-  width: 100%;
-  flex-direction: column;
+  flex-direction: row;
+  padding-bottom: 20px;
 }

@@ -1,6 +1,7 @@
 .column-header-container {
   display: flex;
   width: 300px;
+  height: 100%;
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
