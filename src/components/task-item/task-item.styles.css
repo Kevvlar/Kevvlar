@@ -1,0 +1,22 @@
+.task-item-holder {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-item {
+  color: #fff;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.task-item-board {
+  color: #03a9f4;
+  font-size: 12px;
+}
+
+.task-cancel-icon {
+  color: red;
+  cursor: pointer;
+  padding-right: 10px;
+}

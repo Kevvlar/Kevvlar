@@ -1,0 +1,99 @@
+.sidenav-right-container {
+  position: fixed;
+  right: 0;
+  top: 50px;
+  height: 80%;
+  background-color: #2a323a;
+  transition: right 300ms ease-out;
+  display: flex;
+  flex-direction: column;
+  width: 290px;
+}
+
+.sidenav-right-menu-icons-container {
+  height: 8%;
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.sidenav-right-menu-title {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #565656;
+}
+
+.sidenav-right-more-icon {
+  font-size: 20px;
+  padding-left: 10px;
+  font-weight: 800;
+  color: #cecece;
+  text-decoration: none;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.sidenav-right-more-icon:hover {
+  color: #747474;
+}
+
+.sidenav-right-grid-icon {
+  font-size: 20px;
+  font-weight: 800;
+  color: #cecece;
+  padding-right: 0;
+  text-decoration: none;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.sidenav-right-grid-icon:hover {
+  color: #747474;
+}
+
+.sidenav-right-minus-icon {
+  font-size: 20px;
+  font-weight: 800;
+  color: #cecece;
+  padding-right: 0;
+  text-decoration: none;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.sidenav-right-minus-icon:hover {
+  color: #747474;
+}
+
+.sidenav-right-menu-activity {
+  height: 100%;
+  margin: 15px;
+  margin-top: 25px;
+  border-radius: 0;
+  border-top: 1px solid #e0e0e0;
+}
+
+.sidenav-right-activity-title {
+  top: -15px;
+  left: 15px;
+  width: 65px;
+  padding: 5px;
+  color: #ababab;
+  font-size: 14px;
+  background: #2a323a;
+  position: relative;
+}
+
+.sidenav-right-logout {
+  cursor: pointer;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  margin: 10px;
+  color: #fff;
+  border-bottom: 1px solid #a5a5a5;
+}

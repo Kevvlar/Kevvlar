@@ -3,9 +3,9 @@ import { FaBell } from "react-icons/fa";
 
 import "./notification-icon.styles.css";
 
-const NotificationIcon = () => (
+const NotificationIcon = ({ onNotificationClick }) => (
   <div className="notification-icon-container">
-    <FaBell className="notification-icon" />
+    <FaBell onClick={onNotificationClick} className="notification-icon" />
   </div>
 );
 
