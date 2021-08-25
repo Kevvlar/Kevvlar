@@ -8,7 +8,7 @@ import "./sidenav-left.styles.css";
 const LeftSideNav = ({ hideLeftSideNav }) => {
   return (
     <nav className="sidenav-left-container">
-      <SideNavHeader hideSideNav={hideLeftSideNav} />
+      <SideNavHeader hideLeftSideNav={hideLeftSideNav} />
       <div className="sidenav-left-board-holder">
         <div className="sidenav-left-board-header">Boards</div>
         <SideNavBoardList />

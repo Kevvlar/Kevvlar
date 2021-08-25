@@ -6,7 +6,7 @@ import UserProfile from "../user-profile/user-profile.component";
 
 import "./appbar.styles.css";
 
-const AppBar = ({ onClickMenu }) => (
+const AppBar = ({ onClickMenu, onNotificationClick }) => (
   <header>
     <div className="appbar-container">
       <div className="appbar-menu-container">
@@ -17,7 +17,7 @@ const AppBar = ({ onClickMenu }) => (
       </div>
       <div className="appbar-logo primary-text-color">KEVVLAR</div>
       <div className="appbar-user-menu-container">
-        <NotificationIcon />
+        <NotificationIcon onNotificationClick={onNotificationClick} />
         <UserProfile />
       </div>
     </div>

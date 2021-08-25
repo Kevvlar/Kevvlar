@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import AppBar from "../../components/appbar/appbar.component";
 import LeftSideNav from "../../components/sidenav-left/sidenav-left.component";
+import RightSideNav from "../../components/sidenav-right/sidenav-right.component";
 
 import "./todopage.styles.css";
 
@@ -10,6 +11,7 @@ class Todo extends Component {
     super();
     this.state = {
       leftSideBar: false,
+      sideBarRight: false,
     };
   }
 
@@ -21,13 +23,25 @@ class Todo extends Component {
     this.setState({ leftSideBar: false });
   };
 
+  handleNotificationClick = () => {
+    if (this.state.sideBarRight === false) {
+      this.setState({ sideBarRight: !false });
+    } else {
+      this.setState({ sideBarRight: false });
+    }
+  };
+
   render() {
     return (
       <div className="todopage">
-        <AppBar onClickMenu={this.handleMenuClick} />
+        <AppBar
+          onNotificationClick={this.handleNotificationClick}
+          onClickMenu={this.handleMenuClick}
+        />
         {this.state.leftSideBar ? (
           <LeftSideNav hideLeftSideNav={this.handleHideLeftSideNav} />
         ) : null}
+        {this.state.sideBarRight ? <RightSideNav /> : null}
         <p>Main app goes here ...</p>
       </div>
     );
