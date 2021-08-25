@@ -9,3 +9,102 @@
   flex-direction: column;
   width: 290px;
 }
+
+.sidenav-right-menu-icons-container {
+  height: 8%;
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.sidenav-right-menu-title {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #565656;
+}
+
+.sidenav-right-more-icon {
+  font-size: 20px;
+  padding-left: 10px;
+  font-weight: 800;
+  color: #cecece;
+  text-decoration: none;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.sidenav-right-grid-icon {
+  font-size: 20px;
+  font-weight: 800;
+  color: #cecece;
+  padding-right: 0;
+  text-decoration: none;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.sidenav-right-minus-icon {
+  font-size: 20px;
+  font-weight: 800;
+  color: #cecece;
+  padding-right: 0;
+  text-decoration: none;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.sidenav-right-menu-activity {
+  height: 100%;
+  margin: 15px;
+  margin-top: 25px;
+  border-radius: 0;
+  border-top: 1px solid #e0e0e0;
+}
+
+.sidenav-right-activity-title {
+  top: -15px;
+  left: 15px;
+  width: 65px;
+  padding: 5px;
+  color: #ababab;
+  font-size: 14px;
+  background: #2a323a;
+  position: relative;
+}
+
+.sidenav-right-task-holder {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidenav-right-logout {
+  cursor: pointer;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  margin: 10px;
+  color: #fff;
+  border-bottom: 1px solid #a5a5a5;
+}
+
+.task-item {
+  color: #fff;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.task-item-board {
+  color: #03a9f4;
+  font-size: 12px;
+}
+
+.task-cancel-icon {
+  color: red;
+  cursor: pointer;
+  padding-right: 10px;
+}
