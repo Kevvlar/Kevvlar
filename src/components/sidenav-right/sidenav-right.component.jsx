@@ -1,8 +1,7 @@
 import React from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { FaEllipsisH, FaThLarge, FaMinus } from "react-icons/fa";
 
-import TaskItem from "../task-item/task-item.component";
+import TaskList from "../task-list/task-list.component";
 
 import "./sidenav-right.styles.css";
 
@@ -22,15 +21,7 @@ const RightSideNav = () => (
     </div>
     <div className="sidenav-right-menu-activity">
       <div className="sidenav-right-activity-title">Tasks due</div>
-      <InfiniteScroll dataLength={35} hasMore={true} height={350}>
-        <TaskItem />
-        <TaskItem />
-        <TaskItem />
-        <TaskItem />
-        <TaskItem />
-        <TaskItem />
-        <TaskItem />
-      </InfiniteScroll>
+      <TaskList length={20} />
       <div className="sidenav-right-logout">Log out</div>
     </div>
   </nav>
