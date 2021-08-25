@@ -21,25 +21,29 @@ const RightSideNav = () => (
       <div className="sidenav-right-activity-title">Tasks due</div>
       <div className="sidenav-right-task-holder">
         <div className="task-item">
-          Card title - 08/17/2021 <div class="task-item-board">Feature 3</div>
+          Card title - 08/17/2021
+          <div className="task-item-board">Feature 3</div>
         </div>
         <FaTimes className="task-cancel-icon" />
       </div>
       <div className="sidenav-right-task-holder">
         <div className="task-item">
-          Card title - 08/17/2021 <div class="task-item-board">Feature 3</div>
+          Card title - 08/17/2021
+          <div className="task-item-board">Feature 3</div>
         </div>
         <FaTimes className="task-cancel-icon" />
       </div>
       <div className="sidenav-right-task-holder">
         <div className="task-item">
-          Card title - 08/17/2021 <div class="task-item-board">Feature 3</div>
+          Card title - 08/17/2021
+          <div className="task-item-board">Feature 3</div>
         </div>
         <FaTimes className="task-cancel-icon" />
       </div>
       <div className="sidenav-right-task-holder">
         <div className="task-item">
-          Card title - 08/17/2021 <div class="task-item-board">Feature 3</div>
+          Card title - 08/17/2021{" "}
+          <div className="task-item-board">Feature 3</div>
         </div>
         <FaTimes className="task-cancel-icon" />
       </div>
