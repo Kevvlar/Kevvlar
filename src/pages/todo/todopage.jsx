@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import AppBar from "../../components/appbar/appbar.component";
-import SideNav from "../../components/sidenav/sidenav.component";
+import LeftSideNav from "../../components/sidenav-left/sidenav-left.component";
 
 import "./todopage.styles.css";
 
@@ -9,24 +9,24 @@ class Todo extends Component {
   constructor() {
     super();
     this.state = {
-      sideBar: false,
+      leftSideBar: false,
     };
   }
 
-  handleClick = () => {
-    this.setState({ sideBar: !false });
+  handleMenuClick = () => {
+    this.setState({ leftSideBar: !false });
   };
 
-  handleHideSideNav = () => {
-    this.setState({ sideBar: false });
+  handleHideLeftSideNav = () => {
+    this.setState({ leftSideBar: false });
   };
 
   render() {
     return (
       <div className="todopage">
-        <AppBar onClick={this.handleClick} />
-        {this.state.sideBar ? (
-          <SideNav hideSideNav={this.handleHideSideNav} />
+        <AppBar onClickMenu={this.handleMenuClick} />
+        {this.state.leftSideBar ? (
+          <LeftSideNav hideLeftSideNav={this.handleHideLeftSideNav} />
         ) : null}
         <p>Main app goes here ...</p>
       </div>
