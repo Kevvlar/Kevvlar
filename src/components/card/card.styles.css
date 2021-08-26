@@ -7,6 +7,10 @@
   background-color: #343d46;
 }
 
+.card:hover {
+  box-shadow: 0 0 6px 1px rgb(111 206 235 / 60%);
+}
+
 .card-inner {
   width: 100%;
   padding-left: 15px;
