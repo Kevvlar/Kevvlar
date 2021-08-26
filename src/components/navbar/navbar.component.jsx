@@ -7,7 +7,7 @@ const NavBar = ({ menuItem }) => (
   <header>
     <div className="navbar-container">
       <p className="navbar-logo primary-text-color">KEVVLAR</p>
-      <Link className="navbar-button" to="/app">
+      <Link className="navbar-button" to="/signup">
         sign up
       </Link>
     </div>
