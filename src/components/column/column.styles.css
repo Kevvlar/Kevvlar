@@ -10,3 +10,11 @@
   height: 100%;
   overflow: auto;
 }
+
+.card-container::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-container {
+  height: calc(100% - 140px);
+}
