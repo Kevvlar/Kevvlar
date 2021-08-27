@@ -1,0 +1,20 @@
+.segment-section-title {
+  color: #b5b5b5;
+}
+
+.segment-holder {
+  display: flex;
+  padding: 50px;
+}
+
+.segment-section-holder {
+  padding: 10px;
+}
+
+.padding-top {
+  padding: 50px 0;
+}
+
+.section-margin {
+  margin-top: 7em;
+}

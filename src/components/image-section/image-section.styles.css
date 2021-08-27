@@ -1,0 +1,7 @@
+.image-section-holder {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: left;
+	padding: 50px;
+}

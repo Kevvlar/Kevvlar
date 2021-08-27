@@ -8,7 +8,7 @@ function Greeting() {
   const onClick = () => setShowDiv(true);
 
   return (
-    <div className="greeting-container">
+    <div className="greeting-container section-margin">
       <h2 className="greeting-heading">Simple. Fast. Clean.</h2>
       <h5 className="greeting-main-text primary-text-color">
         Everyone could use some better organization, so we built an app just for
@@ -22,16 +22,9 @@ function Greeting() {
           Pricing
         </div>
       </div>
-      {showDiv ? <Donate /> : null}
     </div>
   );
 }
 
-const Donate = () => (
-  <div>
-    <p className="greeting-donate-text">Free! But donations are appreciated.</p>
-    <button className="greeting-donate-button">Donate</button>
-  </div>
-);
 
 export default Greeting;
