@@ -9,7 +9,7 @@
 .login-content {
   min-width: 200px;
   max-width: 350px;
-  background: #fff;
+  background: #343d46;
   border-radius: 10px;
   padding: 50px 85px;
 }
@@ -19,8 +19,8 @@
   margin: 0;
   padding: 0;
   font-weight: 900;
-  color: #222;
-  font-family: montserrat;
+  color: #fff;
+  font-family: Roboto;
   font-size: 24px;
   text-transform: uppercase;
   text-align: center;
@@ -41,6 +41,7 @@
   font-size: 14px;
   font-weight: 500;
   color: #222;
+  background: #343d46;
 }
 
 .login-form-submit {
@@ -61,5 +62,5 @@
 
 .login-form-login-link {
   font-weight: 700;
-  color: #222;
+  color: #38a88c;
 }
