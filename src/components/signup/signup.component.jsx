@@ -6,7 +6,7 @@ import "./signup.styles.component.css";
 const SignUp = () => (
   <div className="signup-container">
     <div className="signup-content">
-      <form method="POST" id="signup-form" className="signup-form">
+      <form id="signup-form" className="signup-form">
         <h2 className="signup-form-title">Create account</h2>
         <div className="signup-form-group">
           <input
@@ -40,7 +40,7 @@ const SignUp = () => (
           ></span>
         </div>
 
-        <div className="signup-form-group">
+        <Link to="/app" className="signup-form-group">
           <input
             type="submit"
             name="submit"
@@ -48,7 +48,7 @@ const SignUp = () => (
             className="signup-form-submit"
             value="Sign up"
           />
-        </div>
+        </Link>
       </form>
       <p className="loginhere">
         Have already an account ?{" "}
