@@ -3,9 +3,9 @@ import { FaTrash, FaEdit } from "react-icons/fa";
 
 import "./column-header.styles.css";
 
-const ColumnHeader = () => (
+const ColumnHeader = ({ title }) => (
   <div className="column-header-container">
-    <p className="column-header-title">Title</p>
+    <p className="column-header-title">{title}</p>
     <div className="column-header-icon-container">
       <FaTrash className="column-header-trash-icon" />
       <FaEdit className="column-header-edit-icon" />
