@@ -1,5 +1,6 @@
 .modal-wrapper {
   z-index: 2003;
+  background: #0000007a;
   position: fixed;
   top: 0;
   right: 0;
@@ -7,6 +8,9 @@
   left: 0;
   overflow: auto;
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal {
@@ -18,7 +22,8 @@
   margin: 0 auto 50px;
   box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
   box-sizing: border-box;
-  width: 30%;
+  width: 40%;
+  max-height: 45%;
 }
 
 .modal-body {

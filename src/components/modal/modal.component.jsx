@@ -36,7 +36,7 @@ const Modal = () => {
               <div className="modal-progress-percentage">0 %</div>
             </div>
             <div className="modal-check-columns"></div>
-            <input placeholder="+ Add item" className="modal-checkboxinput" />
+            <input placeholder="+ Add item" className="modal-checkbox-input" />
           </div>
         </div>
         <div className="modal-footer-container">Footer</div>
