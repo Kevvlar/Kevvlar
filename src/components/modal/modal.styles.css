@@ -1,0 +1,98 @@
+.modal-wrapper {
+  z-index: 2003;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  margin: 0;
+}
+
+.modal {
+  margin-top: 10vh;
+  border-radius: 10px;
+  background-color: #343d46;
+  background: #343d46;
+  position: relative;
+  margin: 0 auto 50px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
+  box-sizing: border-box;
+  width: 30%;
+}
+
+.modal-body {
+  padding: 0 20px;
+  color: #d1d1d2;
+  font-size: 14px;
+}
+
+.modal-body-title {
+  background: transparent;
+  font-weight: 600;
+  color: #41ba8e;
+  width: 100%;
+  border: none;
+  font-size: 18px;
+  border-radius: 3px;
+}
+
+.modal-body-description {
+  background: transparent;
+  color: #d1d1d2;
+  font-size: 12px;
+  border: none;
+  width: 100%;
+  min-height: 300px;
+  height: 100%;
+  resize: none;
+}
+
+.modal-checkbox-area {
+  max-height: 200px;
+}
+
+.modal-checkbox-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.modal-check-icon-check {
+  border: 1px solid;
+}
+
+.modal-progress-bar-contianer {
+  width: 90%;
+  height: 5px;
+  border-radius: 5px;
+  margin: 10px;
+  background-color: #dadada;
+}
+
+.modal-progress-percentage {
+  display: flex;
+  width: 10%;
+}
+
+.modal-check-columns {
+  display: flex;
+  margin-left: 25px;
+  max-height: 160px;
+  overflow: auto;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.modal-checkbox-input {
+  color: #fff;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: none;
+  background: transparent;
+}
+
+.modal-footer-container {
+  padding: 10px 20px 20px;
+  text-align: right;
+  box-sizing: border-box;
+}

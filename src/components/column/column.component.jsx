@@ -6,7 +6,7 @@ import Card from "../card/card.component";
 
 import "./column.styles.css";
 
-const Column = ({ column, tasks, index }) => (
+const Column = ({ column, tasks, index, showModal }) => (
   <Draggable draggableId={column.id} index={index}>
     {(provided) => (
       <div
@@ -31,7 +31,12 @@ const Column = ({ column, tasks, index }) => (
               {...provided.droppableProps}
             >
               {tasks.map((task, index) => (
-                <Card key={task.id} task={task} index={index} />
+                <Card
+                  showModal={showModal}
+                  key={task.id}
+                  task={task}
+                  index={index}
+                />
               ))}
               {provided.placeholder}
             </div>
