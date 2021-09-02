@@ -1,0 +1,157 @@
+.modal-wrapper {
+  z-index: 2003;
+  background: #0000007a;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  border-radius: 10px;
+  background-color: #343d46;
+  background: #343d46;
+  position: relative;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
+  box-sizing: border-box;
+  width: 45%;
+  height: 65%;
+}
+
+.modal-body {
+  padding: 0 20px;
+  color: #d1d1d2;
+  font-size: 14px;
+}
+
+.modal-body-title {
+  background: transparent;
+  font-weight: 600;
+  color: #41ba8e;
+  width: 100%;
+  border: none;
+  font-size: 18px;
+  border-radius: 3px;
+}
+
+.modal-body-description {
+  background: transparent;
+  color: #d1d1d2;
+  font-size: 12px;
+  border: none;
+  width: 100%;
+  min-height: 200px;
+  height: 50%;
+  resize: none;
+}
+
+.modal-checkbox-area {
+  max-height: 200px;
+}
+
+.modal-checkbox-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.modal-check-icon-check {
+  border: 1px solid;
+}
+
+.modal-progress-bar-contianer {
+  width: 90%;
+  height: 5px;
+  border-radius: 5px;
+  margin: 10px;
+  background-color: #dadada;
+}
+
+.modal-progress-percentage {
+  display: flex;
+  width: 10%;
+}
+
+.modal-check-columns {
+  display: flex;
+  margin-left: 25px;
+  max-height: 160px;
+  overflow: auto;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.modal-checkbox-input {
+  color: #fff;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: none;
+  background: transparent;
+}
+
+.modal-footer-container {
+  width: 100%;
+  padding: 10px 20px 20px;
+  text-align: right;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.date-picker {
+  line-height: 1;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #dcdfe6;
+  background-color: white;
+  color: #606266;
+  box-sizing: border-box;
+  padding: 12px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.colorlabel-button {
+  line-height: 1;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #dcdfe6;
+  color: #fff;
+  box-sizing: border-box;
+  padding: 12px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.close-icon {
+  color: white;
+  padding: 5px;
+  float: right;
+}
+
+.delete-button {
+  line-height: 1;
+  cursor: pointer;
+  background: rgb(242, 116, 116);
+  border: 1px solid #dcdfe6;
+  color: #fff;
+  box-sizing: border-box;
+  padding: 12px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+/*RESPONSIVE BREAKPOINTS*/
+
+@media only screen and (max-width: 600px) {
+  .modal {
+    width: 100%;
+    height: 100%;
+  }
+}
