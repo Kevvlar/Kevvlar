@@ -20,8 +20,8 @@
   position: relative;
   box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
   box-sizing: border-box;
-  width: 40%;
-  height: 45%;
+  width: 45%;
+  height: 65%;
 }
 
 .modal-body {
@@ -46,8 +46,8 @@
   font-size: 12px;
   border: none;
   width: 100%;
-  min-height: 300px;
-  height: 100%;
+  min-height: 200px;
+  height: 50%;
   resize: none;
 }
 
@@ -95,9 +95,56 @@
 }
 
 .modal-footer-container {
+  width: 100%;
   padding: 10px 20px 20px;
   text-align: right;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.date-picker {
+  line-height: 1;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #dcdfe6;
+  background-color: white;
+  color: #606266;
+  box-sizing: border-box;
+  padding: 12px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.colorlabel-button {
+  line-height: 1;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #dcdfe6;
+  color: #fff;
+  box-sizing: border-box;
+  padding: 12px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.close-icon {
+  color: white;
+  padding: 5px;
+  float: right;
+}
+
+.delete-button {
+  line-height: 1;
+  cursor: pointer;
+  background: rgb(242, 116, 116);
+  border: 1px solid #dcdfe6;
+  color: #fff;
+  box-sizing: border-box;
+  padding: 12px 12px;
+  font-size: 14px;
+  border-radius: 4px;
 }
 
 /*RESPONSIVE BREAKPOINTS*/

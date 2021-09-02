@@ -1,19 +1,21 @@
 import React from "react";
-import { FaCheck } from "react-icons/fa";
+import { FaCheck, FaTimes } from "react-icons/fa";
 
 import "./modal.styles.css";
 
-const Modal = () => {
+const Modal = ({ hideModal }) => {
   return (
     <div className="modal-wrapper">
       <div className="modal">
-        <div className="modal-header">Header</div>
+        <div className="close-icon-container">
+          <FaTimes className="close-icon" onClick={hideModal} />
+        </div>
         <div className="modal-body">
           <p>
             <input
               type="text"
               id="input-big"
-              maxlength="2000"
+              maxLength="2000"
               placeholder="Card title"
               className="modal-body-title"
             />
@@ -22,8 +24,8 @@ const Modal = () => {
             <textarea
               type="text"
               id="desc-big"
-              maxlength="2000"
-              value="Write something..."
+              maxLength="2000"
+              placeholder="Write something..."
               className="modal-body-description"
             ></textarea>
           </p>
@@ -39,7 +41,17 @@ const Modal = () => {
             <input placeholder="+ Add item" className="modal-checkbox-input" />
           </div>
         </div>
-        <div className="modal-footer-container">Footer</div>
+        <div className="modal-footer-container">
+          <p>
+            <input className="date-picker" type="date" name="Due Date" />
+          </p>
+          <p>
+            <button className="colorlabel-button">Color Label</button>
+          </p>
+          <p>
+            <button className="delete-button">Delete</button>
+          </p>
+        </div>
       </div>
     </div>
   );

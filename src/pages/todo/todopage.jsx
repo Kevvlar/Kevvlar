@@ -26,6 +26,10 @@ class Todo extends Component {
     this.setState({ showModal: true });
   };
 
+  handleHideModal = () => {
+    this.setState({ showModal: false });
+  };
+
   handleHideLeftSideNav = () => {
     this.setState({ leftSideBar: false });
   };
@@ -45,7 +49,9 @@ class Todo extends Component {
           onNotificationClick={this.handleNotificationClick}
           onClickMenu={this.handleMenuClick}
         />
-        {this.state.showModal ? <Modal /> : null}
+        {this.state.showModal ? (
+          <Modal hideModal={this.handleHideModal} />
+        ) : null}
         {this.state.leftSideBar ? (
           <LeftSideNav hideLeftSideNav={this.handleHideLeftSideNav} />
         ) : null}
