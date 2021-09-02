@@ -6,29 +6,27 @@ import "./modal.styles.css";
 const Modal = ({ hideModal }) => {
   return (
     <div className="modal-wrapper">
+      <div className="modal-close-overlay" onClick={hideModal}></div>
       <div className="modal">
         <div className="close-icon-container">
           <FaTimes className="close-icon" onClick={hideModal} />
         </div>
         <div className="modal-body">
-          <p>
-            <input
-              type="text"
-              id="input-big"
-              maxLength="2000"
-              placeholder="Card title"
-              className="modal-body-title"
-            />
-          </p>
-          <p>
-            <textarea
-              type="text"
-              id="desc-big"
-              maxLength="2000"
-              placeholder="Write something..."
-              className="modal-body-description"
-            ></textarea>
-          </p>
+          <input
+            type="text"
+            id="input-big"
+            maxLength="50"
+            placeholder="Card title"
+            className="modal-body-title"
+          />
+          <textarea
+            type="text"
+            id="desc-big"
+            maxLength="2000"
+            placeholder="Write something..."
+            className="modal-body-description"
+          >
+          </textarea>
           <div className="modal-checkbox-area">
             <div className="modal-checkbox-bar">
               <FaCheck className="modal-check-icon-check" />
