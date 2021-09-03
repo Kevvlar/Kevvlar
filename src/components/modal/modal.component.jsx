@@ -40,15 +40,9 @@ const Modal = ({ hideModal }) => {
           </div>
         </div>
         <div className="modal-footer-container">
-          <p>
             <input className="date-picker" type="date" name="Due Date" />
-          </p>
-          <p>
             <button className="colorlabel-button">Color Label</button>
-          </p>
-          <p>
             <button className="delete-button">Delete</button>
-          </p>
         </div>
       </div>
     </div>

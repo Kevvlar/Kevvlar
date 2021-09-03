@@ -38,7 +38,7 @@
   padding: 0 20px;
   color: #d1d1d2;
   font-size: 14px;
-  height: 80%;
+  height: 87%;
 }
 
 .modal-body-title {
@@ -114,12 +114,11 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: flex-end;
 }
 
 .date-picker {
   line-height: 1;
-  cursor: pointer;
   background: transparent;
   border: 1px solid #dcdfe6;
   background-color: white;
@@ -128,6 +127,7 @@
   padding: 12px 12px;
   font-size: 14px;
   border-radius: 4px;
+  height: 50px;
 }
 
 .colorlabel-button {
@@ -137,9 +137,11 @@
   border: 1px solid #dcdfe6;
   color: #fff;
   box-sizing: border-box;
-  padding: 12px 12px;
+  padding: 12px 32px;
   font-size: 14px;
   border-radius: 4px;
+  height: 50px;
+  margin-left: 25px;
 }
 
 .close-icon {
@@ -156,9 +158,11 @@
   border: 1px solid #dcdfe6;
   color: #fff;
   box-sizing: border-box;
-  padding: 12px 12px;
+  padding: 12px 32px;
   font-size: 14px;
   border-radius: 4px;
+  height: 50px;
+  margin-left: 25px;
 }
 
 /*RESPONSIVE BREAKPOINTS*/
