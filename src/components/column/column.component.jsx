@@ -39,10 +39,10 @@ const Column = ({ column, tasks, index, showModal }) => (
                 />
               ))}
               {provided.placeholder}
+              <button className="new-card-button">+ Add New Card</button>
             </div>
           )}
         </Droppable>
-        <button className="new-card-button">+ Add New Card</button>
       </div>
     )}
   </Draggable>

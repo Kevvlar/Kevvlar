@@ -64,6 +64,8 @@
   border: none;
   padding: 15px;
   color: #6b6b6b;
+  width: 100%;
+  text-align: left;
 }
 
 .new-card-button:hover {
