@@ -1,7 +1,7 @@
 .column {
   height: 100%;
   display: flex;
-  width: 310px;
+  min-width: 325px;
   flex-direction: column;
   padding-right: 15px;
 }
