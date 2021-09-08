@@ -42,6 +42,7 @@ const Column = ({ column, tasks, index, showModal }) => (
             </div>
           )}
         </Droppable>
+        <button className="new-card-button">+ Add New Card</button>
       </div>
     )}
   </Draggable>

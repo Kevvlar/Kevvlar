@@ -129,6 +129,7 @@ class ColumnHolder extends React.Component {
                     />
                   );
                 })}
+                <button className="new-column-button">+ Add New Column</button>
               </div>
             )}
           </Droppable>
