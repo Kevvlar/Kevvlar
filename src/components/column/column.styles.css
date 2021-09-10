@@ -1,7 +1,7 @@
 .column {
   height: 100%;
   display: flex;
-  width: 310px;
+  min-width: 325px;
   flex-direction: column;
   padding-right: 15px;
 }
@@ -57,4 +57,21 @@
   color: #cecece;
   padding-right: 0;
   background: none;
+}
+
+.new-card-button {
+  background: transparent;
+  border: none;
+  padding: 15px;
+  color: #6b6b6b;
+  width: 100%;
+  text-align: left;
+}
+
+.new-card-button:hover {
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+}
+
+.new-card-button:active {
+  box-shadow: none;
 }

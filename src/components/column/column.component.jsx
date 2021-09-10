@@ -57,5 +57,12 @@ class Column extends React.Component {
     );
   }
 }
+          )}
+        </Droppable>
+        <button className="new-card-button">+ Add New Card</button>
+      </div>
+    )}
+  </Draggable>
+);
 
 export default Column;
