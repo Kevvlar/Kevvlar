@@ -2,8 +2,6 @@ import React from "react";
 import ScrollContainer from "react-indiana-drag-scroll";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
-import initialData from "../../data/initial-data.js";
-
 import Column from "../column/column.component";
 
 import "./column-holder.styles.css";
@@ -12,7 +10,40 @@ class ColumnHolder extends React.Component {
   constructor() {
     super();
 
-    this.state = initialData;
+    this.state = {
+      tasks: {
+        "task-1": { id: "task-1", title: "Eat", content: "Eat launch" },
+        "task-2": { id: "task-2", title: "Movie", content: "Watch my show" },
+        "task-3": { id: "task-3", title: "Phone", content: "Charge my phone" },
+        "task-4": { id: "task-4", title: "Cook", content: "Cook dinner" },
+        "task-5": { id: "task-5", title: "Code", content: "Write code" },
+        "task-6": { id: "task-6", title: "Frontend", content: "Fix frontend" },
+      },
+      columns: {
+        "column-1": {
+          id: "column-1",
+          title: "Todo",
+          taskIds: ["task-1", "task-2"],
+        },
+        "column-2": {
+          id: "column-2",
+          title: "In progres",
+          taskIds: ["task-3", "task-4"],
+        },
+        "column-3": {
+          id: "column-3",
+          title: "Done",
+          taskIds: ["task-5", "task-6"],
+        },
+      },
+      columnOrder: ["column-1", "column-2", "column-3"],
+    };
+  }
+
+  componentDidUpdate() {
+    // console.log("Column Order: ", this.state.columnOrder);
+    // console.log("Tasks: ", this.state.tasks);
+    // console.log("Colums: ", this.state.columns);
   }
 
   onDragEnd = (result) => {
@@ -126,9 +157,12 @@ class ColumnHolder extends React.Component {
                       column={column}
                       tasks={tasks}
                       index={index}
+                      setCardActionType={this.props.setCardActionType}
+                      setColumnActionType={this.props.setColumnActionType}
                     />
                   );
                 })}
+                {provided.placeholder}
               </div>
             )}
           </Droppable>

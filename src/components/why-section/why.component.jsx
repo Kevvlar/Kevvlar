@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
+
+import GetStartedButton from "../get-started-button/get-started-button.component";
 
 import "./why.styles.css";
 
 function Why() {
-  const [showDiv, setShowDiv] = useState(false);
-
-  const onClick = () => setShowDiv(true);
-
   return (
     <div className="greeting-container padding-top section-margin">
       <h2 className="greeting-heading">Why Us Instead of Other Apps?</h2>
@@ -14,31 +12,28 @@ function Why() {
         <div className="segment-section-holder">
           <h3 className="segment-section-title">Title number 1</h3>
           <h5 className="greeting-main-text primary-text-color">
-            Everyone could use some better organization, so we built an app just for
-            that.
+            Everyone could use some better organization, so we built an app just
+            for that.
           </h5>
         </div>
         <div className="segment-section-holder">
           <h3 className="segment-section-title">Title number 1</h3>
           <h5 className="greeting-main-text primary-text-color">
-            Everyone could use some better organization, so we built an app just for
-            that.
+            Everyone could use some better organization, so we built an app just
+            for that.
           </h5>
         </div>
         <div className="segment-section-holder">
           <h3 className="segment-section-title">Title number 1</h3>
           <h5 className="greeting-main-text primary-text-color">
-            Everyone could use some better organization, so we built an app just for
-            that.
+            Everyone could use some better organization, so we built an app just
+            for that.
           </h5>
         </div>
       </div>
-      <div className="greeting-buttons-container">
-        <button className="greeting-button-get-started">Get Started</button>
-      </div>
+      <GetStartedButton />
     </div>
   );
 }
-
 
 export default Why;

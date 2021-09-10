@@ -1,0 +1,7 @@
+.greeting-buttons-container {
+  text-decoration: none;
+}
+
+.greeting-button-get-started:hover {
+  background-color: #267562;
+}

@@ -1,4 +1,4 @@
-.login-container {
+.sign-in-container {
   display: flex;
   justify-content: center;
   flex-direction: row;
@@ -6,7 +6,7 @@
   height: 100vh;
 }
 
-.login-content {
+.sign-in-content {
   min-width: 200px;
   max-width: 350px;
   background: #343d46;
@@ -14,7 +14,7 @@
   padding: 50px 85px;
 }
 
-.login-form-title {
+.sign-in-form-title {
   line-height: 1.66;
   margin: 0;
   padding: 0;
@@ -27,12 +27,12 @@
   margin-bottom: 40px;
 }
 
-.login-form-group {
+.sign-in-form-group {
   overflow: hidden;
   margin-bottom: 20px;
 }
 
-.login-form-input {
+.sign-in-form-input {
   width: 100%;
   border: 1px solid #ebebeb;
   border-radius: 5px;
@@ -41,10 +41,11 @@
   font-size: 14px;
   font-weight: 500;
   color: #222;
-  background: #343d46;
+  background: #a1a1a1;
+  border: none;
 }
 
-.login-form-submit {
+.sign-in-form-submit-button {
   background-color: #38a88c;
   width: 100%;
   padding: 17px 20px;
@@ -56,11 +57,35 @@
   border: none;
 }
 
-.login-form-submit:hover {
+.sign-in-form-submit-button:hover {
   background-color: #0f9977;
 }
 
-.login-form-login-link {
+.sign-in-link {
   font-weight: 700;
   color: #38a88c;
+}
+
+.sign-in-link:hover {
+  color: #2a806a;
+}
+
+.sign-in-here {
+  color: white;
+}
+
+.sign-in-form-with-google {
+  margin-top: 10px;
+  background-color: #37c5df;
+  width: 100%;
+  padding: 17px 20px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  border: none;
+}
+.sign-in-form-with-google:hover {
+  background-color: #40aabd;
 }

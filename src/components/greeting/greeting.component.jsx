@@ -1,11 +1,22 @@
 import React, { useState } from "react";
 
+import GetStartedButon from "../get-started-button/get-started-button.component";
+
 import "./greeting.styles.css";
 
 function Greeting() {
-  const [showDiv, setShowDiv] = useState(false);
+  const [showPricing, setShowPricing] = useState(false);
 
-  const onClick = () => setShowDiv(true);
+  const handleClick = () => {
+    setShowPricing(true);
+  };
+
+  const handleShowPricing = () => (
+    <div className="donate-container">
+      <p style={{ color: "#2196f3" }}>Free! But donations are appreciated.</p>{" "}
+      <button className="donatebutton">Donate</button>
+    </div>
+  );
 
   return (
     <div className="greeting-container section-margin">
@@ -17,14 +28,14 @@ function Greeting() {
         thing.
       </h5>
       <div className="greeting-buttons-container">
-        <button className="greeting-button-get-started">Get Started</button>
-        <div onClick={onClick} className="greeting-pricing-link">
+        <GetStartedButon />
+        <div onClick={handleClick} className="greeting-pricing-link">
           Pricing
         </div>
       </div>
+      {showPricing ? handleShowPricing() : null}
     </div>
   );
 }
-
 
 export default Greeting;

@@ -5,24 +5,71 @@ import BoardItem from "../board-item/board-item.component";
 
 import "./sidenav-left-board-list.styles.css";
 
-const LeftSideNavBoardList = () => (
-  <div className="sidenav-left-board-list">
-    <InfiniteScroll dataLength={35} hasMore={true} height={300}>
-      <BoardItem boardName="Board 1" />
-      <BoardItem boardName="Board 2" />
-      <BoardItem boardName="Board 3" />
-      <BoardItem boardName="Board 4" />
-      <BoardItem boardName="Board 5" />
-      <BoardItem boardName="Board 6" />
-      <BoardItem boardName="Board 7" />
-      <BoardItem boardName="Board 8" />
-      <BoardItem boardName="Board 9" />
-      <BoardItem boardName="Board 10" />
-      <BoardItem boardName="Board 11" />
-      <BoardItem boardName="Board 12" />
-    </InfiniteScroll>
-    <div className="sidenav-left-add-new-board-button">+ Add new board</div>
-  </div>
-);
+class LeftSideNavBoardList extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      user: "tdewHYec4HVWBh9cfqo4rix3Rze2",
+      boards: [
+        {
+          id: 1,
+          name: "Kevvlar",
+        },
+        {
+          id: 2,
+          name: "Housify",
+        },
+        {
+          id: 3,
+          name: "Butterfly",
+        },
+        {
+          id: 4,
+          name: "Reddit",
+        },
+        {
+          id: 5,
+          name: "Discord",
+        },
+        {
+          id: 6,
+          name: "Google",
+        },
+        {
+          id: 7,
+          name: "Facebook",
+        },
+      ],
+    };
+  }
+
+  handleAddBoard = () => {
+    this.props.setBoardActionType();
+    this.props.showModal();
+  };
+
+  render() {
+    return (
+      <div className="sidenav-left-board-list">
+        <InfiniteScroll
+          dataLength={this.state.boards.length}
+          hasMore={true}
+          height={300}
+        >
+          {this.state.boards.map((board) => (
+            <BoardItem key={board.id} board={board} />
+          ))}
+        </InfiniteScroll>
+        <div
+          onClick={this.handleAddBoard}
+          className="sidenav-left-add-new-board-button"
+        >
+          + Add new board
+        </div>
+      </div>
+    );
+  }
+}
 
 export default LeftSideNavBoardList;

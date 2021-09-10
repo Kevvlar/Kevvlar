@@ -4,7 +4,7 @@ import { Draggable } from "react-beautiful-dnd";
 
 import "./card.styles.css";
 
-const Card = ({ task, index, showModal }) => (
+const Card = ({ task, index, showModal, setCardActionType }) => (
   <Draggable draggableId={task.id} index={index}>
     {(provided) => (
       <div
@@ -21,7 +21,13 @@ const Card = ({ task, index, showModal }) => (
           <p className="card-description">{task.content}</p>
           <div className="card-menu">
             <p className="card-date">18/02/2021</p>
-            <FaEllipsisH onClick={showModal} className="card-more-icon" />
+            <FaEllipsisH
+              onClick={() => {
+                setCardActionType();
+                showModal();
+              }}
+              className="card-more-icon"
+            />
           </div>
         </div>
       </div>

@@ -10,11 +10,6 @@ const TaskList = ({ length }) => (
     <TaskItem />
     <TaskItem />
     <TaskItem />
-    <TaskItem />
-    <TaskItem />
-    <TaskItem />
-    <TaskItem />
-    <TaskItem />
   </InfiniteScroll>
 );
 

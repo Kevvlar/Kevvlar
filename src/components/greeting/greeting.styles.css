@@ -62,3 +62,20 @@
   text-decoration: none;
   outline: none;
 }
+
+.donatebutton {
+  width: 150px;
+  padding: 10px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #367ffa;
+  border: none;
+  text-decoration: none;
+  outline: none;
+}
+
+.donate-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
