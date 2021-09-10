@@ -3,7 +3,6 @@
   height: 50px;
   display: flex;
   padding-bottom: 10px;
-  justify-content: space-around;
   align-items: center;
   border-bottom: 1px solid grey;
   color: grey;
@@ -11,14 +10,7 @@
 
 .sidenav-left-header-ham-icon-container {
   cursor: default;
-  font-size: 18px;
+  font-size: 20px;
+  margin-left: 10px;
   color: rgba(255, 255, 255, 0.41);
-}
-
-.sidenav-left-header-current-board {
-  font-size: 14px;
-}
-
-.sidenav-left-header-more-icon {
-  margin-right: 10px;
 }

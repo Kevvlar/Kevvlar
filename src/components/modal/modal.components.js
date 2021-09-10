@@ -62,7 +62,7 @@ export const boardModal = () => (
 export const columnModal = () => (
   <div className="modal">
     <div className="modal-body">
-      <h2>Add new Column</h2>
+      <h2>Edit Column</h2>
     </div>
     <div className="modal-footer-container">
       <button>Save</button>

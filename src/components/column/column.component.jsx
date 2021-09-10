@@ -51,6 +51,7 @@ class Column extends React.Component {
                 </div>
               )}
             </Droppable>
+            <button className="new-card-button">+ Add New Card</button>
           </div>
         )}
       </Draggable>
