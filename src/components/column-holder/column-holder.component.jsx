@@ -23,20 +23,15 @@ class ColumnHolder extends React.Component {
         "column-1": {
           id: "column-1",
           title: "Todo",
-          taskIds: ["task-1", "task-2"],
+          taskIds: ["task-1", "task-2", "task-3", "task-4"],
         },
         "column-2": {
           id: "column-2",
           title: "In progres",
-          taskIds: ["task-3", "task-4"],
-        },
-        "column-3": {
-          id: "column-3",
-          title: "Done",
           taskIds: ["task-5", "task-6"],
         },
       },
-      columnOrder: ["column-1", "column-2", "column-3"],
+      columnOrder: ["column-1", "column-2"],
     };
   }
 
