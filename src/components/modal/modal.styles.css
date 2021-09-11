@@ -158,6 +158,13 @@
   margin-left: 25px;
 }
 
+.close-icon {
+  color: white;
+  padding: 10px;
+  float: right;
+  cursor: pointer;
+}
+
 /*RESPONSIVE BREAKPOINTS*/
 
 @media only screen and (max-width: 600px) {

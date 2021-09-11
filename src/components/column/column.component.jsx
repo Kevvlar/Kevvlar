@@ -51,7 +51,15 @@ class Column extends React.Component {
                 </div>
               )}
             </Droppable>
-            <button className="new-card-button">+ Add New Card</button>
+            <button
+              onClick={() => {
+                this.props.setCardActionType();
+                this.props.showModal();
+              }}
+              className="new-card-button"
+            >
+              + Add New Card
+            </button>
           </div>
         )}
       </Draggable>

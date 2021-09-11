@@ -158,7 +158,15 @@ class ColumnHolder extends React.Component {
                   );
                 })}
                 {provided.placeholder}
-                <button className="new-column-button">+ Add New Column</button>
+                <button
+                  onClick={() => {
+                    this.props.setColumnActionType();
+                    this.props.showModal();
+                  }}
+                  className="new-column-button"
+                >
+                  + Add New Column
+                </button>
               </div>
             )}
           </Droppable>

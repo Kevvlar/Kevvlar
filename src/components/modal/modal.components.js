@@ -1,4 +1,4 @@
-import { FaCheck } from "react-icons/fa";
+import { FaCheck, FaTimes } from "react-icons/fa";
 
 /**
  * Create custom modal to be render
@@ -11,8 +11,11 @@ import { FaCheck } from "react-icons/fa";
  * </div>
  */
 
-export const cardModal = () => (
+export const cardModal = (hideModal) => (
   <div className="modal">
+    <div className="close-icon-container">
+      <FaTimes onClick={hideModal} className="close-icon" />
+    </div>
     <div className="modal-body">
       <input
         type="text"
@@ -48,8 +51,11 @@ export const cardModal = () => (
   </div>
 );
 
-export const boardModal = () => (
+export const boardModal = (hideModal) => (
   <div className="modal">
+    <div className="close-icon-container">
+      <FaTimes onClick={hideModal} className="close-icon" />
+    </div>
     <div className="modal-body">
       <h2>Add new board</h2>
     </div>
@@ -59,8 +65,11 @@ export const boardModal = () => (
   </div>
 );
 
-export const columnModal = () => (
+export const columnModal = (hideModal) => (
   <div className="modal">
+    <div className="close-icon-container">
+      <FaTimes onClick={hideModal} className="close-icon" />
+    </div>
     <div className="modal-body">
       <h2>Edit Column</h2>
     </div>
