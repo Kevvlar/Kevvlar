@@ -16,8 +16,17 @@ class MainPage extends Component {
       sideBarRight: false,
       showModal: false,
       actionType: "card",
+      isGrid: true,
     };
   }
+
+  handleToggleGrid = () => {
+    this.setState({ isGrid: true });
+  };
+
+  handleToggleFlat = () => {
+    this.setState({ isGrid: false });
+  };
 
   handleShowModal = () => {
     this.setState({ showModal: true });
@@ -43,7 +52,7 @@ class MainPage extends Component {
     this.setState({ leftSideBar: !false });
   };
 
-  // Handling creating and editing  of board modals
+  // Handling creating and editing actions of  modals
   handleCreateBoardActionType = () => {
     this.setState({ actionType: "CREATE_BOARD" });
   };
@@ -90,13 +99,19 @@ class MainPage extends Component {
             showModal={this.handleShowModal}
           />
         ) : null}
-        {this.state.sideBarRight ? <RightSideNav /> : null}
+        {this.state.sideBarRight ? (
+          <RightSideNav
+            toggleFlat={this.handleToggleFlat}
+            toggleGrid={this.handleToggleGrid}
+          />
+        ) : null}
         <ColumnHolder
           setCardActionType={this.handleSetCardActionType}
           createColumnActionType={this.handleCreateColumnActionType}
           editColumnActionType={this.handleEditColumnActionType}
           deleteModalActionType={this.handleDeleteModalActionType}
           showModal={this.handleShowModal}
+          isGrid={this.state.isGrid}
         />
       </div>
     );

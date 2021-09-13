@@ -5,6 +5,7 @@
   width: 300px;
   display: flex;
   background-color: #343d45;
+  align-items: flex-end;
 }
 
 .card:hover {
@@ -52,12 +53,8 @@
 
 .card-more-icon {
   font-size: 20px;
-  font-weight: 800;
   color: #cecece;
-  padding-right: 0;
   text-decoration: none;
-  background: none;
-  border: none;
-  outline: none;
   cursor: pointer;
+  float: right;
 }

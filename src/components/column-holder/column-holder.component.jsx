@@ -148,6 +148,7 @@ class ColumnHolder extends React.Component {
                   return (
                     <Column
                       showModal={this.props.showModal}
+                      isGrid={this.props.isGrid}
                       key={columnId}
                       column={column}
                       tasks={tasks}

@@ -51,6 +51,7 @@ class Column extends React.Component {
                       key={task.id}
                       task={task}
                       index={index}
+                      isGrid={this.props.isGrid}
                     />
                   ))}
                   {provided.placeholder}

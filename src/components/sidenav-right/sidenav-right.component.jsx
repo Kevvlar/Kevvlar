@@ -21,10 +21,10 @@ class RightSideNav extends React.Component {
             <FaEllipsisH />
           </button>
           <button className="sidenav-right-grid-icon">
-            <FaThLarge />
+            <FaThLarge onClick={this.props.toggleGrid} />
           </button>
           <button className="sidenav-right-minus-icon">
-            <FaMinus />
+            <FaMinus onClick={this.props.toggleFlat} />
           </button>
         </div>
         <div className="sidenav-right-menu-activity">
