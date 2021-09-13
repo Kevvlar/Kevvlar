@@ -102,9 +102,8 @@
 .date-picker {
   line-height: 1;
   background: transparent;
-  border: 1px solid #dcdfe6;
-  background-color: white;
-  color: #606266;
+  border: 1px solid #fff;
+  color: #fff;
   box-sizing: border-box;
   padding: 5px 5px;
   font-size: 14px;
@@ -132,7 +131,7 @@
   border-radius: 4px;
   background: transparent;
   color: #fff;
-  margin-left: 25px;
+  margin: 0px 25px;
   height: 40px;
 }
 

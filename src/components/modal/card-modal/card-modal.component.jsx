@@ -44,7 +44,7 @@ const CardModal = ({ hideModal }) => (
         <option value="yellow">Yellow</option>
         <option value="blue">Blue</option>
       </select>
-      <button className="delete-button">Delete</button>
+      <button className="modal-board-button">Save</button>
     </div>
   </div>
 );

@@ -1,22 +1,3 @@
-.modal-board {
-  border-radius: 10px;
-  background-color: #343d46;
-  background: #343d46;
-  position: relative;
-  box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
-  box-sizing: border-box;
-  width: 30%;
-  height: 30%;
-}
-
-.modal-board-body {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 .delete-modal-title {
   text-align: center;
   color: #d4705f;
