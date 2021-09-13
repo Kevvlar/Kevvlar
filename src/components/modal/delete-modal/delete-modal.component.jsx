@@ -14,7 +14,7 @@ const DeleteModal = ({ hideModal }) => (
         All information contained will be delete
       </span>
       <div className="modal-button-container">
-        <button className="modal-delete-button">Delete</button>
+        <button className="delete-button">Delete</button>
         <button className="modal-cancel-button">Cancel</button>
       </div>
     </div>

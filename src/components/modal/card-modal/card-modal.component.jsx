@@ -38,13 +38,13 @@ const CardModal = ({ hideModal }) => (
     <div className="modal-footer-container">
       <input className="date-picker" type="date" name="Due Date" />
       <select className="select-color">
-        <option value="">choose color label</option>
+        <option value="">Color Label</option>
         <option value="red">Red</option>
         <option value="green">Green</option>
         <option value="yellow">Yellow</option>
         <option value="blue">Blue</option>
       </select>
-      <button className="delete-button">Save</button>
+      <button className="delete-button">Delete</button>
     </div>
   </div>
 );
