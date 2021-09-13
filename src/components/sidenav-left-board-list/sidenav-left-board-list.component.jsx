@@ -45,7 +45,7 @@ class LeftSideNavBoardList extends React.Component {
   }
 
   handleAddBoard = () => {
-    this.props.setBoardActionType();
+    this.props.createBoardActionType();
     this.props.showModal();
   };
 
@@ -58,7 +58,13 @@ class LeftSideNavBoardList extends React.Component {
           height={300}
         >
           {this.state.boards.map((board) => (
-            <BoardItem key={board.id} board={board} />
+            <BoardItem
+              key={board.id}
+              board={board}
+              showModal={this.props.showModal}
+              editBoardActionType={this.props.editBoardActionType}
+              deleteModalActionType={this.props.deleteModalActionType}
+            />
           ))}
         </InfiniteScroll>
         <div

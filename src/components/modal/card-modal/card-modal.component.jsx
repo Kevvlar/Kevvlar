@@ -1,17 +1,9 @@
+import React from "react";
 import { FaCheck, FaTimes } from "react-icons/fa";
 
-/**
- * Create custom modal to be render
- * Create the modal fucntiion and return the html to be rendered
- * NOTE html tags must be put inside the tags below to maintain consistent styles and behaviour
- * <div className="modal">
- * <div className="modal-body">
- * your html code goes here
- * </div>
- * </div>
- */
+import "./card-modal.styles.css";
 
-export const cardModal = (hideModal) => (
+const CardModal = ({ hideModal }) => (
   <div className="modal">
     <div className="close-icon-container">
       <FaTimes onClick={hideModal} className="close-icon" />
@@ -45,36 +37,16 @@ export const cardModal = (hideModal) => (
     </div>
     <div className="modal-footer-container">
       <input className="date-picker" type="date" name="Due Date" />
-      <button className="colorlabel-button">Color Label</button>
-      <button className="delete-button">Delete</button>
+      <select className="select-color">
+        <option value="">choose color label</option>
+        <option value="red">Red</option>
+        <option value="green">Green</option>
+        <option value="yellow">Yellow</option>
+        <option value="blue">Blue</option>
+      </select>
+      <button className="delete-button">Save</button>
     </div>
   </div>
 );
 
-export const boardModal = (hideModal) => (
-  <div className="modal">
-    <div className="close-icon-container">
-      <FaTimes onClick={hideModal} className="close-icon" />
-    </div>
-    <div className="modal-body">
-      <h2>Add new board</h2>
-    </div>
-    <div className="modal-footer-container">
-      <button>Save</button>
-    </div>
-  </div>
-);
-
-export const columnModal = (hideModal) => (
-  <div className="modal">
-    <div className="close-icon-container">
-      <FaTimes onClick={hideModal} className="close-icon" />
-    </div>
-    <div className="modal-body">
-      <h2>Edit Column</h2>
-    </div>
-    <div className="modal-footer-container">
-      <button>Save</button>
-    </div>
-  </div>
-);
+export default CardModal;

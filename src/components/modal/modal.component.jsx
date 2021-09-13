@@ -1,37 +1,54 @@
 import React from "react";
-import { FaTimes } from "react-icons/fa";
 
-import { cardModal, boardModal, columnModal } from "./modal.components";
+import BoardModal from "./board-modal/board-modal";
+import DeleteModal from "./delete-modal/delete-modal.component";
+import ColumnModal from "./column-modal/column-modal.component";
+import CardModal from "./card-modal/card-modal.component";
 
 import "./modal.styles.css";
 
 const Modal = ({ hideModal, actionType }) => {
   switch (actionType) {
+    case "CREATE_BOARD":
+      return (
+        <div className="modal-wrapper">
+          <div className="modal-close-overlay" onClick={hideModal}></div>
+          <BoardModal hideModal={hideModal} type="add" />
+        </div>
+      );
+    case "EDIT_BOARD":
+      return (
+        <div className="modal-wrapper">
+          <div className="modal-close-overlay" onClick={hideModal}></div>
+          <BoardModal hideModal={hideModal} type="edit" />
+        </div>
+      );
+    case "DELETE":
+      return (
+        <div className="modal-wrapper">
+          <div className="modal-close-overlay" onClick={hideModal}></div>
+          <DeleteModal hideModal={hideModal} />
+        </div>
+      );
     case "card":
       return (
         <div className="modal-wrapper">
           <div className="modal-close-overlay" onClick={hideModal}></div>
-          {cardModal(hideModal)}
+          <CardModal hideModal={hideModal} />
         </div>
       );
-    case "board":
+    case "CREATE_COLUMN":
       return (
         <div className="modal-wrapper">
           <div className="modal-close-overlay" onClick={hideModal}></div>
-          <div className="close-icon-container">
-            <FaTimes className="close-icon" onClick={hideModal} />
-          </div>
-          {boardModal(hideModal)}
+          <ColumnModal hideModal={hideModal} type="add" />
         </div>
       );
-    case "column":
+    case "EDIT_COLUMN":
       return (
         <div className="modal-wrapper">
           <div className="modal-close-overlay" onClick={hideModal}></div>
-          <div className="close-icon-container">
-            <FaTimes className="close-icon" onClick={hideModal} />
-          </div>
-          {columnModal(hideModal)}
+          <ColumnModal hideModal={hideModal} type="edit" />
         </div>
       );
     default:

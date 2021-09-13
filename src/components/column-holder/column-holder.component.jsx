@@ -153,14 +153,15 @@ class ColumnHolder extends React.Component {
                       tasks={tasks}
                       index={index}
                       setCardActionType={this.props.setCardActionType}
-                      setColumnActionType={this.props.setColumnActionType}
+                      editColumnActionType={this.props.editColumnActionType}
+                      deleteModalActionType={this.props.deleteModalActionType}
                     />
                   );
                 })}
                 {provided.placeholder}
                 <button
                   onClick={() => {
-                    this.props.setColumnActionType();
+                    this.props.createColumnActionType();
                     this.props.showModal();
                   }}
                   className="new-column-button"

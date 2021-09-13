@@ -19,22 +19,6 @@ class MainPage extends Component {
     };
   }
 
-  handleSetBoardActionType = () => {
-    this.setState({ actionType: "board" });
-  };
-
-  handleSetCardActionType = () => {
-    this.setState({ actionType: "card" });
-  };
-
-  handleSetColumnActionType = () => {
-    this.setState({ actionType: "column" });
-  };
-
-  handleMenuClick = () => {
-    this.setState({ leftSideBar: !false });
-  };
-
   handleShowModal = () => {
     this.setState({ showModal: true });
   };
@@ -55,6 +39,35 @@ class MainPage extends Component {
     }
   };
 
+  handleMenuClick = () => {
+    this.setState({ leftSideBar: !false });
+  };
+
+  // Handling creating and editing  of board modals
+  handleCreateBoardActionType = () => {
+    this.setState({ actionType: "CREATE_BOARD" });
+  };
+
+  handleEditBoardActionType = () => {
+    this.setState({ actionType: "EDIT_BOARD" });
+  };
+
+  handleDeleteModalActionType = () => {
+    this.setState({ actionType: "DELETE" });
+  };
+
+  handleSetCardActionType = () => {
+    this.setState({ actionType: "card" });
+  };
+
+  handleCreateColumnActionType = () => {
+    this.setState({ actionType: "CREATE_COLUMN" });
+  };
+
+  handleEditColumnActionType = () => {
+    this.setState({ actionType: "EDIT_COLUMN" });
+  };
+
   render() {
     return (
       <div className="todopage">
@@ -71,14 +84,18 @@ class MainPage extends Component {
         {this.state.leftSideBar ? (
           <LeftSideNav
             hideLeftSideNav={this.handleHideLeftSideNav}
-            setBoardActionType={this.handleSetBoardActionType}
+            createBoardActionType={this.handleCreateBoardActionType}
+            editBoardActionType={this.handleEditBoardActionType}
+            deleteModalActionType={this.handleDeleteModalActionType}
             showModal={this.handleShowModal}
           />
         ) : null}
         {this.state.sideBarRight ? <RightSideNav /> : null}
         <ColumnHolder
           setCardActionType={this.handleSetCardActionType}
-          setColumnActionType={this.handleSetColumnActionType}
+          createColumnActionType={this.handleCreateColumnActionType}
+          editColumnActionType={this.handleEditColumnActionType}
+          deleteModalActionType={this.handleDeleteModalActionType}
           showModal={this.handleShowModal}
         />
       </div>

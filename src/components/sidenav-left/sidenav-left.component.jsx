@@ -5,7 +5,13 @@ import SideNavBoardList from "../sidenav-left-board-list/sidenav-left-board-list
 
 import "./sidenav-left.styles.css";
 
-const LeftSideNav = ({ hideLeftSideNav, setBoardActionType, showModal }) => {
+const LeftSideNav = ({
+  hideLeftSideNav,
+  createBoardActionType,
+  showModal,
+  editBoardActionType,
+  deleteModalActionType,
+}) => {
   return (
     <nav className="sidenav-left-container">
       <SideNavHeader hideLeftSideNav={hideLeftSideNav} />
@@ -13,7 +19,9 @@ const LeftSideNav = ({ hideLeftSideNav, setBoardActionType, showModal }) => {
         <div className="sidenav-left-board-header">Boards</div>
         <SideNavBoardList
           showModal={showModal}
-          setBoardActionType={setBoardActionType}
+          editBoardActionType={editBoardActionType}
+          createBoardActionType={createBoardActionType}
+          deleteModalActionType={deleteModalActionType}
         />
       </div>
     </nav>

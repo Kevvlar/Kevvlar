@@ -1,0 +1,56 @@
+.modal-board {
+  border-radius: 10px;
+  background-color: #343d46;
+  background: #343d46;
+  position: relative;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
+  box-sizing: border-box;
+  width: 30%;
+  height: 30%;
+}
+
+.modal-board-body {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.modal-board-button {
+  background: transparent;
+  padding: 4px;
+  border: 1px solid #d4705f;
+  border-radius: 4px;
+  width: 80px;
+  color: white;
+  margin-top: 20px;
+}
+
+.modal-board-button:hover {
+  background-color: #bb4e3b;
+}
+
+.modal-board-title {
+  text-align: center;
+  color: #d4705f;
+}
+
+.modal-board-text {
+  text-align: center;
+  background-color: transparent;
+  padding: 5px;
+  border-radius: 4px;
+  width: 60%;
+  color: white;
+  border: 2px solid #d4705f;
+}
+
+/*RESPONSIVE BREAKPOINTS*/
+
+@media only screen and (max-width: 600px) {
+  .modal {
+    width: 100%;
+    height: 100%;
+  }
+}

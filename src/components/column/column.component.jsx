@@ -21,10 +21,16 @@ class Column extends React.Component {
                 {this.props.column.title}
               </p>
               <div className="column-header-icon-container">
-                <FaTrash className="column-header-trash-icon" />
+                <FaTrash
+                  onClick={() => {
+                    this.props.deleteModalActionType();
+                    this.props.showModal();
+                  }}
+                  className="column-header-trash-icon"
+                />
                 <FaEdit
                   onClick={() => {
-                    this.props.setColumnActionType();
+                    this.props.editColumnActionType();
                     this.props.showModal();
                   }}
                   className="column-header-edit-icon"
