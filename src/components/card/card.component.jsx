@@ -23,16 +23,16 @@ const Card = ({ task, index, showModal, setCardActionType, isGrid }) => (
               <p className="card-description">{task.content}</p>
               <div className="card-menu">
                 <p className="card-date">18/02/2021</p>
+                <FaEllipsisH
+                  onClick={() => {
+                    setCardActionType();
+                    showModal();
+                  }}
+                  className="card-more-icon"
+                />
               </div>
             </span>
           ) : null}
-          <FaEllipsisH
-            onClick={() => {
-              setCardActionType();
-              showModal();
-            }}
-            className="card-more-icon"
-          />
         </div>
       </div>
     )}
