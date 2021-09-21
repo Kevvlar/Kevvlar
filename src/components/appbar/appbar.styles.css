@@ -44,6 +44,7 @@
 .appbar-logo {
   font-weight: 700;
   color: #ffffff3b;
+  display: flex;
 }
 
 .appbar-user-menu-container {
