@@ -5,11 +5,11 @@ import Directory from "../../components/directory/Directory";
 
 import "./homePage.css";
 
-const Homepage = () => (
+const HomePage = () => (
   <div className="homepage">
     <NavBar />
     <Directory />
   </div>
 );
 
-export default Homepage;
+export default HomePage;
