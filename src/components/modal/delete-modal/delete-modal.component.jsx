@@ -3,7 +3,7 @@ import { FaTimes } from "react-icons/fa";
 
 import "./delete-modal.styles.css";
 
-const DeleteModal = ({ hideModal }) => (
+const DeleteModal = ({ hideModal, resource, id }) => (
   <div className="modal-board">
     <div className="close-icon-container">
       <FaTimes onClick={hideModal} className="close-icon" />

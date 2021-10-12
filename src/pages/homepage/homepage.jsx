@@ -1,9 +1,9 @@
 import React from "react";
 
-import NavBar from "../../components/navbar/navbar.component";
-import Directory from "../../components/directory/directory.component";
+import NavBar from "../../components/navbar/NavBar";
+import Directory from "../../components/directory/Directory";
 
-import "./homepage.styles.css";
+import "./homePage.css";
 
 const Homepage = () => (
   <div className="homepage">

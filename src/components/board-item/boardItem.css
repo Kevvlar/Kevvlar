@@ -1,0 +1,32 @@
+.board-item-container {
+  padding: 15px;
+  max-width: 200px;
+  overflow: hidden;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.board-item-name:hover {
+  cursor: pointer;
+}
+
+.board-item-container:hover {
+  background-color: #296dce;
+}
+
+.board-item-icons-cotainer {
+  width: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit-board-icon:hover {
+  cursor: pointer;
+}
+
+.delete-board-icon:hover {
+  cursor: pointer;
+}
