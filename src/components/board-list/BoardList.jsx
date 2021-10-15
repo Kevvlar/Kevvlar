@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { connect } from "react-redux";
 
@@ -8,48 +8,15 @@ import BoardItem from "../board-item/BoardItem";
 
 import "./boardlist.css";
 
-const BoardList = ({ addNewBoardModal }) => {
-  const [boards, setBoards] = useState([
-    {
-      title: "Hello",
-    },
-    {
-      title: "Hi",
-    },
-    {
-      title: "Kevvlar",
-    },
-  ]);
-
-  // const fetchBoards = () => {
-  //   const token = localStorage.getItem("token");
-  //   fetch("http://localhost:8000/api/v1/boards", {
-  //     method: "GET",
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   })
-  //     .then((response) => response.json())
-  //     .then((serverData) => {
-  //       if (serverData.status === "success") {
-  //         setBoards(serverData.data.boards);
-  //       } else if (serverData.data.status === "error") {
-  //         alert("Error signing user up; please try signing up again");
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       alert(error.message);
-  //     });
-  // };
-
-  useEffect(() => {}, []);
-
+const BoardList = ({ addNewBoardModal, boardsList }) => {
   return (
     <div className="sidenav-left-board-list">
-      <InfiniteScroll dataLength={boards.length} hasMore={true} height={300}>
-        {boards.map((board, index) => (
+      <InfiniteScroll
+        dataLength={boardsList.length}
+        hasMore={true}
+        height={300}
+      >
+        {boardsList.map((board, index) => (
           <BoardItem key={index} board={board} />
         ))}
       </InfiniteScroll>
@@ -69,4 +36,10 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(BoardList);
+const mapStateToProps = (state) => {
+  return {
+    boardsList: state.board.boards,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BoardList);

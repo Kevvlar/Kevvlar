@@ -11,6 +11,7 @@ const CardModal = ({ closeModal }) => (
     <div className="close-icon-container">
       <FaTimes onClick={closeModal} className="close-icon" />
     </div>
+    <h2 className="modal-title">Add New Card</h2>
     <div className="modal-body">
       <input
         type="text"
@@ -37,17 +38,17 @@ const CardModal = ({ closeModal }) => (
         <div className="modal-check-columns"></div>
         <input placeholder="+ Add item" className="modal-checkbox-input" />
       </div>
-    </div>
-    <div className="modal-footer-container">
-      <input className="date-picker" type="date" name="Due Date" />
-      <select className="select-color">
-        <option value="">Color Label</option>
-        <option value="red">Red</option>
-        <option value="green">Green</option>
-        <option value="yellow">Yellow</option>
-        <option value="blue">Blue</option>
-      </select>
-      <button className="modal-board-button">Save</button>
+      <div className="modal-footer-container">
+        <input className="date-picker" type="date" name="Due Date" />
+        <select className="select-color">
+          <option value="">Color Label</option>
+          <option value="red">Red</option>
+          <option value="green">Green</option>
+          <option value="yellow">Yellow</option>
+          <option value="blue">Blue</option>
+        </select>
+        <button className="modal-board-button">Save</button>
+      </div>
     </div>
   </div>
 );

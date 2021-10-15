@@ -13,6 +13,7 @@ const leftSideNavReducer = (state = initialState, action) => {
       };
     case HIDE_LEFT_SIDE_NAV:
       return {
+        ...state,
         leftSideNav: false,
       };
 

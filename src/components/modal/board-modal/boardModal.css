@@ -37,16 +37,6 @@
   color: #d4705f;
 }
 
-.modal-board-text {
-  text-align: center;
-  background-color: transparent;
-  padding: 5px;
-  border-radius: 4px;
-  width: 60%;
-  color: white;
-  border: 2px solid #d4705f;
-}
-
 /*RESPONSIVE BREAKPOINTS*/
 
 @media only screen and (max-width: 600px) {

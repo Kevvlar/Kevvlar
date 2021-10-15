@@ -23,6 +23,7 @@ const modalReducer = (state = initialState, action) => {
 
     case COLUMN_MODAL:
       return {
+        ...state,
         showModal: true,
         modalType: COLUMN_MODAL,
         modalActionType: action.payLoad,
@@ -30,6 +31,7 @@ const modalReducer = (state = initialState, action) => {
 
     case CARD_MODAL:
       return {
+        ...state,
         showModal: true,
         modalType: CARD_MODAL,
         modalActionType: action.payLoad,
@@ -37,6 +39,7 @@ const modalReducer = (state = initialState, action) => {
 
     case CLOSE_MODAL:
       return {
+        ...state,
         showModal: false,
         modalType: "",
         modalActionType: "",

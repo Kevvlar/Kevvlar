@@ -18,11 +18,13 @@ const rightSideNavReducer = (state = initialState, action) => {
       };
     case TOGGLE_FLAT_CARD:
       return {
+        ...state,
         isGrid: false,
         rightSideNav: true,
       };
     case TOGGLE_GRID_CARD:
       return {
+        ...state,
         isGrid: true,
         rightSideNav: true,
       };

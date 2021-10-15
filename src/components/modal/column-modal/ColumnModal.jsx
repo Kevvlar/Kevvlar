@@ -24,19 +24,14 @@ const editColumn = () => (
 );
 
 const deleteColumn = () => (
-  <div className="modal-board">
-    <div className="close-icon-container">
-      <FaTimes className="close-icon" />
-    </div>
-    <div className="modal-board-body">
-      <h2 className="delete-modal-title">Are You Sure?</h2>
-      <span className="delete-modal-text">
-        All information contained will be delete
-      </span>
-      <div className="modal-button-container">
-        <button className="delete-button">Delete</button>
-        <button className="modal-cancel-button">Cancel</button>
-      </div>
+  <div className="modal-board-body">
+    <h2 className="modal-board-title">Are You Sure?</h2>
+    <span className="modal-sub-text">
+      All information contained in this column will be delete
+    </span>
+    <div className="modal-button-container">
+      <button className="delete-button">Delete</button>
+      <button className="modal-cancel-button">Cancel</button>
     </div>
   </div>
 );

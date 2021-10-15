@@ -13,3 +13,9 @@ export {
   setColumnModal,
   setCardModal,
 } from "./modal/modalActions";
+export {
+  addBoard,
+  editBoard,
+  deleteBoard,
+  setBoardId,
+} from "./board/boardActions";

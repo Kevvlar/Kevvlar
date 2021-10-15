@@ -6,7 +6,12 @@
   box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
   box-sizing: border-box;
   width: 45%;
-  height: 65%;
+  height: 70;
+}
+
+.modal-title {
+  color: white;
+  text-align: center;
 }
 
 .close-icon {
@@ -94,9 +99,7 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-
+  justify-content: center;
 }
 
 .date-picker {
