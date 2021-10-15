@@ -1,10 +1,14 @@
 import React from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { Droppable, Draggable } from "react-beautiful-dnd";
+import { connect } from "react-redux";
+
+import { setCardModal, setColumnModal } from "../../redux";
 
 import Card from "../card/Card";
 
 import "./column.css";
+import { DELETE, EDIT } from "../../redux/modal/modalTypes";
 
 class Column extends React.Component {
   render() {
@@ -22,11 +26,11 @@ class Column extends React.Component {
               </p>
               <div className="column-header-icon-container">
                 <FaTrash
-                  onClick={() => alert("Feature coming soon...")}
+                  onClick={this.props.deleteColumnModal}
                   className="column-header-trash-icon"
                 />
                 <FaEdit
-                  onClick={() => alert("Feature coming soon...")}
+                  onClick={this.props.editColumnModal}
                   className="column-header-edit-icon"
                 />
               </div>
@@ -46,7 +50,7 @@ class Column extends React.Component {
               )}
             </Droppable>
             <button
-              onClick={() => alert("Feature coming soon...")}
+              onClick={this.props.addNewCardModal}
               className="new-card-button"
             >
               + Add New Card
@@ -58,4 +62,12 @@ class Column extends React.Component {
   }
 }
 
-export default Column;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addNewCardModal: () => dispatch(setCardModal()),
+    editColumnModal: () => dispatch(setColumnModal(EDIT)),
+    deleteColumnModal: () => dispatch(setColumnModal(DELETE)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Column);

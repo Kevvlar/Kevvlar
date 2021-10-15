@@ -1,70 +1,40 @@
 import React from "react";
+import { connect } from "react-redux";
 
-import BoardModal from "./board-modal/board-modal";
-import DeleteModal from "./delete-modal/delete-modal.component";
-import ColumnModal from "./column-modal/column-modal.component";
-import CardModal from "./card-modal/card-modal.component";
+import { closeModal } from "../../redux/index";
+import {
+  BOARD_MODAL,
+  COLUMN_MODAL,
+  CARD_MODAL,
+} from "../../redux/modal/modalTypes";
+
+import BoardModal from "./board-modal/BoardModal";
+import ColumnModal from "./column-modal/ColumnModal";
+import CardModal from "./card-modal/CardModal";
 
 import "./modal.css";
 
-const Modal = ({
-  hideModal,
-  actionType,
-  showLeftSideNav,
-  getBoardId,
-  forceShowLeftSideNav,
-}) => {
-  switch (actionType) {
-    case "CREATE_BOARD":
+const Modal = ({ closeModal, modalType }) => {
+  switch (modalType) {
+    case BOARD_MODAL:
       return (
         <div className="modal-wrapper">
-          <div className="modal-close-overlay" onClick={hideModal}></div>
-          <BoardModal
-            hideModal={hideModal}
-            showLeftSideNav={showLeftSideNav}
-            forceShowLeftSideNav={forceShowLeftSideNav}
-            getBoardId={getBoardId}
-            type="add"
-          />
+          <div className="modal-close-overlay" onClick={closeModal}></div>
+          <BoardModal />
         </div>
       );
-    case "EDIT_BOARD":
+    case CARD_MODAL:
       return (
         <div className="modal-wrapper">
-          <div className="modal-close-overlay" onClick={hideModal}></div>
-          <BoardModal
-            hideModal={hideModal}
-            getBoardId={getBoardId}
-            type="edit"
-          />
+          <div className="modal-close-overlay" onClick={closeModal}></div>
+          <CardModal />
         </div>
       );
-    case "DELETE":
+    case COLUMN_MODAL:
       return (
         <div className="modal-wrapper">
-          <div className="modal-close-overlay" onClick={hideModal}></div>
-          <DeleteModal hideModal={hideModal} />
-        </div>
-      );
-    case "card":
-      return (
-        <div className="modal-wrapper">
-          <div className="modal-close-overlay" onClick={hideModal}></div>
-          <CardModal hideModal={hideModal} />
-        </div>
-      );
-    case "CREATE_COLUMN":
-      return (
-        <div className="modal-wrapper">
-          <div className="modal-close-overlay" onClick={hideModal}></div>
-          <ColumnModal hideModal={hideModal} type="add" />
-        </div>
-      );
-    case "EDIT_COLUMN":
-      return (
-        <div className="modal-wrapper">
-          <div className="modal-close-overlay" onClick={hideModal}></div>
-          <ColumnModal hideModal={hideModal} type="edit" />
+          <div className="modal-close-overlay" onClick={closeModal}></div>
+          <ColumnModal />
         </div>
       );
     default:
@@ -72,4 +42,16 @@ const Modal = ({
   }
 };
 
-export default Modal;
+const mapStateToProps = (state) => {
+  return {
+    modalType: state.modal.modalType,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    closeModal: () => dispatch(closeModal()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Modal);

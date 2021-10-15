@@ -1,6 +1,9 @@
 import React from "react";
 import ScrollContainer from "react-indiana-drag-scroll";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { connect } from "react-redux";
+
+import { setColumnModal } from "../../redux/index";
 
 import Column from "../column/Column";
 
@@ -150,7 +153,7 @@ class ColumnHolder extends React.Component {
                 })}
                 {provided.placeholder}
                 <button
-                  onClick={() => alert("Feature coming soon...")}
+                  onClick={this.props.addNewColumnModal}
                   className="new-column-button"
                 >
                   + Add New Column
@@ -164,4 +167,10 @@ class ColumnHolder extends React.Component {
   }
 }
 
-export default ColumnHolder;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addNewColumnModal: () => dispatch(setColumnModal()),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ColumnHolder);

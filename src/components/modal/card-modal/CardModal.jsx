@@ -1,12 +1,15 @@
 import React from "react";
 import { FaCheck, FaTimes } from "react-icons/fa";
+import { connect } from "react-redux";
 
-import "./card-modal.styles.css";
+import { closeModal } from "../../../redux";
 
-const CardModal = ({ hideModal }) => (
+import "./cardModal.css";
+
+const CardModal = ({ closeModal }) => (
   <div className="modal">
     <div className="close-icon-container">
-      <FaTimes onClick={hideModal} className="close-icon" />
+      <FaTimes onClick={closeModal} className="close-icon" />
     </div>
     <div className="modal-body">
       <input
@@ -49,4 +52,10 @@ const CardModal = ({ hideModal }) => (
   </div>
 );
 
-export default CardModal;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    closeModal: () => dispatch(closeModal()),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(CardModal);

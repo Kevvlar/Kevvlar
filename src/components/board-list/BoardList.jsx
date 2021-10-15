@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { connect } from "react-redux";
+
+import { setBoardModal } from "../../redux/index";
 
 import BoardItem from "../board-item/BoardItem";
 
 import "./boardlist.css";
 
-const BoardList = () => {
+const BoardList = ({ addNewBoardModal }) => {
   const [boards, setBoards] = useState([
     {
       title: "Hello",
@@ -51,7 +54,7 @@ const BoardList = () => {
         ))}
       </InfiniteScroll>
       <div
-        onClick={() => alert("feature coming soon...")}
+        onClick={addNewBoardModal}
         className="sidenav-left-add-new-board-button"
       >
         + Add new board
@@ -60,4 +63,10 @@ const BoardList = () => {
   );
 };
 
-export default BoardList;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addNewBoardModal: () => dispatch(setBoardModal()),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(BoardList);
