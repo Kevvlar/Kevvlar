@@ -1,14 +1,18 @@
 import React from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { connect } from "react-redux";
-import { setBoardId } from "../../redux";
+import { setCurrentBoardId, setBoardModal, deleteBoard } from "../../redux";
 
-import { setBoardModal } from "../../redux/modal/modalActions";
 import { EDIT, DELETE } from "../../redux/modal/modalTypes";
 
 import "./boardItem.css";
 
-const BoardItem = ({ board, editBoardModal, deleteBoardModal, setBoardId }) => (
+const BoardItem = ({
+  board,
+  editBoardModal,
+  deleteBoardModal,
+  setCurrentBoardId,
+}) => (
   <div className="board-item-container">
     <div
       className="board-item-name"
@@ -20,14 +24,14 @@ const BoardItem = ({ board, editBoardModal, deleteBoardModal, setBoardId }) => (
       <FaEdit
         className="edit-board-icon"
         onClick={() => {
-          setBoardId(board.id);
+          setCurrentBoardId(board.id);
           editBoardModal();
         }}
       />
       <FaTrash
         className="delete-board-icon"
         onClick={() => {
-          setBoardId(board.id);
+          setCurrentBoardId(board.id);
           deleteBoardModal();
         }}
       />
@@ -39,7 +43,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     editBoardModal: () => dispatch(setBoardModal(EDIT)),
     deleteBoardModal: () => dispatch(setBoardModal(DELETE)),
-    setBoardId: (data) => dispatch(setBoardId(data)),
+    setCurrentBoardId: (data) => dispatch(setCurrentBoardId(data)),
+    deleteBoardItem: (data) => dispatch(deleteBoard(data)),
   };
 };
 

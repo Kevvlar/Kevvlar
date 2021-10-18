@@ -8,9 +8,9 @@ import {
   DELETE_BOARD,
   DELTE_COLUMN,
   DELETE_CARD,
-  SET_BOARD_ID,
-  SET_COLUMN_ID,
-  SET_CARD_ID,
+  SET_CURRENT_BOARD_ID,
+  SET_CURRENT_COLUMN_ID,
+  SET_CURRENT_CARD_ID,
 } from "./boardTypes";
 
 export const addBoard = (boardData) => {
@@ -34,9 +34,9 @@ export const deleteBoard = (boardData) => {
   };
 };
 
-export const setBoardId = (id) => {
+export const setCurrentBoardId = (id) => {
   return {
-    type: SET_BOARD_ID,
+    type: SET_CURRENT_BOARD_ID,
     payLoad: id,
   };
 };

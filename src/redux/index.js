@@ -17,5 +17,5 @@ export {
   addBoard,
   editBoard,
   deleteBoard,
-  setBoardId,
+  setCurrentBoardId,
 } from "./board/boardActions";

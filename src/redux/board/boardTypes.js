@@ -10,6 +10,6 @@ export const DELETE_BOARD = "DELETE_BOARD";
 export const DELTE_COLUMN = "DELETE_COLUMN";
 export const DELETE_CARD = "DELETE_CARD";
 
-export const SET_BOARD_ID = "SET_BOARD_ID";
-export const SET_COLUMN_ID = "SET_COLUMN_ID";
-export const SET_CARD_ID = "SET_CARD_ID";
+export const SET_CURRENT_BOARD_ID = "SET_CURRENT_BOARD_ID";
+export const SET_CURRENT_COLUMN_ID = "SET_CURRENT_COLUMN_ID";
+export const SET_CURRENT_CARD_ID = "SET_CURRENT_CARD_ID";

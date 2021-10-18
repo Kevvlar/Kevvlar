@@ -8,13 +8,15 @@ import {
   DELETE_BOARD,
   DELTE_COLUMN,
   DELETE_CARD,
-  SET_BOARD_ID,
-  SET_COLUMN_ID,
-  SET_CARD_ID,
+  SET_CURRENT_BOARD_ID,
+  SET_CURRENT_COLUMN_ID,
+  SET_CURRENT_CARD_ID,
 } from "./boardTypes";
 
 const initialState = {
-  boardId: "",
+  currentBoardId: "",
+  currentCardID: "",
+  currentColumnId: "",
   boards: [],
 };
 
@@ -33,18 +35,16 @@ const boardReducer = (state = initialState, action) => {
             ? { ...board, title: action.payLoad.title }
             : board
         ),
-        boardId: "",
       };
     case DELETE_BOARD:
       return {
         ...state,
         boards: state.boards.filter((board) => board.id !== action.payLoad),
-        boardId: "",
       };
-    case SET_BOARD_ID:
+    case SET_CURRENT_BOARD_ID:
       return {
         ...state,
-        boardId: action.payLoad,
+        currentBoardId: action.payLoad,
       };
     default:
       return state;
