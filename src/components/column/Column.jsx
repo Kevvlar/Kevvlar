@@ -3,7 +3,11 @@ import { FaTrash, FaEdit } from "react-icons/fa";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
 
-import { setCardModal, setColumnModal } from "../../redux";
+import {
+  setCardModal,
+  setColumnModal,
+  setCurrentColumnIdAndTitle,
+} from "../../redux";
 
 import Card from "../card/Card";
 
@@ -31,9 +35,10 @@ const Column = ({
   addNewCardModal,
   editColumnModal,
   deleteColumnModal,
+  setColumnIdAndTitle,
 }) => {
   return (
-    <Draggable draggableId={column.id} index={index}>
+    <Draggable draggableId={column._id} index={index}>
       {(provided) => (
         <div
           className="column"
@@ -46,25 +51,37 @@ const Column = ({
             </p>
             <div className="column-header-icon-container">
               <FaTrash
-                onClick={deleteColumnModal}
+                onClick={() => {
+                  setColumnIdAndTitle({
+                    id: column._id,
+                    title: column.title,
+                  });
+                  deleteColumnModal();
+                }}
                 className="column-header-trash-icon"
               />
               <FaEdit
-                onClick={editColumnModal}
+                onClick={() => {
+                  setColumnIdAndTitle({
+                    id: column._id,
+                    title: column.title,
+                  });
+                  editColumnModal();
+                }}
                 className="column-header-edit-icon"
               />
             </div>
           </div>
-          <Droppable droppableId={column.id} type="task">
+          <Droppable droppableId={column._id} type="card">
             {(provided) => (
               <div
                 className="card-container"
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
-                {mapOrder(column.taskIds, column.taskOrder, "id").map(
-                  (task, index) => (
-                    <Card key={task.id} task={task} index={index} />
+                {mapOrder(column.cards, column.cardOrder, "_id").map(
+                  (card, index) => (
+                    <Card key={card.id} card={card} index={index} />
                   )
                 )}
 
@@ -86,6 +103,7 @@ const mapDispatchToProps = (dispatch) => {
     addNewCardModal: () => dispatch(setCardModal()),
     editColumnModal: () => dispatch(setColumnModal(EDIT)),
     deleteColumnModal: () => dispatch(setColumnModal(DELETE)),
+    setColumnIdAndTitle: (data) => dispatch(setCurrentColumnIdAndTitle(data)),
   };
 };
 

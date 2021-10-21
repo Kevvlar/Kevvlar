@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { FaBars } from "react-icons/fa";
 
-import { showLeftSideNav } from "../../redux/index";
+import { showLeftSideNav, fetchBoards } from "../../redux/index";
 
 import NotificationIcon from "../notification-icon/NotificationIcon";
 import UserProfile from "../profile-image/ProfileImage";
@@ -10,12 +10,15 @@ import UserProfile from "../profile-image/ProfileImage";
 import "./appbar.css";
 import "./kevvlar-logo.svg";
 
-const AppBar = ({ toggleLeftSideNav }) => (
+const AppBar = ({ toggleLeftSideNav, fetchBoards }) => (
   <header>
     <div className="appbar-container">
       <div className="appbar-menu-container">
         <div
-          onClick={() => toggleLeftSideNav()}
+          onClick={() => {
+            toggleLeftSideNav();
+            fetchBoards();
+          }}
           className="appbar-ham-icon-container"
         >
           <FaBars className="appbar-ham-icon" />
@@ -67,6 +70,7 @@ const AppBar = ({ toggleLeftSideNav }) => (
 const mapDispatchToProps = (dispatch) => {
   return {
     toggleLeftSideNav: () => dispatch(showLeftSideNav()),
+    fetchBoards: () => dispatch(fetchBoards()),
   };
 };
 

@@ -1,7 +1,12 @@
 import React from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { connect } from "react-redux";
-import { setCurrentBoardId, setBoardModal, deleteBoard } from "../../redux";
+import {
+  setBoardModal,
+  setCurrentBoardIdAndTitle,
+  fetchColumnOrder,
+  fetchColumns,
+} from "../../redux";
 
 import { EDIT, DELETE } from "../../redux/modal/modalTypes";
 
@@ -9,14 +14,23 @@ import "./boardItem.css";
 
 const BoardItem = ({
   board,
+  setBoardIdAndTitle,
   editBoardModal,
   deleteBoardModal,
-  setCurrentBoardId,
+  fetchColumnOrder,
+  fetchColumns,
 }) => (
   <div className="board-item-container">
     <div
       className="board-item-name"
-      onClick={() => alert("Feature coming soon...")}
+      onClick={() => {
+        setBoardIdAndTitle({
+          id: board._id,
+          title: board.title,
+        });
+        fetchColumns(board._id);
+        fetchColumnOrder(board._id);
+      }}
     >
       {board.title}
     </div>
@@ -24,14 +38,20 @@ const BoardItem = ({
       <FaEdit
         className="edit-board-icon"
         onClick={() => {
-          setCurrentBoardId(board.id);
+          setBoardIdAndTitle({
+            id: board._id,
+            title: board.title,
+          });
           editBoardModal();
         }}
       />
       <FaTrash
         className="delete-board-icon"
         onClick={() => {
-          setCurrentBoardId(board.id);
+          setBoardIdAndTitle({
+            id: board._id,
+            title: board.title,
+          });
           deleteBoardModal();
         }}
       />
@@ -43,8 +63,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     editBoardModal: () => dispatch(setBoardModal(EDIT)),
     deleteBoardModal: () => dispatch(setBoardModal(DELETE)),
-    setCurrentBoardId: (data) => dispatch(setCurrentBoardId(data)),
-    deleteBoardItem: (data) => dispatch(deleteBoard(data)),
+    setBoardIdAndTitle: (data) => dispatch(setCurrentBoardIdAndTitle(data)),
+    fetchColumnOrder: (data) => dispatch(fetchColumnOrder(data)),
+    fetchColumns: (data) => dispatch(fetchColumns(data)),
   };
 };
 

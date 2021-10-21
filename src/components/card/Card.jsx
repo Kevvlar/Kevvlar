@@ -5,8 +5,8 @@ import { Draggable } from "react-beautiful-dnd";
 
 import "./card.css";
 
-const Card = ({ task, index, isGrid }) => (
-  <Draggable draggableId={task.id} index={index}>
+const Card = ({ card, index, isGrid }) => (
+  <Draggable draggableId={card.id} index={index}>
     {(provided) => (
       <div
         className="card"
@@ -18,10 +18,10 @@ const Card = ({ task, index, isGrid }) => (
           <div id="card-label" className="cardlabel"></div>
         </div>
         <div className="card-inner">
-          <p className="card-title">{task.title}</p>
+          <p className="card-title">{card.title}</p>
           {isGrid ? (
             <span>
-              <p className="card-description">{task.content}</p>
+              <p className="card-description">{card.content}</p>
               <div className="card-menu">
                 <p className="card-date">18/02/2021</p>
                 <FaEllipsisH

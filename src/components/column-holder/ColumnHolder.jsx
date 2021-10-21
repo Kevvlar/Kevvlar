@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import ScrollContainer from "react-indiana-drag-scroll";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
 
-import { setColumnModal } from "../../redux/index";
+import { setColumnModal, updateColumnOrder } from "../../redux/index";
 
 import Column from "../column/Column";
 
@@ -24,43 +24,13 @@ const mapOrder = (array, order, key) => {
   return array;
 };
 
-const ColumnHolder = ({ addNewColumnModal }) => {
-  const [columns, setColumns] = useState([
-    {
-      id: "column-1",
-      title: "Todo",
-      taskOrder: ["task-1", "task-2"],
-      taskIds: [
-        { id: "task-1", title: "Eat", content: "Eat launch" },
-        { id: "task-2", title: "Movie", content: "Watch my show" },
-      ],
-    },
-    {
-      id: "column-2",
-      title: "In progress",
-      taskOrder: ["task-3", "task-4"],
-      taskIds: [
-        { id: "task-3", title: "Code", content: "Write code" },
-        { id: "task-4", title: "Frontend", content: "Fix frontend" },
-      ],
-    },
-    {
-      id: "column-3",
-      title: "Done",
-      taskOrder: ["task-5", "task-6"],
-      taskIds: [
-        { id: "task-5", title: "Play", content: "Write code" },
-        { id: "task-6", title: "Sleep", content: "Fix frontend" },
-      ],
-    },
-  ]);
-
-  const [columnOrder, setColumnOrder] = useState([
-    "column-1",
-    "column-2",
-    "column-3",
-  ]);
-
+const ColumnHolder = ({
+  addNewColumnModal,
+  columns,
+  columnOrder,
+  updateColumnOrder,
+  boardId,
+}) => {
   const onDragEnd = (result) => {
     const { destination, draggableId, source, type } = result;
 
@@ -68,47 +38,53 @@ const ColumnHolder = ({ addNewColumnModal }) => {
       return;
     }
 
+    // console.log("D: ", destination);
+    // console.log("S: ", source);
+    // console.log("T: ", type);
+
     // move column
     if (type === "column" && destination.index !== source.index) {
       const newColumnOrder = Array.from(columnOrder);
-      const [reOrderedColumn] = newColumnOrder.splice(source.index, 1);
-      newColumnOrder.splice(destination.index, 0, reOrderedColumn);
+      const [reOrderedItem] = newColumnOrder.splice(source.index, 1);
+      newColumnOrder.splice(destination.index, 0, reOrderedItem);
 
       // send this to column orderState
-      setColumnOrder(newColumnOrder);
+      updateColumnOrder(boardId, {
+        columnOrder: newColumnOrder,
+      });
     }
 
     // move card within column
     if (
       source.droppableId === destination.droppableId &&
       source.index !== destination.index &&
-      type === "task"
+      type === "card"
     ) {
       const currentColumn = columns.find((column) =>
         column.id === destination.droppableId ? column : null
       );
-      const newTaskOrder = Array.from(currentColumn.taskOrder);
-      const [reOrderedTask] = newTaskOrder.splice(source.index, 1);
-      newTaskOrder.splice(destination.index, 0, reOrderedTask);
+      const newCardOrder = Array.from(currentColumn.cardOrder);
+      const [reOrderedCards] = newCardOrder.splice(source.index, 1);
+      newCardOrder.splice(destination.index, 0, reOrderedCards);
 
-      console.log("Old Within Column: ", currentColumn.taskOrder);
-      console.log("New Within Column: ", newTaskOrder);
+      console.log("Old Within Column: ", currentColumn.cardOrder);
+      console.log("New Within Column: ", newCardOrder);
       // console.log(
       //   `Moving this card within its column to index of ${destination.index}`
       // );
     }
 
     // move card into another column
-    if (source.droppableId !== destination.droppableId && type === "task") {
+    if (source.droppableId !== destination.droppableId && type === "card") {
       const targetColumn = columns.find((column) =>
         column.id === destination.droppableId ? column : null
       );
 
-      const targetColumnTaskOrder = targetColumn.taskOrder;
-      const newTargetColumnTaskOrder = [...targetColumnTaskOrder];
-      newTargetColumnTaskOrder.splice(destination.index, 0, draggableId);
+      const targetColumnCardOrder = targetColumn.cardOrder;
+      const newTargetColumnCardOrder = [...targetColumnCardOrder];
+      newTargetColumnCardOrder.splice(destination.index, 0, draggableId);
 
-      console.log("Task order New: ", newTargetColumnTaskOrder);
+      console.log("Task order New: ", newTargetColumnCardOrder);
       console.log(
         `Moving this card with id: ${draggableId} to index of ${destination.index}`
       );
@@ -133,8 +109,8 @@ const ColumnHolder = ({ addNewColumnModal }) => {
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
-              {mapOrder(columns, columnOrder, "id").map((column, index) => (
-                <Column key={column.id} column={column} index={index} />
+              {mapOrder(columns, columnOrder, "_id").map((column, index) => (
+                <Column key={column._id} column={column} index={index} />
               ))}
               {provided.placeholder}
               <button onClick={addNewColumnModal} className="new-column-button">
@@ -148,10 +124,20 @@ const ColumnHolder = ({ addNewColumnModal }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    addNewColumnModal: () => dispatch(setColumnModal()),
+    columnOrder: state.columnOrder.order,
+    columns: state.column.columns,
+    boardId: state.board.currentBoardId,
   };
 };
 
-export default connect(null, mapDispatchToProps)(ColumnHolder);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addNewColumnModal: () => dispatch(setColumnModal()),
+    updateColumnOrder: (boardId, order) =>
+      dispatch(updateColumnOrder(boardId, order)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ColumnHolder);
