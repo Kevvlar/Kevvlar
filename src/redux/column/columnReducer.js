@@ -6,6 +6,7 @@ import {
   FETCH_COLUMNS_SUCCESS,
   FETCH_COLUMNS_FAILURE,
   SET_CURRENT_COLUMN_ID_AND_TITLE,
+  DELETE_COLUMN_BY_BOARD,
 } from "./columnTypes";
 
 const initialState = {
@@ -74,6 +75,16 @@ const columnReducer = (state = initialState, action) => {
         ...state,
         currentColumnId: action.payLoad.id,
         currentColumnTitle: action.payLoad.title,
+      };
+
+    case DELETE_COLUMN_BY_BOARD:
+      return {
+        ...state,
+        currentColumnId: "",
+        currentColumnTitle: "",
+        loading: false,
+        error: "",
+        columns: [],
       };
 
     default:

@@ -14,6 +14,7 @@ import {
   SET_CURRENT_BOARD_ID_AND_TITLE,
 } from "./boardTypes";
 import axios from "axios";
+import { deleteColumnByBoard, fetchColumnOrder, fetchColumns } from "../index";
 
 export const fetchBoardsRequest = () => {
   return {
@@ -111,8 +112,12 @@ export const addBoard = (data) => {
         },
       })
       .then((response) => {
-        dispatch(addNewBoardSuccess());
+        const { _id, title } = response.data.data.board;
+        dispatch(setCurrentBoardIdAndTitle({ id: _id, title: title }));
         dispatch(fetchBoards());
+        dispatch(fetchColumns(_id));
+        dispatch(fetchColumnOrder(_id));
+        dispatch(addNewBoardSuccess());
       })
       .catch((error) => {
         const errorMsg = error.message;
@@ -132,9 +137,13 @@ export const editBoard = (data, boardId) => {
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNmM2YmI4MTA4M2I2MWVjNThhMGNjNSIsImlhdCI6MTYzNDQ5NTQxN30.G2V6WZJTZOlE-aVc6ELaQ1crB6ldd0GPF5dQtLXuPZE",
         },
       })
-      .then(() => {
-        dispatch(editBoardSuccess());
+      .then((response) => {
+        const { _id, title } = response.data.data.board;
+        dispatch(setCurrentBoardIdAndTitle({ id: _id, title: title }));
         dispatch(fetchBoards());
+        dispatch(fetchColumns(_id));
+        dispatch(fetchColumnOrder(_id));
+        dispatch(addNewBoardSuccess());
       })
       .catch((error) => {
         const errorMsg = error.message;
@@ -156,6 +165,7 @@ export const deleteBoard = (boardId) => {
       })
       .then(() => {
         dispatch(deleteBoardSuccess());
+        dispatch(deleteColumnByBoard());
         dispatch(fetchBoards());
       })
       .catch((error) => {
@@ -177,6 +187,9 @@ export const fetchBoards = () => {
       })
       .then((response) => {
         const boards = response.data.data.boards;
+        const firstBoard = boards[0];
+        dispatch(fetchColumns(firstBoard._id));
+        dispatch(fetchColumnOrder(firstBoard._id));
         dispatch(fetchBoardsSuccess(boards));
       })
       .catch((error) => {

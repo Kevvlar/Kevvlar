@@ -2,13 +2,7 @@ import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { connect } from "react-redux";
 
-import {
-  closeModal,
-  addBoard,
-  fetchBoards,
-  editBoard,
-  deleteBoard,
-} from "../../../redux";
+import { closeModal, addBoard, editBoard, deleteBoard } from "../../../redux";
 import { ADD, EDIT, DELETE } from "../../../redux/modal/modalTypes";
 
 import "./boardModal.css";
@@ -17,7 +11,6 @@ const BoardModal = ({
   type,
   closeModal,
   addBoard,
-  fetchBoards,
   boardId,
   boardTitle,
   editBoard,
@@ -128,7 +121,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
     addBoard: (data) => dispatch(addBoard(data)),
-    fetchBoards: () => dispatch(fetchBoards()),
     editBoard: (data, id) => dispatch(editBoard(data, id)),
     deleteBoard: (id) => dispatch(deleteBoard(id)),
   };

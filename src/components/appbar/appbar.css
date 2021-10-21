@@ -9,6 +9,10 @@
   height: 50px;
 }
 
+.board-lead {
+  background-color: transparent;
+}
+
 .appbar-menu-container {
   display: flex;
   align-items: center;
@@ -38,7 +42,6 @@
   border-radius: 3px;
   background: transparent;
   padding: 0;
-  width: 100px;
 }
 
 .appbar-logo {

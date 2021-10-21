@@ -46,9 +46,9 @@ const Column = ({
           ref={provided.innerRef}
         >
           <div className="column-header-container">
-            <p {...provided.dragHandleProps} className="column-header-title">
-              {column.title}
-            </p>
+            <div className="column-handle" {...provided.dragHandleProps}>
+              <p className="column-header-title">{column.title}</p>
+            </div>
             <div className="column-header-icon-container">
               <FaTrash
                 onClick={() => {

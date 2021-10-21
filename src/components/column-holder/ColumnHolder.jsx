@@ -38,10 +38,6 @@ const ColumnHolder = ({
       return;
     }
 
-    // console.log("D: ", destination);
-    // console.log("S: ", source);
-    // console.log("T: ", type);
-
     // move column
     if (type === "column" && destination.index !== source.index) {
       const newColumnOrder = Array.from(columnOrder);
@@ -113,9 +109,16 @@ const ColumnHolder = ({
                 <Column key={column._id} column={column} index={index} />
               ))}
               {provided.placeholder}
-              <button onClick={addNewColumnModal} className="new-column-button">
-                + Add New Column
-              </button>
+              {boardId ? (
+                <button
+                  onClick={addNewColumnModal}
+                  className="new-column-button"
+                >
+                  + Add New Column
+                </button>
+              ) : (
+                <h2>No board selected</h2>
+              )}
             </div>
           )}
         </Droppable>
@@ -129,6 +132,7 @@ const mapStateToProps = (state) => {
     columnOrder: state.columnOrder.order,
     columns: state.column.columns,
     boardId: state.board.currentBoardId,
+    boards: state.board.boards,
   };
 };
 

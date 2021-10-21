@@ -28,8 +28,6 @@ const boardReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        currentBoardId: "",
-        currentBoardTitle: "",
       };
 
     case FETCH_BOARD_SUCCESS:
@@ -37,8 +35,6 @@ const boardReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         boards: action.payLoad,
-        currentBoardId: "",
-        currentBoardTitle: "",
       };
 
     case FETCH_BOARD_FAILURE:
@@ -62,15 +58,11 @@ const boardReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        currentBoardId: "",
-        currentBoardTitle: "",
       };
     case ADD_BOARD_SUCCESS:
       return {
         ...state,
         loading: false,
-        currentBoardId: "",
-        currentBoardTitle: "",
       };
 
     case ADD_BOARD_FAILURE:

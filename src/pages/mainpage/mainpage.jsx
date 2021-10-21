@@ -7,26 +7,53 @@ import RightSideNav from "../../components/sidenav-right/SideNavRight";
 import ColumnHolder from "../../components/column-holder/ColumnHolder";
 import Modal from "../../components/modal/Modal";
 
+import { fetchBoards } from "../../redux";
+
 import "./mainPage.css";
 
-function MainPage({ leftSideNav, rightSideNav, showModal }) {
-  return (
-    <div className="todopage">
-      <AppBar />
-      {leftSideNav ? <LeftSideNav /> : null}
-      {rightSideNav ? <RightSideNav /> : null}
-      <ColumnHolder />
-      {showModal ? <Modal /> : null}
-    </div>
-  );
+class MainPage extends React.Component {
+  componentDidMount() {
+    this.props.fetchBoards();
+  }
+
+  render() {
+    return (
+      <div className="todopage">
+        <AppBar />
+        {this.props.leftSideNav ? <LeftSideNav /> : null}
+        {this.props.rightSideNav ? <RightSideNav /> : null}
+        {this.props.boardId ? (
+          <ColumnHolder />
+        ) : (
+          <div className="no-active-board">
+            <div className="content">
+              <h2 className="content-title">No board selected</h2>
+              <p className="content-body">
+                There is currently no active board please create one, or select
+                a board from the boards panel.
+              </p>
+            </div>
+          </div>
+        )}
+        {this.props.showModal ? <Modal /> : null}
+      </div>
+    );
+  }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchBoards: () => dispatch(fetchBoards()),
+  };
+};
 
 const mapStateToProps = (state) => {
   return {
     leftSideNav: state.sideNavLeft.leftSideNav,
     rightSideNav: state.sideNavRight.rightSideNav,
     showModal: state.modal.showModal,
+    boardId: state.board.currentBoardId,
   };
 };
 
-export default connect(mapStateToProps, null)(MainPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

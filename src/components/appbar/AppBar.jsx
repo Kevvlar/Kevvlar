@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { FaBars } from "react-icons/fa";
 
-import { showLeftSideNav, fetchBoards } from "../../redux/index";
+import { showLeftSideNav } from "../../redux/index";
 
 import NotificationIcon from "../notification-icon/NotificationIcon";
 import UserProfile from "../profile-image/ProfileImage";
@@ -10,20 +10,19 @@ import UserProfile from "../profile-image/ProfileImage";
 import "./appbar.css";
 import "./kevvlar-logo.svg";
 
-const AppBar = ({ toggleLeftSideNav, fetchBoards }) => (
+const AppBar = ({ toggleLeftSideNav, boardTitle }) => (
   <header>
     <div className="appbar-container">
       <div className="appbar-menu-container">
         <div
           onClick={() => {
             toggleLeftSideNav();
-            fetchBoards();
           }}
           className="appbar-ham-icon-container"
         >
           <FaBars className="appbar-ham-icon" />
         </div>
-        <input className="appbar-input" type="text" placeholder="Enter Board" />
+        <p className="appbar-input">{boardTitle}</p>
       </div>
       <div className="appbar-logo primary-text-color">
         <svg
@@ -67,11 +66,17 @@ const AppBar = ({ toggleLeftSideNav, fetchBoards }) => (
   </header>
 );
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    toggleLeftSideNav: () => dispatch(showLeftSideNav()),
-    fetchBoards: () => dispatch(fetchBoards()),
+    boards: state.board.boards,
+    boardTitle: state.board.currentBoardTitle,
   };
 };
 
-export default connect(null, mapDispatchToProps)(AppBar);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleLeftSideNav: () => dispatch(showLeftSideNav()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppBar);

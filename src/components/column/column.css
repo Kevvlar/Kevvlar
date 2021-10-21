@@ -6,6 +6,10 @@
   padding-right: 15px;
 }
 
+.column-handle {
+  width: 100%;
+}
+
 .card-container {
   height: 100%;
   overflow: auto;

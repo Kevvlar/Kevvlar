@@ -5,10 +5,14 @@ import {
   ADD_COLUMN_REQUEST,
   ADD_COLUMN_SUCCESS,
   ADD_COLUMN_FAILURE,
+  EDIT_COLUMN_REQUEST,
+  EDIT_COLUMN_SUCCESS,
+  EDIT_COLUMN_FAILURE,
   DELETE_COLUMN_REQUEST,
   DELETE_COLUMN_SUCCESS,
   DELETE_COLUMN_FAILURE,
   SET_CURRENT_COLUMN_ID_AND_TITLE,
+  DELETE_COLUMN_BY_BOARD,
 } from "./columnTypes";
 import axios from "axios";
 import { fetchColumnOrder } from "../column-order/columnOrderActions";
@@ -52,6 +56,25 @@ export const addNewColumnFailure = (error) => {
   };
 };
 
+export const editColumnRequest = () => {
+  return {
+    type: EDIT_COLUMN_REQUEST,
+  };
+};
+
+export const editColumnSuccess = () => {
+  return {
+    type: EDIT_COLUMN_SUCCESS,
+  };
+};
+
+export const editColumnFailure = (error) => {
+  return {
+    type: EDIT_COLUMN_FAILURE,
+    payLoad: error,
+  };
+};
+
 export const deleteColumnRequest = () => {
   return {
     type: DELETE_COLUMN_REQUEST,
@@ -75,6 +98,12 @@ export const setCurrentColumnIdAndTitle = (data) => {
   return {
     type: SET_CURRENT_COLUMN_ID_AND_TITLE,
     payLoad: data,
+  };
+};
+
+export const deleteColumnByBoard = () => {
+  return {
+    type: DELETE_COLUMN_BY_BOARD,
   };
 };
 
@@ -119,6 +148,29 @@ export const addColumn = (data, boardId) => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(addNewColumnFailure(errorMsg));
+      });
+  };
+};
+
+export const editColumn = (data, columnId, boardId) => {
+  return (dispatch) => {
+    dispatch(editColumnRequest());
+    axios
+      .patch(`http://localhost:8000/api/v1/columns/${columnId}`, data, {
+        headers: {
+          "content-type": "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNmM2YmI4MTA4M2I2MWVjNThhMGNjNSIsImlhdCI6MTYzNDQ5NTQxN30.G2V6WZJTZOlE-aVc6ELaQ1crB6ldd0GPF5dQtLXuPZE",
+        },
+      })
+      .then(() => {
+        dispatch(editColumnSuccess());
+        dispatch(fetchColumns(boardId));
+        dispatch(fetchColumnOrder(boardId));
+      })
+      .catch((error) => {
+        const errorMsg = error.message;
+        dispatch(editColumnFailure(errorMsg));
       });
   };
 };

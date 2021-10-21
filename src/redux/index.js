@@ -32,6 +32,8 @@ export {
 export {
   fetchColumns,
   addColumn,
+  editColumn,
   deleteColumn,
+  deleteColumnByBoard,
   setCurrentColumnIdAndTitle,
 } from "./column/columnActions";

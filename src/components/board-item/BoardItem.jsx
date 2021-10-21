@@ -14,26 +14,25 @@ import "./boardItem.css";
 
 const BoardItem = ({
   board,
-  setBoardIdAndTitle,
   editBoardModal,
   deleteBoardModal,
+  setBoardIdAndTitle,
   fetchColumnOrder,
   fetchColumns,
 }) => (
-  <div className="board-item-container">
-    <div
-      className="board-item-name"
-      onClick={() => {
-        setBoardIdAndTitle({
-          id: board._id,
-          title: board.title,
-        });
-        fetchColumns(board._id);
-        fetchColumnOrder(board._id);
-      }}
-    >
-      {board.title}
-    </div>
+  <div
+    className="board-item-container"
+    onClick={() => {
+      setBoardIdAndTitle({
+        id: board._id,
+        title: board.title,
+      });
+      fetchColumns(board._id);
+      fetchColumnOrder(board._id);
+    }}
+  >
+    <div className="board-item-name">{board.title}</div>
+
     <div className="board-item-icons-cotainer">
       <FaEdit
         className="edit-board-icon"

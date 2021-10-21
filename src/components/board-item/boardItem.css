@@ -1,6 +1,6 @@
 .board-item-container {
   padding: 15px;
-  max-width: 200px;
+  width: 200px;
   overflow: hidden;
   color: #fff;
   display: flex;
@@ -8,7 +8,7 @@
   align-items: center;
 }
 
-.board-item-name:hover {
+.board-item-name-container:hover {
   cursor: pointer;
 }
 
@@ -21,6 +21,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 5;
 }
 
 .edit-board-icon:hover {
