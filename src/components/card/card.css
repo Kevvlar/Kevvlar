@@ -58,3 +58,17 @@
   cursor: pointer;
   float: right;
 }
+
+/* .cardlabelholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 4px;
+}
+
+.card-label {
+  height: 84px;
+  width: 3px;
+  border-radius: 20px;
+} */

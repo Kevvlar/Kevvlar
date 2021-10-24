@@ -8,12 +8,12 @@
   align-items: center;
 }
 
-.board-item-name-container:hover {
-  cursor: pointer;
-}
-
 .board-item-container:hover {
   background-color: #296dce;
+}
+
+.board-item-name:hover {
+  cursor: pointer;
 }
 
 .board-item-icons-cotainer {

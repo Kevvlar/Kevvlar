@@ -5,6 +5,7 @@ import {
   UPDATE_COLUMN_ORDER_REQUEST,
   UPDATE_COLUMN_ORDER_SUCCESS,
   UPDATE_COLUMN_ORDER_FAILURE,
+  UPDATE_COLUMN_ORDER_LOCAL,
 } from "./columnOrderTypes";
 
 const initialState = {
@@ -39,15 +40,20 @@ export const columnOrderReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        order: [],
       };
 
     case UPDATE_COLUMN_ORDER_SUCCESS:
       return {
         ...state,
         loading: false,
+      };
+
+    case UPDATE_COLUMN_ORDER_LOCAL: {
+      return {
+        ...state,
         order: action.payLoad,
       };
+    }
 
     case UPDATE_COLUMN_ORDER_FAILURE:
       return {

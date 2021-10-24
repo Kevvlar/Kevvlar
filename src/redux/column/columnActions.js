@@ -13,6 +13,9 @@ import {
   DELETE_COLUMN_FAILURE,
   SET_CURRENT_COLUMN_ID_AND_TITLE,
   DELETE_COLUMN_BY_BOARD,
+  UPDATE_CARD_ORDER_WITHIN_COLUMN_REQUEST,
+  UPDATE_CARD_ORDER_WITHIN_COLUMN_SUCCESS,
+  UPDATE_CARD_ORDER_WITHIN_COLUMN_FAILURE,
 } from "./columnTypes";
 import axios from "axios";
 import { fetchColumnOrder } from "../column-order/columnOrderActions";
@@ -107,6 +110,25 @@ export const deleteColumnByBoard = () => {
   };
 };
 
+export const updateCardOrderWithinColumnRequest = () => {
+  return {
+    type: UPDATE_CARD_ORDER_WITHIN_COLUMN_REQUEST,
+  };
+};
+
+export const updateCardOrderWithinColumnSuccess = () => {
+  return {
+    type: UPDATE_CARD_ORDER_WITHIN_COLUMN_SUCCESS,
+  };
+};
+
+export const updateCardOrderWithinColumnFailure = (error) => {
+  return {
+    type: UPDATE_CARD_ORDER_WITHIN_COLUMN_FAILURE,
+    payLoad: error,
+  };
+};
+
 export const fetchColumns = (boardId) => {
   return (dispatch) => {
     dispatch(fetchColumnsRequest());
@@ -141,9 +163,9 @@ export const addColumn = (data, boardId) => {
         },
       })
       .then((response) => {
-        dispatch(addNewColumnSuccess());
         dispatch(fetchColumns(boardId));
         dispatch(fetchColumnOrder(boardId));
+        dispatch(addNewColumnSuccess());
       })
       .catch((error) => {
         const errorMsg = error.message;
@@ -195,6 +217,32 @@ export const deleteColumn = (columnId, boardId) => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(deleteColumnFailure(errorMsg));
+      });
+  };
+};
+
+export const updateCardOrderWithinColumn = (columnId, boardId, order) => {
+  return (dispatch) => {
+    dispatch(updateCardOrderWithinColumnRequest());
+    axios
+      .patch(
+        `http://localhost:8000/api/v1/columns/changecardorderwithincolumn/${columnId}`,
+        order,
+        {
+          headers: {
+            "content-type": "application/json",
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNmM2YmI4MTA4M2I2MWVjNThhMGNjNSIsImlhdCI6MTYzNDQ5NTQxN30.G2V6WZJTZOlE-aVc6ELaQ1crB6ldd0GPF5dQtLXuPZE",
+          },
+        }
+      )
+      .then(() => {
+        dispatch(fetchColumns(boardId));
+        dispatch(updateCardOrderWithinColumnSuccess());
+      })
+      .catch((error) => {
+        const errorMsg = error.message;
+        dispatch(updateCardOrderWithinColumnFailure(errorMsg));
       });
   };
 };

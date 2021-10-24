@@ -6,7 +6,7 @@ import { Draggable } from "react-beautiful-dnd";
 import "./card.css";
 
 const Card = ({ card, index, isGrid }) => (
-  <Draggable draggableId={card.id} index={index}>
+  <Draggable draggableId={card._id} index={index}>
     {(provided) => (
       <div
         className="card"
@@ -15,7 +15,7 @@ const Card = ({ card, index, isGrid }) => (
         ref={provided.innerRef}
       >
         <div className="cardlabelholder">
-          <div id="card-label" className="cardlabel"></div>
+          <div id="card-label" className="card-label"></div>
         </div>
         <div className="card-inner">
           <p className="card-title">{card.title}</p>
@@ -23,7 +23,7 @@ const Card = ({ card, index, isGrid }) => (
             <span>
               <p className="card-description">{card.content}</p>
               <div className="card-menu">
-                <p className="card-date">18/02/2021</p>
+                <p className="card-date">{card.date}</p>
                 <FaEllipsisH
                   onClick={() => alert("Feature coming soon...")}
                   className="card-more-icon"

@@ -7,6 +7,9 @@ import {
   FETCH_COLUMNS_FAILURE,
   SET_CURRENT_COLUMN_ID_AND_TITLE,
   DELETE_COLUMN_BY_BOARD,
+  UPDATE_CARD_ORDER_WITHIN_COLUMN_REQUEST,
+  UPDATE_CARD_ORDER_WITHIN_COLUMN_SUCCESS,
+  UPDATE_CARD_ORDER_WITHIN_COLUMN_FAILURE,
 } from "./columnTypes";
 
 const initialState = {
@@ -85,6 +88,25 @@ const columnReducer = (state = initialState, action) => {
         loading: false,
         error: "",
         columns: [],
+      };
+
+    case UPDATE_CARD_ORDER_WITHIN_COLUMN_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case UPDATE_CARD_ORDER_WITHIN_COLUMN_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case UPDATE_CARD_ORDER_WITHIN_COLUMN_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payLoad,
       };
 
     default:

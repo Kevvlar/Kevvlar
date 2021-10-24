@@ -3,7 +3,12 @@ import ScrollContainer from "react-indiana-drag-scroll";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
 
-import { setColumnModal, updateColumnOrder } from "../../redux/index";
+import {
+  setColumnModal,
+  updateColumnOrder,
+  updateColumnOrderLocal,
+  updateCardOrderWithinColumn,
+} from "../../redux/index";
 
 import Column from "../column/Column";
 
@@ -30,6 +35,8 @@ const ColumnHolder = ({
   columnOrder,
   updateColumnOrder,
   boardId,
+  updateOrderLocal,
+  updateCardOrderInColumn,
 }) => {
   const onDragEnd = (result) => {
     const { destination, draggableId, source, type } = result;
@@ -45,6 +52,7 @@ const ColumnHolder = ({
       newColumnOrder.splice(destination.index, 0, reOrderedItem);
 
       // send this to column orderState
+      updateOrderLocal(newColumnOrder);
       updateColumnOrder(boardId, {
         columnOrder: newColumnOrder,
       });
@@ -63,11 +71,9 @@ const ColumnHolder = ({
       const [reOrderedCards] = newCardOrder.splice(source.index, 1);
       newCardOrder.splice(destination.index, 0, reOrderedCards);
 
-      console.log("Old Within Column: ", currentColumn.cardOrder);
-      console.log("New Within Column: ", newCardOrder);
-      // console.log(
-      //   `Moving this card within its column to index of ${destination.index}`
-      // );
+      updateCardOrderInColumn(destination.droppableId, boardId, {
+        cardOrder: newCardOrder,
+      });
     }
 
     // move card into another column
@@ -80,10 +86,9 @@ const ColumnHolder = ({
       const newTargetColumnCardOrder = [...targetColumnCardOrder];
       newTargetColumnCardOrder.splice(destination.index, 0, draggableId);
 
-      console.log("Task order New: ", newTargetColumnCardOrder);
-      console.log(
-        `Moving this card with id: ${draggableId} to index of ${destination.index}`
-      );
+      // console.log("Card order New: ", newTargetColumnCardOrder);
+      // console.log("D: ", destination);
+      // console.log("DR: ", draggableId);
     }
   };
 
@@ -109,16 +114,9 @@ const ColumnHolder = ({
                 <Column key={column._id} column={column} index={index} />
               ))}
               {provided.placeholder}
-              {boardId ? (
-                <button
-                  onClick={addNewColumnModal}
-                  className="new-column-button"
-                >
-                  + Add New Column
-                </button>
-              ) : (
-                <h2>No board selected</h2>
-              )}
+              <button onClick={addNewColumnModal} className="new-column-button">
+                + Add New Column
+              </button>
             </div>
           )}
         </Droppable>
@@ -141,6 +139,9 @@ const mapDispatchToProps = (dispatch) => {
     addNewColumnModal: () => dispatch(setColumnModal()),
     updateColumnOrder: (boardId, order) =>
       dispatch(updateColumnOrder(boardId, order)),
+    updateOrderLocal: (order) => dispatch(updateColumnOrderLocal(order)),
+    updateCardOrderInColumn: (columnId, boardId, order) =>
+      dispatch(updateCardOrderWithinColumn(columnId, boardId, order)),
   };
 };
 

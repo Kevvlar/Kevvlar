@@ -27,6 +27,7 @@ export {
 export {
   fetchColumnOrder,
   updateColumnOrder,
+  updateColumnOrderLocal,
 } from "./column-order/columnOrderActions";
 
 export {
@@ -36,4 +37,7 @@ export {
   deleteColumn,
   deleteColumnByBoard,
   setCurrentColumnIdAndTitle,
+  updateCardOrderWithinColumn,
 } from "./column/columnActions";
+
+export { addCard } from "./card/cardActions";

@@ -5,6 +5,7 @@ import {
   UPDATE_COLUMN_ORDER_REQUEST,
   UPDATE_COLUMN_ORDER_SUCCESS,
   UPDATE_COLUMN_ORDER_FAILURE,
+  UPDATE_COLUMN_ORDER_LOCAL,
 } from "./columnOrderTypes";
 import axios from "axios";
 
@@ -34,10 +35,9 @@ export const updateColumnOrderRequest = () => {
   };
 };
 
-export const updateColumnOrderSuccess = (columnOrder) => {
+export const updateColumnOrderSuccess = () => {
   return {
     type: UPDATE_COLUMN_ORDER_SUCCESS,
-    payLoad: columnOrder,
   };
 };
 
@@ -45,6 +45,13 @@ export const updateColumnOrderFailure = (error) => {
   return {
     type: UPDATE_COLUMN_ORDER_FAILURE,
     payLoad: error,
+  };
+};
+
+export const updateColumnOrderLocal = (columnOrder) => {
+  return {
+    type: UPDATE_COLUMN_ORDER_LOCAL,
+    payLoad: columnOrder,
   };
 };
 
@@ -82,8 +89,7 @@ export const updateColumnOrder = (boardId, newOrder) => {
         params: { board: boardId },
       })
       .then((response) => {
-        const columnOrder = response.data.data.order.columnOrder;
-        dispatch(updateColumnOrderSuccess(columnOrder));
+        dispatch(updateColumnOrderSuccess());
       })
       .catch((error) => {
         const errorMsg = error.message;

@@ -81,7 +81,7 @@ const Column = ({
               >
                 {mapOrder(column.cards, column.cardOrder, "_id").map(
                   (card, index) => (
-                    <Card key={card.id} card={card} index={index} />
+                    <Card key={card._id} card={card} index={index} />
                   )
                 )}
 
@@ -89,7 +89,16 @@ const Column = ({
               </div>
             )}
           </Droppable>
-          <button onClick={addNewCardModal} className="new-card-button">
+          <button
+            onClick={() => {
+              setColumnIdAndTitle({
+                id: column._id,
+                title: column.title,
+              });
+              addNewCardModal();
+            }}
+            className="new-card-button"
+          >
             + Add New Card
           </button>
         </div>
