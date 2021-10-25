@@ -38,6 +38,7 @@ export {
   deleteColumnByBoard,
   setCurrentColumnIdAndTitle,
   updateCardOrderWithinColumn,
+  updateCardOrderAndColumn,
 } from "./column/columnActions";
 
-export { addCard } from "./card/cardActions";
+export { addCard, setCardData } from "./card/cardActions";

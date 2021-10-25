@@ -16,6 +16,9 @@ import {
   UPDATE_CARD_ORDER_WITHIN_COLUMN_REQUEST,
   UPDATE_CARD_ORDER_WITHIN_COLUMN_SUCCESS,
   UPDATE_CARD_ORDER_WITHIN_COLUMN_FAILURE,
+  UPDATE_CARD_ORDER_AND_COLUMN_REQUEST,
+  UPDATE_CARD_ORDER_AND_COLUMN_SUCCESS,
+  UPDATE_CARD_ORDER_AND_COLUMN_FAILURE,
 } from "./columnTypes";
 import axios from "axios";
 import { fetchColumnOrder } from "../column-order/columnOrderActions";
@@ -126,6 +129,24 @@ export const updateCardOrderWithinColumnFailure = (error) => {
   return {
     type: UPDATE_CARD_ORDER_WITHIN_COLUMN_FAILURE,
     payLoad: error,
+  };
+};
+
+export const updateCardOrderAndColumnRequest = () => {
+  return {
+    type: UPDATE_CARD_ORDER_AND_COLUMN_REQUEST,
+  };
+};
+
+export const updateCardOrderAndColumnSuccess = () => {
+  return {
+    type: UPDATE_CARD_ORDER_AND_COLUMN_SUCCESS,
+  };
+};
+
+export const updateCardOrderAndColumnFailure = () => {
+  return {
+    type: UPDATE_CARD_ORDER_AND_COLUMN_FAILURE,
   };
 };
 
@@ -243,6 +264,32 @@ export const updateCardOrderWithinColumn = (columnId, boardId, order) => {
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(updateCardOrderWithinColumnFailure(errorMsg));
+      });
+  };
+};
+
+export const updateCardOrderAndColumn = (sourceColumnId, boardId, data) => {
+  return (dispatch) => {
+    dispatch(updateCardOrderAndColumnRequest());
+    axios
+      .patch(
+        `http://localhost:8000/api/v1/columns/changecardcolumnandorder/${sourceColumnId}`,
+        data,
+        {
+          headers: {
+            "content-type": "application/json",
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNmM2YmI4MTA4M2I2MWVjNThhMGNjNSIsImlhdCI6MTYzNDQ5NTQxN30.G2V6WZJTZOlE-aVc6ELaQ1crB6ldd0GPF5dQtLXuPZE",
+          },
+        }
+      )
+      .then(() => {
+        dispatch(fetchColumns(boardId));
+        dispatch(updateCardOrderAndColumnSuccess());
+      })
+      .catch((error) => {
+        const errorMsg = error.message;
+        dispatch(updateCardOrderAndColumnFailure(errorMsg));
       });
   };
 };

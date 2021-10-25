@@ -3,9 +3,11 @@ import { connect } from "react-redux";
 import { FaEllipsisH } from "react-icons/fa";
 import { Draggable } from "react-beautiful-dnd";
 
+import { setCardModal, setCardData } from "../../redux/index";
+
 import "./card.css";
 
-const Card = ({ card, index, isGrid }) => (
+const Card = ({ card, index, isGrid, editCardModal, setCurrentCardData }) => (
   <Draggable draggableId={card._id} index={index}>
     {(provided) => (
       <div
@@ -21,11 +23,20 @@ const Card = ({ card, index, isGrid }) => (
           <p className="card-title">{card.title}</p>
           {isGrid ? (
             <span>
-              <p className="card-description">{card.content}</p>
+              <p className="card-description">{card.description}</p>
               <div className="card-menu">
                 <p className="card-date">{card.date}</p>
                 <FaEllipsisH
-                  onClick={() => alert("Feature coming soon...")}
+                  onClick={() => {
+                    editCardModal("EDIT");
+                    setCurrentCardData({
+                      id: card._id,
+                      title: card.title,
+                      description: card.description,
+                      date: card.date,
+                      color: card.colorLabel,
+                    });
+                  }}
                   className="card-more-icon"
                 />
               </div>
@@ -43,4 +54,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(Card);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    editCardModal: (type) => dispatch(setCardModal(type)),
+    setCurrentCardData: (data) => dispatch(setCardData(data)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Card);

@@ -2,6 +2,7 @@ import {
   ADD_CARD_REQUEST,
   ADD_CARD_SUCCESS,
   ADD_CARD_FAILURE,
+  SET_CARD_DATA,
 } from "./cardTypes";
 import axios from "axios";
 import { fetchColumns, fetchColumnOrder } from "../index";
@@ -22,6 +23,13 @@ export const addCardFailure = (error) => {
   return {
     type: ADD_CARD_FAILURE,
     payLoad: error,
+  };
+};
+
+export const setCardData = (data) => {
+  return {
+    type: SET_CARD_DATA,
+    payLoad: data,
   };
 };
 

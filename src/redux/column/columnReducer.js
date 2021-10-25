@@ -10,6 +10,9 @@ import {
   UPDATE_CARD_ORDER_WITHIN_COLUMN_REQUEST,
   UPDATE_CARD_ORDER_WITHIN_COLUMN_SUCCESS,
   UPDATE_CARD_ORDER_WITHIN_COLUMN_FAILURE,
+  UPDATE_CARD_ORDER_AND_COLUMN_REQUEST,
+  UPDATE_CARD_ORDER_AND_COLUMN_SUCCESS,
+  UPDATE_CARD_ORDER_AND_COLUMN_FAILURE,
 } from "./columnTypes";
 
 const initialState = {
@@ -103,6 +106,25 @@ const columnReducer = (state = initialState, action) => {
       };
 
     case UPDATE_CARD_ORDER_WITHIN_COLUMN_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payLoad,
+      };
+
+    case UPDATE_CARD_ORDER_AND_COLUMN_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case UPDATE_CARD_ORDER_AND_COLUMN_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case UPDATE_CARD_ORDER_AND_COLUMN_FAILURE:
       return {
         ...state,
         loading: false,
