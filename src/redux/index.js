@@ -41,4 +41,4 @@ export {
   updateCardOrderAndColumn,
 } from "./column/columnActions";
 
-export { addCard, setCardData } from "./card/cardActions";
+export { addCard, setCardData, deleteCard, editCard } from "./card/cardActions";

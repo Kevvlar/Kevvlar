@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaCheck, FaTimes } from "react-icons/fa";
 import { connect } from "react-redux";
 
-import { closeModal, addCard, setCardData } from "../../../redux";
+import { closeModal, addCard, deleteCard, editCard } from "../../../redux";
 import { ADD, EDIT } from "../../../redux/modal/modalTypes";
 
 import "./cardModal.css";
@@ -13,12 +13,13 @@ const CardModal = ({
   columnId,
   addNewCard,
   type,
-  setCurrentCardData,
   cardId,
   cardTitle,
   cardDescription,
   cardDate,
   cardColor,
+  removeCard,
+  updateCard,
 }) => {
   const AddCardModal = () => {
     const [cardTitle, setCardTitle] = useState("");
@@ -163,17 +164,24 @@ const CardModal = ({
             <option value="#ffff07">Yellow</option>
             <option value="#143bff">Blue</option>
           </select>
-          <button className="modal-board-button">Save</button>
+          <button
+            className="modal-board-button"
+            onClick={() => {
+              updateCard(cardId, boardId, {
+                title: editCardTitle,
+                description: editCardBody,
+                date: editCardDate,
+                colorLabel: editCardColor,
+              });
+              closeModal();
+            }}
+          >
+            Save
+          </button>
           <button
             className="delete-button"
             onClick={() => {
-              setCurrentCardData({
-                id: "",
-                title: "",
-                description: "",
-                date: "",
-                color: "",
-              });
+              removeCard(cardId, boardId);
               closeModal();
             }}
           >
@@ -211,9 +219,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
-    setCurrentCardData: (data) => dispatch(setCardData(data)),
     addNewCard: (data, boardId, columnId) =>
       dispatch(addCard(data, boardId, columnId)),
+    removeCard: (cardId, boardId) => dispatch(deleteCard(cardId, boardId)),
+    updateCard: (cardId, boardId, data) =>
+      dispatch(editCard(cardId, boardId, data)),
   };
 };
 
