@@ -11,7 +11,7 @@ import "./sideNavRight.css";
 
 const RightSideNav = ({ history, toggleGrid, toggleFlat }) => {
   const handleSignOut = () => {
-    console.log("Logging out");
+    localStorage.removeItem("token");
     history.push("/signin");
   };
 

@@ -1,58 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { Link, withRouter } from "react-router-dom";
+
+import { authenticate } from "../auth";
 
 import "./signup.css";
 
-class SignUp extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      name: "",
-      email: "",
-      password: "",
-    };
-  }
+const SignUp = ({ history }) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  handleSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-
-    const signUpData = this.state;
-
-    fetch("http://localhost:8000/api/v1/users/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(signUpData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.status === "success") {
-          this.setState({ name: "", password: "", email: "" });
-          localStorage.setItem("token", data.token);
-          this.props.history.push("/app");
-        } else if (data.status === "error") {
-          alert("Error signing user up; please try signing up again");
+    setIsLoading(true);
+    axios
+      .post(
+        "http://localhost:8000/api/v1/users/signup",
+        {
+          name: name,
+          email: email,
+          password: password,
+        },
+        {
+          headers: {
+            "content-type": "application/json",
+          },
         }
+      )
+      .then((response) => {
+        authenticate(response.data.token, () => {
+          setName("");
+          setEmail("");
+          setPassword("");
+          setIsLoading(false);
+          history.push("/app");
+        });
       })
       .catch((error) => {
-        console.log(error);
+        const errorMsg = error.response.data.message;
+        setErrorMessage(errorMsg);
+        setIsLoading(false);
       });
   };
 
-  handleChange = (event) => {
-    const { name, value } = event.target;
-
-    this.setState({ [name]: value });
-  };
-
-  render() {
-    const { name, email, password } = this.state;
-    return (
-      <div className="signup-container">
+  return (
+    <div className="signup-container">
+      {!isLoading ? (
         <div className="signup-content">
-          <form onSubmit={this.handleSubmit} className="signup-form">
-            <h2 className="signup-form-title">Create account</h2>
+          <form onSubmit={handleSubmit} className="signup-form">
+            <h2 className="signup-form-title">
+              {!errorMessage ? "SIGN UP" : errorMessage}
+            </h2>
             <div className="signup-form-group">
               <input
                 type="text"
@@ -60,7 +61,7 @@ class SignUp extends React.Component {
                 name="name"
                 placeholder="Your Name"
                 value={name}
-                onChange={this.handleChange}
+                onChange={(e) => setName(e.target.value)}
                 required
               />
             </div>
@@ -71,7 +72,7 @@ class SignUp extends React.Component {
                 name="email"
                 placeholder="Your Email"
                 value={email}
-                onChange={this.handleChange}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -82,27 +83,29 @@ class SignUp extends React.Component {
                 name="password"
                 placeholder="Password"
                 value={password}
-                onChange={this.handleChange}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
 
-            <div to="/app" className="signup-form-group">
+            <div className="signup-form-group">
               <button type="submit" className="signup-form-submit">
                 Sign Up
               </button>
             </div>
           </form>
           <p className="loginhere">
-            Have already an account ?{" "}
+            Have already an account ?
             <Link to="/signin" className="signup-form-login-link">
               Sign in here
             </Link>
           </p>
         </div>
-      </div>
-    );
-  }
-}
+      ) : (
+        <h2>Loading</h2>
+      )}
+    </div>
+  );
+};
 
 export default withRouter(SignUp);

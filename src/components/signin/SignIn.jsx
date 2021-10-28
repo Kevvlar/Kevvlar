@@ -1,44 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
+import axios from "axios";
+
+import { authenticate } from "../auth";
 
 import "./signin.css";
 
-class SignIn extends React.Component {
-  constructor(props) {
-    super(props);
+const SignIn = ({ history }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-    this.state = {
-      email: "",
-      password: "",
-    };
-  }
-
-  handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Sign in fucntion");
-    this.props.history("/app");
+    setIsLoading(true);
+    axios
+      .post(
+        "http://localhost:8000/api/v1/users/signin",
+        {
+          email: email,
+          password: password,
+        },
+        {
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        authenticate(response.data.token, () => {
+          setEmail("");
+          setPassword("");
+          setIsLoading(false);
+          history.push("/app");
+        });
+      })
+      .catch((error) => {
+        const errorMsg = error.response.data.message;
+        setErrorMessage(errorMsg);
+        setIsLoading(false);
+      });
   };
 
-  handleChange = (event) => {
-    const { value, name } = event.target;
-
-    this.setState({ [name]: value });
-  };
-
-  render() {
-    return (
-      <div className="sign-in-container">
+  return (
+    <div className="sign-in-container">
+      {!isLoading ? (
         <div className="sign-in-content">
-          <form onSubmit={this.handleSubmit} className="sign-in-form">
-            <h2 className="sign-in-form-title">SIGN IN</h2>
+          <form onSubmit={handleSubmit} className="sign-in-form">
+            <h2 className="signup-form-title">
+              {!errorMessage ? "SIGN IN" : errorMessage}
+            </h2>
             <div className="sign-in-form-group">
               <input
                 type="email"
                 className="sign-in-form-input"
                 name="email"
                 placeholder="Your Email"
-                value={this.state.email}
-                onChange={this.handleChange}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -48,8 +68,8 @@ class SignIn extends React.Component {
                 className="sign-in-form-input"
                 name="password"
                 placeholder="Password"
-                value={this.state.password}
-                onChange={this.handleChange}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
@@ -64,9 +84,11 @@ class SignIn extends React.Component {
             </Link>
           </p>
         </div>
-      </div>
-    );
-  }
-}
+      ) : (
+        <h2>Loading</h2>
+      )}
+    </div>
+  );
+};
 
 export default withRouter(SignIn);

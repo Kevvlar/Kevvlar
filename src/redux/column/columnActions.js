@@ -156,8 +156,7 @@ export const fetchColumns = (boardId) => {
     axios
       .get("http://localhost:8000/api/v1/columns", {
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNmM2YmI4MTA4M2I2MWVjNThhMGNjNSIsImlhdCI6MTYzNDQ5NTQxN30.G2V6WZJTZOlE-aVc6ELaQ1crB6ldd0GPF5dQtLXuPZE",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         params: { board: boardId },
       })
@@ -179,8 +178,7 @@ export const addColumn = (data, boardId) => {
       .post("http://localhost:8000/api/v1/columns", data, {
         headers: {
           "content-type": "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNmM2YmI4MTA4M2I2MWVjNThhMGNjNSIsImlhdCI6MTYzNDQ5NTQxN30.G2V6WZJTZOlE-aVc6ELaQ1crB6ldd0GPF5dQtLXuPZE",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
       .then((response) => {
@@ -202,8 +200,7 @@ export const editColumn = (data, columnId, boardId) => {
       .patch(`http://localhost:8000/api/v1/columns/${columnId}`, data, {
         headers: {
           "content-type": "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNmM2YmI4MTA4M2I2MWVjNThhMGNjNSIsImlhdCI6MTYzNDQ5NTQxN30.G2V6WZJTZOlE-aVc6ELaQ1crB6ldd0GPF5dQtLXuPZE",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
       .then(() => {
@@ -225,8 +222,7 @@ export const deleteColumn = (columnId, boardId) => {
       .delete(`http://localhost:8000/api/v1/columns/${columnId}`, {
         headers: {
           "content-type": "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNmM2YmI4MTA4M2I2MWVjNThhMGNjNSIsImlhdCI6MTYzNDQ5NTQxN30.G2V6WZJTZOlE-aVc6ELaQ1crB6ldd0GPF5dQtLXuPZE",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         params: { board: boardId },
       })
@@ -252,8 +248,7 @@ export const updateCardOrderWithinColumn = (columnId, boardId, order) => {
         {
           headers: {
             "content-type": "application/json",
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNmM2YmI4MTA4M2I2MWVjNThhMGNjNSIsImlhdCI6MTYzNDQ5NTQxN30.G2V6WZJTZOlE-aVc6ELaQ1crB6ldd0GPF5dQtLXuPZE",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       )
@@ -278,8 +273,7 @@ export const updateCardOrderAndColumn = (sourceColumnId, boardId, data) => {
         {
           headers: {
             "content-type": "application/json",
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNmM2YmI4MTA4M2I2MWVjNThhMGNjNSIsImlhdCI6MTYzNDQ5NTQxN30.G2V6WZJTZOlE-aVc6ELaQ1crB6ldd0GPF5dQtLXuPZE",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       )
