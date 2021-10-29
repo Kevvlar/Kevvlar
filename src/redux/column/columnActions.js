@@ -11,6 +11,7 @@ import {
   DELETE_COLUMN_REQUEST,
   DELETE_COLUMN_SUCCESS,
   DELETE_COLUMN_FAILURE,
+  COLUMN_API_URL,
   SET_CURRENT_COLUMN_ID_AND_TITLE,
   DELETE_COLUMN_BY_BOARD,
   UPDATE_CARD_ORDER_WITHIN_COLUMN_REQUEST,
@@ -19,6 +20,7 @@ import {
   UPDATE_CARD_ORDER_AND_COLUMN_REQUEST,
   UPDATE_CARD_ORDER_AND_COLUMN_SUCCESS,
   UPDATE_CARD_ORDER_AND_COLUMN_FAILURE,
+  EMPTY_COLUMNS,
 } from "./columnTypes";
 import axios from "axios";
 import { fetchColumnOrder } from "../column-order/columnOrderActions";
@@ -150,11 +152,17 @@ export const updateCardOrderAndColumnFailure = () => {
   };
 };
 
+export const emptyColumns = () => {
+  return {
+    type: EMPTY_COLUMNS,
+  };
+};
+
 export const fetchColumns = (boardId) => {
   return (dispatch) => {
     dispatch(fetchColumnsRequest());
     axios
-      .get("http://localhost:8000/api/v1/columns", {
+      .get(`${COLUMN_API_URL}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -175,7 +183,7 @@ export const addColumn = (data, boardId) => {
   return (dispatch) => {
     dispatch(addNewColumnRequest());
     axios
-      .post("http://localhost:8000/api/v1/columns", data, {
+      .post(`${COLUMN_API_URL}`, data, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -197,7 +205,7 @@ export const editColumn = (data, columnId, boardId) => {
   return (dispatch) => {
     dispatch(editColumnRequest());
     axios
-      .patch(`http://localhost:8000/api/v1/columns/${columnId}`, data, {
+      .patch(`${COLUMN_API_URL}/${columnId}`, data, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -219,7 +227,7 @@ export const deleteColumn = (columnId, boardId) => {
   return (dispatch) => {
     dispatch(deleteColumnRequest());
     axios
-      .delete(`http://localhost:8000/api/v1/columns/${columnId}`, {
+      .delete(`${COLUMN_API_URL}/${columnId}`, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -243,7 +251,7 @@ export const updateCardOrderWithinColumn = (columnId, boardId, order) => {
     dispatch(updateCardOrderWithinColumnRequest());
     axios
       .patch(
-        `http://localhost:8000/api/v1/columns/changecardorderwithincolumn/${columnId}`,
+        `${COLUMN_API_URL}/changecardorderwithincolumn/${columnId}`,
         order,
         {
           headers: {
@@ -268,7 +276,7 @@ export const updateCardOrderAndColumn = (sourceColumnId, boardId, data) => {
     dispatch(updateCardOrderAndColumnRequest());
     axios
       .patch(
-        `http://localhost:8000/api/v1/columns/changecardcolumnandorder/${sourceColumnId}`,
+        `${COLUMN_API_URL}/changecardcolumnandorder/${sourceColumnId}`,
         data,
         {
           headers: {

@@ -15,4 +15,6 @@ export const FETCH_BOARD_REQUEST = "FETCH_BOARD_REQUEST";
 export const FETCH_BOARD_SUCCESS = "FETCH_BOARD_SUCCESS";
 export const FETCH_BOARD_FAILURE = "FETCH_BOARD_FAILURE";
 
+export const BOARD_API_URL =
+  "https://intense-garden-79464.herokuapp.com/api/v1/boards";
 export const SET_CURRENT_BOARD_ID_AND_TITLE = "SET_CURRENT_BOARD_ID_AND_TITLE";

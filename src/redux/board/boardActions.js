@@ -11,6 +11,7 @@ import {
   FETCH_BOARD_REQUEST,
   FETCH_BOARD_SUCCESS,
   FETCH_BOARD_FAILURE,
+  BOARD_API_URL,
   SET_CURRENT_BOARD_ID_AND_TITLE,
 } from "./boardTypes";
 import axios from "axios";
@@ -104,7 +105,7 @@ export const addBoard = (data) => {
   return (dispatch) => {
     dispatch(addNewBoardRequest());
     axios
-      .post("http://localhost:8000/api/v1/boards", data, {
+      .post(`${BOARD_API_URL}`, data, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -129,7 +130,7 @@ export const editBoard = (data, boardId) => {
   return (dispatch) => {
     dispatch(editBoardRequest());
     axios
-      .patch(`http://localhost:8000/api/v1/boards/${boardId}`, data, {
+      .patch(`${BOARD_API_URL}/${boardId}`, data, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -154,7 +155,7 @@ export const deleteBoard = (boardId) => {
   return (dispatch) => {
     dispatch(deleteBoardRequest());
     axios
-      .delete(`http://localhost:8000/api/v1/boards/${boardId}`, {
+      .delete(`${BOARD_API_URL}/${boardId}`, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -176,7 +177,7 @@ export const fetchBoards = () => {
   return (dispatch) => {
     dispatch(fetchBoardsRequest());
     axios
-      .get("http://localhost:8000/api/v1/boards", {
+      .get(`${BOARD_API_URL}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

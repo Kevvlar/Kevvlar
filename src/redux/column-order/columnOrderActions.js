@@ -6,6 +6,7 @@ import {
   UPDATE_COLUMN_ORDER_SUCCESS,
   UPDATE_COLUMN_ORDER_FAILURE,
   UPDATE_COLUMN_ORDER_LOCAL,
+  COLUMN_ORDER_API_URL,
 } from "./columnOrderTypes";
 import axios from "axios";
 
@@ -59,7 +60,7 @@ export const fetchColumnOrder = (boardId) => {
   return (dispatch) => {
     dispatch(fetchColumnOrderRequest());
     axios
-      .get("http://localhost:8000/api/v1/columnorder", {
+      .get(`${COLUMN_ORDER_API_URL}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -80,7 +81,7 @@ export const updateColumnOrder = (boardId, newOrder) => {
   return (dispatch) => {
     dispatch(updateColumnOrderRequest());
     axios
-      .patch("http://localhost:8000/api/v1/columnorder", newOrder, {
+      .patch(`${COLUMN_ORDER_API_URL}`, newOrder, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

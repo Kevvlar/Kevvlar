@@ -8,10 +8,11 @@ import {
   DELETE_CARD_REQUEST,
   DELETE_CARD_SUCCESS,
   DELETE_CARD_FAILURE,
+  CARD_API_URL,
   SET_CARD_DATA,
 } from "./cardTypes";
 import axios from "axios";
-import { fetchColumns, fetchColumnOrder } from "../index";
+import { fetchColumns, fetchColumnOrder, emptyColumns } from "../index";
 
 export const addCardRequest = () => {
   return {
@@ -79,9 +80,10 @@ export const deleteCardFailure = (error) => {
 
 export const addCard = (data, boardId, columnId) => {
   return (dispatch) => {
+    dispatch(emptyColumns());
     dispatch(addCardRequest());
     axios
-      .post("http://localhost:8000/api/v1/cards", data, {
+      .post(`${CARD_API_URL}`, data, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -101,9 +103,10 @@ export const addCard = (data, boardId, columnId) => {
 
 export const editCard = (cardId, boardId, data) => {
   return (dispatch) => {
+    dispatch(emptyColumns());
     dispatch(editCardRequest());
     axios
-      .patch(`http://localhost:8000/api/v1/cards/${cardId}`, data, {
+      .patch(`${CARD_API_URL}/${cardId}`, data, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -123,9 +126,10 @@ export const editCard = (cardId, boardId, data) => {
 
 export const deleteCard = (cardId, boardId) => {
   return (dispatch) => {
+    dispatch(emptyColumns());
     dispatch(deleteCardRequest());
     axios
-      .delete(`http://localhost:8000/api/v1/cards/${cardId}`, {
+      .delete(`${CARD_API_URL}/${cardId}`, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,

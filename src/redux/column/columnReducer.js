@@ -13,6 +13,7 @@ import {
   UPDATE_CARD_ORDER_AND_COLUMN_REQUEST,
   UPDATE_CARD_ORDER_AND_COLUMN_SUCCESS,
   UPDATE_CARD_ORDER_AND_COLUMN_FAILURE,
+  EMPTY_COLUMNS,
 } from "./columnTypes";
 
 const initialState = {
@@ -76,6 +77,12 @@ const columnReducer = (state = initialState, action) => {
         currentColumnTitle: "",
       };
 
+    case EMPTY_COLUMNS:
+      return {
+        ...state,
+        columns: [],
+      };
+
     case SET_CURRENT_COLUMN_ID_AND_TITLE:
       return {
         ...state,
@@ -97,6 +104,7 @@ const columnReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+        columns: [],
       };
 
     case UPDATE_CARD_ORDER_WITHIN_COLUMN_SUCCESS:
@@ -116,6 +124,7 @@ const columnReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+        columns: [],
       };
 
     case UPDATE_CARD_ORDER_AND_COLUMN_SUCCESS:

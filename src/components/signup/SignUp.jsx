@@ -18,7 +18,7 @@ const SignUp = ({ history }) => {
     setIsLoading(true);
     axios
       .post(
-        "http://localhost:8000/api/v1/users/signup",
+        "https://intense-garden-79464.herokuapp.com/api/v1/users/signup",
         {
           name: name,
           email: email,

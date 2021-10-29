@@ -39,6 +39,7 @@ export {
   setCurrentColumnIdAndTitle,
   updateCardOrderWithinColumn,
   updateCardOrderAndColumn,
+  emptyColumns,
 } from "./column/columnActions";
 
 export { addCard, setCardData, deleteCard, editCard } from "./card/cardActions";
