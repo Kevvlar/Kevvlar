@@ -6,13 +6,14 @@
 }
 
 .new-column-button {
-  background: #80808021;
-  border: none;
+  background: transparent;
+  border: 1px dotted;
   padding: 15px;
   color: #6b6b6b;
   height: 50px;
   width: 300px;
   text-overflow: ellipsis;
+  border-radius: 5px;
 }
 
 .new-column-button:hover {
