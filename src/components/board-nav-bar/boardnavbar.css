@@ -16,6 +16,12 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin-right: 15px;
+	cursor: pointer;
+}
+
+.add-user-icon {
+	cursor: pointer;
 }
 
 .boardnavbar-boardtitle {
