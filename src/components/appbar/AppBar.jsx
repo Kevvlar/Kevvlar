@@ -21,10 +21,7 @@ const AppBar = ({ toggleLeftSideNav, boardTitle }) => (
           className="appbar-ham-icon-container"
         >
           <FaBars className="appbar-ham-icon" />
-        </div>
-        <p className="appbar-input">{boardTitle}</p>
-      </div>
-      <div className="appbar-logo primary-text-color">
+          <div className="appbar-logo primary-text-color">
         <svg
           width="120"
           height="38"
@@ -58,6 +55,8 @@ const AppBar = ({ toggleLeftSideNav, boardTitle }) => (
           />
         </svg>
       </div>
+        </div>
+      </div>
       <div className="appbar-user-menu-container">
         <NotificationIcon />
         <UserProfile />
@@ -65,7 +64,6 @@ const AppBar = ({ toggleLeftSideNav, boardTitle }) => (
     </div>
   </header>
 );
-
 const mapStateToProps = (state) => {
   return {
     boards: state.board.boards,

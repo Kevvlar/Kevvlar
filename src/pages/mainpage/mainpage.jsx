@@ -6,6 +6,7 @@ import LeftSideNav from "../../components/sidenav-left/SideNavLeft";
 import RightSideNav from "../../components/sidenav-right/SideNavRight";
 import ColumnHolder from "../../components/column-holder/ColumnHolder";
 import Modal from "../../components/modal/Modal";
+import BoardNavBar from "../../components/board-nav-bar/BoardNavBar";
 
 import { fetchBoards } from "../../redux";
 
@@ -20,6 +21,7 @@ class MainPage extends React.Component {
     return (
       <div className="todopage">
         <AppBar />
+        <BoardNavBar />
         {this.props.leftSideNav ? <LeftSideNav /> : null}
         {this.props.rightSideNav ? <RightSideNav /> : null}
         {this.props.boardId ? (
