@@ -18,6 +18,11 @@
 	align-items: center;
 	margin-right: 15px;
 	cursor: pointer;
+	min-width: 120px;
+}
+
+.boardnavbar-scroll-container{
+	max-height: 75px;
 }
 
 .add-user-icon {
