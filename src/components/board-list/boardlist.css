@@ -16,4 +16,5 @@
 
 .sidenav-left-add-new-board-button:hover {
   background-color: #3bc768;
+  cursor: pointer;
 }
