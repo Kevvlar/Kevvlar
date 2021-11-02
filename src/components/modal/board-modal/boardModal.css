@@ -34,7 +34,8 @@
 
 .modal-board-title {
   text-align: center;
-  color: #d4705f;
+  color: #fff;
+  margin-top: 0px;
 }
 
 /*RESPONSIVE BREAKPOINTS*/
