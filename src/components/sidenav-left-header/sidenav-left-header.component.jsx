@@ -11,6 +11,7 @@ const LeftSideNavHeader = ({ unToogleSideNav }) => (
     <div className="sidenav-left-header-ham-icon-container">
       <FaBars onClick={() => unToogleSideNav()} />
     </div>
+    <div className="sidenav-left-exit-wrapper" onClick={() => unToogleSideNav()}></div>
   </div>
 );
 

@@ -9,22 +9,35 @@
 
 .sidenav-left-board-holder {
   height: 100%;
-  margin-top: 15px;
+  padding-top: 15px;
   display: flex;
   flex-direction: column;
+  background-color: #2a323a;
 }
 
 .sidenav-left-board-header {
   top: 42px;
   left: 9px;
-  background-color: #2a323a;
   padding-left: 5px;
   padding-right: 5px;
   position: absolute;
   color: #7d7d7d;
   font-size: 14px;
+  background-color: #2a323a;
 }
 
 .infinite-scroll-component::-webkit-scrollbar {
   display: none;
+}
+
+.sidenav-left-exit-wrapper {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: black;
+  opacity: 0.5;
+  z-index: -4;
+
 }
