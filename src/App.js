@@ -3,8 +3,8 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import { Switch, Route } from "react-router-dom";
 
-import Homepage from "./pages/HomePage/HomePage";
-import MainPage from "./pages/MainPage/MainPage";
+import Homepage from "./pages/homepage/HomePage";
+import MainPage from "./pages/mainpage/MainPage";
 import SignUp from "./components/signup/SignUp";
 import SignIn from "./components/signin/SignIn";
 import PrivateRoute from "./components/auth/PrivateRoute";
