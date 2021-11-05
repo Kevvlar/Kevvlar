@@ -30,11 +30,11 @@
 .modal-board-text {
   text-align: center;
   background-color: transparent;
-  padding: 5px;
+  padding: 15px;
   border-radius: 4px;
   width: 60%;
   color: white;
-  border: 2px solid #d4705f;
+  border: 1px solid grey;
 }
 
 .modal-delete-button:hover {

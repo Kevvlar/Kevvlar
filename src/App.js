@@ -26,5 +26,3 @@ const App = () => (
 );
 
 export default App;
-
-<Route exact path="/" component={Homepage} />;

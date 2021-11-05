@@ -1,0 +1,41 @@
+.boardnavbar {
+	height: 50px;
+	display: flex;
+	margin-top: 15px;
+	margin-left: 25px;
+}
+
+.boardnavbar-btn {
+	background: #2C3136;
+	color: #A0A0A0;
+	padding: 5px 25px;
+	text-align: center;
+	line-height: 25px;
+	height: 35px;
+	border-radius: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-right: 15px;
+	cursor: pointer;
+	min-width: 120px;
+	border: none;
+}
+
+.boardnavbar-scroll-container{
+	max-height: 75px;
+}
+
+.add-user-icon {
+	cursor: pointer;
+	background: none;
+	border: none;
+	padding: 0px;
+	margin: 0px;
+	height: 35px;
+}
+
+.boardnavbar-boardtitle {
+	margin-left: 10px;
+	font-weight: 500;
+}

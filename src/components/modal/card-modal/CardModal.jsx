@@ -33,7 +33,7 @@ const CardModal = ({
         <input
           type="text"
           id="input-big"
-          maxLength="50"
+          maxLength={75}
           placeholder="Card title"
           className="modal-body-title"
           value={cardTitle}
@@ -42,7 +42,7 @@ const CardModal = ({
         <textarea
           type="text"
           id="desc-big"
-          maxLength="50"
+          maxLength={1000}
           value={cardBody}
           onChange={(e) => setCardBody(e.target.value)}
           placeholder="Write something..."
@@ -119,7 +119,7 @@ const CardModal = ({
         <input
           type="text"
           id="input-big"
-          maxLength="50"
+          maxLength={75}
           placeholder="Card title"
           className="modal-body-title"
           value={editCardTitle}
@@ -128,7 +128,7 @@ const CardModal = ({
         <textarea
           type="text"
           id="desc-big"
-          maxLength="50"
+          maxLength={1000}
           value={editCardBody}
           onChange={(e) => setEditCardBody(e.target.value)}
           placeholder="Write something..."
