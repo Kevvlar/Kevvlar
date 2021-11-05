@@ -15,7 +15,6 @@
 
 .card-inner {
   width: 100%;
-  padding-left: 15px;
   padding-right: 15px;
 }
 
@@ -63,6 +62,18 @@
   text-decoration: none;
   cursor: pointer;
   float: right;
+}
+
+.card-color-label-holder {
+  height: 100%;
+}
+
+.card-color-label {
+  width: 8px;
+  height: 8px;
+  background-color: #ff5722;
+  border-radius: 50px;
+  margin: 5px 5px;
 }
 
 /* .cardlabelholder {

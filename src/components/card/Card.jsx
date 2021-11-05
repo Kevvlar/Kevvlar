@@ -17,6 +17,9 @@ const Card = ({ card, index, isGrid, editCardModal, setCurrentCardData }) => (
         {...provided.dragHandleProps}
         ref={provided.innerRef}
       >
+        <div className="card-color-label-holder">
+          <div className="card-color-label"></div>
+        </div>
         <div className="cardlabelholder">
           <div id="card-label" className="card-label"></div>
         </div>
