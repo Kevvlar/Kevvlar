@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/Kevvlar/static/css/main.4afd83f2.chunk.css",
-    "main.js": "/Kevvlar/static/js/main.ad4fb9c0.chunk.js",
-    "main.js.map": "/Kevvlar/static/js/main.ad4fb9c0.chunk.js.map",
+    "main.css": "/Kevvlar/static/css/main.40a2b64f.chunk.css",
+    "main.js": "/Kevvlar/static/js/main.ef96006b.chunk.js",
+    "main.js.map": "/Kevvlar/static/js/main.ef96006b.chunk.js.map",
     "runtime-main.js": "/Kevvlar/static/js/runtime-main.4f37c43a.js",
     "runtime-main.js.map": "/Kevvlar/static/js/runtime-main.4f37c43a.js.map",
-    "static/js/2.145a4c00.chunk.js": "/Kevvlar/static/js/2.145a4c00.chunk.js",
-    "static/js/2.145a4c00.chunk.js.map": "/Kevvlar/static/js/2.145a4c00.chunk.js.map",
+    "static/js/2.9057b6c9.chunk.js": "/Kevvlar/static/js/2.9057b6c9.chunk.js",
+    "static/js/2.9057b6c9.chunk.js.map": "/Kevvlar/static/js/2.9057b6c9.chunk.js.map",
     "index.html": "/Kevvlar/index.html",
-    "static/css/main.4afd83f2.chunk.css.map": "/Kevvlar/static/css/main.4afd83f2.chunk.css.map",
-    "static/js/2.145a4c00.chunk.js.LICENSE.txt": "/Kevvlar/static/js/2.145a4c00.chunk.js.LICENSE.txt"
+    "static/css/main.40a2b64f.chunk.css.map": "/Kevvlar/static/css/main.40a2b64f.chunk.css.map",
+    "static/js/2.9057b6c9.chunk.js.LICENSE.txt": "/Kevvlar/static/js/2.9057b6c9.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.4f37c43a.js",
-    "static/js/2.145a4c00.chunk.js",
-    "static/css/main.4afd83f2.chunk.css",
-    "static/js/main.ad4fb9c0.chunk.js"
+    "static/js/2.9057b6c9.chunk.js",
+    "static/css/main.40a2b64f.chunk.css",
+    "static/js/main.ef96006b.chunk.js"
   ]
 }
