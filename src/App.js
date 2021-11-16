@@ -3,8 +3,9 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import { Switch, Route } from "react-router-dom";
 
-import Homepage from "./pages/homePage/HomePage";
-import MainPage from "./pages/mainPage/MainPage";
+import Homepage from "./pages/HomePage/HomePage";
+import MainPage from "./pages/MainPage/MainPage";
+import BoardsPage from "./pages/BoardsPage/BoardsPage";
 import SignUp from "./components/signup/SignUp";
 import SignIn from "./components/signin/SignIn";
 import PrivateRoute from "./components/auth/PrivateRoute";
@@ -19,7 +20,8 @@ const App = () => (
         <RedirectToMainPage exact path="/" component={Homepage} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/signin" component={SignIn} />
-        <PrivateRoute path="/app" exact component={MainPage} />
+        <PrivateRoute path="/boards/:id" exact component={MainPage} />
+        <PrivateRoute path="/boards" exact component={BoardsPage} />
       </Switch>
     </div>
   </Provider>
