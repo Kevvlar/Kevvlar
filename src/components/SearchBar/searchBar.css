@@ -1,0 +1,10 @@
+.boards-search {
+  min-width: 800px;
+  height: 20px;
+  border: none;
+  border-radius: 20px;
+  background-color: #343d46ab;
+  font-size: large;
+  padding: 10px;
+  margin-bottom: 50px;
+}

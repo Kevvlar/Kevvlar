@@ -1,7 +1,8 @@
 import React from "react";
 
-import { BoardIcon, EditIcon, DeleteIcon } from "../../assets/svg/iconlibrary";
 import AppBar from "../../components/appbar/AppBar";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import BoardList from "../../components/BoardList/BoardList";
 
 import "./boardsPage.css";
 
@@ -11,31 +12,11 @@ const BoardsPage = () => {
       <AppBar />
       <div className="boards-page">
         <div className="board-main">
-          <input type="text" placeholder="Search" className="boards-search" />
+          <SearchBar />
           <div className="boards-container">
             <h2 className="all-boards-title">All Boards</h2>
             <div className="board-list-holder">
-              <div className="boards-list">
-                <div className="board-item">
-                  <div className="title-container">
-                    <BoardIcon />
-                    <span className="board-item-title">Title</span>
-                  </div>
-                  <div className="board-item-info-container">
-                    <p className="sub-color board-item-no-margin">7 Columns</p>
-                    <p className="sub-color board-item-no-margin">42 Cards</p>
-                  </div>
-                  <div className="board-item-footer">
-                    <div className="board-num-members sub-color">
-                      12 Members
-                    </div>
-                    <div className="board-item-icons">
-                      <EditIcon />
-                      <DeleteIcon />
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <BoardList />
               <div className="add-board-button sub-color">+ New Board</div>
             </div>
           </div>
@@ -43,7 +24,6 @@ const BoardsPage = () => {
           <div className="boards-container">
             <h2 className="all-boards-title">Team Board</h2>
             <div className="board-list-holder">
-              
               <div className="add-board-button sub-color">+ New Board</div>
             </div>
           </div>

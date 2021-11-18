@@ -4,8 +4,8 @@ import store from "./redux/store";
 import { Switch, Route } from "react-router-dom";
 
 import BoardsPage from "./pages/BoardsPage/BoardsPage";
-import Homepage from "./pages/homepage/HomePage";
-import MainPage from "./pages/mainpage/MainPage";
+import Homepage from "./pages/HomePage/HomePage";
+import MainPage from "./pages/MainPage/MainPage";
 import SignUp from "./components/signup/SignUp";
 import SignIn from "./components/signin/SignIn";
 import PrivateRoute from "./components/auth/PrivateRoute";

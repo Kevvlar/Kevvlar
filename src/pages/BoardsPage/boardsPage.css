@@ -21,88 +21,9 @@
   padding: 20px 10px;
 }
 
-.boards-search {
-  min-width: 800px;
-  height: 20px;
-  border: none;
-  border-radius: 20px;
-  background-color: #343d46ab;
-  font-size: large;
-  padding: 10px;
-  margin-bottom: 50px;
-}
-
 .all-boards-title {
   text-align: left;
   color: #e4745d;
-}
-
-.board-list-holder {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  column-gap: 15px;
-}
-
-.boards-list {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  row-gap: 10px;
-  column-gap: 15px;
-}
-
-.board-item-info-container {
-  min-height: 70px;
-}
-
-.board-item-no-margin {
-  margin: 0px;
-}
-
-.board-item {
-  background: #343d45;
-  padding: 15px;
-  min-width: 300px;
-  height: 140px;
-  border-radius: 6px;
-}
-
-.title-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.board-item-title {
-  margin-left: 5px;
-  font-weight: bold;
-  color: #ffffffab;
-}
-
-.sub-color {
-  color: #8498aa;
-}
-
-.board-num-members {
-  width: 100px;
-  padding: 5px;
-  background: #f8f8f81c;
-  border-radius: 4px;
-}
-
-.board-item-footer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.board-item-icons {
-  width: 40px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 }
 
 .add-board-button {
