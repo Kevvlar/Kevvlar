@@ -5,13 +5,15 @@ import BoardItem from "../BoardItem/BoardItem";
 
 import "./boardList.css";
 
-const BoardList = ({ boards }) => {
+const BoardList = ({ boards, searchKeyWord }) => {
   return (
     <div className="board-list-holder">
       <div className="boards-list">
-        {boards.map((boardItem) => (
-          <BoardItem key={boardItem.id} board={boardItem} />
-        ))}
+        {boards
+          .filter((board) => board.title.toLowerCase().includes(searchKeyWord))
+          .map((boardItem) => (
+            <BoardItem key={boardItem.id} board={boardItem} />
+          ))}
       </div>
     </div>
   );
@@ -20,6 +22,7 @@ const BoardList = ({ boards }) => {
 const mapStateToProps = (state) => {
   return {
     boards: state.board.boards,
+    searchKeyWord: state.board.searchKey,
   };
 };
 

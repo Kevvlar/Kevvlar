@@ -3,11 +3,13 @@ import {
   SET_CURRENT_BOARD_DATA,
   EDIT_BOARD_LOCAL,
   DELETE_BOARD_LOCAL,
+  ENTER_SEARCH_TEXT,
 } from "./boardTypes";
 
 const initialState = {
   selectBoardId: "",
   selectBoardTitle: "",
+  searchKey: "",
   error: "",
   boards: [],
 };
@@ -45,6 +47,12 @@ const boardReducer = (state = initialState, action) => {
         boards: state.boards.filter((board) => board.id !== action.payLoad),
         selectBoardId: "",
         selectBoardTitle: "",
+      };
+
+    case ENTER_SEARCH_TEXT:
+      return {
+        ...state,
+        searchKey: action.payLoad.toLowerCase(),
       };
 
     default:

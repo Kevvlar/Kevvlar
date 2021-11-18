@@ -21,6 +21,7 @@ export {
   setCurrentBoardData,
   editCurrentBoardLocal,
   deleteCurrentBoardLocal,
+  enterSearchText,
 } from "./board/boardActions";
 
 export {} from "./column-order/columnOrderActions";

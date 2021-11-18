@@ -3,6 +3,7 @@ import {
   SET_CURRENT_BOARD_DATA,
   EDIT_BOARD_LOCAL,
   DELETE_BOARD_LOCAL,
+  ENTER_SEARCH_TEXT,
 } from "./boardTypes";
 
 export const addNewBoardLocal = (boardObj) => {
@@ -30,5 +31,12 @@ export const deleteCurrentBoardLocal = (boardId) => {
   return {
     type: DELETE_BOARD_LOCAL,
     payLoad: boardId,
+  };
+};
+
+export const enterSearchText = (text) => {
+  return {
+    type: ENTER_SEARCH_TEXT,
+    payLoad: text,
   };
 };
