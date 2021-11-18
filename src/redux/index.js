@@ -16,7 +16,12 @@ export {
   setCardModal,
 } from "./modal/modalActions";
 
-export { addNewBoardLocal } from "./board/boardActions";
+export {
+  addNewBoardLocal,
+  setCurrentBoardData,
+  editCurrentBoardLocal,
+  deleteCurrentBoardLocal,
+} from "./board/boardActions";
 
 export {} from "./column-order/columnOrderActions";
 

@@ -3,12 +3,25 @@ import { FaTimes } from "react-icons/fa";
 import { connect } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
-import { closeModal, addNewBoardLocal } from "../../../redux";
+import {
+  closeModal,
+  addNewBoardLocal,
+  editCurrentBoardLocal,
+  deleteCurrentBoardLocal,
+} from "../../../redux";
 import { ADD, EDIT, DELETE } from "../../../redux/modal/modalTypes";
 
 import "./boardModal.css";
 
-const BoardModal = ({ type, closeModal, addBoardLocal }) => {
+const BoardModal = ({
+  type,
+  closeModal,
+  addBoardLocal,
+  currrentBoardTitle,
+  currrentBoardId,
+  editBoardLocal,
+  deleteBoardLocal,
+}) => {
   const AddBoard = () => {
     const [boardName, setBoardName] = useState("");
     return (
@@ -40,7 +53,7 @@ const BoardModal = ({ type, closeModal, addBoardLocal }) => {
   };
 
   const EditBoard = () => {
-    const [editBoardName, setEditBoardName] = useState("");
+    const [editBoardName, setEditBoardName] = useState(currrentBoardTitle);
     return (
       <div className="modal-board-body">
         <h2 className="modal-board-title">Edit Board</h2>
@@ -54,6 +67,10 @@ const BoardModal = ({ type, closeModal, addBoardLocal }) => {
         <button
           className="modal-board-button"
           onClick={() => {
+            editBoardLocal({
+              id: currrentBoardId,
+              title: editBoardName,
+            });
             setEditBoardName("");
             closeModal();
           }}
@@ -75,6 +92,7 @@ const BoardModal = ({ type, closeModal, addBoardLocal }) => {
           <button
             className="delete-button"
             onClick={() => {
+              deleteBoardLocal(currrentBoardId);
               closeModal();
             }}
           >
@@ -103,6 +121,8 @@ const BoardModal = ({ type, closeModal, addBoardLocal }) => {
 const mapStateToProps = (state) => {
   return {
     type: state.modal.modalActionType,
+    currrentBoardTitle: state.board.selectBoardTitle,
+    currrentBoardId: state.board.selectBoardId,
   };
 };
 
@@ -110,6 +130,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
     addBoardLocal: (boardObj) => dispatch(addNewBoardLocal(boardObj)),
+    editBoardLocal: (boardObj) => dispatch(editCurrentBoardLocal(boardObj)),
+    deleteBoardLocal: (boardId) => dispatch(deleteCurrentBoardLocal(boardId)),
   };
 };
 

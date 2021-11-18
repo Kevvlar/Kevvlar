@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  color: white;
 }
 
 .title-container {
@@ -41,4 +42,12 @@
   padding: 5px;
   background: #f8f8f81c;
   border-radius: 4px;
+}
+
+.edit-board-icon:hover {
+  cursor: pointer;
+}
+
+.delete-board-icon:hover {
+  cursor: pointer;
 }
