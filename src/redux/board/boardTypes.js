@@ -1,0 +1,1 @@
+export const ADD_NEW_BOARD_LOCAL = "ADD_NEW_BOARD_LOCAL";

@@ -5,7 +5,6 @@ import AppBar from "../../components/appbar/AppBar";
 import LeftSideNav from "../../components/sidenav-left/SideNavLeft";
 import RightSideNav from "../../components/sidenav-right/SideNavRight";
 import ColumnHolder from "../../components/column-holder/ColumnHolder";
-import Modal from "../../components/modal/Modal";
 import BoardNavBar from "../../components/board-nav-bar/BoardNavBar";
 
 import {} from "../../redux";
@@ -33,7 +32,6 @@ class MainPage extends React.Component {
             </div>
           </div>
         )}
-        {this.props.showModal ? <Modal /> : null}
       </div>
     );
   }
@@ -47,7 +45,6 @@ const mapStateToProps = (state) => {
   return {
     leftSideNav: state.sideNavLeft.leftSideNav,
     rightSideNav: state.sideNavRight.rightSideNav,
-    showModal: state.modal.showModal,
   };
 };
 

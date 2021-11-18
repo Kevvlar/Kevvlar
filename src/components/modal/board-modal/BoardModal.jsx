@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { connect } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
-import { closeModal } from "../../../redux";
+import { closeModal, addNewBoardLocal } from "../../../redux";
 import { ADD, EDIT, DELETE } from "../../../redux/modal/modalTypes";
 
 import "./boardModal.css";
 
-const BoardModal = ({ type, closeModal }) => {
+const BoardModal = ({ type, closeModal, addBoardLocal }) => {
   const AddBoard = () => {
     const [boardName, setBoardName] = useState("");
     return (
@@ -24,6 +25,10 @@ const BoardModal = ({ type, closeModal }) => {
         <button
           className="modal-board-button"
           onClick={() => {
+            addBoardLocal({
+              id: uuidv4(),
+              title: boardName,
+            });
             setBoardName("");
             closeModal();
           }}
@@ -104,6 +109,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
+    addBoardLocal: (boardObj) => dispatch(addNewBoardLocal(boardObj)),
   };
 };
 

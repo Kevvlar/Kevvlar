@@ -1,12 +1,16 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import AppBar from "../../components/appbar/AppBar";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import BoardList from "../../components/BoardList/BoardList";
+import Modal from "../../components/modal/Modal";
+
+import { setBoardModal } from "../../redux";
 
 import "./boardsPage.css";
 
-const BoardsPage = () => {
+const BoardsPage = ({ showBoardModal, showModal }) => {
   return (
     <div>
       <AppBar />
@@ -17,7 +21,12 @@ const BoardsPage = () => {
             <h2 className="all-boards-title">All Boards</h2>
             <div className="board-list-holder">
               <BoardList />
-              <div className="add-board-button sub-color">+ New Board</div>
+              <div
+                className="add-board-button sub-color"
+                onClick={() => showBoardModal()}
+              >
+                + New Board
+              </div>
             </div>
           </div>
 
@@ -29,8 +38,21 @@ const BoardsPage = () => {
           </div>
         </div>
       </div>
+      {showModal ? <Modal /> : null}
     </div>
   );
 };
 
-export default BoardsPage;
+const mapStateToProps = (state) => {
+  return {
+    showModal: state.modal.showModal,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    showBoardModal: () => dispatch(setBoardModal()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BoardsPage);

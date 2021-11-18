@@ -4,12 +4,12 @@ import { BoardIcon, EditIcon, DeleteIcon } from "../../assets/svg/iconlibrary";
 
 import "./boardItem.css";
 
-const boardItem = () => {
+const boardItem = ({ board }) => {
   return (
     <div className="board-item">
       <div className="title-container">
         <BoardIcon />
-        <span className="board-item-title">Title</span>
+        <span className="board-item-title">{board.title}</span>
       </div>
       <div className="board-item-info-container">
         <p className="sub-color board-item-no-margin">7 Columns</p>
