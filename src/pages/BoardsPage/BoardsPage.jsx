@@ -21,8 +21,10 @@ const BoardsPage = () => {
                     <BoardIcon />
                     <span className="board-item-title">Title</span>
                   </div>
-                  <p className="sub-color">7 Columns</p>
-                  <p className="sub-color">42 Cards</p>
+                  <div className="board-item-info-container">
+                    <p className="sub-color board-item-no-margin">7 Columns</p>
+                    <p className="sub-color board-item-no-margin">42 Cards</p>
+                  </div>
                   <div className="board-item-footer">
                     <div className="board-num-members sub-color">
                       12 Members
@@ -41,25 +43,7 @@ const BoardsPage = () => {
           <div className="boards-container">
             <h2 className="all-boards-title">Team Board</h2>
             <div className="board-list-holder">
-              <div className="boards-list">
-                <div className="board-item">
-                  <div className="title-container">
-                    <BoardIcon />
-                    <span className="board-item-title">Title</span>
-                  </div>
-                  <p className="sub-color">7 Columns</p>
-                  <p className="sub-color">42 Cards</p>
-                  <div className="board-item-footer">
-                    <div className="board-num-members sub-color">
-                      12 Members
-                    </div>
-                    <div className="board-item-icons">
-                      <EditIcon />
-                      <DeleteIcon />
-                    </div>
-                  </div>
-                </div>
-              </div>
+              
               <div className="add-board-button sub-color">+ New Board</div>
             </div>
           </div>

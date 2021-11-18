@@ -19,17 +19,17 @@
   height: 70%;
   margin-top: 80px;
   padding: 20px 10px;
-  border: 1px solid grey;
 }
 
 .boards-search {
-  width: 800px;
+  min-width: 800px;
   height: 20px;
   border: none;
   border-radius: 20px;
   background-color: #343d46ab;
   font-size: large;
   padding: 10px;
+  margin-bottom: 50px;
 }
 
 .all-boards-title {
@@ -52,10 +52,19 @@
   column-gap: 15px;
 }
 
+.board-item-info-container {
+  min-height: 70px;
+}
+
+.board-item-no-margin {
+  margin: 0px;
+}
+
 .board-item {
   background: #343d45;
-  padding: 5px;
-  width: 300px;
+  padding: 15px;
+  min-width: 300px;
+  height: 140px;
   border-radius: 6px;
 }
 
@@ -63,6 +72,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .board-item-title {
@@ -98,12 +108,40 @@
 .add-board-button {
   border: 1px solid gray;
   background: transparent;
-  padding: 5px;
+  margin: 0px;
   width: 300px;
-  height: 120px;
+  height: 170px;
   border-radius: 6px;
   font-weight: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+}
+
+.add-board-button:hover {
+  background-color: #7e7e7e21;
+}
+
+@media only screen and (max-width: 600px) {
+  .board-list-holder {
+    flex-direction: column;
+  }
+
+  .board-item {
+    min-width: 200px;
+  }
+
+  .boards-list {
+    flex-direction: column;
+    min-width: 100%;
+  }
+
+  .add-board-button {
+    margin-top: 15px;
+  }
+
+  .boards-search {
+    min-width: 95%;
+  }
 }
