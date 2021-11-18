@@ -1,3 +1,11 @@
+.search-bar-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: fit-content;
+  block-size: fit-content;
+}
+
 .boards-search {
   min-width: 800px;
   height: 20px;
@@ -7,5 +15,20 @@
   font-size: large;
   padding: 10px;
   margin-bottom: 50px;
+  padding-left: 50px;
   color: white;
+}
+
+.boards-search::placeholder {
+  margin-left: 10px;
+  color: white;
+}
+
+.search-icon {
+  position: relative;
+  color: white;
+  top: -25px;
+  left: 30px;
+  width: 15px;
+  height: 15px;
 }
