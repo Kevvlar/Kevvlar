@@ -3,11 +3,7 @@ import { FaTrash, FaEdit } from "react-icons/fa";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
 
-import {
-  setCardModal,
-  setColumnModal,
-  setCurrentColumnIdAndTitle,
-} from "../../redux";
+import { setCardModal, setColumnModal } from "../../redux";
 
 import Card from "../card/Card";
 
@@ -35,7 +31,6 @@ const Column = ({
   addNewCardModal,
   editColumnModal,
   deleteColumnModal,
-  setColumnIdAndTitle,
 }) => {
   return (
     <Draggable draggableId={column._id} index={index}>
@@ -52,20 +47,12 @@ const Column = ({
             <div className="column-header-icon-container">
               <FaTrash
                 onClick={() => {
-                  setColumnIdAndTitle({
-                    id: column._id,
-                    title: column.title,
-                  });
                   deleteColumnModal();
                 }}
                 className="column-header-trash-icon"
               />
               <FaEdit
                 onClick={() => {
-                  setColumnIdAndTitle({
-                    id: column._id,
-                    title: column.title,
-                  });
                   editColumnModal();
                 }}
                 className="column-header-edit-icon"
@@ -91,10 +78,6 @@ const Column = ({
           </Droppable>
           <button
             onClick={() => {
-              setColumnIdAndTitle({
-                id: column._id,
-                title: column.title,
-              });
               addNewCardModal();
             }}
             className="new-card-button"
@@ -112,7 +95,6 @@ const mapDispatchToProps = (dispatch) => {
     addNewCardModal: () => dispatch(setCardModal()),
     editColumnModal: () => dispatch(setColumnModal(EDIT)),
     deleteColumnModal: () => dispatch(setColumnModal(DELETE)),
-    setColumnIdAndTitle: (data) => dispatch(setCurrentColumnIdAndTitle(data)),
   };
 };
 

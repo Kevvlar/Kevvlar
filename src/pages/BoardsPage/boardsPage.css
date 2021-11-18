@@ -18,7 +18,8 @@
   width: 80%;
   height: 70%;
   margin-top: 80px;
-  padding: 10px;
+  padding: 20px 10px;
+  border: 1px solid grey;
 }
 
 .boards-search {
@@ -36,9 +37,17 @@
   color: #e4745d;
 }
 
+.board-list-holder {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 15px;
+}
+
 .boards-list {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   row-gap: 10px;
   column-gap: 15px;
 }
@@ -58,6 +67,19 @@
 
 .board-item-title {
   margin-left: 5px;
+  font-weight: bold;
+  color: #ffffffab;
+}
+
+.sub-color {
+  color: #8498aa;
+}
+
+.board-num-members {
+  width: 100px;
+  padding: 5px;
+  background: #f8f8f81c;
+  border-radius: 4px;
 }
 
 .board-item-footer {
@@ -78,9 +100,10 @@
   background: transparent;
   padding: 5px;
   width: 300px;
+  height: 120px;
   border-radius: 6px;
+  font-weight: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
-  float: left;
 }

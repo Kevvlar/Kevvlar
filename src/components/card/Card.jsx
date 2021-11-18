@@ -4,11 +4,11 @@ import { FaEllipsisH } from "react-icons/fa";
 import { Draggable } from "react-beautiful-dnd";
 import moment from "moment";
 
-import { setCardModal, setCardData } from "../../redux/index";
+import { setCardModal } from "../../redux/index";
 
 import "./card.css";
 
-const Card = ({ card, index, isGrid, editCardModal, setCurrentCardData }) => (
+const Card = ({ card, index, isGrid, editCardModal }) => (
   <Draggable draggableId={card._id} index={index}>
     {(provided) => (
       <div
@@ -30,13 +30,6 @@ const Card = ({ card, index, isGrid, editCardModal, setCurrentCardData }) => (
                 <FaEllipsisH
                   onClick={() => {
                     editCardModal("EDIT");
-                    setCurrentCardData({
-                      id: card._id,
-                      title: card.title,
-                      description: card.description,
-                      date: card.date,
-                      color: card.colorLabel,
-                    });
                   }}
                   className="card-more-icon"
                 />
@@ -58,7 +51,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     editCardModal: (type) => dispatch(setCardModal(type)),
-    setCurrentCardData: (data) => dispatch(setCardData(data)),
   };
 };
 

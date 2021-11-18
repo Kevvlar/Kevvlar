@@ -2,26 +2,12 @@ import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { connect } from "react-redux";
 
-import {
-  closeModal,
-  addColumn,
-  deleteColumn,
-  editColumn,
-} from "../../../redux";
+import { closeModal } from "../../../redux";
 import { ADD, EDIT, DELETE } from "../../../redux/modal/modalTypes";
 
 import "./columnModal.css";
 
-const ColumnModal = ({
-  closeModal,
-  type,
-  columnId,
-  boardId,
-  createColumn,
-  deleteCurrentColumn,
-  currentColumnTitle,
-  updateColumn,
-}) => {
+const ColumnModal = ({ closeModal, type }) => {
   const AddColumn = () => {
     const [columnTitle, setColumnTitle] = useState("");
     return (
@@ -38,13 +24,6 @@ const ColumnModal = ({
         <button
           className="modal-board-button"
           onClick={() => {
-            createColumn(
-              {
-                title: columnTitle,
-                board: boardId,
-              },
-              boardId
-            );
             setColumnTitle("");
             closeModal();
           }}
@@ -56,7 +35,7 @@ const ColumnModal = ({
   };
 
   const EditColumn = () => {
-    const [columnEditTitle, setColumnEditTitle] = useState(currentColumnTitle);
+    const [columnEditTitle, setColumnEditTitle] = useState("");
     return (
       <div className="modal-board-body">
         <h2 className="modal-board-title">Edit Column</h2>
@@ -70,7 +49,6 @@ const ColumnModal = ({
         <button
           className="modal-board-button"
           onClick={() => {
-            updateColumn({ title: columnEditTitle }, columnId, boardId);
             setColumnEditTitle("");
             closeModal();
           }}
@@ -91,7 +69,6 @@ const ColumnModal = ({
         <button
           className="delete-button"
           onClick={() => {
-            deleteCurrentColumn(columnId, boardId);
             closeModal();
           }}
         >
@@ -119,20 +96,12 @@ const ColumnModal = ({
 const mapStateToProps = (state) => {
   return {
     type: state.modal.modalActionType,
-    boardId: state.board.currentBoardId,
-    columnId: state.column.currentColumnId,
-    currentColumnTitle: state.column.currentColumnTitle,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
-    createColumn: (data, id) => dispatch(addColumn(data, id)),
-    deleteCurrentColumn: (columnId, boardId) =>
-      dispatch(deleteColumn(columnId, boardId)),
-    updateColumn: (data, columnId, boardId) =>
-      dispatch(editColumn(data, columnId, boardId)),
   };
 };
 

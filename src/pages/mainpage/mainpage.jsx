@@ -8,15 +8,11 @@ import ColumnHolder from "../../components/column-holder/ColumnHolder";
 import Modal from "../../components/modal/Modal";
 import BoardNavBar from "../../components/board-nav-bar/BoardNavBar";
 
-import { fetchBoards } from "../../redux";
+import {} from "../../redux";
 
 import "./mainPage.css";
 
 class MainPage extends React.Component {
-  componentDidMount() {
-    this.props.fetchBoards();
-  }
-
   render() {
     return (
       <div className="todopage">
@@ -44,9 +40,7 @@ class MainPage extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchBoards: () => dispatch(fetchBoards()),
-  };
+  return {};
 };
 
 const mapStateToProps = (state) => {
@@ -54,7 +48,6 @@ const mapStateToProps = (state) => {
     leftSideNav: state.sideNavLeft.leftSideNav,
     rightSideNav: state.sideNavRight.rightSideNav,
     showModal: state.modal.showModal,
-    boardId: state.board.currentBoardId,
   };
 };
 

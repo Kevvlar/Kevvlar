@@ -2,20 +2,12 @@ import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { connect } from "react-redux";
 
-import { closeModal, addBoard, editBoard, deleteBoard } from "../../../redux";
+import { closeModal } from "../../../redux";
 import { ADD, EDIT, DELETE } from "../../../redux/modal/modalTypes";
 
 import "./boardModal.css";
 
-const BoardModal = ({
-  type,
-  closeModal,
-  addBoard,
-  boardId,
-  boardTitle,
-  editBoard,
-  deleteBoard,
-}) => {
+const BoardModal = ({ type, closeModal }) => {
   const AddBoard = () => {
     const [boardName, setBoardName] = useState("");
     return (
@@ -32,11 +24,7 @@ const BoardModal = ({
         <button
           className="modal-board-button"
           onClick={() => {
-            const body = {
-              title: boardName,
-            };
             setBoardName("");
-            addBoard(body);
             closeModal();
           }}
         >
@@ -47,7 +35,7 @@ const BoardModal = ({
   };
 
   const EditBoard = () => {
-    const [editBoardName, setEditBoardName] = useState(boardTitle.toString());
+    const [editBoardName, setEditBoardName] = useState("");
     return (
       <div className="modal-board-body">
         <h2 className="modal-board-title">Edit Board</h2>
@@ -62,7 +50,6 @@ const BoardModal = ({
           className="modal-board-button"
           onClick={() => {
             setEditBoardName("");
-            editBoard({ title: editBoardName }, boardId);
             closeModal();
           }}
         >
@@ -83,7 +70,6 @@ const BoardModal = ({
           <button
             className="delete-button"
             onClick={() => {
-              deleteBoard(boardId);
               closeModal();
             }}
           >
@@ -112,17 +98,12 @@ const BoardModal = ({
 const mapStateToProps = (state) => {
   return {
     type: state.modal.modalActionType,
-    boardId: state.board.currentBoardId,
-    boardTitle: state.board.currentBoardTitle,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
-    addBoard: (data) => dispatch(addBoard(data)),
-    editBoard: (data, id) => dispatch(editBoard(data, id)),
-    deleteBoard: (id) => dispatch(deleteBoard(id)),
   };
 };
 

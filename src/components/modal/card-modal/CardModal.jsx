@@ -2,25 +2,12 @@ import React, { useState } from "react";
 import { FaCheck, FaTimes } from "react-icons/fa";
 import { connect } from "react-redux";
 
-import { closeModal, addCard, deleteCard, editCard } from "../../../redux";
+import { closeModal } from "../../../redux";
 import { ADD, EDIT } from "../../../redux/modal/modalTypes";
 
 import "./cardModal.css";
 
-const CardModal = ({
-  closeModal,
-  boardId,
-  columnId,
-  addNewCard,
-  type,
-  cardId,
-  cardTitle,
-  cardDescription,
-  cardDate,
-  cardColor,
-  removeCard,
-  updateCard,
-}) => {
+const CardModal = ({ closeModal, type }) => {
   const AddCardModal = () => {
     const [cardTitle, setCardTitle] = useState("");
     const [cardBody, setCardBody] = useState("");
@@ -81,18 +68,6 @@ const CardModal = ({
           <button
             className="modal-board-button"
             onClick={() => {
-              addNewCard(
-                {
-                  title: cardTitle,
-                  description: cardBody,
-                  date: cardDate,
-                  colorLabel: cardColor,
-                  board: boardId,
-                  column: columnId,
-                },
-                boardId,
-                columnId
-              );
               setCardTitle("");
               setCardBody("");
               setCardDate("");
@@ -108,10 +83,10 @@ const CardModal = ({
   };
 
   const EditBoardModal = () => {
-    const [editCardTitle, setEditCardTitle] = useState(cardTitle);
-    const [editCardBody, setEditCardBody] = useState(cardDescription);
-    const [editCardDate, setEditCardDate] = useState(cardDate);
-    const [editCardColor, setEditCardColor] = useState(cardColor);
+    const [editCardTitle, setEditCardTitle] = useState("");
+    const [editCardBody, setEditCardBody] = useState("");
+    const [editCardDate, setEditCardDate] = useState("");
+    const [editCardColor, setEditCardColor] = useState("");
 
     return (
       <div className="modal-body">
@@ -167,12 +142,6 @@ const CardModal = ({
           <button
             className="modal-board-button"
             onClick={() => {
-              updateCard(cardId, boardId, {
-                title: editCardTitle,
-                description: editCardBody,
-                date: editCardDate,
-                colorLabel: editCardColor,
-              });
               closeModal();
             }}
           >
@@ -181,7 +150,6 @@ const CardModal = ({
           <button
             className="delete-button"
             onClick={() => {
-              removeCard(cardId, boardId);
               closeModal();
             }}
           >
@@ -205,25 +173,13 @@ const CardModal = ({
 
 const mapStateToProps = (state) => {
   return {
-    boardId: state.board.currentBoardId,
-    columnId: state.column.currentColumnId,
     type: state.modal.modalActionType,
-    cardId: state.card.currentCardId,
-    cardTitle: state.card.title,
-    cardDescription: state.card.description,
-    cardDate: state.card.date,
-    cardColor: state.card.color,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
-    addNewCard: (data, boardId, columnId) =>
-      dispatch(addCard(data, boardId, columnId)),
-    removeCard: (cardId, boardId) => dispatch(deleteCard(cardId, boardId)),
-    updateCard: (cardId, boardId, data) =>
-      dispatch(editCard(cardId, boardId, data)),
   };
 };
 
