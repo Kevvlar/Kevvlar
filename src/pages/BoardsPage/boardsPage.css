@@ -109,7 +109,7 @@
   border: 1px solid gray;
   background: transparent;
   margin: 0px;
-  width: 300px;
+  min-width: 300px;
   height: 170px;
   border-radius: 6px;
   font-weight: 300px;
@@ -139,6 +139,7 @@
 
   .add-board-button {
     margin-top: 15px;
+    min-width: 100%;
   }
 
   .boards-search {
