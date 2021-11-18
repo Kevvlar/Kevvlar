@@ -19,6 +19,12 @@
   color: white;
 }
 
+.boards-search:focus { 
+  outline: none !important;
+  border-color: #719ECE;
+  box-shadow: 0 0 6px 0px #ffc107b0;
+}
+
 .boards-search::placeholder {
   margin-left: 10px;
   color: white;
