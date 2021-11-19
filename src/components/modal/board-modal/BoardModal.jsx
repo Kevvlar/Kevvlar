@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import {
   closeModal,
-  addNewBoardLocal,
+  handleAddNewBoardLocal,
   editCurrentBoardLocal,
   deleteCurrentBoardLocal,
 } from "../../../redux";
@@ -38,10 +38,18 @@ const BoardModal = ({
         <button
           className="modal-board-button"
           onClick={() => {
-            addBoardLocal({
-              id: uuidv4(),
+            const baordId = uuidv4();
+            const boardObj = {
+              id: baordId,
               title: boardName,
-            });
+            };
+
+            const orderObj = {
+              boardId: baordId,
+              order: [],
+            };
+
+            addBoardLocal(boardObj, orderObj);
             setBoardName("");
             closeModal();
           }}
@@ -129,7 +137,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
-    addBoardLocal: (boardObj) => dispatch(addNewBoardLocal(boardObj)),
+    addBoardLocal: (boardObj, orderObj) =>
+      dispatch(handleAddNewBoardLocal(boardObj, orderObj)),
     editBoardLocal: (boardObj) => dispatch(editCurrentBoardLocal(boardObj)),
     deleteBoardLocal: (boardId) => dispatch(deleteCurrentBoardLocal(boardId)),
   };

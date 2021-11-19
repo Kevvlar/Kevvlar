@@ -6,10 +6,19 @@ import {
   ENTER_SEARCH_TEXT,
 } from "./boardTypes";
 
+import { addNewColumnOrderLocal } from "../index";
+
 export const addNewBoardLocal = (boardObj) => {
   return {
     type: ADD_NEW_BOARD_LOCAL,
     payLoad: boardObj,
+  };
+};
+
+export const handleAddNewBoardLocal = (boardObj, orderObj) => {
+  return (dispatch) => {
+    dispatch(addNewBoardLocal(boardObj));
+    dispatch(addNewColumnOrderLocal(orderObj));
   };
 };
 

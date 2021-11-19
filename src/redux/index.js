@@ -17,14 +17,14 @@ export {
 } from "./modal/modalActions";
 
 export {
-  addNewBoardLocal,
+  handleAddNewBoardLocal,
   setCurrentBoardData,
   editCurrentBoardLocal,
   deleteCurrentBoardLocal,
   enterSearchText,
 } from "./board/boardActions";
 
-export {} from "./column-order/columnOrderActions";
+export { addNewColumnOrderLocal } from "./column-order/columnOrderActions";
 
 export {} from "./column/columnActions";
 
