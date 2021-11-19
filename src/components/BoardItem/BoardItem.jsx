@@ -2,7 +2,6 @@ import React from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-import { v4 as uuidv4 } from "uuid";
 
 import { BoardIcon } from "../../assets/svg/iconlibrary";
 
@@ -26,9 +25,7 @@ const boardItem = ({
           id: board.id,
           title: board.title,
         });
-        history.push(
-          `${match.url}/${board.title.toLowerCase()}/${board.id}/${uuidv4()}`
-        );
+        history.push(`${match.url}/${board.title.toLowerCase()}/${board.id}`);
       }}
     >
       <div className="title-container">
