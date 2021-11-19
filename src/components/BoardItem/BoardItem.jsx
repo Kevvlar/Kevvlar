@@ -1,6 +1,8 @@
 import React from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { connect } from "react-redux";
+import { withRouter } from "react-router";
+import { v4 as uuidv4 } from "uuid";
 
 import { BoardIcon } from "../../assets/svg/iconlibrary";
 
@@ -9,9 +11,26 @@ import { EDIT, DELETE } from "../../redux/modal/modalTypes";
 
 import "./boardItem.css";
 
-const boardItem = ({ board, setSelectBoardData, showModal }) => {
+const boardItem = ({
+  board,
+  setSelectBoardData,
+  showModal,
+  history,
+  match,
+}) => {
   return (
-    <div className="board-item">
+    <div
+      className="board-item"
+      onClick={() => {
+        setSelectBoardData({
+          id: board.id,
+          title: board.title,
+        });
+        history.push(
+          `${match.url}/${board.title.toLowerCase()}/${board.id}/${uuidv4()}`
+        );
+      }}
+    >
       <div className="title-container">
         <BoardIcon />
         <span className="board-item-title">{board.title}</span>
@@ -56,4 +75,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(boardItem);
+export default connect(null, mapDispatchToProps)(withRouter(boardItem));

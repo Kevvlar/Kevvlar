@@ -5,7 +5,7 @@ import { Switch, Route } from "react-router-dom";
 
 import BoardsPage from "./pages/BoardsPage/BoardsPage";
 import Homepage from "./pages/HomePage/HomePage";
-import MainPage from "./pages/MainPage/MainPage";
+import ActivityPage from "./pages/ActivityPage/ActivityPage";
 import SignUp from "./components/signup/SignUp";
 import SignIn from "./components/signin/SignIn";
 import PrivateRoute from "./components/auth/PrivateRoute";
@@ -20,8 +20,12 @@ const App = () => (
         <RedirectToMainPage exact path="/" component={Homepage} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/signin" component={SignIn} />
-        <PrivateRoute path="/boards/:id" exact component={MainPage} />
-        <PrivateRoute path="/boards" exact component={BoardsPage} />
+        <PrivateRoute
+          exact
+          path="/boards/:boardName/:boardId/:randomString"
+          component={ActivityPage}
+        />
+        <PrivateRoute path="/boards" component={BoardsPage} />
       </Switch>
     </div>
   </Provider>
