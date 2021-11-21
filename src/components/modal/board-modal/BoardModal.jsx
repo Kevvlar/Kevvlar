@@ -42,9 +42,12 @@ const BoardModal = ({
             const boardObj = {
               id: baordId,
               title: boardName,
+              cards: [],
+              cardOrder: [],
             };
 
             const orderObj = {
+              id: uuidv4(),
               boardId: baordId,
               order: [],
             };

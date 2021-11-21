@@ -24,8 +24,15 @@ export {
   enterSearchText,
 } from "./board/boardActions";
 
-export { addNewColumnOrderLocal } from "./column-order/columnOrderActions";
+export {
+  addNewColumnOrderLocal,
+  addNewColumnToColumnOrderLocal,
+  getColumnOrderByBoardLocal,
+} from "./column-order/columnOrderActions";
 
-export {} from "./column/columnActions";
+export {
+  handleAddNewColumnLocal,
+  getColumnsByBoardLocal,
+} from "./column/columnActions";
 
 export {} from "./card/cardActions";

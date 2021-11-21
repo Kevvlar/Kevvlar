@@ -1,9 +1,11 @@
-import {} from "./columnTypes";
+import {
+  ADD_NEW_COLUMN_LOCAL,
+  GET_COLUMNS_BY_BOARDS_LOCAL,
+} from "./columnTypes";
 
 const initialState = {
   currentColumnId: "",
   currentColumnTitle: "",
-  loading: false,
   error: "",
   columns: [],
   columnsByBoard: [],
@@ -11,6 +13,20 @@ const initialState = {
 
 const columnReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_NEW_COLUMN_LOCAL:
+      return {
+        ...state,
+        columns: [...state.columns, action.payLoad],
+      };
+
+    case GET_COLUMNS_BY_BOARDS_LOCAL:
+      return {
+        ...state,
+        columnsByBoard: state.columns.filter(
+          (column) => column.boardId === action.payLoad
+        ),
+      };
+
     default:
       return state;
   }

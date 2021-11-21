@@ -2,14 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { FaEllipsisH } from "react-icons/fa";
 import { Draggable } from "react-beautiful-dnd";
-import moment from "moment";
 
 import { setCardModal } from "../../redux/index";
 
 import "./card.css";
 
 const Card = ({ card, index, isGrid, editCardModal }) => (
-  <Draggable draggableId={card._id} index={index}>
+  <Draggable draggableId={card.id} index={index}>
     {(provided) => (
       <div
         className="card"
@@ -26,7 +25,7 @@ const Card = ({ card, index, isGrid, editCardModal }) => (
             <span>
               <p className="card-description">{card.description}</p>
               <div className="card-menu">
-                <p className="card-date">{moment(card.date).format()}</p>
+                <p className="card-date">{card.date}</p>
                 <FaEllipsisH
                   onClick={() => {
                     editCardModal("EDIT");

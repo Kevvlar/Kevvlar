@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { connect } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
-import { closeModal } from "../../../redux";
+import { closeModal, handleAddNewColumnLocal } from "../../../redux";
 import { ADD, EDIT, DELETE } from "../../../redux/modal/modalTypes";
 
 import "./columnModal.css";
 
-const ColumnModal = ({ closeModal, type }) => {
+const ColumnModal = ({ closeModal, type, selectBoardId, addNewColumn }) => {
   const AddColumn = () => {
     const [columnTitle, setColumnTitle] = useState("");
     return (
@@ -24,6 +25,14 @@ const ColumnModal = ({ closeModal, type }) => {
         <button
           className="modal-board-button"
           onClick={() => {
+            const columnObj = {
+              id: uuidv4(),
+              boardId: selectBoardId,
+              title: columnTitle,
+              cards: [],
+              cardsOrder: [],
+            };
+            addNewColumn(columnObj);
             setColumnTitle("");
             closeModal();
           }}
@@ -96,12 +105,14 @@ const ColumnModal = ({ closeModal, type }) => {
 const mapStateToProps = (state) => {
   return {
     type: state.modal.modalActionType,
+    selectBoardId: state.board.selectBoardId,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
+    addNewColumn: (columnObj) => dispatch(handleAddNewColumnLocal(columnObj)),
   };
 };
 

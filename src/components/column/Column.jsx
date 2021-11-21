@@ -33,7 +33,7 @@ const Column = ({
   deleteColumnModal,
 }) => {
   return (
-    <Draggable draggableId={column._id} index={index}>
+    <Draggable draggableId={column.id} index={index}>
       {(provided) => (
         <div
           className="column"
@@ -59,7 +59,7 @@ const Column = ({
               />
             </div>
           </div>
-          <Droppable droppableId={column._id} type="card">
+          <Droppable droppableId={column.id} type="card">
             {(provided) => (
               <div
                 className="card-container"

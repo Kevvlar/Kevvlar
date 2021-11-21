@@ -9,26 +9,22 @@ import Column from "../column/Column";
 
 import "./columnHolder.css";
 
-// const mapOrder = (array, order, key) => {
-//   array.sort(function (a, b) {
-//     var A = a[key],
-//       B = b[key];
+const mapOrder = (array, order, key) => {
+  array.sort(function (a, b) {
+    var A = a[key],
+      B = b[key];
 
-//     if (order.indexOf(A) > order.indexOf(B)) {
-//       return 1;
-//     } else {
-//       return -1;
-//     }
-//   });
+    if (order.indexOf(A) > order.indexOf(B)) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
 
-//   return array;
-// };
+  return array;
+};
 
-const ColumnHolder = ({
-  addNewColumnModal,
-  columns = [],
-  columnOrder = [],
-}) => {
+const ColumnHolder = ({ addNewColumnModal, columns, columnOrder }) => {
   const onDragEnd = (result) => {
     const { destination, draggableId, source, type } = result;
 
@@ -89,8 +85,8 @@ const ColumnHolder = ({
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
-              {columns.map((column, index) => (
-                <Column key={column._id} column={column} index={index} />
+              {mapOrder(columns, columnOrder, "id").map((column, index) => (
+                <Column key={column.id} column={column} index={index} />
               ))}
               {provided.placeholder}
               <button onClick={addNewColumnModal} className="new-column-button">
@@ -105,7 +101,10 @@ const ColumnHolder = ({
 };
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    columns: state.column.columnsByBoard,
+    columnOrder: state.columnOrder.columnOrderByBoard.order,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -115,7 +114,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ColumnHolder);
-
-// {mapOrder(columns, columnOrder, "_id").map((column, index) => (
-//   <Column key={column._id} column={column} index={index} />
-// ))}

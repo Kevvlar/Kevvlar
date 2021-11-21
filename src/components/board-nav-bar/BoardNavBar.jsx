@@ -44,7 +44,7 @@ const BoardNavBar = ({ boardTitle, toggleLeftSideNav, history }) => (
 );
 const mapStateToProps = (state) => {
   return {
-    boardTitle: state.board.currentBoardTitle,
+    boardTitle: state.board.selectBoardTitle,
   };
 };
 
