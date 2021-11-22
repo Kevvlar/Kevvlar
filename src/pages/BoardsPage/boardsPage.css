@@ -30,7 +30,8 @@
   border: 1px solid gray;
   background: transparent;
   margin: 0px;
-  min-width: 300px;
+  min-width: 330px;
+  max-width: 330px;
   height: 170px;
   border-radius: 6px;
   font-weight: 300px;

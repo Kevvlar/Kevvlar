@@ -19,22 +19,11 @@ const BoardsPage = ({ showBoardModal, showModal }) => {
           <SearchBar />
           <div className="boards-container">
             <h2 className="all-boards-title">All Boards</h2>
-            <div className="board-list-holder">
-              <BoardList />
-              <div
-                className="add-board-button sub-color"
-                onClick={() => showBoardModal()}
-              >
-                + New Board
-              </div>
-            </div>
+            <BoardList />
           </div>
 
           <div className="boards-container">
-            <h2 className="all-boards-title">Team Board</h2>
-            <div className="board-list-holder">
-              <div className="add-board-button sub-color">+ New Board</div>
-            </div>
+            <h2 className="all-boards-title">Team Boards</h2>
           </div>
         </div>
       </div>
@@ -43,16 +32,4 @@ const BoardsPage = ({ showBoardModal, showModal }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    showModal: state.modal.showModal,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    showBoardModal: () => dispatch(setBoardModal()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(BoardsPage);
+export default connect()(BoardsPage);
