@@ -25,26 +25,28 @@ const boardItem = ({
   getColumns,
 }) => {
   return (
-    <div
-      className="board-item"
-      onClick={() => {
-        setSelectBoardData({
-          id: board.id,
-          title: board.title,
-        });
-        getColumnOrder(board.id);
-        getColumns(board.id);
-        history.push(`${match.url}/${board.title.toLowerCase()}/${board.id}`);
-      }}
-    >
-      <div className="title-container">
-        <BoardIcon />
-        <span className="board-item-title">{board.title}</span>
-      </div>
-      <div className="board-item-info-container">
-        <p className="sub-color board-item-no-margin">7 Columns</p>
-        <p className="sub-color board-item-no-margin">42 Cards</p>
-      </div>
+    <div className="board-item">
+      <span
+        className="class-for-item-on-click-event"
+        onClick={() => {
+          setSelectBoardData({
+            id: board.id,
+            title: board.title,
+          });
+          getColumnOrder(board.id);
+          getColumns(board.id);
+          history.push(`${match.url}/${board.title.toLowerCase()}/${board.id}`);
+        }}
+      >
+        <div className="title-container">
+          <BoardIcon />
+          <span className="board-item-title">{board.title}</span>
+        </div>
+        <div className="board-item-info-container">
+          <p className="sub-color board-item-no-margin">7 Columns</p>
+          <p className="sub-color board-item-no-margin">42 Cards</p>
+        </div>
+      </span>
       <div className="board-item-footer">
         <div className="board-num-members sub-color">12 Members</div>
         <div className="board-item-icons">

@@ -7,7 +7,7 @@ import {
   closeModal,
   handleAddNewBoardLocal,
   editCurrentBoardLocal,
-  deleteCurrentBoardLocal,
+  handleGlobalDeleteLocal,
 } from "../../../redux";
 import { ADD, EDIT, DELETE } from "../../../redux/modal/modalTypes";
 
@@ -143,7 +143,7 @@ const mapDispatchToProps = (dispatch) => {
     addBoardLocal: (boardObj, orderObj) =>
       dispatch(handleAddNewBoardLocal(boardObj, orderObj)),
     editBoardLocal: (boardObj) => dispatch(editCurrentBoardLocal(boardObj)),
-    deleteBoardLocal: (boardId) => dispatch(deleteCurrentBoardLocal(boardId)),
+    deleteBoardLocal: (boardId) => dispatch(handleGlobalDeleteLocal(boardId)),
   };
 };
 

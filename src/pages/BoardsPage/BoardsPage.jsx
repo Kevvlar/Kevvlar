@@ -6,8 +6,6 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import BoardList from "../../components/BoardList/BoardList";
 import Modal from "../../components/modal/Modal";
 
-import { setBoardModal } from "../../redux";
-
 import "./boardsPage.css";
 
 const BoardsPage = ({ showBoardModal, showModal }) => {

@@ -1,5 +1,6 @@
 import {
   ADD_NEW_COLUMN_LOCAL,
+  DELETE_COLUMNS_BY_BOARD_LOCAL,
   GET_COLUMNS_BY_BOARDS_LOCAL,
 } from "./columnTypes";
 
@@ -18,6 +19,13 @@ export const addNewColumnLocal = (columnObj) => {
 export const getColumnsByBoardLocal = (boardId) => {
   return {
     type: GET_COLUMNS_BY_BOARDS_LOCAL,
+    payLoad: boardId,
+  };
+};
+
+export const deleteColumnsByBoardLocal = (boardId) => {
+  return {
+    type: DELETE_COLUMNS_BY_BOARD_LOCAL,
     payLoad: boardId,
   };
 };

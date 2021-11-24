@@ -1,5 +1,6 @@
 import {
   ADD_NEW_COLUMN_LOCAL,
+  DELETE_COLUMNS_BY_BOARD_LOCAL,
   GET_COLUMNS_BY_BOARDS_LOCAL,
 } from "./columnTypes";
 
@@ -17,6 +18,17 @@ const columnReducer = (state = initialState, action) => {
       return {
         ...state,
         columns: [...state.columns, action.payLoad],
+      };
+
+    case DELETE_COLUMNS_BY_BOARD_LOCAL:
+      return {
+        ...state,
+        columns: state.columns.filter(
+          (columnItem) => columnItem.boardId !== action.payLoad
+        ),
+        currentColumnId: "",
+        currentColumnTitle: "",
+        columnsByBoard: [],
       };
 
     case GET_COLUMNS_BY_BOARDS_LOCAL:

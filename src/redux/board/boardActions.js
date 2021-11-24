@@ -6,7 +6,11 @@ import {
   ENTER_SEARCH_TEXT,
 } from "./boardTypes";
 
-import { addNewColumnOrderLocal } from "../index";
+import {
+  addNewColumnOrderLocal,
+  deleteColumnsByBoardLocal,
+  deleteColumnOrderByBoardLocal,
+} from "../index";
 
 export const addNewBoardLocal = (boardObj) => {
   return {
@@ -40,6 +44,14 @@ export const deleteCurrentBoardLocal = (boardId) => {
   return {
     type: DELETE_BOARD_LOCAL,
     payLoad: boardId,
+  };
+};
+
+export const handleGlobalDeleteLocal = (boardId) => {
+  return (dispatch) => {
+    dispatch(deleteColumnOrderByBoardLocal(boardId));
+    dispatch(deleteColumnsByBoardLocal(boardId));
+    dispatch(deleteCurrentBoardLocal(boardId));
   };
 };
 

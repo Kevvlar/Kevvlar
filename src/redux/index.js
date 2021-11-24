@@ -20,7 +20,7 @@ export {
   handleAddNewBoardLocal,
   setCurrentBoardData,
   editCurrentBoardLocal,
-  deleteCurrentBoardLocal,
+  handleGlobalDeleteLocal,
   enterSearchText,
 } from "./board/boardActions";
 
@@ -28,11 +28,14 @@ export {
   addNewColumnOrderLocal,
   addNewColumnToColumnOrderLocal,
   getColumnOrderByBoardLocal,
+  changeColumnOrderLocal,
+  deleteColumnOrderByBoardLocal,
 } from "./column-order/columnOrderActions";
 
 export {
   handleAddNewColumnLocal,
   getColumnsByBoardLocal,
+  deleteColumnsByBoardLocal,
 } from "./column/columnActions";
 
 export {} from "./card/cardActions";

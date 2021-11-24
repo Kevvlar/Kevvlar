@@ -8,7 +8,7 @@ import { ADD, EDIT, DELETE } from "../../../redux/modal/modalTypes";
 
 import "./columnModal.css";
 
-const ColumnModal = ({ closeModal, type, selectBoardId, addNewColumn }) => {
+const ColumnModal = ({ closeModal, type, currentBoardId, addNewColumn }) => {
   const AddColumn = () => {
     const [columnTitle, setColumnTitle] = useState("");
     return (
@@ -27,7 +27,7 @@ const ColumnModal = ({ closeModal, type, selectBoardId, addNewColumn }) => {
           onClick={() => {
             const columnObj = {
               id: uuidv4(),
-              boardId: selectBoardId,
+              boardId: currentBoardId,
               title: columnTitle,
               cards: [],
               cardsOrder: [],
@@ -105,7 +105,7 @@ const ColumnModal = ({ closeModal, type, selectBoardId, addNewColumn }) => {
 const mapStateToProps = (state) => {
   return {
     type: state.modal.modalActionType,
-    selectBoardId: state.board.selectBoardId,
+    currentBoardId: state.board.selectBoardId,
   };
 };
 
