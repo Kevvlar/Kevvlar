@@ -48,6 +48,10 @@
   font-weight: 700;
   color: #ffffff3b;
   display: flex;
+  margin: 0px 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .appbar-user-menu-container {

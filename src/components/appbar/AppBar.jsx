@@ -6,11 +6,13 @@ import { showLeftSideNav } from "../../redux/index";
 
 import NotificationIcon from "../notification-icon/NotificationIcon";
 import UserProfile from "../profile-image/ProfileImage";
+import { HomeIcon } from "../../assets/svg/iconlibrary";
+import { withRouter } from "react-router";
 
 import "./appbar.css";
 import "./kevvlar-logo.svg";
 
-const AppBar = ({ toggleLeftSideNav, boardTitle }) => (
+const AppBar = ({ toggleLeftSideNav, boardTitle, history }) => (
   <header>
     <div className="appbar-container">
       <div className="appbar-menu-container">
@@ -20,7 +22,13 @@ const AppBar = ({ toggleLeftSideNav, boardTitle }) => (
           }}
           className="appbar-ham-icon-container"
         >
-          <FaBars className="appbar-ham-icon" />
+          <button className="appbar-logo"
+            onClick={() => {
+            history.push("/boards");
+          }}
+           >
+           <HomeIcon />
+           </button>
           <div className="appbar-logo primary-text-color">
         <svg
           width="120"
@@ -77,4 +85,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppBar);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(AppBar));
