@@ -43,7 +43,6 @@ const ColumnHolder = ({
       const newColumnOrder = Array.from(columnOrder);
       const [reOrderedItem] = newColumnOrder.splice(source.index, 1);
       newColumnOrder.splice(destination.index, 0, reOrderedItem);
-      console.log(newColumnOrder);
       updateColumnOrderLocal({
         boardId: currentBoardId,
         order: newColumnOrder,

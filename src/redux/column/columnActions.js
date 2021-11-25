@@ -3,6 +3,8 @@ import {
   DELETE_COLUMNS_BY_BOARD_LOCAL,
   GET_COLUMNS_BY_BOARDS_LOCAL,
   SET_CURRENT_COLUMN_DATA,
+  DELETE_COLUMN_LOCAL,
+  EDIT_COLUMN_LOCAL,
 } from "./columnTypes";
 
 import {
@@ -43,6 +45,20 @@ export const handleAddNewColumnLocal = (columnObj) => {
 export const setCurrentColumnData = (columnObj) => {
   return {
     type: SET_CURRENT_COLUMN_DATA,
+    payLoad: columnObj,
+  };
+};
+
+export const deleteColumnLocal = (columnId) => {
+  return {
+    type: DELETE_COLUMN_LOCAL,
+    payLoad: columnId,
+  };
+};
+
+export const editColumnLocal = (columnObj) => {
+  return {
+    type: EDIT_COLUMN_LOCAL,
     payLoad: columnObj,
   };
 };
