@@ -12,6 +12,9 @@
 .modal-title {
   color: white;
   text-align: center;
+  font-size: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ffffff24;
 }
 
 .close-icon {
@@ -19,7 +22,10 @@
   padding: 10px;
   float: right;
   cursor: pointer;
+  position: relative;
+  top: -8px;
 }
+
 .modal-body-title {
   background: transparent;
   font-weight: 600;

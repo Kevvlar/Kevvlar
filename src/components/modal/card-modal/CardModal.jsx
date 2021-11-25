@@ -35,6 +35,7 @@ const CardModal = ({ closeModal, type }) => {
           placeholder="Write something..."
           className="modal-body-description"
         ></textarea>
+        {/*
         <div className="modal-checkbox-area">
           <div className="modal-checkbox-bar">
             <FaCheck className="modal-check-icon-check" />
@@ -46,6 +47,7 @@ const CardModal = ({ closeModal, type }) => {
           <div className="modal-check-columns"></div>
           <input placeholder="+ Add item" className="modal-checkbox-input" />
         </div>
+        */}
         <div className="modal-footer-container">
           <input
             className="date-picker"
