@@ -27,6 +27,7 @@ const boardReducer = (state = initialState, action) => {
         ...state,
         selectBoardId: action.payLoad.id,
         selectBoardTitle: action.payLoad.title,
+        searchKey: "",
       };
 
     case EDIT_BOARD_LOCAL:

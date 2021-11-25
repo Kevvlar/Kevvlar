@@ -3,7 +3,11 @@ import { FaTrash, FaEdit } from "react-icons/fa";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
 
-import { setCardModal, setColumnModal } from "../../redux";
+import {
+  setCardModal,
+  setColumnModal,
+  setCurrentColumnData,
+} from "../../redux";
 
 import Card from "../card/Card";
 
@@ -31,6 +35,7 @@ const Column = ({
   addNewCardModal,
   editColumnModal,
   deleteColumnModal,
+  getColumnData,
 }) => {
   return (
     <Draggable draggableId={column.id} index={index}>
@@ -47,12 +52,20 @@ const Column = ({
             <div className="column-header-icon-container">
               <FaTrash
                 onClick={() => {
+                  getColumnData({
+                    id: column.id,
+                    title: column.title,
+                  });
                   deleteColumnModal();
                 }}
                 className="column-header-trash-icon"
               />
               <FaEdit
                 onClick={() => {
+                  getColumnData({
+                    id: column.id,
+                    title: column.title,
+                  });
                   editColumnModal();
                 }}
                 className="column-header-edit-icon"
@@ -95,6 +108,7 @@ const mapDispatchToProps = (dispatch) => {
     addNewCardModal: () => dispatch(setCardModal()),
     editColumnModal: () => dispatch(setColumnModal(EDIT)),
     deleteColumnModal: () => dispatch(setColumnModal(DELETE)),
+    getColumnData: (columnObj) => dispatch(setCurrentColumnData(columnObj)),
   };
 };
 

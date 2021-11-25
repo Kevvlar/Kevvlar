@@ -2,6 +2,7 @@ import {
   ADD_NEW_COLUMN_LOCAL,
   DELETE_COLUMNS_BY_BOARD_LOCAL,
   GET_COLUMNS_BY_BOARDS_LOCAL,
+  SET_CURRENT_COLUMN_DATA,
 } from "./columnTypes";
 
 import {
@@ -36,5 +37,12 @@ export const handleAddNewColumnLocal = (columnObj) => {
     dispatch(addNewColumnToColumnOrderLocal(columnObj));
     dispatch(getColumnsByBoardLocal(columnObj.boardId));
     dispatch(getColumnOrderByBoardLocal(columnObj.boardId));
+  };
+};
+
+export const setCurrentColumnData = (columnObj) => {
+  return {
+    type: SET_CURRENT_COLUMN_DATA,
+    payLoad: columnObj,
   };
 };

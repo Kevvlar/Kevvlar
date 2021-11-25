@@ -36,6 +36,7 @@ export {
   handleAddNewColumnLocal,
   getColumnsByBoardLocal,
   deleteColumnsByBoardLocal,
+  setCurrentColumnData,
 } from "./column/columnActions";
 
 export {} from "./card/cardActions";

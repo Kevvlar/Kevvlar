@@ -21,6 +21,7 @@ const App = () => (
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/signin" component={SignIn} />
         <PrivateRoute
+          exact
           path="/boards/:boardName/:boardId"
           component={ActivityPage}
         />

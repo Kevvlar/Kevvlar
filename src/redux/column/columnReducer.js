@@ -2,6 +2,7 @@ import {
   ADD_NEW_COLUMN_LOCAL,
   DELETE_COLUMNS_BY_BOARD_LOCAL,
   GET_COLUMNS_BY_BOARDS_LOCAL,
+  SET_CURRENT_COLUMN_DATA,
 } from "./columnTypes";
 
 const initialState = {
@@ -37,6 +38,13 @@ const columnReducer = (state = initialState, action) => {
         columnsByBoard: state.columns.filter(
           (column) => column.boardId === action.payLoad
         ),
+      };
+
+    case SET_CURRENT_COLUMN_DATA:
+      return {
+        ...state,
+        currentColumnId: action.payLoad.id,
+        currentColumnTitle: action.payLoad.title,
       };
 
     default:
