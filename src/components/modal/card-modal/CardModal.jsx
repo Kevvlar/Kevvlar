@@ -1,18 +1,25 @@
 import React, { useState } from "react";
 import { FaCheck, FaTimes } from "react-icons/fa";
 import { connect } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
-import { closeModal } from "../../../redux";
+import { closeModal, addNewCardLocal } from "../../../redux";
 import { ADD, EDIT } from "../../../redux/modal/modalTypes";
 
 import "./cardModal.css";
 
-const CardModal = ({ closeModal, type }) => {
+const CardModal = ({
+  closeModal,
+  type,
+  currrentBoardId,
+  currentColumnId,
+  createCardLocal,
+}) => {
   const AddCardModal = () => {
     const [cardTitle, setCardTitle] = useState("");
     const [cardBody, setCardBody] = useState("");
     const [cardDate, setCardDate] = useState("");
-    const [cardColor, setCardColor] = useState("");
+    const [cardLabel, setCardLable] = useState("");
 
     return (
       <div className="modal-body">
@@ -35,6 +42,7 @@ const CardModal = ({ closeModal, type }) => {
           placeholder="Write something..."
           className="modal-body-description"
         ></textarea>
+        {/**Did you leave this code here on purpose? */}
         {/*
         <div className="modal-checkbox-area">
           <div className="modal-checkbox-bar">
@@ -58,8 +66,8 @@ const CardModal = ({ closeModal, type }) => {
           />
           <select
             className="select-color"
-            onChange={(e) => setCardColor(e.target.value)}
-            value={cardColor}
+            onChange={(e) => setCardLable(e.target.value)}
+            value={cardLabel}
           >
             <option value="">Color Label</option>
             <option value="#ff0000">Red</option>
@@ -70,10 +78,19 @@ const CardModal = ({ closeModal, type }) => {
           <button
             className="modal-board-button"
             onClick={() => {
+              createCardLocal({
+                id: uuidv4(),
+                columnId: currentColumnId,
+                boardId: currrentBoardId,
+                title: cardTitle,
+                description: cardBody,
+                date: cardDate,
+                label: cardLabel,
+              });
               setCardTitle("");
               setCardBody("");
               setCardDate("");
-              setCardColor("");
+              setCardLable("");
               closeModal();
             }}
           >
@@ -176,12 +193,15 @@ const CardModal = ({ closeModal, type }) => {
 const mapStateToProps = (state) => {
   return {
     type: state.modal.modalActionType,
+    currrentBoardId: state.board.selectBoardId,
+    currentColumnId: state.column.currentColumnId,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
+    createCardLocal: (cardObj) => dispatch(addNewCardLocal(cardObj)),
   };
 };
 

@@ -39,6 +39,5 @@ export {
   setCurrentColumnData,
   deleteColumnLocal,
   editColumnLocal,
+  addNewCardLocal,
 } from "./column/columnActions";
-
-export {} from "./card/cardActions";

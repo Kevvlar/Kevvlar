@@ -5,6 +5,7 @@ import {
   SET_CURRENT_COLUMN_DATA,
   DELETE_COLUMN_LOCAL,
   EDIT_COLUMN_LOCAL,
+  ADD_NEW_CARD_LOCAL,
 } from "./columnTypes";
 
 import {
@@ -60,5 +61,12 @@ export const editColumnLocal = (columnObj) => {
   return {
     type: EDIT_COLUMN_LOCAL,
     payLoad: columnObj,
+  };
+};
+
+export const addNewCardLocal = (cardObj) => {
+  return {
+    type: ADD_NEW_CARD_LOCAL,
+    payLoad: cardObj,
   };
 };

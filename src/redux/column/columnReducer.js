@@ -5,6 +5,7 @@ import {
   SET_CURRENT_COLUMN_DATA,
   DELETE_COLUMN_LOCAL,
   EDIT_COLUMN_LOCAL,
+  ADD_NEW_CARD_LOCAL,
 } from "./columnTypes";
 
 const initialState = {
@@ -77,6 +78,31 @@ const columnReducer = (state = initialState, action) => {
         ),
         currentColumnId: "",
         currentColumnTitle: "",
+      };
+
+    case ADD_NEW_CARD_LOCAL:
+      return {
+        ...state,
+        columnsByBoard: state.columnsByBoard.map((columnItem) => {
+          if (columnItem.id === action.payLoad.columnId) {
+            return {
+              ...columnItem,
+              cards: [...columnItem.cards, action.payLoad],
+              cardsOrder: [...columnItem.cardsOrder, action.payLoad.id],
+            };
+          }
+          return columnItem;
+        }),
+        columns: state.columns.map((columnItem) => {
+          if (columnItem.id === action.payLoad.columnId) {
+            return {
+              ...columnItem,
+              cards: [...columnItem.cards, action.payLoad],
+              cardsOrder: [...columnItem.cardsOrder, action.payLoad.id],
+            };
+          }
+          return columnItem;
+        }),
       };
 
     default:

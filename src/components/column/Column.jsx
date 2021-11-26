@@ -79,7 +79,7 @@ const Column = ({
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
-                {mapOrder(column.cards, column.cardOrder, "_id").map(
+                {mapOrder(column.cards, column.cardsOrder, "id").map(
                   (card, index) => (
                     <Card key={card._id} card={card} index={index} />
                   )
@@ -91,6 +91,10 @@ const Column = ({
           </Droppable>
           <button
             onClick={() => {
+              getColumnData({
+                id: column.id,
+                title: column.title,
+              });
               addNewCardModal();
             }}
             className="new-card-button"
