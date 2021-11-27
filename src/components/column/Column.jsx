@@ -81,7 +81,13 @@ const Column = ({
               >
                 {mapOrder(column.cards, column.cardsOrder, "id").map(
                   (card, index) => (
-                    <Card key={card._id} card={card} index={index} />
+                    <Card
+                      key={card.id}
+                      card={card}
+                      index={index}
+                      columnId={column.id}
+                      columnTitle={column.title}
+                    />
                   )
                 )}
 

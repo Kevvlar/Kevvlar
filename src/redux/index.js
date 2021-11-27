@@ -17,27 +17,23 @@ export {
 } from "./modal/modalActions";
 
 export {
-  handleAddNewBoardLocal,
+  addNewBoardLocal,
   setCurrentBoardData,
   editCurrentBoardLocal,
+  addColumnToColumnsOrderLocal,
+  changeColumnsOrderLocal,
+  removeColumnFromColumnsOrderLocal,
   handleGlobalDeleteLocal,
   enterSearchText,
 } from "./board/boardActions";
-
-export {
-  addNewColumnOrderLocal,
-  addNewColumnToColumnOrderLocal,
-  getColumnOrderByBoardLocal,
-  changeColumnOrderLocal,
-  deleteColumnOrderByBoardLocal,
-} from "./column-order/columnOrderActions";
 
 export {
   handleAddNewColumnLocal,
   getColumnsByBoardLocal,
   deleteColumnsByBoardLocal,
   setCurrentColumnData,
-  deleteColumnLocal,
+  handleDeleteColumnLocal,
   editColumnLocal,
   addNewCardLocal,
+  changeCardOrderLocal,
 } from "./column/columnActions";

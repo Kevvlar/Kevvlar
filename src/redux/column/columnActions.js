@@ -3,14 +3,15 @@ import {
   DELETE_COLUMNS_BY_BOARD_LOCAL,
   GET_COLUMNS_BY_BOARDS_LOCAL,
   SET_CURRENT_COLUMN_DATA,
+  CHANGE_CARD_ORDER_LOCAL,
   DELETE_COLUMN_LOCAL,
   EDIT_COLUMN_LOCAL,
   ADD_NEW_CARD_LOCAL,
 } from "./columnTypes";
 
 import {
-  addNewColumnToColumnOrderLocal,
-  getColumnOrderByBoardLocal,
+  addColumnToColumnsOrderLocal,
+  removeColumnFromColumnsOrderLocal,
 } from "../index";
 
 export const addNewColumnLocal = (columnObj) => {
@@ -36,10 +37,9 @@ export const deleteColumnsByBoardLocal = (boardId) => {
 
 export const handleAddNewColumnLocal = (columnObj) => {
   return (dispatch) => {
+    dispatch(addColumnToColumnsOrderLocal(columnObj.id));
     dispatch(addNewColumnLocal(columnObj));
-    dispatch(addNewColumnToColumnOrderLocal(columnObj));
     dispatch(getColumnsByBoardLocal(columnObj.boardId));
-    dispatch(getColumnOrderByBoardLocal(columnObj.boardId));
   };
 };
 
@@ -50,10 +50,24 @@ export const setCurrentColumnData = (columnObj) => {
   };
 };
 
+export const changeCardOrderLocal = (order) => {
+  return {
+    type: CHANGE_CARD_ORDER_LOCAL,
+    payLoad: order,
+  };
+};
+
 export const deleteColumnLocal = (columnId) => {
   return {
     type: DELETE_COLUMN_LOCAL,
     payLoad: columnId,
+  };
+};
+
+export const handleDeleteColumnLocal = (columnId) => {
+  return (dispatch) => {
+    dispatch(deleteColumnLocal(columnId));
+    dispatch(removeColumnFromColumnsOrderLocal(columnId));
   };
 };
 

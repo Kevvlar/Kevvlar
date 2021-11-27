@@ -6,11 +6,13 @@ import {
   DELETE_COLUMN_LOCAL,
   EDIT_COLUMN_LOCAL,
   ADD_NEW_CARD_LOCAL,
+  CHANGE_CARD_ORDER_LOCAL,
 } from "./columnTypes";
 
 const initialState = {
   currentColumnId: "",
   currentColumnTitle: "",
+  currentCard: {},
   error: "",
   columns: [],
   columnsByBoard: [],
@@ -103,6 +105,27 @@ const columnReducer = (state = initialState, action) => {
           }
           return columnItem;
         }),
+      };
+
+    case CHANGE_CARD_ORDER_LOCAL:
+      return {
+        ...state,
+        columnsByBoard: state.columnsByBoard.map((columnItem) =>
+          columnItem.id === state.currentColumnId
+            ? {
+                ...columnItem,
+                cardsOrder: action.payLoad,
+              }
+            : columnItem
+        ),
+        columns: state.columns.map((columnItem) =>
+          columnItem.id === state.currentColumnId
+            ? {
+                ...columnItem,
+                cardsOrder: action.payLoad,
+              }
+            : columnItem
+        ),
       };
 
     default:

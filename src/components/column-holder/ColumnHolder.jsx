@@ -3,7 +3,11 @@ import ScrollContainer from "react-indiana-drag-scroll";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
 
-import { setColumnModal, changeColumnOrderLocal } from "../../redux/index";
+import {
+  setColumnModal,
+  changeColumnsOrderLocal,
+  changeCardOrderLocal,
+} from "../../redux/index";
 
 import Column from "../column/Column";
 
@@ -27,9 +31,10 @@ const mapOrder = (array, order, key) => {
 const ColumnHolder = ({
   addNewColumnModal,
   columns,
-  columnOrder,
+  columnsOrder,
+  changesColumnsOrder,
   currentBoardId,
-  updateColumnOrderLocal,
+  changeCardOrder,
 }) => {
   const onDragEnd = (result) => {
     const { destination, draggableId, source, type } = result;
@@ -40,13 +45,10 @@ const ColumnHolder = ({
 
     // move column
     if (type === "column" && destination.index !== source.index) {
-      const newColumnOrder = Array.from(columnOrder);
+      const newColumnOrder = Array.from(columnsOrder);
       const [reOrderedItem] = newColumnOrder.splice(source.index, 1);
       newColumnOrder.splice(destination.index, 0, reOrderedItem);
-      updateColumnOrderLocal({
-        boardId: currentBoardId,
-        order: newColumnOrder,
-      });
+      changesColumnsOrder(newColumnOrder);
     }
 
     // move card within column
@@ -58,9 +60,10 @@ const ColumnHolder = ({
       const currentColumn = columns.find((column) =>
         column.id === destination.droppableId ? column : null
       );
-      const newCardOrder = Array.from(currentColumn.cardOrder);
+      const newCardOrder = Array.from(currentColumn.cardsOrder);
       const [reOrderedCards] = newCardOrder.splice(source.index, 1);
       newCardOrder.splice(destination.index, 0, reOrderedCards);
+      changeCardOrder(newCardOrder);
     }
 
     // move card into another column
@@ -69,7 +72,7 @@ const ColumnHolder = ({
         column.id === destination.droppableId ? column : null
       );
 
-      const targetColumnCardOrder = targetColumn.cardOrder;
+      const targetColumnCardOrder = targetColumn.cardsOrder;
       const newTargetColumnCardOrder = [...targetColumnCardOrder];
       newTargetColumnCardOrder.splice(destination.index, 0, draggableId);
     }
@@ -93,7 +96,7 @@ const ColumnHolder = ({
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
-              {mapOrder(columns, columnOrder, "id").map((column, index) => (
+              {mapOrder(columns, columnsOrder, "id").map((column, index) => (
                 <Column key={column.id} column={column} index={index} />
               ))}
               {provided.placeholder}
@@ -110,17 +113,16 @@ const ColumnHolder = ({
 
 const mapStateToProps = (state) => {
   return {
+    columnsOrder: state.board.selectColumnsOrder,
     columns: state.column.columnsByBoard,
-    columnOrder: state.columnOrder.columnOrderByBoard.order,
-    currentBoardId: state.board.selectBoardId,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     addNewColumnModal: () => dispatch(setColumnModal()),
-    updateColumnOrderLocal: (changeObj) =>
-      dispatch(changeColumnOrderLocal(changeObj)),
+    changesColumnsOrder: (order) => dispatch(changeColumnsOrderLocal(order)),
+    changeCardOrder: (order) => dispatch(changeCardOrderLocal(order)),
   };
 };
 

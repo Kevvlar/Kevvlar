@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import {
   closeModal,
   handleAddNewColumnLocal,
-  deleteColumnLocal,
+  handleDeleteColumnLocal,
   editColumnLocal,
 } from "../../../redux";
 import { ADD, EDIT, DELETE } from "../../../redux/modal/modalTypes";
@@ -135,7 +135,8 @@ const mapDispatchToProps = (dispatch) => {
     closeModal: () => dispatch(closeModal()),
     addNewColumnLocal: (columnObj) =>
       dispatch(handleAddNewColumnLocal(columnObj)),
-    removeColumnLocal: (columnId) => dispatch(deleteColumnLocal(columnId)),
+    removeColumnLocal: (columnId) =>
+      dispatch(handleDeleteColumnLocal(columnId)),
     updateColumnLocal: (columnObj) => dispatch(editColumnLocal(columnObj)),
   };
 };

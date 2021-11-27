@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import {
   closeModal,
-  handleAddNewBoardLocal,
+  addNewBoardLocal,
   editCurrentBoardLocal,
   handleGlobalDeleteLocal,
 } from "../../../redux";
@@ -42,17 +42,9 @@ const BoardModal = ({
             const boardObj = {
               id: baordId,
               title: boardName,
-              cards: [],
-              cardOrder: [],
+              columnsOrder: [],
             };
-
-            const orderObj = {
-              id: uuidv4(),
-              boardId: baordId,
-              order: [],
-            };
-
-            addBoardLocal(boardObj, orderObj);
+            addBoardLocal(boardObj);
             setBoardName("");
             closeModal();
           }}
@@ -140,8 +132,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
-    addBoardLocal: (boardObj, orderObj) =>
-      dispatch(handleAddNewBoardLocal(boardObj, orderObj)),
+    addBoardLocal: (boardObj) => dispatch(addNewBoardLocal(boardObj)),
     editBoardLocal: (boardObj) => dispatch(editCurrentBoardLocal(boardObj)),
     deleteBoardLocal: (boardId) => dispatch(handleGlobalDeleteLocal(boardId)),
   };

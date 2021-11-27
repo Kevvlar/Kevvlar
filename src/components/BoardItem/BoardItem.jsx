@@ -8,7 +8,6 @@ import { BoardIcon } from "../../assets/svg/iconlibrary";
 import {
   setCurrentBoardData,
   setBoardModal,
-  getColumnOrderByBoardLocal,
   getColumnsByBoardLocal,
 } from "../../redux";
 import { EDIT, DELETE } from "../../redux/modal/modalTypes";
@@ -21,7 +20,6 @@ const boardItem = ({
   showModal,
   history,
   match,
-  getColumnOrder,
   getColumns,
 }) => {
   return (
@@ -32,8 +30,8 @@ const boardItem = ({
           setSelectBoardData({
             id: board.id,
             title: board.title,
+            columnsOrder: board.columnsOrder,
           });
-          getColumnOrder(board.id);
           getColumns(board.id);
           history.push(`${match.url}/${board.title.toLowerCase()}/${board.id}`);
         }}
@@ -66,6 +64,7 @@ const boardItem = ({
               setSelectBoardData({
                 id: board.id,
                 title: board.title,
+                columnsOrder: board.columnsOrder,
               });
               showModal(DELETE);
             }}
@@ -80,7 +79,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setSelectBoardData: (board) => dispatch(setCurrentBoardData(board)),
     showModal: (type) => dispatch(setBoardModal(type)),
-    getColumnOrder: (boardId) => dispatch(getColumnOrderByBoardLocal(boardId)),
     getColumns: (boardId) => dispatch(getColumnsByBoardLocal(boardId)),
   };
 };

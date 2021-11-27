@@ -3,26 +3,18 @@ import {
   SET_CURRENT_BOARD_DATA,
   EDIT_BOARD_LOCAL,
   DELETE_BOARD_LOCAL,
+  ADD_COLUMN_TO_COLUMNS_ORDER_LOCAL,
+  CHANGE_COLUMNS_ORDER_LOCAL,
+  REMOVE_COLUM_FROM_COLUMNS_ORDER_LOCAL,
   ENTER_SEARCH_TEXT,
 } from "./boardTypes";
 
-import {
-  addNewColumnOrderLocal,
-  deleteColumnsByBoardLocal,
-  deleteColumnOrderByBoardLocal,
-} from "../index";
+import { deleteColumnsByBoardLocal } from "../index";
 
 export const addNewBoardLocal = (boardObj) => {
   return {
     type: ADD_NEW_BOARD_LOCAL,
     payLoad: boardObj,
-  };
-};
-
-export const handleAddNewBoardLocal = (boardObj, orderObj) => {
-  return (dispatch) => {
-    dispatch(addNewBoardLocal(boardObj));
-    dispatch(addNewColumnOrderLocal(orderObj));
   };
 };
 
@@ -47,9 +39,29 @@ export const deleteCurrentBoardLocal = (boardId) => {
   };
 };
 
+export const addColumnToColumnsOrderLocal = (columnId) => {
+  return {
+    type: ADD_COLUMN_TO_COLUMNS_ORDER_LOCAL,
+    payLoad: columnId,
+  };
+};
+
+export const changeColumnsOrderLocal = (order) => {
+  return {
+    type: CHANGE_COLUMNS_ORDER_LOCAL,
+    payLoad: order,
+  };
+};
+
+export const removeColumnFromColumnsOrderLocal = (columnId) => {
+  return {
+    type: REMOVE_COLUM_FROM_COLUMNS_ORDER_LOCAL,
+    payLoad: columnId,
+  };
+};
+
 export const handleGlobalDeleteLocal = (boardId) => {
   return (dispatch) => {
-    dispatch(deleteColumnOrderByBoardLocal(boardId));
     dispatch(deleteColumnsByBoardLocal(boardId));
     dispatch(deleteCurrentBoardLocal(boardId));
   };
