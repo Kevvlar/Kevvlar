@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import ScrollContainer from "react-indiana-drag-scroll";
 import { showLeftSideNav } from "../../redux/index";
+import CardSearchBar from "../../components/CardSearchBar/CardSearchBar";
 
 import {
   LockIcon,
@@ -39,6 +40,7 @@ const BoardNavBar = ({ boardTitle, toggleLeftSideNav, history }) => (
       <button className="add-user-icon">
         <AddUserIcon />
       </button>
+      <CardSearchBar />
     </div>
   </ScrollContainer>
 );
