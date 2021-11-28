@@ -39,6 +39,7 @@
   font-size: 12px;
   border: none;
   width: 100%;
+  overflow-wrap: anywhere;
   resize: none;
   height: 30px;
   overflow: hidden;
