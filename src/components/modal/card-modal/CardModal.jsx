@@ -128,17 +128,6 @@ const CardModal = ({
           placeholder="Write something..."
           className="modal-body-description"
         ></textarea>
-        <div className="modal-checkbox-area">
-          <div className="modal-checkbox-bar">
-            <FaCheck className="modal-check-icon-check" />
-            <div className="modal-progress-bar-contianer">
-              <div id="cba182952" className="cbabarprogress"></div>
-            </div>
-            <div className="modal-progress-percentage">0 %</div>
-          </div>
-          <div className="modal-check-columns"></div>
-          <input placeholder="+ Add item" className="modal-checkbox-input" />
-        </div>
         <div className="modal-footer-container">
           <input
             className="date-picker"
