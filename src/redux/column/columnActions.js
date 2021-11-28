@@ -3,10 +3,13 @@ import {
   DELETE_COLUMNS_BY_BOARD_LOCAL,
   GET_COLUMNS_BY_BOARDS_LOCAL,
   SET_CURRENT_COLUMN_DATA,
-  CHANGE_CARD_ORDER_LOCAL,
   DELETE_COLUMN_LOCAL,
   EDIT_COLUMN_LOCAL,
   ADD_NEW_CARD_LOCAL,
+  CHANGE_CARD_ORDER_LOCAL,
+  SET_CURRENT_CARD_DATA,
+  REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL,
+  CHANGE_CARD_COLUMN_LOCAL,
 } from "./columnTypes";
 
 import {
@@ -50,13 +53,6 @@ export const setCurrentColumnData = (columnObj) => {
   };
 };
 
-export const changeCardOrderLocal = (order) => {
-  return {
-    type: CHANGE_CARD_ORDER_LOCAL,
-    payLoad: order,
-  };
-};
-
 export const deleteColumnLocal = (columnId) => {
   return {
     type: DELETE_COLUMN_LOCAL,
@@ -82,5 +78,33 @@ export const addNewCardLocal = (cardObj) => {
   return {
     type: ADD_NEW_CARD_LOCAL,
     payLoad: cardObj,
+  };
+};
+
+export const changeCardOrderLocal = (order) => {
+  return {
+    type: CHANGE_CARD_ORDER_LOCAL,
+    payLoad: order,
+  };
+};
+
+export const setCurrentCardData = (cardObj) => {
+  return {
+    type: SET_CURRENT_CARD_DATA,
+    payLoad: cardObj,
+  };
+};
+
+export const removeCardFromSourceColumnLocal = (sourceColumnId) => {
+  return {
+    type: REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL,
+    payLoad: sourceColumnId,
+  };
+};
+
+export const changeCardColumnLocal = (changeObj) => {
+  return {
+    type: CHANGE_CARD_COLUMN_LOCAL,
+    payLoad: changeObj,
   };
 };

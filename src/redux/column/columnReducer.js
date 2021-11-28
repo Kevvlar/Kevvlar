@@ -7,6 +7,9 @@ import {
   EDIT_COLUMN_LOCAL,
   ADD_NEW_CARD_LOCAL,
   CHANGE_CARD_ORDER_LOCAL,
+  SET_CURRENT_CARD_DATA,
+  REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL,
+  CHANGE_CARD_COLUMN_LOCAL,
 } from "./columnTypes";
 
 const initialState = {
@@ -123,6 +126,66 @@ const columnReducer = (state = initialState, action) => {
             ? {
                 ...columnItem,
                 cardsOrder: action.payLoad,
+              }
+            : columnItem
+        ),
+      };
+
+    case SET_CURRENT_CARD_DATA:
+      return {
+        ...state,
+        currentCard: action.payLoad,
+      };
+
+    case REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL:
+      return {
+        ...state,
+        columnsByBoard: state.columnsByBoard.map((columnItem) =>
+          columnItem.id === action.payLoad
+            ? {
+                ...columnItem,
+                cards: columnItem.cards.filter(
+                  (card) => card.id !== state.currentCard.id
+                ),
+                cardsOrder: columnItem.cardsOrder.filter(
+                  (id) => id !== state.currentCard.id
+                ),
+              }
+            : columnItem
+        ),
+        columns: state.columns.map((columnItem) =>
+          columnItem.id === action.payLoad
+            ? {
+                ...columnItem,
+                cards: columnItem.cards.filter(
+                  (card) => card.id !== state.currentCard.id
+                ),
+                cardsOrder: columnItem.cardsOrder.filter(
+                  (id) => id !== state.currentCard.id
+                ),
+              }
+            : columnItem
+        ),
+      };
+
+    case CHANGE_CARD_COLUMN_LOCAL:
+      return {
+        ...state,
+        columnsByBoard: state.columnsByBoard.map((columnItem) =>
+          columnItem.id === action.payLoad.destinationColumn
+            ? {
+                ...columnItem,
+                cards: [...columnItem.cards, state.currentCard],
+                cardsOrder: action.payLoad.newOrder,
+              }
+            : columnItem
+        ),
+        columns: state.columns.map((columnItem) =>
+          columnItem.id === action.payLoad.destinationColumn
+            ? {
+                ...columnItem,
+                cards: [...columnItem.cards, state.currentCard],
+                cardsOrder: action.payLoad.newOrder,
               }
             : columnItem
         ),

@@ -36,4 +36,7 @@ export {
   editColumnLocal,
   addNewCardLocal,
   changeCardOrderLocal,
+  setCurrentCardData,
+  removeCardFromSourceColumnLocal,
+  changeCardColumnLocal,
 } from "./column/columnActions";

@@ -3,7 +3,11 @@ import { connect } from "react-redux";
 import { FaEllipsisH } from "react-icons/fa";
 import { Draggable } from "react-beautiful-dnd";
 
-import { setCardModal, setCurrentColumnData } from "../../redux/index";
+import {
+  setCardModal,
+  setCurrentColumnData,
+  setCurrentCardData,
+} from "../../redux/index";
 
 import "./card.css";
 
@@ -15,6 +19,7 @@ const Card = ({
   columnId,
   columnTitle,
   getColumnData,
+  getCardData,
 }) => (
   <Draggable draggableId={card.id} index={index}>
     {(provided) => (
@@ -23,12 +28,13 @@ const Card = ({
         {...provided.draggableProps}
         {...provided.dragHandleProps}
         ref={provided.innerRef}
-        onMouseDown={() =>
+        onMouseDown={() => {
           getColumnData({
             id: columnId,
             title: columnTitle,
-          })
-        }
+          });
+          getCardData(card);
+        }}
       >
         <div className="cardlabelholder">
           <div id="card-label" className="card-label"></div>
@@ -65,6 +71,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     editCardModal: (type) => dispatch(setCardModal(type)),
     getColumnData: (columnObj) => dispatch(setCurrentColumnData(columnObj)),
+    getCardData: (cardObj) => dispatch(setCurrentCardData(cardObj)),
   };
 };
 
