@@ -78,10 +78,6 @@ const ColumnHolder = ({
       const targetColumnCardOrder = targetColumn.cardsOrder;
       const newTargetColumnCardOrder = [...targetColumnCardOrder];
       newTargetColumnCardOrder.splice(destination.index, 0, draggableId);
-      // console.log(newTargetColumnCardOrder);
-      // console.log("D: ", destination);
-      // console.log("S: ", source);
-      // console.log("DR ID: ", draggableId);
       removeCardFromSourceColumn(source.droppableId);
       changeCardColumn({
         destinationColumn: destination.droppableId,
