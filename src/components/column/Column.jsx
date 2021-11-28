@@ -81,8 +81,10 @@ const Column = ({
                 {...provided.droppableProps}
               >
                 {mapOrder(column.cards, column.cardsOrder, "id")
-                  .filter((columnItem) =>
-                    columnItem.title.toLowerCase().includes(searchKeyWord)
+                  .filter(
+                    (cardItem) =>
+                      cardItem.title.toLowerCase().includes(searchKeyWord) ||
+                      cardItem.description.toLowerCase().includes(searchKeyWord)
                   )
                   .map((card, index) => (
                     <Card
