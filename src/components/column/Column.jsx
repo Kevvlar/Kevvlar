@@ -83,8 +83,14 @@ const Column = ({
                 {mapOrder(column.cards, column.cardsOrder, "id")
                   .filter(
                     (cardItem) =>
-                      cardItem.title.toLowerCase().includes(searchKeyWord) ||
-                      cardItem.description.toLowerCase().includes(searchKeyWord)
+                      cardItem.title
+                        .toLowerCase()
+                        .replace(/\s/g, "")
+                        .includes(searchKeyWord) ||
+                      cardItem.description
+                        .toLowerCase()
+                        .replace(/\s/g, "")
+                        .includes(searchKeyWord)
                   )
                   .map((card, index) => (
                     <Card

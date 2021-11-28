@@ -13,7 +13,9 @@ const CardSearchBar = ({ inputSearchKey }) => (
       type="text"
       placeholder="Search"
       className="cards-search"
-      onChange={(e) => inputSearchKey(e.target.value.toLocaleLowerCase())}
+      onChange={(e) =>
+        inputSearchKey(e.target.value.toLocaleLowerCase().replace(/\s/g, ""))
+      }
     />
   </div>
 );
