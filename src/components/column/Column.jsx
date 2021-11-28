@@ -36,6 +36,7 @@ const Column = ({
   editColumnModal,
   deleteColumnModal,
   getColumnData,
+  searchKeyWord,
 }) => {
   return (
     <Draggable draggableId={column.id} index={index}>
@@ -79,8 +80,11 @@ const Column = ({
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
-                {mapOrder(column.cards, column.cardsOrder, "id").map(
-                  (card, index) => (
+                {mapOrder(column.cards, column.cardsOrder, "id")
+                  .filter((columnItem) =>
+                    columnItem.title.toLowerCase().includes(searchKeyWord)
+                  )
+                  .map((card, index) => (
                     <Card
                       key={card.id}
                       card={card}
@@ -88,8 +92,7 @@ const Column = ({
                       columnId={column.id}
                       columnTitle={column.title}
                     />
-                  )
-                )}
+                  ))}
 
                 {provided.placeholder}
               </div>
@@ -113,6 +116,12 @@ const Column = ({
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    searchKeyWord: state.column.cardSearchKeyWord,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     addNewCardModal: () => dispatch(setCardModal()),
@@ -122,4 +131,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Column);
+export default connect(mapStateToProps, mapDispatchToProps)(Column);

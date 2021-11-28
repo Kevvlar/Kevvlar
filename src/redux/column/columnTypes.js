@@ -10,5 +10,6 @@ export const SET_CURRENT_CARD_DATA = "SET_CURRENT_CARD-DATA";
 export const REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL =
   "REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL";
 export const CHANGE_CARD_COLUMN_LOCAL = "CHANGE_CARD_COLUMN_LOCAL";
+export const ENTER_CARD_SEARCH_KEY = "ENTER_CARD_SEARCH_KEY";
 export const COLUMN_API_URL =
   "https://intense-garden-79464.herokuapp.com/api/v1/columns";

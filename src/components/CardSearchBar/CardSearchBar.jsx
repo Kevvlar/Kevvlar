@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { FaSearch } from "react-icons/fa";
 
-import { enterSearchText } from "../../redux/index";
+import { enterCardSearchKey } from "../../redux/index";
 
 import "./Cardsearchbar.css";
 
@@ -13,13 +13,14 @@ const CardSearchBar = ({ inputSearchKey }) => (
       type="text"
       placeholder="Search"
       className="cards-search"
+      onChange={(e) => inputSearchKey(e.target.value.toLocaleLowerCase())}
     />
   </div>
 );
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    inputSearchKey: (text) => dispatch(enterSearchText(text)),
+    inputSearchKey: (keyWord) => dispatch(enterCardSearchKey(keyWord)),
   };
 };
 

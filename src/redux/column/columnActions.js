@@ -10,6 +10,7 @@ import {
   SET_CURRENT_CARD_DATA,
   REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL,
   CHANGE_CARD_COLUMN_LOCAL,
+  ENTER_CARD_SEARCH_KEY,
 } from "./columnTypes";
 
 import {
@@ -106,5 +107,12 @@ export const changeCardColumnLocal = (changeObj) => {
   return {
     type: CHANGE_CARD_COLUMN_LOCAL,
     payLoad: changeObj,
+  };
+};
+
+export const enterCardSearchKey = (keyWord) => {
+  return {
+    type: ENTER_CARD_SEARCH_KEY,
+    payLoad: keyWord,
   };
 };

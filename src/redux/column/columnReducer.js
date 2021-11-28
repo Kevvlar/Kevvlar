@@ -10,9 +10,11 @@ import {
   SET_CURRENT_CARD_DATA,
   REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL,
   CHANGE_CARD_COLUMN_LOCAL,
+  ENTER_CARD_SEARCH_KEY,
 } from "./columnTypes";
 
 const initialState = {
+  cardSearchKeyWord: "",
   currentColumnId: "",
   currentColumnTitle: "",
   currentCard: {},
@@ -189,6 +191,12 @@ const columnReducer = (state = initialState, action) => {
               }
             : columnItem
         ),
+      };
+
+    case ENTER_CARD_SEARCH_KEY:
+      return {
+        ...state,
+        cardSearchKeyWord: action.payLoad,
       };
 
     default:

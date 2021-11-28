@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaCheck, FaTimes } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 import { connect } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 

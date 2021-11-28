@@ -13,7 +13,7 @@ const SearchBar = ({ inputSearchKey }) => (
       type="text"
       placeholder="Search"
       className="boards-search"
-      onChange={(e) => inputSearchKey(e.target.value)}
+      onChange={(e) => inputSearchKey(e.target.value.toLocaleLowerCase())}
     />
   </div>
 );
