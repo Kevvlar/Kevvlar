@@ -26,8 +26,8 @@ const ColumnModal = ({
   const AddColumn = () => {
     const [columnTitle, setColumnTitle] = useState("");
     return (
-      <div className="modal-board-body">
-        <h2 className="modal-board-title">Add New Column</h2>
+      <div className="modal-body">
+        <h2 className="modal-title">Add New Column</h2>
         <input
           className="modal-board-text"
           type="text"
@@ -60,8 +60,8 @@ const ColumnModal = ({
   const EditColumn = () => {
     const [columnEditTitle, setColumnEditTitle] = useState(currentColumnTitle);
     return (
-      <div className="modal-board-body">
-        <h2 className="modal-board-title">Edit Column</h2>
+      <div className="modal-body">
+        <h2 className="modal-title">Edit Column</h2>
         <input
           className="modal-board-text"
           type="text"
@@ -87,8 +87,8 @@ const ColumnModal = ({
   };
 
   const DeleteColumn = () => (
-    <div className="modal-board-body">
-      <h2 className="modal-board-title">Are You Sure?</h2>
+    <div className="modal-body">
+      <h2 className="modal-title">Are You Sure?</h2>
       <span className="modal-sub-text">
         All information contained in this column will be delete
       </span>
@@ -113,10 +113,10 @@ const ColumnModal = ({
     <div className="modal-board">
       <div className="close-icon-container">
         <FaTimes onClick={closeModal} className="close-icon" />
+        {type === ADD ? <AddColumn /> : null}
+        {type === EDIT ? <EditColumn /> : null}
+        {type === DELETE ? <DeleteColumn /> : null}
       </div>
-      {type === ADD ? <AddColumn /> : null}
-      {type === EDIT ? <EditColumn /> : null}
-      {type === DELETE ? <DeleteColumn /> : null}
     </div>
   );
 };
