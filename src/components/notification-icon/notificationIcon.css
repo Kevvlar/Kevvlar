@@ -1,6 +1,11 @@
 .notification-icon {
   font-size: 20px;
-  color: #636a71;
+  color: #A0A0A0;
+  cursor: pointer;
+}
+
+.notification-icon:hover {
+	filter: opacity(0.5);
 }
 
 .notification-icon-container {
