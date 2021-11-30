@@ -37,7 +37,10 @@ const Card = ({
         }}
       >
         <div className="card-color-label-holder">
-          <div className="card-color-label"></div>
+          <div
+            style={{ backgroundColor: `${card.label}` }}
+            className="card-color-label"
+          ></div>
         </div>
         <div className="cardlabelholder">
           <div id="card-label" className="card-label"></div>

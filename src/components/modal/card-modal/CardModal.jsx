@@ -78,10 +78,9 @@ const CardModal = ({
             value={cardLabel}
           >
             <option value="">Color Label</option>
-            <option value="#ff0000">Red</option>
-            <option value="#26d100">Green</option>
-            <option value="#ffff07">Yellow</option>
-            <option value="#143bff">Blue</option>
+            <option value="#B0B0B0">grey</option>
+            <option value="#F8BE7A">yellow</option>
+            <option value="#E34B4B">red</option>
           </select>
           <button
             className="modal-board-button"
@@ -150,10 +149,9 @@ const CardModal = ({
             value={editCardColor}
           >
             <option value="">Color Label</option>
-            <option value="#ff0000">Red</option>
-            <option value="#26d100">Green</option>
-            <option value="#ffff07">Yellow</option>
-            <option value="#143bff">Blue</option>
+            <option value="#B0B0B0">grey</option>
+            <option value="#F8BE7A">yellow</option>
+            <option value="#E34B4B">red</option>
           </select>
           <button
             className="modal-board-button"
