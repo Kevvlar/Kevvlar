@@ -6,6 +6,7 @@
   box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
   box-sizing: border-box;
   width: 45%;
+  max-width: 622px;
   height: 60%;
 }
 
@@ -17,13 +18,18 @@
   border-bottom: 1px solid #ffffff24;
 }
 
+.close-icon-container {
+  height: 100%;
+}
+
 .close-icon {
   color: white;
   padding: 10px;
   float: right;
   cursor: pointer;
-  position: relative;
-  top: -8px;
+  position: absolute;
+  top: 5px;
+  right: 0px;
 }
 
 .modal-body-title {
@@ -41,6 +47,8 @@
   color: #d1d1d2;
   font-size: 14px;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-body-description {
@@ -50,7 +58,7 @@
   border: none;
   width: 100%;
   min-height: 200px;
-  height: 300px;
+  height: 65%;
   resize: none;
   margin: 20px 0;
   font-family: "Roboto";
@@ -106,8 +114,6 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  position: absolute;
-  bottom: 0;
 }
 
 .date-picker {

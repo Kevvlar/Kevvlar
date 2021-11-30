@@ -25,6 +25,7 @@
 
 .modal-sub-text {
   color: white;
+  margin: auto;
 }
 
 .modal-board-text {
@@ -35,6 +36,7 @@
   width: 60%;
   color: white;
   border: 1px solid grey;
+  margin: auto;
 }
 
 .modal-delete-button:hover {
@@ -53,4 +55,8 @@
   height: 40px;
   color: white;
   margin-left: 8px;
+}
+
+.modal-button-container {
+  margin: 25px auto;
 }

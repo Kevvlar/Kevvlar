@@ -6,7 +6,7 @@
   box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
   box-sizing: border-box;
   width: 30%;
-  height: 30%;
+  height: 25%;
 }
 
 .modal-board-body {
@@ -25,6 +25,7 @@
   border: 1px solid #03a9f4;
   border-radius: 4px;
   color: #03a9f4;
+  margin: auto;
 }
 
 .modal-board-button:hover {
