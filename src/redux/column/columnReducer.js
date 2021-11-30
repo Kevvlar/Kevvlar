@@ -6,11 +6,13 @@ import {
   DELETE_COLUMN_LOCAL,
   EDIT_COLUMN_LOCAL,
   ADD_NEW_CARD_LOCAL,
+  EDIT_CARD_LOCAL,
   CHANGE_CARD_ORDER_LOCAL,
   SET_CURRENT_CARD_DATA,
   REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL,
   CHANGE_CARD_COLUMN_LOCAL,
   ENTER_CARD_SEARCH_KEY,
+  CHANGE_CARD_COLUMN_ID,
 } from "./columnTypes";
 
 const initialState = {
@@ -112,6 +114,49 @@ const columnReducer = (state = initialState, action) => {
         }),
       };
 
+    case EDIT_CARD_LOCAL:
+      return {
+        ...state,
+        columnsByBoard: state.columnsByBoard.map((columnItem) => {
+          if (columnItem.id === action.payLoad.columnId) {
+            return {
+              ...columnItem,
+              cards: columnItem.cards.map((cardItem) =>
+                cardItem.id === action.payLoad.id
+                  ? {
+                      ...cardItem,
+                      title: action.payLoad.title,
+                      description: action.payLoad.description,
+                      date: action.payLoad.date,
+                      label: action.payLoad.label,
+                    }
+                  : cardItem
+              ),
+            };
+          }
+          return columnItem;
+        }),
+        columns: state.columns.map((columnItem) => {
+          if (columnItem.id === action.payLoad.columnId) {
+            return {
+              ...columnItem,
+              cards: columnItem.cards.map((cardItem) =>
+                cardItem.id === action.payLoad.id
+                  ? {
+                      ...cardItem,
+                      title: action.payLoad.title,
+                      description: action.payLoad.description,
+                      date: action.payLoad.date,
+                      label: action.payLoad.label,
+                    }
+                  : cardItem
+              ),
+            };
+          }
+          return columnItem;
+        }),
+      };
+
     case CHANGE_CARD_ORDER_LOCAL:
       return {
         ...state,
@@ -191,6 +236,12 @@ const columnReducer = (state = initialState, action) => {
               }
             : columnItem
         ),
+      };
+
+    case CHANGE_CARD_COLUMN_ID:
+      return {
+        ...state,
+        currentCard: { ...state.currentCard, columnId: action.payLoad },
       };
 
     case ENTER_CARD_SEARCH_KEY:

@@ -48,6 +48,11 @@ const Card = ({
                 <p className="card-date">{card.date}</p>
                 <FaEllipsisH
                   onClick={() => {
+                    getCardData(card);
+                    getColumnData({
+                      id: columnId,
+                      title: columnTitle,
+                    });
                     editCardModal("EDIT");
                   }}
                   className="card-more-icon"

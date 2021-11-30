@@ -6,9 +6,11 @@ import {
   DELETE_COLUMN_LOCAL,
   EDIT_COLUMN_LOCAL,
   ADD_NEW_CARD_LOCAL,
+  EDIT_CARD_LOCAL,
   CHANGE_CARD_ORDER_LOCAL,
   SET_CURRENT_CARD_DATA,
   REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL,
+  CHANGE_CARD_COLUMN_ID,
   CHANGE_CARD_COLUMN_LOCAL,
   ENTER_CARD_SEARCH_KEY,
 } from "./columnTypes";
@@ -82,6 +84,13 @@ export const addNewCardLocal = (cardObj) => {
   };
 };
 
+export const editCardLocal = (cardObj) => {
+  return {
+    type: EDIT_CARD_LOCAL,
+    payLoad: cardObj,
+  };
+};
+
 export const changeCardOrderLocal = (order) => {
   return {
     type: CHANGE_CARD_ORDER_LOCAL,
@@ -107,6 +116,21 @@ export const changeCardColumnLocal = (changeObj) => {
   return {
     type: CHANGE_CARD_COLUMN_LOCAL,
     payLoad: changeObj,
+  };
+};
+
+export const changeCardColumnId = (columnId) => {
+  return {
+    type: CHANGE_CARD_COLUMN_ID,
+    payLoad: columnId,
+  };
+};
+
+export const handleChangeCardColumnLocal = (sourceColumnId, changeObj) => {
+  return (dispatch) => {
+    dispatch(removeCardFromSourceColumnLocal(sourceColumnId));
+    dispatch(changeCardColumnId(changeObj.destinationColumn));
+    dispatch(changeCardColumnLocal(changeObj));
   };
 };
 

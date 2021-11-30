@@ -3,7 +3,7 @@ import { FaTimes } from "react-icons/fa";
 import { connect } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
-import { closeModal, addNewCardLocal } from "../../../redux";
+import { closeModal, addNewCardLocal, editCardLocal } from "../../../redux";
 import { ADD, EDIT } from "../../../redux/modal/modalTypes";
 
 import "./cardModal.css";
@@ -14,6 +14,8 @@ const CardModal = ({
   currrentBoardId,
   currentColumnId,
   createCardLocal,
+  currentCard,
+  updateCardLocal,
 }) => {
   const AddCardModal = () => {
     const [cardTitle, setCardTitle] = useState("");
@@ -102,10 +104,10 @@ const CardModal = ({
   };
 
   const EditBoardModal = () => {
-    const [editCardTitle, setEditCardTitle] = useState("");
-    const [editCardBody, setEditCardBody] = useState("");
-    const [editCardDate, setEditCardDate] = useState("");
-    const [editCardColor, setEditCardColor] = useState("");
+    const [editCardTitle, setEditCardTitle] = useState(currentCard.title);
+    const [editCardBody, setEditCardBody] = useState(currentCard.description);
+    const [editCardDate, setEditCardDate] = useState(currentCard.date);
+    const [editCardColor, setEditCardColor] = useState(currentCard.label);
 
     return (
       <div className="modal-body">
@@ -150,6 +152,14 @@ const CardModal = ({
           <button
             className="modal-board-button"
             onClick={() => {
+              updateCardLocal({
+                id: currentCard.id,
+                columnId: currentCard.columnId,
+                title: editCardTitle,
+                description: editCardBody,
+                date: editCardDate,
+                label: editCardColor,
+              });
               closeModal();
             }}
           >
@@ -184,6 +194,7 @@ const mapStateToProps = (state) => {
     type: state.modal.modalActionType,
     currrentBoardId: state.board.selectBoardId,
     currentColumnId: state.column.currentColumnId,
+    currentCard: state.column.currentCard,
   };
 };
 
@@ -191,6 +202,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
     createCardLocal: (cardObj) => dispatch(addNewCardLocal(cardObj)),
+    updateCardLocal: (cardObj) => dispatch(editCardLocal(cardObj)),
   };
 };
 

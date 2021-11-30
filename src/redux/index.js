@@ -35,9 +35,9 @@ export {
   handleDeleteColumnLocal,
   editColumnLocal,
   addNewCardLocal,
+  editCardLocal,
   changeCardOrderLocal,
   setCurrentCardData,
-  removeCardFromSourceColumnLocal,
-  changeCardColumnLocal,
+  handleChangeCardColumnLocal,
   enterCardSearchKey,
 } from "./column/columnActions";

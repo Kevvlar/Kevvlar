@@ -7,8 +7,7 @@ import {
   setColumnModal,
   changeColumnsOrderLocal,
   changeCardOrderLocal,
-  removeCardFromSourceColumnLocal,
-  changeCardColumnLocal,
+  handleChangeCardColumnLocal,
 } from "../../redux/index";
 
 import Column from "../column/Column";
@@ -36,7 +35,6 @@ const ColumnHolder = ({
   columnsOrder,
   changesColumnsOrder,
   changeCardOrder,
-  removeCardFromSourceColumn,
   changeCardColumn,
 }) => {
   const onDragEnd = (result) => {
@@ -78,8 +76,7 @@ const ColumnHolder = ({
       const targetColumnCardOrder = targetColumn.cardsOrder;
       const newTargetColumnCardOrder = [...targetColumnCardOrder];
       newTargetColumnCardOrder.splice(destination.index, 0, draggableId);
-      removeCardFromSourceColumn(source.droppableId);
-      changeCardColumn({
+      changeCardColumn(source.droppableId, {
         destinationColumn: destination.droppableId,
         newOrder: newTargetColumnCardOrder,
       });
@@ -131,9 +128,8 @@ const mapDispatchToProps = (dispatch) => {
     addNewColumnModal: () => dispatch(setColumnModal()),
     changesColumnsOrder: (order) => dispatch(changeColumnsOrderLocal(order)),
     changeCardOrder: (order) => dispatch(changeCardOrderLocal(order)),
-    removeCardFromSourceColumn: (sourceColumnId) =>
-      dispatch(removeCardFromSourceColumnLocal(sourceColumnId)),
-    changeCardColumn: (changeObj) => dispatch(changeCardColumnLocal(changeObj)),
+    changeCardColumn: (sourceColumnId, changeObj) =>
+      dispatch(handleChangeCardColumnLocal(sourceColumnId, changeObj)),
   };
 };
 
