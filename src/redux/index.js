@@ -35,6 +35,7 @@ export {
   handleDeleteColumnLocal,
   editColumnLocal,
   addNewCardLocal,
+  deleteCardLocal,
   editCardLocal,
   changeCardOrderLocal,
   setCurrentCardData,

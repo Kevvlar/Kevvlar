@@ -4,6 +4,7 @@ import {
   GET_COLUMNS_BY_BOARDS_LOCAL,
   SET_CURRENT_COLUMN_DATA,
   DELETE_COLUMN_LOCAL,
+  DELETE_CARD_LOCAL,
   EDIT_COLUMN_LOCAL,
   ADD_NEW_CARD_LOCAL,
   EDIT_CARD_LOCAL,
@@ -155,6 +156,40 @@ const columnReducer = (state = initialState, action) => {
           }
           return columnItem;
         }),
+      };
+
+    case DELETE_CARD_LOCAL:
+      return {
+        ...state,
+        columnsByBoard: state.columnsByBoard.map((columnItem) => {
+          if (columnItem.id === action.payLoad.columnId) {
+            return {
+              ...columnItem,
+              cards: columnItem.cards.filter(
+                (cardItem) => cardItem.id !== action.payLoad.cardId
+              ),
+              cardsOrder: columnItem.cardsOrder.filter(
+                (id) => id !== action.payLoad.cardId
+              ),
+            };
+          }
+          return columnItem;
+        }),
+        columns: state.columns.map((columnItem) => {
+          if (columnItem.id === action.payLoad.columnId) {
+            return {
+              ...columnItem,
+              cards: columnItem.cards.filter(
+                (cardItem) => cardItem.id !== action.payLoad.cardId
+              ),
+              cardsOrder: columnItem.cardsOrder.filter(
+                (id) => id !== action.payLoad.cardId
+              ),
+            };
+          }
+          return columnItem;
+        }),
+        currentCard: [],
       };
 
     case CHANGE_CARD_ORDER_LOCAL:

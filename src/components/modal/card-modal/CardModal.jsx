@@ -3,7 +3,12 @@ import { FaTimes } from "react-icons/fa";
 import { connect } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
-import { closeModal, addNewCardLocal, editCardLocal } from "../../../redux";
+import {
+  closeModal,
+  addNewCardLocal,
+  editCardLocal,
+  deleteCardLocal,
+} from "../../../redux";
 import { ADD, EDIT } from "../../../redux/modal/modalTypes";
 
 import "./cardModal.css";
@@ -16,6 +21,7 @@ const CardModal = ({
   createCardLocal,
   currentCard,
   updateCardLocal,
+  deleteCard,
 }) => {
   const AddCardModal = () => {
     const [cardTitle, setCardTitle] = useState("");
@@ -168,6 +174,10 @@ const CardModal = ({
           <button
             className="delete-button"
             onClick={() => {
+              deleteCard({
+                columnId: currentCard.columnId,
+                cardId: currentCard.id,
+              });
               closeModal();
             }}
           >
@@ -203,6 +213,7 @@ const mapDispatchToProps = (dispatch) => {
     closeModal: () => dispatch(closeModal()),
     createCardLocal: (cardObj) => dispatch(addNewCardLocal(cardObj)),
     updateCardLocal: (cardObj) => dispatch(editCardLocal(cardObj)),
+    deleteCard: (deleteObj) => dispatch(deleteCardLocal(deleteObj)),
   };
 };
 

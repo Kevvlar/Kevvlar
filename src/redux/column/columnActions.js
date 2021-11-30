@@ -6,6 +6,7 @@ import {
   DELETE_COLUMN_LOCAL,
   EDIT_COLUMN_LOCAL,
   ADD_NEW_CARD_LOCAL,
+  DELETE_CARD_LOCAL,
   EDIT_CARD_LOCAL,
   CHANGE_CARD_ORDER_LOCAL,
   SET_CURRENT_CARD_DATA,
@@ -88,6 +89,13 @@ export const editCardLocal = (cardObj) => {
   return {
     type: EDIT_CARD_LOCAL,
     payLoad: cardObj,
+  };
+};
+
+export const deleteCardLocal = (deleteObj) => {
+  return {
+    type: DELETE_CARD_LOCAL,
+    payLoad: deleteObj,
   };
 };
 
