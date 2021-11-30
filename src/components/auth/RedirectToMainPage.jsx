@@ -7,7 +7,9 @@ const RedirectToMainPage = ({ component: Component, ...rest }) => (
     {...rest}
     render={(props) =>
       isAuthenticated() ? (
-        <Redirect to={{ pathname: "/app", state: { from: props.location } }} />
+        <Redirect
+          to={{ pathname: "/boards", state: { from: props.location } }}
+        />
       ) : (
         <Component {...props} />
       )

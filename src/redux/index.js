@@ -17,29 +17,28 @@ export {
 } from "./modal/modalActions";
 
 export {
-  fetchBoards,
-  addBoard,
-  editBoard,
-  deleteBoard,
-  setCurrentBoardIdAndTitle,
+  addNewBoardLocal,
+  setCurrentBoardData,
+  editCurrentBoardLocal,
+  addColumnToColumnsOrderLocal,
+  changeColumnsOrderLocal,
+  removeColumnFromColumnsOrderLocal,
+  handleGlobalDeleteLocal,
+  enterSearchText,
 } from "./board/boardActions";
 
 export {
-  fetchColumnOrder,
-  updateColumnOrder,
-  updateColumnOrderLocal,
-} from "./column-order/columnOrderActions";
-
-export {
-  fetchColumns,
-  addColumn,
-  editColumn,
-  deleteColumn,
-  deleteColumnByBoard,
-  setCurrentColumnIdAndTitle,
-  updateCardOrderWithinColumn,
-  updateCardOrderAndColumn,
-  emptyColumns,
+  handleAddNewColumnLocal,
+  getColumnsByBoardLocal,
+  deleteColumnsByBoardLocal,
+  setCurrentColumnData,
+  handleDeleteColumnLocal,
+  editColumnLocal,
+  addNewCardLocal,
+  deleteCardLocal,
+  editCardLocal,
+  changeCardOrderLocal,
+  setCurrentCardData,
+  handleChangeCardColumnLocal,
+  enterCardSearchKey,
 } from "./column/columnActions";
-
-export { addCard, setCardData, deleteCard, editCard } from "./card/cardActions";

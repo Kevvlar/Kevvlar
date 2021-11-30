@@ -1,0 +1,70 @@
+.boards-page {
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.team-boards {
+  width: 80%;
+  height: 70%;
+  margin-top: 80px;
+  padding: 10px;
+}
+
+.board-main {
+  width: 80%;
+  height: 70%;
+  margin-top: 80px;
+  padding: 20px 10px;
+}
+
+.all-boards-title {
+  text-align: left;
+  color: #e4745d;
+}
+
+.add-board-button {
+  border: 1px solid gray;
+  background: transparent;
+  margin: 0px;
+  min-width: 330px;
+  max-width: 330px;
+  height: 170px;
+  border-radius: 6px;
+  font-weight: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.add-board-button:hover {
+  background-color: #7e7e7e21;
+}
+
+@media only screen and (max-width: 600px) {
+  .board-list-holder {
+    flex-direction: column;
+  }
+
+  .board-item {
+    min-width: 200px;
+  }
+
+  .boards-list {
+    flex-direction: column;
+    min-width: 100%;
+  }
+
+  .add-board-button {
+    margin-top: 15px;
+    min-width: 100%;
+  }
+
+  .boards-search {
+    min-width: 95%;
+  }
+}

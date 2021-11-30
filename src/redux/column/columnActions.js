@@ -1,297 +1,150 @@
 import {
-  FETCH_COLUMNS_REQUEST,
-  FETCH_COLUMNS_SUCCESS,
-  FETCH_COLUMNS_FAILURE,
-  ADD_COLUMN_REQUEST,
-  ADD_COLUMN_SUCCESS,
-  ADD_COLUMN_FAILURE,
-  EDIT_COLUMN_REQUEST,
-  EDIT_COLUMN_SUCCESS,
-  EDIT_COLUMN_FAILURE,
-  DELETE_COLUMN_REQUEST,
-  DELETE_COLUMN_SUCCESS,
-  DELETE_COLUMN_FAILURE,
-  COLUMN_API_URL,
-  SET_CURRENT_COLUMN_ID_AND_TITLE,
-  DELETE_COLUMN_BY_BOARD,
-  UPDATE_CARD_ORDER_WITHIN_COLUMN_REQUEST,
-  UPDATE_CARD_ORDER_WITHIN_COLUMN_SUCCESS,
-  UPDATE_CARD_ORDER_WITHIN_COLUMN_FAILURE,
-  UPDATE_CARD_ORDER_AND_COLUMN_REQUEST,
-  UPDATE_CARD_ORDER_AND_COLUMN_SUCCESS,
-  UPDATE_CARD_ORDER_AND_COLUMN_FAILURE,
-  EMPTY_COLUMNS,
+  ADD_NEW_COLUMN_LOCAL,
+  DELETE_COLUMNS_BY_BOARD_LOCAL,
+  GET_COLUMNS_BY_BOARDS_LOCAL,
+  SET_CURRENT_COLUMN_DATA,
+  DELETE_COLUMN_LOCAL,
+  EDIT_COLUMN_LOCAL,
+  ADD_NEW_CARD_LOCAL,
+  DELETE_CARD_LOCAL,
+  EDIT_CARD_LOCAL,
+  CHANGE_CARD_ORDER_LOCAL,
+  SET_CURRENT_CARD_DATA,
+  REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL,
+  CHANGE_CARD_COLUMN_ID,
+  CHANGE_CARD_COLUMN_LOCAL,
+  ENTER_CARD_SEARCH_KEY,
 } from "./columnTypes";
-import axios from "axios";
-import { fetchColumnOrder } from "../column-order/columnOrderActions";
 
-export const fetchColumnsRequest = () => {
+import {
+  addColumnToColumnsOrderLocal,
+  removeColumnFromColumnsOrderLocal,
+} from "../index";
+
+export const addNewColumnLocal = (columnObj) => {
   return {
-    type: FETCH_COLUMNS_REQUEST,
+    type: ADD_NEW_COLUMN_LOCAL,
+    payLoad: columnObj,
   };
 };
 
-export const fetchColumnSuccess = (columns) => {
+export const getColumnsByBoardLocal = (boardId) => {
   return {
-    type: FETCH_COLUMNS_SUCCESS,
-    payLoad: columns,
+    type: GET_COLUMNS_BY_BOARDS_LOCAL,
+    payLoad: boardId,
   };
 };
 
-export const fetchColumnFailure = (error) => {
+export const deleteColumnsByBoardLocal = (boardId) => {
   return {
-    type: FETCH_COLUMNS_FAILURE,
-    payLoad: error,
+    type: DELETE_COLUMNS_BY_BOARD_LOCAL,
+    payLoad: boardId,
   };
 };
 
-export const addNewColumnRequest = () => {
-  return {
-    type: ADD_COLUMN_REQUEST,
-  };
-};
-
-export const addNewColumnSuccess = () => {
-  return {
-    type: ADD_COLUMN_SUCCESS,
-  };
-};
-
-export const addNewColumnFailure = (error) => {
-  return {
-    type: ADD_COLUMN_FAILURE,
-    payLoad: error,
-  };
-};
-
-export const editColumnRequest = () => {
-  return {
-    type: EDIT_COLUMN_REQUEST,
-  };
-};
-
-export const editColumnSuccess = () => {
-  return {
-    type: EDIT_COLUMN_SUCCESS,
-  };
-};
-
-export const editColumnFailure = (error) => {
-  return {
-    type: EDIT_COLUMN_FAILURE,
-    payLoad: error,
-  };
-};
-
-export const deleteColumnRequest = () => {
-  return {
-    type: DELETE_COLUMN_REQUEST,
-  };
-};
-
-export const deleteColumnSuccess = () => {
-  return {
-    type: DELETE_COLUMN_SUCCESS,
-  };
-};
-
-export const deleteColumnFailure = (error) => {
-  return {
-    type: DELETE_COLUMN_FAILURE,
-    payLoad: error,
-  };
-};
-
-export const setCurrentColumnIdAndTitle = (data) => {
-  return {
-    type: SET_CURRENT_COLUMN_ID_AND_TITLE,
-    payLoad: data,
-  };
-};
-
-export const deleteColumnByBoard = () => {
-  return {
-    type: DELETE_COLUMN_BY_BOARD,
-  };
-};
-
-export const updateCardOrderWithinColumnRequest = () => {
-  return {
-    type: UPDATE_CARD_ORDER_WITHIN_COLUMN_REQUEST,
-  };
-};
-
-export const updateCardOrderWithinColumnSuccess = () => {
-  return {
-    type: UPDATE_CARD_ORDER_WITHIN_COLUMN_SUCCESS,
-  };
-};
-
-export const updateCardOrderWithinColumnFailure = (error) => {
-  return {
-    type: UPDATE_CARD_ORDER_WITHIN_COLUMN_FAILURE,
-    payLoad: error,
-  };
-};
-
-export const updateCardOrderAndColumnRequest = () => {
-  return {
-    type: UPDATE_CARD_ORDER_AND_COLUMN_REQUEST,
-  };
-};
-
-export const updateCardOrderAndColumnSuccess = () => {
-  return {
-    type: UPDATE_CARD_ORDER_AND_COLUMN_SUCCESS,
-  };
-};
-
-export const updateCardOrderAndColumnFailure = () => {
-  return {
-    type: UPDATE_CARD_ORDER_AND_COLUMN_FAILURE,
-  };
-};
-
-export const emptyColumns = () => {
-  return {
-    type: EMPTY_COLUMNS,
-  };
-};
-
-export const fetchColumns = (boardId) => {
+export const handleAddNewColumnLocal = (columnObj) => {
   return (dispatch) => {
-    dispatch(fetchColumnsRequest());
-    axios
-      .get(`${COLUMN_API_URL}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        params: { board: boardId },
-      })
-      .then((response) => {
-        const columns = response.data.data.columns;
-        dispatch(fetchColumnSuccess(columns));
-      })
-      .catch((error) => {
-        const errorMsg = error.message;
-        dispatch(fetchColumnFailure(errorMsg));
-      });
+    dispatch(addColumnToColumnsOrderLocal(columnObj.id));
+    dispatch(addNewColumnLocal(columnObj));
+    dispatch(getColumnsByBoardLocal(columnObj.boardId));
   };
 };
 
-export const addColumn = (data, boardId) => {
-  return (dispatch) => {
-    dispatch(addNewColumnRequest());
-    axios
-      .post(`${COLUMN_API_URL}`, data, {
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((response) => {
-        dispatch(fetchColumns(boardId));
-        dispatch(fetchColumnOrder(boardId));
-        dispatch(addNewColumnSuccess());
-      })
-      .catch((error) => {
-        const errorMsg = error.message;
-        dispatch(addNewColumnFailure(errorMsg));
-      });
+export const setCurrentColumnData = (columnObj) => {
+  return {
+    type: SET_CURRENT_COLUMN_DATA,
+    payLoad: columnObj,
   };
 };
 
-export const editColumn = (data, columnId, boardId) => {
-  return (dispatch) => {
-    dispatch(editColumnRequest());
-    axios
-      .patch(`${COLUMN_API_URL}/${columnId}`, data, {
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then(() => {
-        dispatch(editColumnSuccess());
-        dispatch(fetchColumns(boardId));
-        dispatch(fetchColumnOrder(boardId));
-      })
-      .catch((error) => {
-        const errorMsg = error.message;
-        dispatch(editColumnFailure(errorMsg));
-      });
+export const deleteColumnLocal = (columnId) => {
+  return {
+    type: DELETE_COLUMN_LOCAL,
+    payLoad: columnId,
   };
 };
 
-export const deleteColumn = (columnId, boardId) => {
+export const handleDeleteColumnLocal = (columnId) => {
   return (dispatch) => {
-    dispatch(deleteColumnRequest());
-    axios
-      .delete(`${COLUMN_API_URL}/${columnId}`, {
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        params: { board: boardId },
-      })
-      .then(() => {
-        dispatch(deleteColumnSuccess());
-        dispatch(fetchColumns(boardId));
-        dispatch(fetchColumnOrder(boardId));
-      })
-      .catch((error) => {
-        const errorMsg = error.message;
-        dispatch(deleteColumnFailure(errorMsg));
-      });
+    dispatch(deleteColumnLocal(columnId));
+    dispatch(removeColumnFromColumnsOrderLocal(columnId));
   };
 };
 
-export const updateCardOrderWithinColumn = (columnId, boardId, order) => {
-  return (dispatch) => {
-    dispatch(updateCardOrderWithinColumnRequest());
-    axios
-      .patch(
-        `${COLUMN_API_URL}/changecardorderwithincolumn/${columnId}`,
-        order,
-        {
-          headers: {
-            "content-type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      )
-      .then(() => {
-        dispatch(fetchColumns(boardId));
-        dispatch(updateCardOrderWithinColumnSuccess());
-      })
-      .catch((error) => {
-        const errorMsg = error.message;
-        dispatch(updateCardOrderWithinColumnFailure(errorMsg));
-      });
+export const editColumnLocal = (columnObj) => {
+  return {
+    type: EDIT_COLUMN_LOCAL,
+    payLoad: columnObj,
   };
 };
 
-export const updateCardOrderAndColumn = (sourceColumnId, boardId, data) => {
+export const addNewCardLocal = (cardObj) => {
+  return {
+    type: ADD_NEW_CARD_LOCAL,
+    payLoad: cardObj,
+  };
+};
+
+export const editCardLocal = (cardObj) => {
+  return {
+    type: EDIT_CARD_LOCAL,
+    payLoad: cardObj,
+  };
+};
+
+export const deleteCardLocal = (deleteObj) => {
+  return {
+    type: DELETE_CARD_LOCAL,
+    payLoad: deleteObj,
+  };
+};
+
+export const changeCardOrderLocal = (order) => {
+  return {
+    type: CHANGE_CARD_ORDER_LOCAL,
+    payLoad: order,
+  };
+};
+
+export const setCurrentCardData = (cardObj) => {
+  return {
+    type: SET_CURRENT_CARD_DATA,
+    payLoad: cardObj,
+  };
+};
+
+export const removeCardFromSourceColumnLocal = (sourceColumnId) => {
+  return {
+    type: REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL,
+    payLoad: sourceColumnId,
+  };
+};
+
+export const changeCardColumnLocal = (changeObj) => {
+  return {
+    type: CHANGE_CARD_COLUMN_LOCAL,
+    payLoad: changeObj,
+  };
+};
+
+export const changeCardColumnId = (columnId) => {
+  return {
+    type: CHANGE_CARD_COLUMN_ID,
+    payLoad: columnId,
+  };
+};
+
+export const handleChangeCardColumnLocal = (sourceColumnId, changeObj) => {
   return (dispatch) => {
-    dispatch(updateCardOrderAndColumnRequest());
-    axios
-      .patch(
-        `${COLUMN_API_URL}/changecardcolumnandorder/${sourceColumnId}`,
-        data,
-        {
-          headers: {
-            "content-type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      )
-      .then(() => {
-        dispatch(fetchColumns(boardId));
-        dispatch(updateCardOrderAndColumnSuccess());
-      })
-      .catch((error) => {
-        const errorMsg = error.message;
-        dispatch(updateCardOrderAndColumnFailure(errorMsg));
-      });
+    dispatch(removeCardFromSourceColumnLocal(sourceColumnId));
+    dispatch(changeCardColumnId(changeObj.destinationColumn));
+    dispatch(changeCardColumnLocal(changeObj));
+  };
+};
+
+export const enterCardSearchKey = (keyWord) => {
+  return {
+    type: ENTER_CARD_SEARCH_KEY,
+    payLoad: keyWord,
   };
 };

@@ -33,7 +33,7 @@ const SignIn = ({ history }) => {
           setEmail("");
           setPassword("");
           setIsLoading(false);
-          history.push("/app");
+          history.push("/boards");
         });
       })
       .catch((error) => {

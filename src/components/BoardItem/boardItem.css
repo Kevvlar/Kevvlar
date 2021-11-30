@@ -1,0 +1,54 @@
+.board-item-icons {
+  width: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: white;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.board-item-title {
+  margin-left: 5px;
+  font-weight: bold;
+  color: #ffffffab;
+}
+
+.board-item-info-container {
+  min-height: 70px;
+}
+
+.sub-color {
+  color: #8498aa;
+}
+
+.board-item-no-margin {
+  margin: 0px;
+}
+
+.board-item-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.board-num-members {
+  width: 100px;
+  padding: 5px;
+  background: #f8f8f81c;
+  border-radius: 4px;
+}
+
+.edit-board-icon:hover {
+  cursor: pointer;
+}
+
+.delete-board-icon:hover {
+  cursor: pointer;
+}

@@ -2,20 +2,39 @@ import React from "react";
 import { connect } from "react-redux";
 import { FaEllipsisH } from "react-icons/fa";
 import { Draggable } from "react-beautiful-dnd";
-import moment from "moment";
 
-import { setCardModal, setCardData } from "../../redux/index";
+import {
+  setCardModal,
+  setCurrentColumnData,
+  setCurrentCardData,
+} from "../../redux/index";
 
 import "./card.css";
 
-const Card = ({ card, index, isGrid, editCardModal, setCurrentCardData }) => (
-  <Draggable draggableId={card._id} index={index}>
+const Card = ({
+  card,
+  index,
+  isGrid,
+  editCardModal,
+  columnId,
+  columnTitle,
+  getColumnData,
+  getCardData,
+}) => (
+  <Draggable draggableId={card.id} index={index}>
     {(provided) => (
       <div
         className="card"
         {...provided.draggableProps}
         {...provided.dragHandleProps}
         ref={provided.innerRef}
+        onMouseDown={() => {
+          getColumnData({
+            id: columnId,
+            title: columnTitle,
+          });
+          getCardData(card);
+        }}
       >
         <div className="card-color-label-holder">
           <div className="card-color-label"></div>
@@ -29,17 +48,15 @@ const Card = ({ card, index, isGrid, editCardModal, setCurrentCardData }) => (
             <span>
               <p className="card-description">{card.description}</p>
               <div className="card-menu">
-                <p className="card-date">{moment(card.date).format()}</p>
+                <p className="card-date">{card.date}</p>
                 <FaEllipsisH
                   onClick={() => {
-                    editCardModal("EDIT");
-                    setCurrentCardData({
-                      id: card._id,
-                      title: card.title,
-                      description: card.description,
-                      date: card.date,
-                      color: card.colorLabel,
+                    getCardData(card);
+                    getColumnData({
+                      id: columnId,
+                      title: columnTitle,
                     });
+                    editCardModal("EDIT");
                   }}
                   className="card-more-icon"
                 />
@@ -61,7 +78,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     editCardModal: (type) => dispatch(setCardModal(type)),
-    setCurrentCardData: (data) => dispatch(setCardData(data)),
+    getColumnData: (columnObj) => dispatch(setCurrentColumnData(columnObj)),
+    getCardData: (cardObj) => dispatch(setCurrentCardData(cardObj)),
   };
 };
 

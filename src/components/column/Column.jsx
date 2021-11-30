@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import {
   setCardModal,
   setColumnModal,
-  setCurrentColumnIdAndTitle,
+  setCurrentColumnData,
 } from "../../redux";
 
 import Card from "../card/Card";
@@ -35,10 +35,11 @@ const Column = ({
   addNewCardModal,
   editColumnModal,
   deleteColumnModal,
-  setColumnIdAndTitle,
+  getColumnData,
+  searchKeyWord,
 }) => {
   return (
-    <Draggable draggableId={column._id} index={index}>
+    <Draggable draggableId={column.id} index={index}>
       {(provided) => (
         <div
           className="column"
@@ -52,8 +53,8 @@ const Column = ({
             <div className="column-header-icon-container">
               <FaTrash
                 onClick={() => {
-                  setColumnIdAndTitle({
-                    id: column._id,
+                  getColumnData({
+                    id: column.id,
                     title: column.title,
                   });
                   deleteColumnModal();
@@ -62,8 +63,8 @@ const Column = ({
               />
               <FaEdit
                 onClick={() => {
-                  setColumnIdAndTitle({
-                    id: column._id,
+                  getColumnData({
+                    id: column.id,
                     title: column.title,
                   });
                   editColumnModal();
@@ -72,18 +73,34 @@ const Column = ({
               />
             </div>
           </div>
-          <Droppable droppableId={column._id} type="card">
+          <Droppable droppableId={column.id} type="card">
             {(provided) => (
               <div
                 className="card-container"
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
-                {mapOrder(column.cards, column.cardOrder, "_id").map(
-                  (card, index) => (
-                    <Card key={card._id} card={card} index={index} />
+                {mapOrder(column.cards, column.cardsOrder, "id")
+                  .filter(
+                    (cardItem) =>
+                      cardItem.title
+                        .toLowerCase()
+                        .replace(/\s/g, "")
+                        .includes(searchKeyWord) ||
+                      cardItem.description
+                        .toLowerCase()
+                        .replace(/\s/g, "")
+                        .includes(searchKeyWord)
                   )
-                )}
+                  .map((card, index) => (
+                    <Card
+                      key={card.id}
+                      card={card}
+                      index={index}
+                      columnId={column.id}
+                      columnTitle={column.title}
+                    />
+                  ))}
 
                 {provided.placeholder}
               </div>
@@ -91,8 +108,8 @@ const Column = ({
           </Droppable>
           <button
             onClick={() => {
-              setColumnIdAndTitle({
-                id: column._id,
+              getColumnData({
+                id: column.id,
                 title: column.title,
               });
               addNewCardModal();
@@ -107,13 +124,19 @@ const Column = ({
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    searchKeyWord: state.column.cardSearchKeyWord,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     addNewCardModal: () => dispatch(setCardModal()),
     editColumnModal: () => dispatch(setColumnModal(EDIT)),
     deleteColumnModal: () => dispatch(setColumnModal(DELETE)),
-    setColumnIdAndTitle: (data) => dispatch(setCurrentColumnIdAndTitle(data)),
+    getColumnData: (columnObj) => dispatch(setCurrentColumnData(columnObj)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(Column);
+export default connect(mapStateToProps, mapDispatchToProps)(Column);

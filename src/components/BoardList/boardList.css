@@ -1,0 +1,28 @@
+.board-list-holder {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 15px;
+}
+
+.boards-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  column-gap: 15px;
+}
+
+.board-item {
+  background: #343d45;
+  padding: 15px;
+  min-width: 300px;
+  height: 140px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.board-item:hover {
+  box-shadow: 0 0 6px 1px rgb(111 206 235 / 60%);
+  transition: 0.2s;
+}

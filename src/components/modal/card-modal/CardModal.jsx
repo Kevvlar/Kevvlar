@@ -1,31 +1,33 @@
 import React, { useState } from "react";
-import { FaCheck, FaTimes } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 import { connect } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
-import { closeModal, addCard, deleteCard, editCard } from "../../../redux";
+import {
+  closeModal,
+  addNewCardLocal,
+  editCardLocal,
+  deleteCardLocal,
+} from "../../../redux";
 import { ADD, EDIT } from "../../../redux/modal/modalTypes";
 
 import "./cardModal.css";
 
 const CardModal = ({
   closeModal,
-  boardId,
-  columnId,
-  addNewCard,
   type,
-  cardId,
-  cardTitle,
-  cardDescription,
-  cardDate,
-  cardColor,
-  removeCard,
-  updateCard,
+  currrentBoardId,
+  currentColumnId,
+  createCardLocal,
+  currentCard,
+  updateCardLocal,
+  deleteCard,
 }) => {
   const AddCardModal = () => {
     const [cardTitle, setCardTitle] = useState("");
     const [cardBody, setCardBody] = useState("");
     const [cardDate, setCardDate] = useState("");
-    const [cardColor, setCardColor] = useState("");
+    const [cardLabel, setCardLable] = useState("");
 
     return (
       <div className="modal-body">
@@ -48,6 +50,8 @@ const CardModal = ({
           placeholder="Write something..."
           className="modal-body-description"
         ></textarea>
+        {/**Did you leave this code here on purpose? */}
+        {/*
         <div className="modal-checkbox-area">
           <div className="modal-checkbox-bar">
             <FaCheck className="modal-check-icon-check" />
@@ -59,6 +63,7 @@ const CardModal = ({
           <div className="modal-check-columns"></div>
           <input placeholder="+ Add item" className="modal-checkbox-input" />
         </div>
+        */}
         <div className="modal-footer-container">
           <input
             className="date-picker"
@@ -69,8 +74,8 @@ const CardModal = ({
           />
           <select
             className="select-color"
-            onChange={(e) => setCardColor(e.target.value)}
-            value={cardColor}
+            onChange={(e) => setCardLable(e.target.value)}
+            value={cardLabel}
           >
             <option value="">Color Label</option>
             <option value="#ff0000">Red</option>
@@ -81,22 +86,19 @@ const CardModal = ({
           <button
             className="modal-board-button"
             onClick={() => {
-              addNewCard(
-                {
-                  title: cardTitle,
-                  description: cardBody,
-                  date: cardDate,
-                  colorLabel: cardColor,
-                  board: boardId,
-                  column: columnId,
-                },
-                boardId,
-                columnId
-              );
+              createCardLocal({
+                id: uuidv4(),
+                columnId: currentColumnId,
+                boardId: currrentBoardId,
+                title: cardTitle,
+                description: cardBody,
+                date: cardDate,
+                label: cardLabel,
+              });
               setCardTitle("");
               setCardBody("");
               setCardDate("");
-              setCardColor("");
+              setCardLable("");
               closeModal();
             }}
           >
@@ -108,10 +110,10 @@ const CardModal = ({
   };
 
   const EditBoardModal = () => {
-    const [editCardTitle, setEditCardTitle] = useState(cardTitle);
-    const [editCardBody, setEditCardBody] = useState(cardDescription);
-    const [editCardDate, setEditCardDate] = useState(cardDate);
-    const [editCardColor, setEditCardColor] = useState(cardColor);
+    const [editCardTitle, setEditCardTitle] = useState(currentCard.title);
+    const [editCardBody, setEditCardBody] = useState(currentCard.description);
+    const [editCardDate, setEditCardDate] = useState(currentCard.date);
+    const [editCardColor, setEditCardColor] = useState(currentCard.label);
 
     return (
       <div className="modal-body">
@@ -134,17 +136,6 @@ const CardModal = ({
           placeholder="Write something..."
           className="modal-body-description"
         ></textarea>
-        <div className="modal-checkbox-area">
-          <div className="modal-checkbox-bar">
-            <FaCheck className="modal-check-icon-check" />
-            <div className="modal-progress-bar-contianer">
-              <div id="cba182952" className="cbabarprogress"></div>
-            </div>
-            <div className="modal-progress-percentage">0 %</div>
-          </div>
-          <div className="modal-check-columns"></div>
-          <input placeholder="+ Add item" className="modal-checkbox-input" />
-        </div>
         <div className="modal-footer-container">
           <input
             className="date-picker"
@@ -167,11 +158,13 @@ const CardModal = ({
           <button
             className="modal-board-button"
             onClick={() => {
-              updateCard(cardId, boardId, {
+              updateCardLocal({
+                id: currentCard.id,
+                columnId: currentCard.columnId,
                 title: editCardTitle,
                 description: editCardBody,
                 date: editCardDate,
-                colorLabel: editCardColor,
+                label: editCardColor,
               });
               closeModal();
             }}
@@ -181,7 +174,10 @@ const CardModal = ({
           <button
             className="delete-button"
             onClick={() => {
-              removeCard(cardId, boardId);
+              deleteCard({
+                columnId: currentCard.columnId,
+                cardId: currentCard.id,
+              });
               closeModal();
             }}
           >
@@ -205,25 +201,19 @@ const CardModal = ({
 
 const mapStateToProps = (state) => {
   return {
-    boardId: state.board.currentBoardId,
-    columnId: state.column.currentColumnId,
     type: state.modal.modalActionType,
-    cardId: state.card.currentCardId,
-    cardTitle: state.card.title,
-    cardDescription: state.card.description,
-    cardDate: state.card.date,
-    cardColor: state.card.color,
+    currrentBoardId: state.board.selectBoardId,
+    currentColumnId: state.column.currentColumnId,
+    currentCard: state.column.currentCard,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
-    addNewCard: (data, boardId, columnId) =>
-      dispatch(addCard(data, boardId, columnId)),
-    removeCard: (cardId, boardId) => dispatch(deleteCard(cardId, boardId)),
-    updateCard: (cardId, boardId, data) =>
-      dispatch(editCard(cardId, boardId, data)),
+    createCardLocal: (cardObj) => dispatch(addNewCardLocal(cardObj)),
+    updateCardLocal: (cardObj) => dispatch(editCardLocal(cardObj)),
+    deleteCard: (deleteObj) => dispatch(deleteCardLocal(deleteObj)),
   };
 };
 

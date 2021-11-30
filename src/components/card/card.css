@@ -1,5 +1,4 @@
 .card {
-  margin: 5px;
   margin-top: 10px;
   border-radius: 5px;
   width: 285px;
@@ -38,6 +37,7 @@
   font-size: 12px;
   border: none;
   width: 100%;
+  overflow-wrap: anywhere;
   resize: none;
   height: 30px;
   overflow: hidden;
@@ -49,6 +49,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  height: 38px;
 }
 
 .card-date {

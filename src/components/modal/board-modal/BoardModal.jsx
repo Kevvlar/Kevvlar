@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { connect } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
-import { closeModal, addBoard, editBoard, deleteBoard } from "../../../redux";
+import {
+  closeModal,
+  addNewBoardLocal,
+  editCurrentBoardLocal,
+  handleGlobalDeleteLocal,
+} from "../../../redux";
 import { ADD, EDIT, DELETE } from "../../../redux/modal/modalTypes";
 
 import "./boardModal.css";
@@ -10,17 +16,17 @@ import "./boardModal.css";
 const BoardModal = ({
   type,
   closeModal,
-  addBoard,
-  boardId,
-  boardTitle,
-  editBoard,
-  deleteBoard,
+  addBoardLocal,
+  currrentBoardTitle,
+  currrentBoardId,
+  editBoardLocal,
+  deleteBoardLocal,
 }) => {
   const AddBoard = () => {
     const [boardName, setBoardName] = useState("");
     return (
-      <div className="modal-board-body">
-        <h2 className="modal-board-title">Add New Board</h2>
+      <div className="modal-body">
+        <h2 className="modal-title">Add New Board</h2>
         <input
           className="modal-board-text"
           type="text"
@@ -32,11 +38,14 @@ const BoardModal = ({
         <button
           className="modal-board-button"
           onClick={() => {
-            const body = {
+            const baordId = uuidv4();
+            const boardObj = {
+              id: baordId,
               title: boardName,
+              columnsOrder: [],
             };
+            addBoardLocal(boardObj);
             setBoardName("");
-            addBoard(body);
             closeModal();
           }}
         >
@@ -47,10 +56,10 @@ const BoardModal = ({
   };
 
   const EditBoard = () => {
-    const [editBoardName, setEditBoardName] = useState(boardTitle.toString());
+    const [editBoardName, setEditBoardName] = useState(currrentBoardTitle);
     return (
-      <div className="modal-board-body">
-        <h2 className="modal-board-title">Edit Board</h2>
+      <div className="modal-body">
+        <h2 className="modal-title">Edit Board</h2>
         <input
           className="modal-board-text"
           type="text"
@@ -61,8 +70,11 @@ const BoardModal = ({
         <button
           className="modal-board-button"
           onClick={() => {
+            editBoardLocal({
+              id: currrentBoardId,
+              title: editBoardName,
+            });
             setEditBoardName("");
-            editBoard({ title: editBoardName }, boardId);
             closeModal();
           }}
         >
@@ -74,8 +86,8 @@ const BoardModal = ({
 
   const DeleteBoard = () => {
     return (
-      <div className="modal-board-body">
-        <h2 className="modal-board-title">Are You Sure?</h2>
+      <div className="modal-body">
+        <h2 className="modal-title">Are You Sure?</h2>
         <span className="modal-sub-text">
           All information contained in this board will be delete
         </span>
@@ -83,7 +95,7 @@ const BoardModal = ({
           <button
             className="delete-button"
             onClick={() => {
-              deleteBoard(boardId);
+              deleteBoardLocal(currrentBoardId);
               closeModal();
             }}
           >
@@ -101,10 +113,10 @@ const BoardModal = ({
     <div className="modal-board">
       <div className="close-icon-container">
         <FaTimes onClick={closeModal} className="close-icon" />
+        {type === ADD ? <AddBoard /> : null}
+        {type === EDIT ? <EditBoard /> : null}
+        {type === DELETE ? <DeleteBoard /> : null}
       </div>
-      {type === ADD ? <AddBoard /> : null}
-      {type === EDIT ? <EditBoard /> : null}
-      {type === DELETE ? <DeleteBoard /> : null}
     </div>
   );
 };
@@ -112,17 +124,17 @@ const BoardModal = ({
 const mapStateToProps = (state) => {
   return {
     type: state.modal.modalActionType,
-    boardId: state.board.currentBoardId,
-    boardTitle: state.board.currentBoardTitle,
+    currrentBoardTitle: state.board.selectBoardTitle,
+    currrentBoardId: state.board.selectBoardId,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
-    addBoard: (data) => dispatch(addBoard(data)),
-    editBoard: (data, id) => dispatch(editBoard(data, id)),
-    deleteBoard: (id) => dispatch(deleteBoard(id)),
+    addBoardLocal: (boardObj) => dispatch(addNewBoardLocal(boardObj)),
+    editBoardLocal: (boardObj) => dispatch(editCurrentBoardLocal(boardObj)),
+    deleteBoardLocal: (boardId) => dispatch(handleGlobalDeleteLocal(boardId)),
   };
 };
 

@@ -1,0 +1,41 @@
+.cardsearch-bar-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: -15px;
+  height: 40px;
+  margin-left: 60px;
+  position: relative;
+  top: -3px;
+}
+
+.cards-search {
+  min-width: 600px;
+  height: 20px;
+  border: none;
+  border-radius: 20px;
+  background-color: #2C3136;
+  font-size: 16px;
+  padding: 7.5px;  
+  padding-left: 50px;
+  color: white;
+}
+
+.cards-search:focus { 
+  outline: none !important;
+  border-color: #719ECE;
+  box-shadow: 0 0 6px 0px #ffc107b0;
+}
+
+.cards-search::placeholder {
+  margin-left: 10px;
+  color: #A0A0A0;
+}
+
+.cardsearch-icon {
+  position: relative;
+  color: #A0A0A0;
+  left: 30px;
+  width: 15px;
+  height: 15px;
+}

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { connect } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
 import {
   closeModal,
-  addColumn,
-  deleteColumn,
-  editColumn,
+  handleAddNewColumnLocal,
+  handleDeleteColumnLocal,
+  editColumnLocal,
 } from "../../../redux";
 import { ADD, EDIT, DELETE } from "../../../redux/modal/modalTypes";
 
@@ -15,18 +16,18 @@ import "./columnModal.css";
 const ColumnModal = ({
   closeModal,
   type,
-  columnId,
-  boardId,
-  createColumn,
-  deleteCurrentColumn,
+  currentBoardId,
+  addNewColumnLocal,
+  removeColumnLocal,
+  currentColumnId,
   currentColumnTitle,
-  updateColumn,
+  updateColumnLocal,
 }) => {
   const AddColumn = () => {
     const [columnTitle, setColumnTitle] = useState("");
     return (
-      <div className="modal-board-body">
-        <h2 className="modal-board-title">Add New Column</h2>
+      <div className="modal-body">
+        <h2 className="modal-title">Add New Column</h2>
         <input
           className="modal-board-text"
           type="text"
@@ -38,13 +39,14 @@ const ColumnModal = ({
         <button
           className="modal-board-button"
           onClick={() => {
-            createColumn(
-              {
-                title: columnTitle,
-                board: boardId,
-              },
-              boardId
-            );
+            const columnObj = {
+              id: uuidv4(),
+              boardId: currentBoardId,
+              title: columnTitle,
+              cards: [],
+              cardsOrder: [],
+            };
+            addNewColumnLocal(columnObj);
             setColumnTitle("");
             closeModal();
           }}
@@ -58,8 +60,8 @@ const ColumnModal = ({
   const EditColumn = () => {
     const [columnEditTitle, setColumnEditTitle] = useState(currentColumnTitle);
     return (
-      <div className="modal-board-body">
-        <h2 className="modal-board-title">Edit Column</h2>
+      <div className="modal-body">
+        <h2 className="modal-title">Edit Column</h2>
         <input
           className="modal-board-text"
           type="text"
@@ -70,7 +72,10 @@ const ColumnModal = ({
         <button
           className="modal-board-button"
           onClick={() => {
-            updateColumn({ title: columnEditTitle }, columnId, boardId);
+            updateColumnLocal({
+              id: currentColumnId,
+              title: columnEditTitle,
+            });
             setColumnEditTitle("");
             closeModal();
           }}
@@ -82,8 +87,8 @@ const ColumnModal = ({
   };
 
   const DeleteColumn = () => (
-    <div className="modal-board-body">
-      <h2 className="modal-board-title">Are You Sure?</h2>
+    <div className="modal-body">
+      <h2 className="modal-title">Are You Sure?</h2>
       <span className="modal-sub-text">
         All information contained in this column will be delete
       </span>
@@ -91,7 +96,7 @@ const ColumnModal = ({
         <button
           className="delete-button"
           onClick={() => {
-            deleteCurrentColumn(columnId, boardId);
+            removeColumnLocal(currentColumnId);
             closeModal();
           }}
         >
@@ -108,10 +113,10 @@ const ColumnModal = ({
     <div className="modal-board">
       <div className="close-icon-container">
         <FaTimes onClick={closeModal} className="close-icon" />
+        {type === ADD ? <AddColumn /> : null}
+        {type === EDIT ? <EditColumn /> : null}
+        {type === DELETE ? <DeleteColumn /> : null}
       </div>
-      {type === ADD ? <AddColumn /> : null}
-      {type === EDIT ? <EditColumn /> : null}
-      {type === DELETE ? <DeleteColumn /> : null}
     </div>
   );
 };
@@ -119,8 +124,8 @@ const ColumnModal = ({
 const mapStateToProps = (state) => {
   return {
     type: state.modal.modalActionType,
-    boardId: state.board.currentBoardId,
-    columnId: state.column.currentColumnId,
+    currentBoardId: state.board.selectBoardId,
+    currentColumnId: state.column.currentColumnId,
     currentColumnTitle: state.column.currentColumnTitle,
   };
 };
@@ -128,11 +133,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
-    createColumn: (data, id) => dispatch(addColumn(data, id)),
-    deleteCurrentColumn: (columnId, boardId) =>
-      dispatch(deleteColumn(columnId, boardId)),
-    updateColumn: (data, columnId, boardId) =>
-      dispatch(editColumn(data, columnId, boardId)),
+    addNewColumnLocal: (columnObj) =>
+      dispatch(handleAddNewColumnLocal(columnObj)),
+    removeColumnLocal: (columnId) =>
+      dispatch(handleDeleteColumnLocal(columnId)),
+    updateColumnLocal: (columnObj) => dispatch(editColumnLocal(columnObj)),
   };
 };
 

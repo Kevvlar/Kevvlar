@@ -46,8 +46,15 @@
 
 .appbar-logo {
   font-weight: 700;
-  color: #ffffff3b;
   display: flex;
+  margin: 0px 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.appbar-logo:hover {
+  filter: opacity(0.5);
 }
 
 .appbar-user-menu-container {

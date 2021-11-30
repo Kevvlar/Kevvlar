@@ -1,13 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router";
 import ScrollContainer from "react-indiana-drag-scroll";
 import { showLeftSideNav } from "../../redux/index";
+import CardSearchBar from "../../components/CardSearchBar/CardSearchBar";
 
-import { LockIcon, BoardIcon, TeamIcon, AddUserIcon } from "../../assets/svg/iconlibrary";
+import {
+  LockIcon,
+  BoardIcon,
+  TeamIcon,
+  AddUserIcon,
+} from "../../assets/svg/iconlibrary";
 
 import "./boardnavbar.css";
 
-const BoardNavBar = ({ boardTitle, toggleLeftSideNav }) => (
+const BoardNavBar = ({ boardTitle, toggleLeftSideNav, history }) => (
   <ScrollContainer
     className="scroll-container boardnavbar-scroll-container"
     horizontal={true}
@@ -16,7 +23,7 @@ const BoardNavBar = ({ boardTitle, toggleLeftSideNav }) => (
       <button
         className="boardnavbar-btn"
         onClick={() => {
-          toggleLeftSideNav();
+          history.push("/boards");
         }}
       >
         <BoardIcon />
@@ -33,12 +40,13 @@ const BoardNavBar = ({ boardTitle, toggleLeftSideNav }) => (
       <button className="add-user-icon">
         <AddUserIcon />
       </button>
+      <CardSearchBar />
     </div>
   </ScrollContainer>
 );
 const mapStateToProps = (state) => {
   return {
-    boardTitle: state.board.currentBoardTitle,
+    boardTitle: state.board.selectBoardTitle,
   };
 };
 
@@ -48,4 +56,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BoardNavBar);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(BoardNavBar));

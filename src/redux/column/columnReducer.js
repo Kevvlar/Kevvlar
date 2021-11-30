@@ -1,143 +1,288 @@
 import {
-  ADD_COLUMN_REQUEST,
-  ADD_COLUMN_SUCCESS,
-  ADD_COLUMN_FAILURE,
-  FETCH_COLUMNS_REQUEST,
-  FETCH_COLUMNS_SUCCESS,
-  FETCH_COLUMNS_FAILURE,
-  SET_CURRENT_COLUMN_ID_AND_TITLE,
-  DELETE_COLUMN_BY_BOARD,
-  UPDATE_CARD_ORDER_WITHIN_COLUMN_REQUEST,
-  UPDATE_CARD_ORDER_WITHIN_COLUMN_SUCCESS,
-  UPDATE_CARD_ORDER_WITHIN_COLUMN_FAILURE,
-  UPDATE_CARD_ORDER_AND_COLUMN_REQUEST,
-  UPDATE_CARD_ORDER_AND_COLUMN_SUCCESS,
-  UPDATE_CARD_ORDER_AND_COLUMN_FAILURE,
-  EMPTY_COLUMNS,
+  ADD_NEW_COLUMN_LOCAL,
+  DELETE_COLUMNS_BY_BOARD_LOCAL,
+  GET_COLUMNS_BY_BOARDS_LOCAL,
+  SET_CURRENT_COLUMN_DATA,
+  DELETE_COLUMN_LOCAL,
+  DELETE_CARD_LOCAL,
+  EDIT_COLUMN_LOCAL,
+  ADD_NEW_CARD_LOCAL,
+  EDIT_CARD_LOCAL,
+  CHANGE_CARD_ORDER_LOCAL,
+  SET_CURRENT_CARD_DATA,
+  REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL,
+  CHANGE_CARD_COLUMN_LOCAL,
+  ENTER_CARD_SEARCH_KEY,
+  CHANGE_CARD_COLUMN_ID,
 } from "./columnTypes";
 
 const initialState = {
+  cardSearchKeyWord: "",
   currentColumnId: "",
   currentColumnTitle: "",
-  loading: false,
+  currentCard: {},
   error: "",
   columns: [],
+  columnsByBoard: [],
 };
 
 const columnReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_COLUMN_REQUEST:
+    case ADD_NEW_COLUMN_LOCAL:
       return {
         ...state,
-        loading: true,
+        columns: [...state.columns, action.payLoad],
+      };
+
+    case DELETE_COLUMNS_BY_BOARD_LOCAL:
+      return {
+        ...state,
+        columns: state.columns.filter(
+          (columnItem) => columnItem.boardId !== action.payLoad
+        ),
         currentColumnId: "",
         currentColumnTitle: "",
+        columnsByBoard: [],
       };
 
-    case ADD_COLUMN_SUCCESS:
+    case GET_COLUMNS_BY_BOARDS_LOCAL:
       return {
         ...state,
-        loading: false,
-        currentColumnId: "",
-        currentColumnTitle: "",
+        columnsByBoard: state.columns.filter(
+          (column) => column.boardId === action.payLoad
+        ),
       };
 
-    case ADD_COLUMN_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: action.payLoad,
-        currentColumnId: "",
-        currentColumnTitle: "",
-      };
-
-    case FETCH_COLUMNS_REQUEST:
-      return {
-        ...state,
-        loading: true,
-        currentColumnId: "",
-        currentColumnTitle: "",
-      };
-
-    case FETCH_COLUMNS_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        columns: action.payLoad,
-        currentColumnId: "",
-        currentColumnTitle: "",
-      };
-
-    case FETCH_COLUMNS_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: action.payLoad,
-        currentColumnId: "",
-        currentColumnTitle: "",
-      };
-
-    case EMPTY_COLUMNS:
-      return {
-        ...state,
-        columns: [],
-      };
-
-    case SET_CURRENT_COLUMN_ID_AND_TITLE:
+    case SET_CURRENT_COLUMN_DATA:
       return {
         ...state,
         currentColumnId: action.payLoad.id,
         currentColumnTitle: action.payLoad.title,
       };
 
-    case DELETE_COLUMN_BY_BOARD:
+    case DELETE_COLUMN_LOCAL:
       return {
         ...state,
+        columnsByBoard: state.columnsByBoard.filter(
+          (columnItem) => columnItem.id !== action.payLoad
+        ),
+        columns: state.columns.filter(
+          (columnItem) => columnItem.id !== action.payLoad
+        ),
         currentColumnId: "",
         currentColumnTitle: "",
-        loading: false,
-        error: "",
-        columns: [],
       };
 
-    case UPDATE_CARD_ORDER_WITHIN_COLUMN_REQUEST:
+    case EDIT_COLUMN_LOCAL:
       return {
         ...state,
-        loading: true,
-        columns: [],
+        columnsByBoard: state.columnsByBoard.map((columnItem) =>
+          columnItem.id === action.payLoad.id
+            ? { ...columnItem, title: action.payLoad.title }
+            : columnItem
+        ),
+        columns: state.columns.map((columnItem) =>
+          columnItem.id === action.payLoad.id
+            ? { ...columnItem, title: action.payLoad.title }
+            : columnItem
+        ),
+        currentColumnId: "",
+        currentColumnTitle: "",
       };
 
-    case UPDATE_CARD_ORDER_WITHIN_COLUMN_SUCCESS:
+    case ADD_NEW_CARD_LOCAL:
       return {
         ...state,
-        loading: false,
+        columnsByBoard: state.columnsByBoard.map((columnItem) => {
+          if (columnItem.id === action.payLoad.columnId) {
+            return {
+              ...columnItem,
+              cards: [...columnItem.cards, action.payLoad],
+              cardsOrder: [...columnItem.cardsOrder, action.payLoad.id],
+            };
+          }
+          return columnItem;
+        }),
+        columns: state.columns.map((columnItem) => {
+          if (columnItem.id === action.payLoad.columnId) {
+            return {
+              ...columnItem,
+              cards: [...columnItem.cards, action.payLoad],
+              cardsOrder: [...columnItem.cardsOrder, action.payLoad.id],
+            };
+          }
+          return columnItem;
+        }),
       };
 
-    case UPDATE_CARD_ORDER_WITHIN_COLUMN_FAILURE:
+    case EDIT_CARD_LOCAL:
       return {
         ...state,
-        loading: false,
-        error: action.payLoad,
+        columnsByBoard: state.columnsByBoard.map((columnItem) => {
+          if (columnItem.id === action.payLoad.columnId) {
+            return {
+              ...columnItem,
+              cards: columnItem.cards.map((cardItem) =>
+                cardItem.id === action.payLoad.id
+                  ? {
+                      ...cardItem,
+                      title: action.payLoad.title,
+                      description: action.payLoad.description,
+                      date: action.payLoad.date,
+                      label: action.payLoad.label,
+                    }
+                  : cardItem
+              ),
+            };
+          }
+          return columnItem;
+        }),
+        columns: state.columns.map((columnItem) => {
+          if (columnItem.id === action.payLoad.columnId) {
+            return {
+              ...columnItem,
+              cards: columnItem.cards.map((cardItem) =>
+                cardItem.id === action.payLoad.id
+                  ? {
+                      ...cardItem,
+                      title: action.payLoad.title,
+                      description: action.payLoad.description,
+                      date: action.payLoad.date,
+                      label: action.payLoad.label,
+                    }
+                  : cardItem
+              ),
+            };
+          }
+          return columnItem;
+        }),
       };
 
-    case UPDATE_CARD_ORDER_AND_COLUMN_REQUEST:
+    case DELETE_CARD_LOCAL:
       return {
         ...state,
-        loading: true,
-        columns: [],
+        columnsByBoard: state.columnsByBoard.map((columnItem) => {
+          if (columnItem.id === action.payLoad.columnId) {
+            return {
+              ...columnItem,
+              cards: columnItem.cards.filter(
+                (cardItem) => cardItem.id !== action.payLoad.cardId
+              ),
+              cardsOrder: columnItem.cardsOrder.filter(
+                (id) => id !== action.payLoad.cardId
+              ),
+            };
+          }
+          return columnItem;
+        }),
+        columns: state.columns.map((columnItem) => {
+          if (columnItem.id === action.payLoad.columnId) {
+            return {
+              ...columnItem,
+              cards: columnItem.cards.filter(
+                (cardItem) => cardItem.id !== action.payLoad.cardId
+              ),
+              cardsOrder: columnItem.cardsOrder.filter(
+                (id) => id !== action.payLoad.cardId
+              ),
+            };
+          }
+          return columnItem;
+        }),
+        currentCard: [],
       };
 
-    case UPDATE_CARD_ORDER_AND_COLUMN_SUCCESS:
+    case CHANGE_CARD_ORDER_LOCAL:
       return {
         ...state,
-        loading: false,
+        columnsByBoard: state.columnsByBoard.map((columnItem) =>
+          columnItem.id === state.currentColumnId
+            ? {
+                ...columnItem,
+                cardsOrder: action.payLoad,
+              }
+            : columnItem
+        ),
+        columns: state.columns.map((columnItem) =>
+          columnItem.id === state.currentColumnId
+            ? {
+                ...columnItem,
+                cardsOrder: action.payLoad,
+              }
+            : columnItem
+        ),
       };
 
-    case UPDATE_CARD_ORDER_AND_COLUMN_FAILURE:
+    case SET_CURRENT_CARD_DATA:
       return {
         ...state,
-        loading: false,
-        error: action.payLoad,
+        currentCard: action.payLoad,
+      };
+
+    case REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL:
+      return {
+        ...state,
+        columnsByBoard: state.columnsByBoard.map((columnItem) =>
+          columnItem.id === action.payLoad
+            ? {
+                ...columnItem,
+                cards: columnItem.cards.filter(
+                  (card) => card.id !== state.currentCard.id
+                ),
+                cardsOrder: columnItem.cardsOrder.filter(
+                  (id) => id !== state.currentCard.id
+                ),
+              }
+            : columnItem
+        ),
+        columns: state.columns.map((columnItem) =>
+          columnItem.id === action.payLoad
+            ? {
+                ...columnItem,
+                cards: columnItem.cards.filter(
+                  (card) => card.id !== state.currentCard.id
+                ),
+                cardsOrder: columnItem.cardsOrder.filter(
+                  (id) => id !== state.currentCard.id
+                ),
+              }
+            : columnItem
+        ),
+      };
+
+    case CHANGE_CARD_COLUMN_LOCAL:
+      return {
+        ...state,
+        columnsByBoard: state.columnsByBoard.map((columnItem) =>
+          columnItem.id === action.payLoad.destinationColumn
+            ? {
+                ...columnItem,
+                cards: [...columnItem.cards, state.currentCard],
+                cardsOrder: action.payLoad.newOrder,
+              }
+            : columnItem
+        ),
+        columns: state.columns.map((columnItem) =>
+          columnItem.id === action.payLoad.destinationColumn
+            ? {
+                ...columnItem,
+                cards: [...columnItem.cards, state.currentCard],
+                cardsOrder: action.payLoad.newOrder,
+              }
+            : columnItem
+        ),
+      };
+
+    case CHANGE_CARD_COLUMN_ID:
+      return {
+        ...state,
+        currentCard: { ...state.currentCard, columnId: action.payLoad },
+      };
+
+    case ENTER_CARD_SEARCH_KEY:
+      return {
+        ...state,
+        cardSearchKeyWord: action.payLoad,
       };
 
     default:

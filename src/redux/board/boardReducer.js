@@ -1,126 +1,112 @@
 import {
-  FETCH_BOARD_REQUEST,
-  FETCH_BOARD_SUCCESS,
-  FETCH_BOARD_FAILURE,
-  ADD_BOARD_REQUEST,
-  ADD_BOARD_SUCCESS,
-  ADD_BOARD_FAILURE,
-  EDIT_BOARD_REQUEST,
-  EDIT_BOARD_SUCCESS,
-  EDIT_BOARD_FAILURE,
-  DELETE_BOARD_REQUEST,
-  DELETE_BOARD_SUCCESS,
-  DELETE_BOARD_FAILURE,
-  SET_CURRENT_BOARD_ID_AND_TITLE,
+  ADD_NEW_BOARD_LOCAL,
+  SET_CURRENT_BOARD_DATA,
+  EDIT_BOARD_LOCAL,
+  DELETE_BOARD_LOCAL,
+  ADD_COLUMN_TO_COLUMNS_ORDER_LOCAL,
+  CHANGE_COLUMNS_ORDER_LOCAL,
+  REMOVE_COLUM_FROM_COLUMNS_ORDER_LOCAL,
+  ENTER_SEARCH_TEXT,
 } from "./boardTypes";
 
 const initialState = {
-  currentBoardId: "",
-  currentBoardTitle: "",
-  loading: false,
+  selectBoardId: "",
+  selectBoardTitle: "",
+  selectColumnsOrder: [],
+  searchKey: "",
   error: "",
   boards: [],
 };
 
 const boardReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_BOARD_REQUEST:
+    case ADD_NEW_BOARD_LOCAL:
       return {
         ...state,
-        loading: true,
+        boards: [...state.boards, action.payLoad],
       };
 
-    case FETCH_BOARD_SUCCESS:
+    case SET_CURRENT_BOARD_DATA:
       return {
         ...state,
-        loading: false,
-        boards: action.payLoad,
+        selectBoardId: action.payLoad.id,
+        selectBoardTitle: action.payLoad.title,
+        selectColumnsOrder: action.payLoad.columnsOrder,
+        searchKey: "",
       };
 
-    case FETCH_BOARD_FAILURE:
+    case EDIT_BOARD_LOCAL:
       return {
         ...state,
-        loading: false,
-        boards: [],
-        error: action.payLoad,
-        currentBoardId: "",
-        currentBoardTitle: "",
+        boards: state.boards.map((board) =>
+          board.id === action.payLoad.id
+            ? { ...board, title: action.payLoad.title }
+            : board
+        ),
+        selectBoardId: "",
+        selectBoardTitle: "",
+        selectColumnsOrder: [],
       };
 
-    case SET_CURRENT_BOARD_ID_AND_TITLE:
+    case ADD_COLUMN_TO_COLUMNS_ORDER_LOCAL:
       return {
         ...state,
-        currentBoardId: action.payLoad.id,
-        currentBoardTitle: action.payLoad.title,
+        selectColumnsOrder: [...state.selectColumnsOrder, action.payLoad],
+        boards: state.boards.map((boardItem) =>
+          boardItem.id === state.selectBoardId
+            ? {
+                ...boardItem,
+                columnsOrder: [...boardItem.columnsOrder, action.payLoad],
+              }
+            : boardItem
+        ),
       };
 
-    case ADD_BOARD_REQUEST:
+    case CHANGE_COLUMNS_ORDER_LOCAL:
       return {
         ...state,
-        loading: true,
-      };
-    case ADD_BOARD_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-      };
-
-    case ADD_BOARD_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        boards: [],
-        currentBoardId: "",
-        currentBoardTitle: "",
-        error: action.payLoad,
+        selectColumnsOrder: action.payLoad,
+        boards: state.boards.map((boardItem) =>
+          boardItem.id === state.selectBoardId
+            ? {
+                ...boardItem,
+                columnsOrder: action.payLoad,
+              }
+            : boardItem
+        ),
       };
 
-    case EDIT_BOARD_REQUEST:
+    case REMOVE_COLUM_FROM_COLUMNS_ORDER_LOCAL:
       return {
         ...state,
-        loading: true,
+        selectColumnsOrder: state.selectColumnsOrder.filter(
+          (id) => id !== action.payLoad
+        ),
+        boards: state.boards.map((boardItem) =>
+          boardItem.id === state.selectBoardId
+            ? {
+                ...boardItem,
+                columnsOrder: boardItem.columnsOrder.filter(
+                  (id) => id !== action.payLoad
+                ),
+              }
+            : boardItem
+        ),
       };
 
-    case EDIT_BOARD_SUCCESS:
+    case DELETE_BOARD_LOCAL:
       return {
         ...state,
-        loading: false,
-        currentBoardId: "",
-        currentBoardTitle: "",
+        boards: state.boards.filter((board) => board.id !== action.payLoad),
+        selectBoardId: "",
+        selectBoardTitle: "",
+        selectColumnsOrder: [],
       };
 
-    case EDIT_BOARD_FAILURE:
+    case ENTER_SEARCH_TEXT:
       return {
         ...state,
-        loading: false,
-        boards: [],
-        currentBoardId: "",
-        currentBoardTitle: "",
-        error: action.payLoad,
-      };
-
-    case DELETE_BOARD_REQUEST:
-      return {
-        ...state,
-        loading: true,
-      };
-
-    case DELETE_BOARD_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        currentBoardId: "",
-        currentBoardTitle: "",
-      };
-
-    case DELETE_BOARD_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        boards: [],
-        currentBoardId: "",
-        currentBoardTitle: "",
-        error: action.payLoad,
+        searchKey: action.payLoad.toLowerCase(),
       };
 
     default:

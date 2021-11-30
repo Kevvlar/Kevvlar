@@ -1,197 +1,75 @@
 import {
-  ADD_BOARD_REQUEST,
-  ADD_BOARD_SUCCESS,
-  ADD_BOARD_FAILURE,
-  EDIT_BOARD_REQUEST,
-  EDIT_BOARD_SUCCESS,
-  EDIT_BOARD_FAILURE,
-  DELETE_BOARD_REQUEST,
-  DELETE_BOARD_SUCCESS,
-  DELETE_BOARD_FAILURE,
-  FETCH_BOARD_REQUEST,
-  FETCH_BOARD_SUCCESS,
-  FETCH_BOARD_FAILURE,
-  BOARD_API_URL,
-  SET_CURRENT_BOARD_ID_AND_TITLE,
+  ADD_NEW_BOARD_LOCAL,
+  SET_CURRENT_BOARD_DATA,
+  EDIT_BOARD_LOCAL,
+  DELETE_BOARD_LOCAL,
+  ADD_COLUMN_TO_COLUMNS_ORDER_LOCAL,
+  CHANGE_COLUMNS_ORDER_LOCAL,
+  REMOVE_COLUM_FROM_COLUMNS_ORDER_LOCAL,
+  ENTER_SEARCH_TEXT,
 } from "./boardTypes";
-import axios from "axios";
-import { deleteColumnByBoard, fetchColumnOrder, fetchColumns } from "../index";
 
-export const fetchBoardsRequest = () => {
+import { deleteColumnsByBoardLocal } from "../index";
+
+export const addNewBoardLocal = (boardObj) => {
   return {
-    type: FETCH_BOARD_REQUEST,
+    type: ADD_NEW_BOARD_LOCAL,
+    payLoad: boardObj,
   };
 };
 
-export const fetchBoardsSuccess = (boards) => {
+export const setCurrentBoardData = (board) => {
   return {
-    type: FETCH_BOARD_SUCCESS,
-    payLoad: boards,
+    type: SET_CURRENT_BOARD_DATA,
+    payLoad: board,
   };
 };
 
-export const fetchBoardsFailure = (error) => {
+export const editCurrentBoardLocal = (boardObj) => {
   return {
-    type: FETCH_BOARD_FAILURE,
-    payLoad: error,
+    type: EDIT_BOARD_LOCAL,
+    payLoad: boardObj,
   };
 };
 
-export const addNewBoardRequest = () => {
+export const deleteCurrentBoardLocal = (boardId) => {
   return {
-    type: ADD_BOARD_REQUEST,
+    type: DELETE_BOARD_LOCAL,
+    payLoad: boardId,
   };
 };
 
-export const addNewBoardSuccess = () => {
+export const addColumnToColumnsOrderLocal = (columnId) => {
   return {
-    type: ADD_BOARD_SUCCESS,
+    type: ADD_COLUMN_TO_COLUMNS_ORDER_LOCAL,
+    payLoad: columnId,
   };
 };
 
-export const addNewBoardFailure = (error) => {
+export const changeColumnsOrderLocal = (order) => {
   return {
-    type: ADD_BOARD_FAILURE,
-    payLoad: error,
+    type: CHANGE_COLUMNS_ORDER_LOCAL,
+    payLoad: order,
   };
 };
 
-export const editBoardRequest = () => {
+export const removeColumnFromColumnsOrderLocal = (columnId) => {
   return {
-    type: EDIT_BOARD_REQUEST,
+    type: REMOVE_COLUM_FROM_COLUMNS_ORDER_LOCAL,
+    payLoad: columnId,
   };
 };
 
-export const editBoardSuccess = () => {
-  return {
-    type: EDIT_BOARD_SUCCESS,
-  };
-};
-
-export const editBoardFailure = (error) => {
-  return {
-    type: EDIT_BOARD_FAILURE,
-    payLoad: error,
-  };
-};
-
-export const deleteBoardRequest = () => {
-  return {
-    type: DELETE_BOARD_REQUEST,
-  };
-};
-
-export const deleteBoardSuccess = () => {
-  return {
-    type: DELETE_BOARD_SUCCESS,
-  };
-};
-
-export const deleteBoardFailure = (error) => {
-  return {
-    type: DELETE_BOARD_FAILURE,
-    payLoad: error,
-  };
-};
-
-export const setCurrentBoardIdAndTitle = (data) => {
-  return {
-    type: SET_CURRENT_BOARD_ID_AND_TITLE,
-    payLoad: data,
-  };
-};
-
-export const addBoard = (data) => {
+export const handleGlobalDeleteLocal = (boardId) => {
   return (dispatch) => {
-    dispatch(addNewBoardRequest());
-    axios
-      .post(`${BOARD_API_URL}`, data, {
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((response) => {
-        const { _id, title } = response.data.data.board;
-        dispatch(setCurrentBoardIdAndTitle({ id: _id, title: title }));
-        dispatch(fetchBoards());
-        dispatch(fetchColumns(_id));
-        dispatch(fetchColumnOrder(_id));
-        dispatch(addNewBoardSuccess());
-      })
-      .catch((error) => {
-        const errorMsg = error.message;
-        dispatch(addNewBoardFailure(errorMsg));
-      });
+    dispatch(deleteColumnsByBoardLocal(boardId));
+    dispatch(deleteCurrentBoardLocal(boardId));
   };
 };
 
-export const editBoard = (data, boardId) => {
-  return (dispatch) => {
-    dispatch(editBoardRequest());
-    axios
-      .patch(`${BOARD_API_URL}/${boardId}`, data, {
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((response) => {
-        const { _id, title } = response.data.data.board;
-        dispatch(setCurrentBoardIdAndTitle({ id: _id, title: title }));
-        dispatch(fetchBoards());
-        dispatch(fetchColumns(_id));
-        dispatch(fetchColumnOrder(_id));
-        dispatch(addNewBoardSuccess());
-      })
-      .catch((error) => {
-        const errorMsg = error.message;
-        dispatch(editBoardFailure(errorMsg));
-      });
-  };
-};
-
-export const deleteBoard = (boardId) => {
-  return (dispatch) => {
-    dispatch(deleteBoardRequest());
-    axios
-      .delete(`${BOARD_API_URL}/${boardId}`, {
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then(() => {
-        dispatch(deleteBoardSuccess());
-        dispatch(deleteColumnByBoard());
-        dispatch(fetchBoards());
-      })
-      .catch((error) => {
-        const errorMsg = error.message;
-        dispatch(deleteBoardFailure(errorMsg));
-      });
-  };
-};
-
-export const fetchBoards = () => {
-  return (dispatch) => {
-    dispatch(fetchBoardsRequest());
-    axios
-      .get(`${BOARD_API_URL}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((response) => {
-        const boards = response.data.data.boards;
-        const firstBoard = boards[0];
-        dispatch(fetchColumns(firstBoard._id));
-        dispatch(fetchColumnOrder(firstBoard._id));
-        dispatch(fetchBoardsSuccess(boards));
-      })
-      .catch((error) => {
-        const errorMsg = error.message;
-        dispatch(fetchBoardsFailure(errorMsg));
-      });
+export const enterSearchText = (text) => {
+  return {
+    type: ENTER_SEARCH_TEXT,
+    payLoad: text,
   };
 };

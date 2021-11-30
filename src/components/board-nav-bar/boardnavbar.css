@@ -2,7 +2,7 @@
 	height: 50px;
 	display: flex;
 	margin-top: 15px;
-	margin-left: 25px;
+	margin-left: 20px;
 }
 
 .boardnavbar-btn {
@@ -18,8 +18,12 @@
 	align-items: center;
 	margin-right: 15px;
 	cursor: pointer;
-	min-width: 120px;
+	white-space: nowrap;
 	border: none;
+}
+
+.boardnavbar-btn:hover {
+	background: #3e444a;
 }
 
 .boardnavbar-scroll-container{
@@ -33,6 +37,12 @@
 	padding: 0px;
 	margin: 0px;
 	height: 35px;
+	border-radius: 25px;
+	background: #2C3136;
+}
+
+.add-user-icon:hover {
+	background: #3e444a;
 }
 
 .boardnavbar-boardtitle {
