@@ -25,8 +25,8 @@ const BoardModal = ({
   const AddBoard = () => {
     const [boardName, setBoardName] = useState("");
     return (
-      <div className="modal-board-body">
-        <h2 className="modal-board-title">Add New Board</h2>
+      <div className="modal-body">
+        <h2 className="modal-title">Add New Board</h2>
         <input
           className="modal-board-text"
           type="text"
@@ -58,8 +58,8 @@ const BoardModal = ({
   const EditBoard = () => {
     const [editBoardName, setEditBoardName] = useState(currrentBoardTitle);
     return (
-      <div className="modal-board-body">
-        <h2 className="modal-board-title">Edit Board</h2>
+      <div className="modal-body">
+        <h2 className="modal-title">Edit Board</h2>
         <input
           className="modal-board-text"
           type="text"
@@ -86,8 +86,8 @@ const BoardModal = ({
 
   const DeleteBoard = () => {
     return (
-      <div className="modal-board-body">
-        <h2 className="modal-board-title">Are You Sure?</h2>
+      <div className="modal-body">
+        <h2 className="modal-title">Are You Sure?</h2>
         <span className="modal-sub-text">
           All information contained in this board will be delete
         </span>
@@ -113,10 +113,10 @@ const BoardModal = ({
     <div className="modal-board">
       <div className="close-icon-container">
         <FaTimes onClick={closeModal} className="close-icon" />
+        {type === ADD ? <AddBoard /> : null}
+        {type === EDIT ? <EditBoard /> : null}
+        {type === DELETE ? <DeleteBoard /> : null}
       </div>
-      {type === ADD ? <AddBoard /> : null}
-      {type === EDIT ? <EditBoard /> : null}
-      {type === DELETE ? <DeleteBoard /> : null}
     </div>
   );
 };
