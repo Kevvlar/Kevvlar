@@ -83,6 +83,14 @@
   margin: 5px 5px;
 }
 
+/*MOBILE BREAKPOINTS*/
+
+@media only screen and (max-width: 600px) {
+  .card-more-icon {
+    opacity: 1;
+  }
+}
+
 /* .cardlabelholder {
   display: flex;
   flex-direction: column;

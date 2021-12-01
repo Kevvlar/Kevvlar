@@ -86,3 +86,12 @@
 .new-card-button:active {
   box-shadow: none;
 }
+
+/*MOBILE BREAKPOINTS*/
+
+@media only screen and (max-width: 600px) {
+  .column-header-icon-container {
+    opacity: 1;
+  }
+}
+
