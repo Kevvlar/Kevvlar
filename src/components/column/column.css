@@ -38,6 +38,7 @@
   display: inline-block;
   font-size: 16px;
   border: none;
+  margin-left: 10px;
 }
 
 .column-header-icon-container {
