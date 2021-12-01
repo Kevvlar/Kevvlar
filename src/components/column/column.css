@@ -44,6 +44,13 @@
 .column-header-icon-container {
   display: flex;
   flex-direction: row;
+  opacity: 0;
+  transition: 0.2s;
+}
+
+.column-header-icon-container:hover {
+  opacity: 1;
+  cursor: pointer;
 }
 
 .column-header-trash-icon {
