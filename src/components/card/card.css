@@ -13,6 +13,10 @@
   box-shadow: 0 0 6px 1px rgb(111 206 235 / 60%);
 }
 
+.card.dragging {
+  box-shadow: 0 5px 19px 2px #00000066;
+}
+
 .card-inner {
   width: 100%;
   padding-right: 15px;
