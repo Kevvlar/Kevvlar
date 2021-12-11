@@ -55,14 +55,14 @@ export const logUserOut = () => {
   };
 };
 
-export const handleLogOutUser = () => {
+export const handleLogOutUser = (history) => {
   return (dispatch) => {
-    window.location.assign("/");
     dispatch(logUserOut());
+    history.push("/signin");
   };
 };
 
-export const signUserUp = (userData) => {
+export const signUserUp = (userData, history) => {
   return (dispatch) => {
     dispatch(signUpUserRequest());
     axios
@@ -74,7 +74,7 @@ export const signUserUp = (userData) => {
       .then((response) => {
         const user = response.data.data.user;
         dispatch(signUpUserSuccess(user));
-        window.location.assign("/boards");
+        history.push("/boards");
       })
       .catch((error) => {
         dispatch(signUpUserFailure(error.message));
@@ -82,7 +82,7 @@ export const signUserUp = (userData) => {
   };
 };
 
-export const signUserIn = (userData) => {
+export const signUserIn = (userData, history) => {
   return (dispatch) => {
     dispatch(signInUserRequest());
     axios
@@ -94,7 +94,7 @@ export const signUserIn = (userData) => {
       .then((response) => {
         const user = response.data.data.user;
         dispatch(signInUserSuccess(user));
-        window.location.assign("/boards");
+        history.push("/boards");
       })
       .catch((error) => {
         dispatch(signInUserFailure(error.message));

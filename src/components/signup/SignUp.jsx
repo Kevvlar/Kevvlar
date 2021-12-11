@@ -1,23 +1,26 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { signUserUp } from "../../redux";
 
 import "./signup.css";
 
-const SignUp = ({ signUpUser }) => {
+const SignUp = ({ signUpUser, history }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    signUpUser({
-      name: name,
-      email: email,
-      password: password,
-    });
+    signUpUser(
+      {
+        name: name,
+        email: email,
+        password: password,
+      },
+      history
+    );
     setName("");
     setEmail("");
     setPassword("");
@@ -80,8 +83,8 @@ const SignUp = ({ signUpUser }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    signUpUser: (userData) => dispatch(signUserUp(userData)),
+    signUpUser: (userData, history) => dispatch(signUserUp(userData, history)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(SignUp);
+export default connect(null, mapDispatchToProps)(withRouter(SignUp));

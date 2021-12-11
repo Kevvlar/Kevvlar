@@ -1,21 +1,24 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { signUserIn } from "../../redux";
 
 import "./signin.css";
 
-const SignIn = ({ signInUser }) => {
+const SignIn = ({ signInUser, history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    signInUser({
-      userEmail: email,
-      userPassword: password,
-    });
+    signInUser(
+      {
+        userEmail: email,
+        userPassword: password,
+      },
+      history
+    );
     setEmail("");
     setPassword("");
   };
@@ -63,8 +66,8 @@ const SignIn = ({ signInUser }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    signInUser: (userData) => dispatch(signUserIn(userData)),
+    signInUser: (userData, history) => dispatch(signUserIn(userData, history)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(SignIn);
+export default connect(null, mapDispatchToProps)(withRouter(SignIn));

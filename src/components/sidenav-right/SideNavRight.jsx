@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { FaEllipsisH, FaThLarge, FaMinus } from "react-icons/fa";
 
 import {
@@ -18,10 +19,11 @@ const RightSideNav = ({
   toggleFlat,
   logUserOut,
   toggleRightSideNav,
+  history,
 }) => {
   const handleSignOut = () => {
     toggleRightSideNav();
-    logUserOut();
+    logUserOut(history);
   };
 
   return (
@@ -53,9 +55,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     toggleGrid: () => dispatch(toggleGridCard()),
     toggleFlat: () => dispatch(toggleFlatCard()),
-    logUserOut: () => dispatch(handleLogOutUser()),
+    logUserOut: (history) => dispatch(handleLogOutUser(history)),
     toggleRightSideNav: () => dispatch(toggleRightSideNav()),
   };
 };
 
-export default connect(null, mapDispatchToProps)(RightSideNav);
+export default connect(null, mapDispatchToProps)(withRouter(RightSideNav));
