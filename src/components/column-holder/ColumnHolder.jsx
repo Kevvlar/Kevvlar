@@ -3,12 +3,7 @@ import ScrollContainer from "react-indiana-drag-scroll";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
 
-import {
-  setColumnModal,
-  changeColumnsOrderLocal,
-  changeCardOrderLocal,
-  handleChangeCardColumnLocal,
-} from "../../redux/index";
+import { setColumnModal } from "../../redux/index";
 
 import Column from "../column/Column";
 
@@ -29,14 +24,7 @@ const mapOrder = (array, order, key) => {
   return array;
 };
 
-const ColumnHolder = ({
-  addNewColumnModal,
-  columns,
-  columnsOrder,
-  changesColumnsOrder,
-  changeCardOrder,
-  changeCardColumn,
-}) => {
+const ColumnHolder = ({ addNewColumnModal, columns = [], columnsOrder }) => {
   const onDragEnd = (result) => {
     const { destination, draggableId, source, type } = result;
 
@@ -49,7 +37,7 @@ const ColumnHolder = ({
       const newColumnOrder = Array.from(columnsOrder);
       const [reOrderedItem] = newColumnOrder.splice(source.index, 1);
       newColumnOrder.splice(destination.index, 0, reOrderedItem);
-      changesColumnsOrder(newColumnOrder);
+      console.log(newColumnOrder);
     }
 
     // move card within column
@@ -64,7 +52,7 @@ const ColumnHolder = ({
       const newCardOrder = Array.from(currentColumn.cardsOrder);
       const [reOrderedCards] = newCardOrder.splice(source.index, 1);
       newCardOrder.splice(destination.index, 0, reOrderedCards);
-      changeCardOrder(newCardOrder);
+      console.log(newCardOrder);
     }
 
     // move card into another column
@@ -76,10 +64,7 @@ const ColumnHolder = ({
       const targetColumnCardOrder = targetColumn.cardsOrder;
       const newTargetColumnCardOrder = [...targetColumnCardOrder];
       newTargetColumnCardOrder.splice(destination.index, 0, draggableId);
-      changeCardColumn(source.droppableId, {
-        destinationColumn: destination.droppableId,
-        newOrder: newTargetColumnCardOrder,
-      });
+      console.log(newTargetColumnCardOrder);
     }
   };
 
@@ -126,10 +111,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addNewColumnModal: () => dispatch(setColumnModal()),
-    changesColumnsOrder: (order) => dispatch(changeColumnsOrderLocal(order)),
-    changeCardOrder: (order) => dispatch(changeCardOrderLocal(order)),
-    changeCardColumn: (sourceColumnId, changeObj) =>
-      dispatch(handleChangeCardColumnLocal(sourceColumnId, changeObj)),
   };
 };
 

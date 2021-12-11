@@ -1,11 +1,14 @@
 import {
   ADD_NEW_BOARD_LOCAL,
+  ADD_NEW_BOARD_SERVER,
+  ADD_NEW_BOARD_SERVER_FAILURE,
   SET_CURRENT_BOARD_DATA,
   EDIT_BOARD_LOCAL,
+  EDIT_BOARD_SERVER,
+  EDIT_BOARD_SERVER_FAILURE,
   DELETE_BOARD_LOCAL,
-  ADD_COLUMN_TO_COLUMNS_ORDER_LOCAL,
-  CHANGE_COLUMNS_ORDER_LOCAL,
-  REMOVE_COLUM_FROM_COLUMNS_ORDER_LOCAL,
+  DELETE_BOARD_SERVER,
+  DELTE_BOARD_SERVER_FAILURE,
   ENTER_SEARCH_TEXT,
 } from "./boardTypes";
 
@@ -22,6 +25,17 @@ const boardReducer = (state = initialState, action) => {
       return {
         ...state,
         boards: [...state.boards, action.payLoad],
+      };
+    case ADD_NEW_BOARD_SERVER:
+      return {
+        ...state,
+        error: "",
+      };
+
+    case ADD_NEW_BOARD_SERVER_FAILURE:
+      return {
+        ...state,
+        error: action.payLoad,
       };
 
     case SET_CURRENT_BOARD_DATA:
@@ -42,53 +56,16 @@ const boardReducer = (state = initialState, action) => {
         selectBoard: {},
       };
 
-    case ADD_COLUMN_TO_COLUMNS_ORDER_LOCAL:
+    case EDIT_BOARD_SERVER:
       return {
         ...state,
-        selectBoard: {
-          ...state.selectBoard,
-          columnsOrder: [...state.selectBoard.columnsOrder, action.payLoad],
-        },
-        boards: state.boards.map((boardItem) =>
-          boardItem.id === state.selectBoard.id
-            ? {
-                ...boardItem,
-                columnsOrder: [...boardItem.columnsOrder, action.payLoad],
-              }
-            : boardItem
-        ),
+        error: "",
       };
 
-    case CHANGE_COLUMNS_ORDER_LOCAL:
+    case EDIT_BOARD_SERVER_FAILURE:
       return {
         ...state,
-        selectColumnsOrder: action.payLoad,
-        boards: state.boards.map((boardItem) =>
-          boardItem.id === state.selectBoard.id
-            ? {
-                ...boardItem,
-                columnsOrder: action.payLoad,
-              }
-            : boardItem
-        ),
-      };
-
-    case REMOVE_COLUM_FROM_COLUMNS_ORDER_LOCAL:
-      return {
-        ...state,
-        selectColumnsOrder: state.selectColumnsOrder.filter(
-          (id) => id !== action.payLoad
-        ),
-        boards: state.boards.map((boardItem) =>
-          boardItem.id === state.selectBoardId
-            ? {
-                ...boardItem,
-                columnsOrder: boardItem.columnsOrder.filter(
-                  (id) => id !== action.payLoad
-                ),
-              }
-            : boardItem
-        ),
+        error: action.payLoad,
       };
 
     case DELETE_BOARD_LOCAL:
@@ -96,6 +73,18 @@ const boardReducer = (state = initialState, action) => {
         ...state,
         boards: state.boards.filter((board) => board.id !== action.payLoad),
         selectBoard: {},
+      };
+
+    case DELETE_BOARD_SERVER:
+      return {
+        ...state,
+        error: "",
+      };
+
+    case DELTE_BOARD_SERVER_FAILURE:
+      return {
+        ...state,
+        error: action.payLoad,
       };
 
     case ENTER_SEARCH_TEXT:

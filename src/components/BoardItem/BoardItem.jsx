@@ -41,31 +41,30 @@ const boardItem = ({
           <span className="board-item-title">{board.title}</span>
         </div>
         <div className="board-item-info-container">
-          <p className="sub-color board-item-no-margin">7 Columns</p>
-          <p className="sub-color board-item-no-margin">42 Cards</p>
+          <p className="sub-color board-item-no-margin">
+            {board.numberOfColumns} Columns
+          </p>
+          <p className="sub-color board-item-no-margin">
+            {board.numberOfCards} Cards
+          </p>
         </div>
       </span>
       <div className="board-item-footer">
-        <div className="board-num-members sub-color">12 Members</div>
+        <div className="board-num-members sub-color">
+          {board.members.length} Members
+        </div>
         <div className="board-item-icons">
           <FaEdit
             className="edit-board-icon"
             onClick={() => {
-              setSelectBoardData({
-                id: board.id,
-                title: board.title,
-              });
+              setSelectBoardData(board);
               showModal(EDIT);
             }}
           />
           <FaTrash
             className="delete-board-icon"
             onClick={() => {
-              setSelectBoardData({
-                id: board.id,
-                title: board.title,
-                columnsOrder: board.columnsOrder,
-              });
+              setSelectBoardData(board);
               showModal(DELETE);
             }}
           />

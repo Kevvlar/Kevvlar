@@ -20,12 +20,12 @@ export {
 
 export {
   addNewBoardLocal,
+  createNewBoardServer,
   setCurrentBoardData,
   editCurrentBoardLocal,
-  addColumnToColumnsOrderLocal,
-  changeColumnsOrderLocal,
-  removeColumnFromColumnsOrderLocal,
-  handleGlobalDeleteLocal,
+  editBoardServer,
+  deleteCurrentBoardLocal,
+  handleDeleteBoardServer,
   enterSearchText,
 } from "./board/boardActions";
 

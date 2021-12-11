@@ -16,11 +16,6 @@ import {
   ENTER_CARD_SEARCH_KEY,
 } from "./columnTypes";
 
-import {
-  addColumnToColumnsOrderLocal,
-  removeColumnFromColumnsOrderLocal,
-} from "../index";
-
 export const addNewColumnLocal = (columnObj) => {
   return {
     type: ADD_NEW_COLUMN_LOCAL,
@@ -44,7 +39,6 @@ export const deleteColumnsByBoardLocal = (boardId) => {
 
 export const handleAddNewColumnLocal = (columnObj) => {
   return (dispatch) => {
-    dispatch(addColumnToColumnsOrderLocal(columnObj.id));
     dispatch(addNewColumnLocal(columnObj));
     dispatch(getColumnsByBoardLocal(columnObj.boardId));
   };
@@ -67,7 +61,6 @@ export const deleteColumnLocal = (columnId) => {
 export const handleDeleteColumnLocal = (columnId) => {
   return (dispatch) => {
     dispatch(deleteColumnLocal(columnId));
-    dispatch(removeColumnFromColumnsOrderLocal(columnId));
   };
 };
 

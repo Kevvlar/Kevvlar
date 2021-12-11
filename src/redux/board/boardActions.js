@@ -1,20 +1,53 @@
+import axios from "axios";
 import {
   ADD_NEW_BOARD_LOCAL,
+  ADD_NEW_BOARD_SERVER,
+  ADD_NEW_BOARD_SERVER_FAILURE,
   SET_CURRENT_BOARD_DATA,
   EDIT_BOARD_LOCAL,
+  EDIT_BOARD_SERVER,
+  EDIT_BOARD_SERVER_FAILURE,
   DELETE_BOARD_LOCAL,
-  ADD_COLUMN_TO_COLUMNS_ORDER_LOCAL,
-  CHANGE_COLUMNS_ORDER_LOCAL,
-  REMOVE_COLUM_FROM_COLUMNS_ORDER_LOCAL,
+  DELETE_BOARD_SERVER,
+  DELTE_BOARD_SERVER_FAILURE,
   ENTER_SEARCH_TEXT,
 } from "./boardTypes";
-
-import { deleteColumnsByBoardLocal } from "../index";
 
 export const addNewBoardLocal = (boardObj) => {
   return {
     type: ADD_NEW_BOARD_LOCAL,
     payLoad: boardObj,
+  };
+};
+
+export const addNewBoardServer = () => {
+  return {
+    type: ADD_NEW_BOARD_SERVER,
+  };
+};
+
+export const addNewBoardFailure = (error) => {
+  return {
+    type: ADD_NEW_BOARD_SERVER_FAILURE,
+    payLoad: error,
+  };
+};
+
+export const createNewBoardServer = (boardObj, token) => {
+  return (dispatch) => {
+    axios
+      .post("http://localhost:8000/api/v1/boards", boardObj, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        dispatch(addNewBoardServer());
+      })
+      .catch((error) => {
+        dispatch(addNewBoardFailure(error.message));
+      });
   };
 };
 
@@ -32,6 +65,40 @@ export const editCurrentBoardLocal = (boardObj) => {
   };
 };
 
+export const editCurrentBoardServer = () => {
+  return {
+    type: EDIT_BOARD_SERVER,
+  };
+};
+
+export const editCurrentBoardServerFailure = (error) => {
+  return {
+    type: EDIT_BOARD_SERVER_FAILURE,
+    payLoad: error,
+  };
+};
+
+export const editBoardServer = (boardId, boardObj, token) => {
+  return (dispatch) => {
+    axios
+      .patch(`http://localhost:8000/api/v1/boards/${boardId}`, boardObj, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          boardId,
+        },
+      })
+      .then((response) => {
+        dispatch(editCurrentBoardServer());
+      })
+      .catch((error) => {
+        dispatch(editCurrentBoardServerFailure(error.message));
+      });
+  };
+};
+
 export const deleteCurrentBoardLocal = (boardId) => {
   return {
     type: DELETE_BOARD_LOCAL,
@@ -39,31 +106,37 @@ export const deleteCurrentBoardLocal = (boardId) => {
   };
 };
 
-export const addColumnToColumnsOrderLocal = (columnId) => {
+export const deleteCurrentBoardServer = () => {
   return {
-    type: ADD_COLUMN_TO_COLUMNS_ORDER_LOCAL,
-    payLoad: columnId,
+    type: DELETE_BOARD_SERVER,
   };
 };
 
-export const changeColumnsOrderLocal = (order) => {
+export const deleteCurrentBoardServerFailure = (error) => {
   return {
-    type: CHANGE_COLUMNS_ORDER_LOCAL,
-    payLoad: order,
+    type: DELTE_BOARD_SERVER_FAILURE,
+    payLoad: error,
   };
 };
 
-export const removeColumnFromColumnsOrderLocal = (columnId) => {
-  return {
-    type: REMOVE_COLUM_FROM_COLUMNS_ORDER_LOCAL,
-    payLoad: columnId,
-  };
-};
-
-export const handleGlobalDeleteLocal = (boardId) => {
+export const handleDeleteBoardServer = (boardId, token) => {
   return (dispatch) => {
-    dispatch(deleteColumnsByBoardLocal(boardId));
-    dispatch(deleteCurrentBoardLocal(boardId));
+    axios
+      .delete(`http://localhost:8000/api/v1/boards/${boardId}`, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          boardId,
+        },
+      })
+      .then((response) => {
+        dispatch(deleteCurrentBoardServer());
+      })
+      .catch((error) => {
+        dispatch(deleteCurrentBoardServerFailure(error.message));
+      });
   };
 };
 

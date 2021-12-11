@@ -6,8 +6,11 @@ import { v4 as uuidv4 } from "uuid";
 import {
   closeModal,
   addNewBoardLocal,
+  createNewBoardServer,
   editCurrentBoardLocal,
-  handleGlobalDeleteLocal,
+  editBoardServer,
+  deleteCurrentBoardLocal,
+  handleDeleteBoardServer,
 } from "../../../redux";
 import { ADD, EDIT, DELETE } from "../../../redux/modal/modalTypes";
 
@@ -17,10 +20,14 @@ const BoardModal = ({
   type,
   closeModal,
   addBoardLocal,
+  addBoardServer,
   boardTitle,
   boardId,
   editBoardLocal,
+  updateBoardServer,
   deleteBoardLocal,
+  deleteBoardServer,
+  user,
 }) => {
   const AddBoard = () => {
     const [boardName, setBoardName] = useState("");
@@ -38,13 +45,18 @@ const BoardModal = ({
         <button
           className="modal-board-button"
           onClick={() => {
-            const baordId = uuidv4();
+            const boardId = uuidv4();
             const boardObj = {
-              id: baordId,
+              id: boardId,
               title: boardName,
+              numberOfColumns: 0,
+              numberOfCards: 0,
               columnsOrder: [],
+              admins: [user._id],
+              members: [],
             };
             addBoardLocal(boardObj);
+            addBoardServer(boardObj, user.token);
             setBoardName("");
             closeModal();
           }}
@@ -74,6 +86,7 @@ const BoardModal = ({
               id: boardId,
               title: editBoardName,
             });
+            updateBoardServer(boardId, { title: editBoardName }, user.token);
             setEditBoardName("");
             closeModal();
           }}
@@ -96,6 +109,7 @@ const BoardModal = ({
             className="delete-button"
             onClick={() => {
               deleteBoardLocal(boardId);
+              deleteBoardServer(boardId, user.token);
               closeModal();
             }}
           >
@@ -126,6 +140,7 @@ const mapStateToProps = (state) => {
     type: state.modal.modalActionType,
     boardTitle: state.board.selectBoard.title,
     boardId: state.board.selectBoard.id,
+    user: state.user.userData,
   };
 };
 
@@ -133,8 +148,14 @@ const mapDispatchToProps = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
     addBoardLocal: (boardObj) => dispatch(addNewBoardLocal(boardObj)),
+    addBoardServer: (boardObj, token) =>
+      dispatch(createNewBoardServer(boardObj, token)),
     editBoardLocal: (boardObj) => dispatch(editCurrentBoardLocal(boardObj)),
-    deleteBoardLocal: (boardId) => dispatch(handleGlobalDeleteLocal(boardId)),
+    updateBoardServer: (boardId, boardObj, token) =>
+      dispatch(editBoardServer(boardId, boardObj, token)),
+    deleteBoardLocal: (boardId) => dispatch(deleteCurrentBoardLocal(boardId)),
+    deleteBoardServer: (boardId, token) =>
+      dispatch(handleDeleteBoardServer(boardId, token)),
   };
 };
 
