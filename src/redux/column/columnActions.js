@@ -1,7 +1,7 @@
 import {
   ADD_NEW_COLUMN_LOCAL,
+  ADD_NEW_COLUMN_SERVER_FAILURE,
   DELETE_COLUMNS_BY_BOARD_LOCAL,
-  GET_COLUMNS_BY_BOARDS_LOCAL,
   SET_CURRENT_COLUMN_DATA,
   DELETE_COLUMN_LOCAL,
   EDIT_COLUMN_LOCAL,
@@ -23,10 +23,10 @@ export const addNewColumnLocal = (columnObj) => {
   };
 };
 
-export const getColumnsByBoardLocal = (boardId) => {
+export const addNewColumnServerFailure = (error) => {
   return {
-    type: GET_COLUMNS_BY_BOARDS_LOCAL,
-    payLoad: boardId,
+    type: ADD_NEW_COLUMN_SERVER_FAILURE,
+    payLoad: error,
   };
 };
 
@@ -40,7 +40,6 @@ export const deleteColumnsByBoardLocal = (boardId) => {
 export const handleAddNewColumnLocal = (columnObj) => {
   return (dispatch) => {
     dispatch(addNewColumnLocal(columnObj));
-    dispatch(getColumnsByBoardLocal(columnObj.boardId));
   };
 };
 

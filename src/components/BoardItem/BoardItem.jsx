@@ -5,11 +5,7 @@ import { withRouter } from "react-router";
 
 import { BoardIcon } from "../../assets/svg/iconlibrary";
 
-import {
-  setCurrentBoardData,
-  setBoardModal,
-  getColumnsByBoardLocal,
-} from "../../redux";
+import { setCurrentBoardData, setBoardModal } from "../../redux";
 import { EDIT, DELETE } from "../../redux/modal/modalTypes";
 
 import "./boardItem.css";
@@ -20,19 +16,13 @@ const boardItem = ({
   showModal,
   history,
   match,
-  getColumns,
 }) => {
   return (
     <div className="board-item">
       <span
         className="class-for-item-on-click-event"
         onClick={() => {
-          setSelectBoardData({
-            id: board.id,
-            title: board.title,
-            columnsOrder: board.columnsOrder,
-          });
-          getColumns(board.id);
+          setSelectBoardData(board);
           history.push(`${match.url}/${board.title.toLowerCase()}/${board.id}`);
         }}
       >
@@ -78,7 +68,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setSelectBoardData: (board) => dispatch(setCurrentBoardData(board)),
     showModal: (type) => dispatch(setBoardModal(type)),
-    getColumns: (boardId) => dispatch(getColumnsByBoardLocal(boardId)),
   };
 };
 

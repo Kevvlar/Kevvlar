@@ -19,6 +19,7 @@ export {
 } from "./modal/modalActions";
 
 export {
+  fetchBoards,
   addNewBoardLocal,
   createNewBoardServer,
   setCurrentBoardData,
@@ -31,7 +32,6 @@ export {
 
 export {
   handleAddNewColumnLocal,
-  getColumnsByBoardLocal,
   deleteColumnsByBoardLocal,
   setCurrentColumnData,
   handleDeleteColumnLocal,

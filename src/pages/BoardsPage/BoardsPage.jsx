@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import AppBar from "../../components/appbar/AppBar";
@@ -7,9 +7,17 @@ import BoardList from "../../components/BoardList/BoardList";
 import RightSideNav from "../../components/sidenav-right/SideNavRight";
 import Modal from "../../components/modal/Modal";
 
+import { fetchBoards } from "../../redux";
+
 import "./boardsPage.css";
 
-const BoardsPage = ({ rightSideNav, showModal }) => {
+const BoardsPage = ({ rightSideNav, showModal, getBoards, user, boards }) => {
+  useEffect(() => {
+    if (!boards) {
+      getBoards(user.token);
+    }
+  }, []);
+
   return (
     <div>
       <AppBar />
@@ -37,7 +45,15 @@ const mapStateToProps = (state) => {
     leftSideNav: state.sideNavLeft.leftSideNav,
     rightSideNav: state.sideNavRight.rightSideNav,
     showModal: state.modal.showModal,
+    user: state.user.userData,
+    boards: state.board.boards,
   };
 };
 
-export default connect(mapStateToProps, null)(BoardsPage);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getBoards: (token) => dispatch(fetchBoards(token)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BoardsPage);

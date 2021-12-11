@@ -24,7 +24,7 @@ const mapOrder = (array, order, key) => {
   return array;
 };
 
-const ColumnHolder = ({ addNewColumnModal, columns = [], columnsOrder }) => {
+const ColumnHolder = ({ addNewColumnModal, columns, columnsOrder }) => {
   const onDragEnd = (result) => {
     const { destination, draggableId, source, type } = result;
 
@@ -104,7 +104,7 @@ const ColumnHolder = ({ addNewColumnModal, columns = [], columnsOrder }) => {
 const mapStateToProps = (state) => {
   return {
     columnsOrder: state.board.selectBoard.columnsOrder,
-    columns: state.column.columnsByBoard,
+    columns: state.column.columns,
   };
 };
 

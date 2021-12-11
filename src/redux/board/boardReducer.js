@@ -1,4 +1,7 @@
 import {
+  FETCH_BOARDS_REQUEST,
+  FETCH_BOARDS_SUCCESS,
+  FETCH_BOARDS_FAILURE,
   ADD_NEW_BOARD_LOCAL,
   ADD_NEW_BOARD_SERVER,
   ADD_NEW_BOARD_SERVER_FAILURE,
@@ -17,10 +20,32 @@ const initialState = {
   searchKey: "",
   error: "",
   boards: [],
+  loading: false,
 };
 
 const boardReducer = (state = initialState, action) => {
   switch (action.type) {
+    case FETCH_BOARDS_REQUEST:
+      return {
+        ...state,
+        error: "",
+        loading: true,
+      };
+
+    case FETCH_BOARDS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        boards: action.payLoad,
+      };
+
+    case FETCH_BOARDS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payLoad,
+      };
+
     case ADD_NEW_BOARD_LOCAL:
       return {
         ...state,

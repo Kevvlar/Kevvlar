@@ -1,5 +1,8 @@
 import axios from "axios";
 import {
+  FETCH_BOARDS_REQUEST,
+  FETCH_BOARDS_SUCCESS,
+  FETCH_BOARDS_FAILURE,
   ADD_NEW_BOARD_LOCAL,
   ADD_NEW_BOARD_SERVER,
   ADD_NEW_BOARD_SERVER_FAILURE,
@@ -12,6 +15,46 @@ import {
   DELTE_BOARD_SERVER_FAILURE,
   ENTER_SEARCH_TEXT,
 } from "./boardTypes";
+
+export const fetchBoardsRequest = () => {
+  return {
+    type: FETCH_BOARDS_REQUEST,
+  };
+};
+
+export const fetchBoardsSuccess = (boards) => {
+  return {
+    type: FETCH_BOARDS_SUCCESS,
+    payLoad: boards,
+  };
+};
+
+export const fetchBoardsFailure = (error) => {
+  return {
+    type: FETCH_BOARDS_FAILURE,
+    payLoad: error,
+  };
+};
+
+export const fetchBoards = (token) => {
+  return (dispatch) => {
+    dispatch(fetchBoardsRequest());
+    axios
+      .get("http://localhost:8000/api/v1/boards", {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const boards = response.data.data.boards;
+        dispatch(fetchBoardsSuccess(boards));
+      })
+      .catch((error) => {
+        dispatch(fetchBoardsFailure(error.message));
+      });
+  };
+};
 
 export const addNewBoardLocal = (boardObj) => {
   return {
