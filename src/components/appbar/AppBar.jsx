@@ -11,7 +11,7 @@ import { withRouter } from "react-router";
 import "./appbar.css";
 import "./kevvlar-logo.svg";
 
-const AppBar = ({ toggleLeftSideNav, boardTitle, history }) => (
+const AppBar = ({ toggleLeftSideNav, history }) => (
   <header>
     <div className="appbar-container">
       <div className="appbar-menu-container">
@@ -75,7 +75,6 @@ const AppBar = ({ toggleLeftSideNav, boardTitle, history }) => (
 const mapStateToProps = (state) => {
   return {
     boards: state.board.boards,
-    boardTitle: state.board.currentBoardTitle,
   };
 };
 

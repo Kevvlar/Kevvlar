@@ -16,7 +16,7 @@ import "./columnModal.css";
 const ColumnModal = ({
   closeModal,
   type,
-  currentBoardId,
+  boardId,
   addNewColumnLocal,
   removeColumnLocal,
   currentColumnId,
@@ -41,7 +41,7 @@ const ColumnModal = ({
           onClick={() => {
             const columnObj = {
               id: uuidv4(),
-              boardId: currentBoardId,
+              boardId: boardId,
               title: columnTitle,
               cards: [],
               cardsOrder: [],
@@ -124,7 +124,7 @@ const ColumnModal = ({
 const mapStateToProps = (state) => {
   return {
     type: state.modal.modalActionType,
-    currentBoardId: state.board.selectBoardId,
+    boardId: state.board.selectBoard.id,
     currentColumnId: state.column.currentColumnId,
     currentColumnTitle: state.column.currentColumnTitle,
   };

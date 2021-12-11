@@ -10,9 +10,7 @@ import {
 } from "./boardTypes";
 
 const initialState = {
-  selectBoardId: "",
-  selectBoardTitle: "",
-  selectColumnsOrder: [],
+  selectBoard: {},
   searchKey: "",
   error: "",
   boards: [],
@@ -29,9 +27,7 @@ const boardReducer = (state = initialState, action) => {
     case SET_CURRENT_BOARD_DATA:
       return {
         ...state,
-        selectBoardId: action.payLoad.id,
-        selectBoardTitle: action.payLoad.title,
-        selectColumnsOrder: action.payLoad.columnsOrder,
+        selectBoard: action.payLoad,
         searchKey: "",
       };
 
@@ -43,17 +39,18 @@ const boardReducer = (state = initialState, action) => {
             ? { ...board, title: action.payLoad.title }
             : board
         ),
-        selectBoardId: "",
-        selectBoardTitle: "",
-        selectColumnsOrder: [],
+        selectBoard: {},
       };
 
     case ADD_COLUMN_TO_COLUMNS_ORDER_LOCAL:
       return {
         ...state,
-        selectColumnsOrder: [...state.selectColumnsOrder, action.payLoad],
+        selectBoard: {
+          ...state.selectBoard,
+          columnsOrder: [...state.selectBoard.columnsOrder, action.payLoad],
+        },
         boards: state.boards.map((boardItem) =>
-          boardItem.id === state.selectBoardId
+          boardItem.id === state.selectBoard.id
             ? {
                 ...boardItem,
                 columnsOrder: [...boardItem.columnsOrder, action.payLoad],
@@ -67,7 +64,7 @@ const boardReducer = (state = initialState, action) => {
         ...state,
         selectColumnsOrder: action.payLoad,
         boards: state.boards.map((boardItem) =>
-          boardItem.id === state.selectBoardId
+          boardItem.id === state.selectBoard.id
             ? {
                 ...boardItem,
                 columnsOrder: action.payLoad,
@@ -98,9 +95,7 @@ const boardReducer = (state = initialState, action) => {
       return {
         ...state,
         boards: state.boards.filter((board) => board.id !== action.payLoad),
-        selectBoardId: "",
-        selectBoardTitle: "",
-        selectColumnsOrder: [],
+        selectBoard: {},
       };
 
     case ENTER_SEARCH_TEXT:

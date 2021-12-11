@@ -118,7 +118,7 @@ const ColumnHolder = ({
 
 const mapStateToProps = (state) => {
   return {
-    columnsOrder: state.board.selectColumnsOrder,
+    columnsOrder: state.board.selectBoard.columnsOrder,
     columns: state.column.columnsByBoard,
   };
 };

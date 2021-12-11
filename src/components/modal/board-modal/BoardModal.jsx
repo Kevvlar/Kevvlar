@@ -17,8 +17,8 @@ const BoardModal = ({
   type,
   closeModal,
   addBoardLocal,
-  currrentBoardTitle,
-  currrentBoardId,
+  boardTitle,
+  boardId,
   editBoardLocal,
   deleteBoardLocal,
 }) => {
@@ -56,7 +56,7 @@ const BoardModal = ({
   };
 
   const EditBoard = () => {
-    const [editBoardName, setEditBoardName] = useState(currrentBoardTitle);
+    const [editBoardName, setEditBoardName] = useState(boardTitle);
     return (
       <div className="modal-body">
         <h2 className="modal-title">Edit Board</h2>
@@ -71,7 +71,7 @@ const BoardModal = ({
           className="modal-board-button"
           onClick={() => {
             editBoardLocal({
-              id: currrentBoardId,
+              id: boardId,
               title: editBoardName,
             });
             setEditBoardName("");
@@ -95,7 +95,7 @@ const BoardModal = ({
           <button
             className="delete-button"
             onClick={() => {
-              deleteBoardLocal(currrentBoardId);
+              deleteBoardLocal(boardId);
               closeModal();
             }}
           >
@@ -124,8 +124,8 @@ const BoardModal = ({
 const mapStateToProps = (state) => {
   return {
     type: state.modal.modalActionType,
-    currrentBoardTitle: state.board.selectBoardTitle,
-    currrentBoardId: state.board.selectBoardId,
+    boardTitle: state.board.selectBoard.title,
+    boardId: state.board.selectBoard.id,
   };
 };
 

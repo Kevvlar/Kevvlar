@@ -19,7 +19,7 @@ const App = () => (
     <PersistGate loading={null} persistor={persistor}>
       <div className="App">
         <Switch>
-          <RedirectToMainPage exact path="/Kevvlar" component={Homepage} />
+          <RedirectToMainPage exact path="/" component={Homepage} />
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/signin" component={SignIn} />
           <PrivateRoute

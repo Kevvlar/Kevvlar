@@ -1,3 +1,5 @@
+export { signUserUp, signUserIn, handleLogOutUser } from "./user/userActions";
+
 export {
   showLeftSideNav,
   hideLeftSideNav,

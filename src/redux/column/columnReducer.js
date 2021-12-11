@@ -18,12 +18,10 @@ import {
 
 const initialState = {
   cardSearchKeyWord: "",
-  currentColumnId: "",
-  currentColumnTitle: "",
-  currentCard: {},
+  selectColummn: {},
+  selectCard: {},
   error: "",
   columns: [],
-  columnsByBoard: [],
 };
 
 const columnReducer = (state = initialState, action) => {
@@ -40,15 +38,13 @@ const columnReducer = (state = initialState, action) => {
         columns: state.columns.filter(
           (columnItem) => columnItem.boardId !== action.payLoad
         ),
-        currentColumnId: "",
-        currentColumnTitle: "",
-        columnsByBoard: [],
+        selectColummn: {},
       };
 
     case GET_COLUMNS_BY_BOARDS_LOCAL:
       return {
         ...state,
-        columnsByBoard: state.columns.filter(
+        columns: state.columns.filter(
           (column) => column.boardId === action.payLoad
         ),
       };
@@ -189,7 +185,7 @@ const columnReducer = (state = initialState, action) => {
           }
           return columnItem;
         }),
-        currentCard: [],
+        selectCard: [],
       };
 
     case CHANGE_CARD_ORDER_LOCAL:
@@ -216,7 +212,7 @@ const columnReducer = (state = initialState, action) => {
     case SET_CURRENT_CARD_DATA:
       return {
         ...state,
-        currentCard: action.payLoad,
+        selectCard: action.payLoad,
       };
 
     case REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL:
@@ -227,10 +223,10 @@ const columnReducer = (state = initialState, action) => {
             ? {
                 ...columnItem,
                 cards: columnItem.cards.filter(
-                  (card) => card.id !== state.currentCard.id
+                  (card) => card.id !== state.selectCard.id
                 ),
                 cardsOrder: columnItem.cardsOrder.filter(
-                  (id) => id !== state.currentCard.id
+                  (id) => id !== state.selectCard.id
                 ),
               }
             : columnItem
@@ -240,10 +236,10 @@ const columnReducer = (state = initialState, action) => {
             ? {
                 ...columnItem,
                 cards: columnItem.cards.filter(
-                  (card) => card.id !== state.currentCard.id
+                  (card) => card.id !== state.selectCard.id
                 ),
                 cardsOrder: columnItem.cardsOrder.filter(
-                  (id) => id !== state.currentCard.id
+                  (id) => id !== state.selectCard.id
                 ),
               }
             : columnItem
@@ -257,7 +253,7 @@ const columnReducer = (state = initialState, action) => {
           columnItem.id === action.payLoad.destinationColumn
             ? {
                 ...columnItem,
-                cards: [...columnItem.cards, state.currentCard],
+                cards: [...columnItem.cards, state.selectCard],
                 cardsOrder: action.payLoad.newOrder,
               }
             : columnItem
@@ -266,7 +262,7 @@ const columnReducer = (state = initialState, action) => {
           columnItem.id === action.payLoad.destinationColumn
             ? {
                 ...columnItem,
-                cards: [...columnItem.cards, state.currentCard],
+                cards: [...columnItem.cards, state.selectCard],
                 cardsOrder: action.payLoad.newOrder,
               }
             : columnItem
@@ -276,7 +272,7 @@ const columnReducer = (state = initialState, action) => {
     case CHANGE_CARD_COLUMN_ID:
       return {
         ...state,
-        currentCard: { ...state.currentCard, columnId: action.payLoad },
+        selectCard: { ...state.selectCard, columnId: action.payLoad },
       };
 
     case ENTER_CARD_SEARCH_KEY:
