@@ -7,6 +7,8 @@ import BoardList from "../../components/BoardList/BoardList";
 import RightSideNav from "../../components/sidenav-right/SideNavRight";
 import Modal from "../../components/modal/Modal";
 
+import { LoadingIcon } from "../../assets/svg/iconlibrary";
+
 import { fetchBoards } from "../../redux";
 
 import "./boardsPage.css";
@@ -20,19 +22,23 @@ class BoardsPage extends React.Component {
     return (
       <div>
         <AppBar />
-        <div className="boards-page">
-          <div className="board-main">
-            <SearchBar />
-            <div className="boards-container">
-              <h2 className="all-boards-title">All Boards</h2>
-              <BoardList />
-            </div>
+        {this.props.boardState ? (
+          <div className="boards-page">
+            <div className="board-main">
+              <SearchBar />
+              <div className="boards-container">
+                <h2 className="all-boards-title">All Boards</h2>
+                <BoardList />
+              </div>
 
-            <div className="boards-container">
-              <h2 className="all-boards-title">Team Boards</h2>
+              <div className="boards-container">
+                <h2 className="all-boards-title">Team Boards</h2>
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <LoadingIcon />
+        )}
         {this.props.showModal ? <Modal /> : null}
         {this.props.rightSideNav ? <RightSideNav /> : null}
       </div>
@@ -45,6 +51,7 @@ const mapStateToProps = (state) => {
     rightSideNav: state.sideNavRight.rightSideNav,
     showModal: state.modal.showModal,
     user: state.user.userData,
+    boardState: state.board.loading,
   };
 };
 

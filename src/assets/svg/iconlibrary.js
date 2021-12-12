@@ -124,34 +124,75 @@ const DeleteIcon = () => {
 
 const HomeIcon = () => {
   return (
-    <svg width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M8 17V11H12V17H17V9H20L10 0L0 9H3V17H8Z" fill="#A0A0A0"/>
+    <svg
+      width="20"
+      height="17"
+      viewBox="0 0 20 17"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M8 17V11H12V17H17V9H20L10 0L0 9H3V17H8Z" fill="#A0A0A0" />
     </svg>
   );
 };
 
 const LoadingIcon = () => {
   return (
-    <svg style="margin: auto; background: rgb(241, 242, 243); display: block; shape-rendering: auto;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" transform='rotate(45)'>
+    <svg
+      style={{
+        margin: "auto",
+        background: "rgb(241, 242, 243)",
+        display: "block",
+        shapeRendering: "auto",
+      }}
+      width="200px"
+      height="200px"
+      viewBox="0 0 100 100"
+      preserveAspectRatio="xMidYMid"
+      transform="rotate(45)"
+    >
       <g transform="translate(26.666666666666668,26.666666666666668)">
         <rect x="-20" y="-20" width="40" height="40" fill="#03a9f4">
-          <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" dur="1s" keyTimes="0;1" values="1.1500000000000001;1" begin="-0.3s"></animateTransform>
+          <animateTransform
+            attributeName="transform"
+            type="scale"
+            repeatCount="indefinite"
+            dur="1s"
+            keyTimes="0;1"
+            values="1.1500000000000001;1"
+            begin="-0.3s"
+          ></animateTransform>
         </rect>
       </g>
       <g transform="translate(26.666666666666668,73.33333333333333)">
         <rect x="-20" y="-20" width="40" height="40" fill="#e27561">
-          <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" dur="1s" keyTimes="0;1" values="1.1500000000000001;1" begin="0s"></animateTransform>
+          <animateTransform
+            attributeName="transform"
+            type="scale"
+            repeatCount="indefinite"
+            dur="1s"
+            keyTimes="0;1"
+            values="1.1500000000000001;1"
+            begin="0s"
+          ></animateTransform>
         </rect>
       </g>
       <g transform="translate(73.33333333333333,73.33333333333333)">
         <rect x="-20" y="-20" width="40" height="40" fill="#47b98f">
-          <animateTransform attributeName="transform" type="scale" repeatCount="indefinite" dur="1s" keyTimes="0;1" values="1.1500000000000001;1" begin="-0.1s"></animateTransform>
+          <animateTransform
+            attributeName="transform"
+            type="scale"
+            repeatCount="indefinite"
+            dur="1s"
+            keyTimes="0;1"
+            values="1.1500000000000001;1"
+            begin="-0.1s"
+          ></animateTransform>
         </rect>
       </g>
     </svg>
   );
 };
-
 
 export {
   LockIcon,
