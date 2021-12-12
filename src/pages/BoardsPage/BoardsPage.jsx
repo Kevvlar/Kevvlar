@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
 import AppBar from "../../components/appbar/AppBar";
@@ -11,36 +11,37 @@ import { fetchBoards } from "../../redux";
 
 import "./boardsPage.css";
 
-const BoardsPage = ({ rightSideNav, showModal, getBoards, user }) => {
-  useEffect(() => {
-    getBoards(user.token);
-  }, []);
+class BoardsPage extends React.Component {
+  componentDidMount() {
+    this.props.getBoards(this.props.user.token);
+  }
 
-  return (
-    <div>
-      <AppBar />
-      <div className="boards-page">
-        <div className="board-main">
-          <SearchBar />
-          <div className="boards-container">
-            <h2 className="all-boards-title">All Boards</h2>
-            <BoardList />
-          </div>
+  render() {
+    return (
+      <div>
+        <AppBar />
+        <div className="boards-page">
+          <div className="board-main">
+            <SearchBar />
+            <div className="boards-container">
+              <h2 className="all-boards-title">All Boards</h2>
+              <BoardList />
+            </div>
 
-          <div className="boards-container">
-            <h2 className="all-boards-title">Team Boards</h2>
+            <div className="boards-container">
+              <h2 className="all-boards-title">Team Boards</h2>
+            </div>
           </div>
         </div>
+        {this.props.showModal ? <Modal /> : null}
+        {this.props.rightSideNav ? <RightSideNav /> : null}
       </div>
-      {showModal ? <Modal /> : null}
-      {rightSideNav ? <RightSideNav /> : null}
-    </div>
-  );
-};
+    );
+  }
+}
 
 const mapStateToProps = (state) => {
   return {
-    leftSideNav: state.sideNavLeft.leftSideNav,
     rightSideNav: state.sideNavRight.rightSideNav,
     showModal: state.modal.showModal,
     user: state.user.userData,
