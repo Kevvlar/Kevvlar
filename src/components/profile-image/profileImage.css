@@ -9,7 +9,7 @@
   height: 25px;
   margin-right: 10px;
   border-radius: 15px;
-  background-color: tomato;
+  border: 1px solid greenyellow;
 }
 
 .user-profile-name {

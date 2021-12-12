@@ -53,20 +53,14 @@ const Column = ({
             <div className="column-header-icon-container">
               <FaTrash
                 onClick={() => {
-                  getColumnData({
-                    id: column.id,
-                    title: column.title,
-                  });
+                  getColumnData(column);
                   deleteColumnModal();
                 }}
                 className="column-header-trash-icon"
               />
               <FaEdit
                 onClick={() => {
-                  getColumnData({
-                    id: column.id,
-                    title: column.title,
-                  });
+                  getColumnData(column);
                   editColumnModal();
                 }}
                 className="column-header-edit-icon"
@@ -108,10 +102,7 @@ const Column = ({
           </Droppable>
           <button
             onClick={() => {
-              getColumnData({
-                id: column.id,
-                title: column.title,
-              });
+              getColumnData(column);
               addNewCardModal();
             }}
             className="new-card-button"

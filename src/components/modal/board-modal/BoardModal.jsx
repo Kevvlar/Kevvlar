@@ -6,8 +6,11 @@ import { v4 as uuidv4 } from "uuid";
 import {
   closeModal,
   addNewBoardLocal,
+  createNewBoardServer,
   editCurrentBoardLocal,
-  handleGlobalDeleteLocal,
+  editBoardServer,
+  handleDeleteBoardLocal,
+  handleDeleteBoardServer,
 } from "../../../redux";
 import { ADD, EDIT, DELETE } from "../../../redux/modal/modalTypes";
 
@@ -17,10 +20,14 @@ const BoardModal = ({
   type,
   closeModal,
   addBoardLocal,
-  currrentBoardTitle,
-  currrentBoardId,
+  addBoardServer,
+  boardTitle,
+  boardId,
   editBoardLocal,
+  updateBoardServer,
   deleteBoardLocal,
+  deleteBoardServer,
+  user,
 }) => {
   const AddBoard = () => {
     const [boardName, setBoardName] = useState("");
@@ -38,13 +45,18 @@ const BoardModal = ({
         <button
           className="modal-board-button"
           onClick={() => {
-            const baordId = uuidv4();
+            const boardId = uuidv4();
             const boardObj = {
-              id: baordId,
+              id: boardId,
               title: boardName,
+              numberOfColumns: 0,
+              numberOfCards: 0,
               columnsOrder: [],
+              admins: [user._id],
+              members: [],
             };
             addBoardLocal(boardObj);
+            addBoardServer(boardObj, user.token);
             setBoardName("");
             closeModal();
           }}
@@ -56,7 +68,7 @@ const BoardModal = ({
   };
 
   const EditBoard = () => {
-    const [editBoardName, setEditBoardName] = useState(currrentBoardTitle);
+    const [editBoardName, setEditBoardName] = useState(boardTitle);
     return (
       <div className="modal-body">
         <h2 className="modal-title">Edit Board</h2>
@@ -71,9 +83,10 @@ const BoardModal = ({
           className="modal-board-button"
           onClick={() => {
             editBoardLocal({
-              id: currrentBoardId,
+              id: boardId,
               title: editBoardName,
             });
+            updateBoardServer(boardId, { title: editBoardName }, user.token);
             setEditBoardName("");
             closeModal();
           }}
@@ -95,7 +108,8 @@ const BoardModal = ({
           <button
             className="delete-button"
             onClick={() => {
-              deleteBoardLocal(currrentBoardId);
+              deleteBoardLocal(boardId);
+              deleteBoardServer(boardId, user.token);
               closeModal();
             }}
           >
@@ -124,8 +138,9 @@ const BoardModal = ({
 const mapStateToProps = (state) => {
   return {
     type: state.modal.modalActionType,
-    currrentBoardTitle: state.board.selectBoardTitle,
-    currrentBoardId: state.board.selectBoardId,
+    boardTitle: state.board.selectBoard.title,
+    boardId: state.board.selectBoard.id,
+    user: state.user.userData,
   };
 };
 
@@ -133,8 +148,14 @@ const mapDispatchToProps = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
     addBoardLocal: (boardObj) => dispatch(addNewBoardLocal(boardObj)),
+    addBoardServer: (boardObj, token) =>
+      dispatch(createNewBoardServer(boardObj, token)),
     editBoardLocal: (boardObj) => dispatch(editCurrentBoardLocal(boardObj)),
-    deleteBoardLocal: (boardId) => dispatch(handleGlobalDeleteLocal(boardId)),
+    updateBoardServer: (boardId, boardObj, token) =>
+      dispatch(editBoardServer(boardId, boardObj, token)),
+    deleteBoardLocal: (boardId) => dispatch(handleDeleteBoardLocal(boardId)),
+    deleteBoardServer: (boardId, token) =>
+      dispatch(handleDeleteBoardServer(boardId, token)),
   };
 };
 

@@ -1,18 +1,29 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { FaEllipsisH, FaThLarge, FaMinus } from "react-icons/fa";
 
-import { toggleGridCard, toggleFlatCard } from "../../redux/index.js";
+import {
+  toggleGridCard,
+  toggleFlatCard,
+  handleLogOutUser,
+  toggleRightSideNav,
+} from "../../redux/index.js";
 
 import TaskList from "../task-list/TaskList";
 
 import "./sideNavRight.css";
 
-const RightSideNav = ({ history, toggleGrid, toggleFlat }) => {
+const RightSideNav = ({
+  toggleGrid,
+  toggleFlat,
+  logUserOut,
+  toggleRightSideNav,
+  history,
+}) => {
   const handleSignOut = () => {
-    localStorage.removeItem("token");
-    history.push("/signin");
+    toggleRightSideNav();
+    logUserOut(history);
   };
 
   return (
@@ -44,6 +55,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     toggleGrid: () => dispatch(toggleGridCard()),
     toggleFlat: () => dispatch(toggleFlatCard()),
+    logUserOut: (history) => dispatch(handleLogOutUser(history)),
+    toggleRightSideNav: () => dispatch(toggleRightSideNav()),
   };
 };
 

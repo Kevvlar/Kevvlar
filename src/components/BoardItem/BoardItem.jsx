@@ -5,16 +5,13 @@ import { withRouter } from "react-router";
 
 import { BoardIcon } from "../../assets/svg/iconlibrary";
 
-import {
-  setCurrentBoardData,
-  setBoardModal,
-  getColumnsByBoardLocal,
-} from "../../redux";
+import { setCurrentBoardData, setBoardModal, fetchColumns } from "../../redux";
 import { EDIT, DELETE } from "../../redux/modal/modalTypes";
 
 import "./boardItem.css";
 
 const boardItem = ({
+  user,
   board,
   setSelectBoardData,
   showModal,
@@ -27,12 +24,8 @@ const boardItem = ({
       <span
         className="class-for-item-on-click-event"
         onClick={() => {
-          setSelectBoardData({
-            id: board.id,
-            title: board.title,
-            columnsOrder: board.columnsOrder,
-          });
-          getColumns(board.id);
+          getColumns(user.token, board.id);
+          setSelectBoardData(board);
           history.push(`${match.url}/${board.title.toLowerCase()}/${board.id}`);
         }}
       >
@@ -41,31 +34,30 @@ const boardItem = ({
           <span className="board-item-title">{board.title}</span>
         </div>
         <div className="board-item-info-container">
-          <p className="sub-color board-item-no-margin">7 Columns</p>
-          <p className="sub-color board-item-no-margin">42 Cards</p>
+          <p className="sub-color board-item-no-margin">
+            {board.numberOfColumns} Columns
+          </p>
+          <p className="sub-color board-item-no-margin">
+            {board.numberOfCards} Cards
+          </p>
         </div>
       </span>
       <div className="board-item-footer">
-        <div className="board-num-members sub-color">12 Members</div>
+        <div className="board-num-members sub-color">
+          {board.members.length + board.admins.length} Users
+        </div>
         <div className="board-item-icons">
           <FaEdit
             className="edit-board-icon"
             onClick={() => {
-              setSelectBoardData({
-                id: board.id,
-                title: board.title,
-              });
+              setSelectBoardData(board);
               showModal(EDIT);
             }}
           />
           <FaTrash
             className="delete-board-icon"
             onClick={() => {
-              setSelectBoardData({
-                id: board.id,
-                title: board.title,
-                columnsOrder: board.columnsOrder,
-              });
+              setSelectBoardData(board);
               showModal(DELETE);
             }}
           />
@@ -75,12 +67,21 @@ const boardItem = ({
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    setSelectBoardData: (board) => dispatch(setCurrentBoardData(board)),
-    showModal: (type) => dispatch(setBoardModal(type)),
-    getColumns: (boardId) => dispatch(getColumnsByBoardLocal(boardId)),
+    user: state.user.userData,
   };
 };
 
-export default connect(null, mapDispatchToProps)(withRouter(boardItem));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setSelectBoardData: (board) => dispatch(setCurrentBoardData(board)),
+    getColumns: (token, boardId) => dispatch(fetchColumns(token, boardId)),
+    showModal: (type) => dispatch(setBoardModal(type)),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(boardItem));

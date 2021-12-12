@@ -1,8 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { showLeftSideNav } from "../../redux/index";
-
 import NotificationIcon from "../notification-icon/NotificationIcon";
 import UserProfile from "../profile-image/ProfileImage";
 import { HomeIcon } from "../../assets/svg/iconlibrary";
@@ -11,19 +9,17 @@ import { withRouter } from "react-router";
 import "./appbar.css";
 import "./kevvlar-logo.svg";
 
-const AppBar = ({ toggleLeftSideNav, boardTitle, history }) => (
+const AppBar = ({ history, boardState }) => (
   <header>
     <div className="appbar-container">
       <div className="appbar-menu-container">
-        <div
-          onClick={() => {
-            toggleLeftSideNav();
-          }}
-          className="appbar-ham-icon-container"
-        >
+        <div className="appbar-ham-icon-container">
           <button
             className="appbar-logo"
             onClick={() => {
+              if (boardState === true) {
+                return;
+              }
               history.push("/boards");
             }}
           >
@@ -75,14 +71,8 @@ const AppBar = ({ toggleLeftSideNav, boardTitle, history }) => (
 const mapStateToProps = (state) => {
   return {
     boards: state.board.boards,
-    boardTitle: state.board.currentBoardTitle,
+    boardState: state.board.loading,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    toggleLeftSideNav: () => dispatch(showLeftSideNav()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AppBar));
+export default connect(mapStateToProps, null)(withRouter(AppBar));

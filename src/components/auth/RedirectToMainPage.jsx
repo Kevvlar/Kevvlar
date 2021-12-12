@@ -1,12 +1,12 @@
 import React from "react";
 import { Route, Redirect } from "react-router";
-import { isAuthenticated } from "./index";
+import { connect } from "react-redux";
 
-const RedirectToMainPage = ({ component: Component, ...rest }) => (
+const RedirectToMainPage = ({ component: Component, user, ...rest }) => (
   <Route
     {...rest}
     render={(props) =>
-      isAuthenticated() ? (
+      user.token ? (
         <Redirect
           to={{ pathname: "/boards", state: { from: props.location } }}
         />
@@ -17,4 +17,10 @@ const RedirectToMainPage = ({ component: Component, ...rest }) => (
   />
 );
 
-export default RedirectToMainPage;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user.userData,
+  };
+};
+
+export default connect(mapStateToProps, null)(RedirectToMainPage);

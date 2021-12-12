@@ -1,20 +1,26 @@
 import React from "react";
 import { Route, Redirect } from "react-router";
-import { isAuthenticated } from "./index";
+import { connect } from "react-redux";
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
+const PrivateRoute = ({ component: Component, user, ...rest }) => (
   <Route
     {...rest}
     render={(props) =>
-      isAuthenticated() ? (
+      user.token ? (
         <Component {...props} />
       ) : (
         <Redirect
-          to={{ pathname: "/signin", state: { from: props.location } }}
+          to={{ pathname: "/kevvlar", state: { from: props.location } }}
         />
       )
     }
   />
 );
 
-export default PrivateRoute;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user.userData,
+  };
+};
+
+export default connect(mapStateToProps, null)(PrivateRoute);

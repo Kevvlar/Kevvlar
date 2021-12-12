@@ -1,16 +1,19 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import "./profileImage.css";
 
-const UserProfile = () => (
+const UserProfile = ({ user }) => (
   <div className="user-profile-container">
-    <img
-      className="user-profile-image"
-      alt="img"
-      src="https://robohash.org/620050a4db5104bae758cd75171d64ca?size=100x100"
-    />
-    <div className="user-profile-name">JohnDoe</div>
+    <img className="user-profile-image" alt="img" src={user.photo} />
+    <div className="user-profile-name">{user.name}</div>
   </div>
 );
 
-export default UserProfile;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user.userData,
+  };
+};
+
+export default connect(mapStateToProps, null)(UserProfile);

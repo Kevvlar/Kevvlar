@@ -5,9 +5,9 @@ import { connect } from "react-redux";
 
 import {
   setColumnModal,
+  editBoardServer,
   changeColumnsOrderLocal,
-  changeCardOrderLocal,
-  handleChangeCardColumnLocal,
+  fetchBoards,
 } from "../../redux/index";
 
 import Column from "../column/Column";
@@ -30,12 +30,14 @@ const mapOrder = (array, order, key) => {
 };
 
 const ColumnHolder = ({
+  user,
+  boardId,
   addNewColumnModal,
   columns,
+  getBoards,
   columnsOrder,
-  changesColumnsOrder,
-  changeCardOrder,
-  changeCardColumn,
+  updateBoardServer,
+  updateColumnsOrderLocal,
 }) => {
   const onDragEnd = (result) => {
     const { destination, draggableId, source, type } = result;
@@ -49,7 +51,9 @@ const ColumnHolder = ({
       const newColumnOrder = Array.from(columnsOrder);
       const [reOrderedItem] = newColumnOrder.splice(source.index, 1);
       newColumnOrder.splice(destination.index, 0, reOrderedItem);
-      changesColumnsOrder(newColumnOrder);
+      updateColumnsOrderLocal(newColumnOrder);
+      updateBoardServer(boardId, { columnsOrder: newColumnOrder }, user.token);
+      getBoards(user.token);
     }
 
     // move card within column
@@ -64,7 +68,7 @@ const ColumnHolder = ({
       const newCardOrder = Array.from(currentColumn.cardsOrder);
       const [reOrderedCards] = newCardOrder.splice(source.index, 1);
       newCardOrder.splice(destination.index, 0, reOrderedCards);
-      changeCardOrder(newCardOrder);
+      console.log(newCardOrder);
     }
 
     // move card into another column
@@ -76,10 +80,7 @@ const ColumnHolder = ({
       const targetColumnCardOrder = targetColumn.cardsOrder;
       const newTargetColumnCardOrder = [...targetColumnCardOrder];
       newTargetColumnCardOrder.splice(destination.index, 0, draggableId);
-      changeCardColumn(source.droppableId, {
-        destinationColumn: destination.droppableId,
-        newOrder: newTargetColumnCardOrder,
-      });
+      console.log(newTargetColumnCardOrder);
     }
   };
 
@@ -118,18 +119,21 @@ const ColumnHolder = ({
 
 const mapStateToProps = (state) => {
   return {
-    columnsOrder: state.board.selectColumnsOrder,
-    columns: state.column.columnsByBoard,
+    columnsOrder: state.board.selectBoard.columnsOrder,
+    columns: state.column.columns,
+    boardId: state.board.selectBoard.id,
+    user: state.user.userData,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    getBoards: (token) => dispatch(fetchBoards(token)),
     addNewColumnModal: () => dispatch(setColumnModal()),
-    changesColumnsOrder: (order) => dispatch(changeColumnsOrderLocal(order)),
-    changeCardOrder: (order) => dispatch(changeCardOrderLocal(order)),
-    changeCardColumn: (sourceColumnId, changeObj) =>
-      dispatch(handleChangeCardColumnLocal(sourceColumnId, changeObj)),
+    updateBoardServer: (boardId, boardObj, token) =>
+      dispatch(editBoardServer(boardId, boardObj, token)),
+    updateColumnsOrderLocal: (changeObj) =>
+      dispatch(changeColumnsOrderLocal(changeObj)),
   };
 };
 
