@@ -5,7 +5,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { Switch, Route } from "react-router-dom";
 
 import BoardsPage from "./pages/BoardsPage/BoardsPage";
-import Homepage from "./pages/homepage/HomePage";
+import Homepage from "./pages/HomePage/HomePage";
 import ActivityPage from "./pages/ActivityPage/ActivityPage";
 import SignUp from "./components/signup/SignUp";
 import SignIn from "./components/signin/SignIn";
