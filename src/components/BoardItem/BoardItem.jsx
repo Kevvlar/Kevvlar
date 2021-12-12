@@ -44,7 +44,7 @@ const boardItem = ({
       </span>
       <div className="board-item-footer">
         <div className="board-num-members sub-color">
-          {board.members.length} Members
+          {board.members.length + board.admins.length} Users
         </div>
         <div className="board-item-icons">
           <FaEdit
