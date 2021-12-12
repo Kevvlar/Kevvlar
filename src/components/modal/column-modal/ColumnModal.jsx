@@ -6,8 +6,11 @@ import { v4 as uuidv4 } from "uuid";
 import {
   closeModal,
   handleAddNewColumnLocal,
-  handleDeleteColumnLocal,
+  createColumnServer,
   editColumnLocal,
+  editColumnServer,
+  handleDeleteColumnLocal,
+  deleteColumnServer,
 } from "../../../redux";
 import { ADD, EDIT, DELETE } from "../../../redux/modal/modalTypes";
 
@@ -15,13 +18,17 @@ import "./columnModal.css";
 
 const ColumnModal = ({
   closeModal,
+  user,
   type,
   boardId,
-  addNewColumnLocal,
-  removeColumnLocal,
   currentColumnId,
   currentColumnTitle,
+  addNewColumnLocal,
+  addNewColumnServer,
   updateColumnLocal,
+  updateColumnServer,
+  removeColumnLocal,
+  deleteCurrentColumnServer,
 }) => {
   const AddColumn = () => {
     const [columnTitle, setColumnTitle] = useState("");
@@ -47,6 +54,7 @@ const ColumnModal = ({
               cardsOrder: [],
             };
             addNewColumnLocal(columnObj);
+            addNewColumnServer(user.token, boardId, columnObj);
             setColumnTitle("");
             closeModal();
           }}
@@ -76,6 +84,9 @@ const ColumnModal = ({
               id: currentColumnId,
               title: columnEditTitle,
             });
+            updateColumnServer(user.token, boardId, currentColumnId, {
+              title: columnEditTitle,
+            });
             setColumnEditTitle("");
             closeModal();
           }}
@@ -97,6 +108,7 @@ const ColumnModal = ({
           className="delete-button"
           onClick={() => {
             removeColumnLocal(currentColumnId);
+            deleteCurrentColumnServer(user.token, boardId, currentColumnId);
             closeModal();
           }}
         >
@@ -124,9 +136,10 @@ const ColumnModal = ({
 const mapStateToProps = (state) => {
   return {
     type: state.modal.modalActionType,
+    user: state.user.userData,
     boardId: state.board.selectBoard.id,
-    currentColumnId: state.column.currentColumnId,
-    currentColumnTitle: state.column.currentColumnTitle,
+    currentColumnId: state.column.selectColumn.id,
+    currentColumnTitle: state.column.selectColumn.title,
   };
 };
 
@@ -135,9 +148,15 @@ const mapDispatchToProps = (dispatch) => {
     closeModal: () => dispatch(closeModal()),
     addNewColumnLocal: (columnObj) =>
       dispatch(handleAddNewColumnLocal(columnObj)),
+    addNewColumnServer: (token, boardId, columnObj) =>
+      dispatch(createColumnServer(token, boardId, columnObj)),
+    updateColumnLocal: (columnObj) => dispatch(editColumnLocal(columnObj)),
+    updateColumnServer: (token, boardId, columnId, columnObj) =>
+      dispatch(editColumnServer(token, boardId, columnId, columnObj)),
     removeColumnLocal: (columnId) =>
       dispatch(handleDeleteColumnLocal(columnId)),
-    updateColumnLocal: (columnObj) => dispatch(editColumnLocal(columnObj)),
+    deleteCurrentColumnServer: (token, boardId, columnId) =>
+      dispatch(deleteColumnServer(token, boardId, columnId)),
   };
 };
 

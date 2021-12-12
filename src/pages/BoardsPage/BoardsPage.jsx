@@ -13,7 +13,7 @@ import "./boardsPage.css";
 
 const BoardsPage = ({ rightSideNav, showModal, getBoards, user, boards }) => {
   useEffect(() => {
-    if (!boards) {
+    if (boards.length <= 0) {
       getBoards(user.token);
     }
   }, []);

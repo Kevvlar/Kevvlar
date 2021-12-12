@@ -3,7 +3,12 @@ import ScrollContainer from "react-indiana-drag-scroll";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
 
-import { setColumnModal } from "../../redux/index";
+import {
+  setColumnModal,
+  editBoardServer,
+  changeColumnsOrderLocal,
+  fetchBoards,
+} from "../../redux/index";
 
 import Column from "../column/Column";
 
@@ -24,7 +29,16 @@ const mapOrder = (array, order, key) => {
   return array;
 };
 
-const ColumnHolder = ({ addNewColumnModal, columns, columnsOrder }) => {
+const ColumnHolder = ({
+  user,
+  boardId,
+  addNewColumnModal,
+  columns,
+  getBoards,
+  columnsOrder,
+  updateBoardServer,
+  updateColumnsOrderLocal,
+}) => {
   const onDragEnd = (result) => {
     const { destination, draggableId, source, type } = result;
 
@@ -37,7 +51,9 @@ const ColumnHolder = ({ addNewColumnModal, columns, columnsOrder }) => {
       const newColumnOrder = Array.from(columnsOrder);
       const [reOrderedItem] = newColumnOrder.splice(source.index, 1);
       newColumnOrder.splice(destination.index, 0, reOrderedItem);
-      console.log(newColumnOrder);
+      updateColumnsOrderLocal(newColumnOrder);
+      updateBoardServer(boardId, { columnsOrder: newColumnOrder }, user.token);
+      getBoards(user.token);
     }
 
     // move card within column
@@ -105,12 +121,19 @@ const mapStateToProps = (state) => {
   return {
     columnsOrder: state.board.selectBoard.columnsOrder,
     columns: state.column.columns,
+    boardId: state.board.selectBoard.id,
+    user: state.user.userData,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    getBoards: (token) => dispatch(fetchBoards(token)),
     addNewColumnModal: () => dispatch(setColumnModal()),
+    updateBoardServer: (boardId, boardObj, token) =>
+      dispatch(editBoardServer(boardId, boardObj, token)),
+    updateColumnsOrderLocal: (changeObj) =>
+      dispatch(changeColumnsOrderLocal(changeObj)),
   };
 };
 

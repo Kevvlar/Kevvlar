@@ -1,58 +1,71 @@
 import {
+  FETCH_COLUMNS_REQUEST,
+  FETCH_COLUMNS_SUCCESS,
+  FETCH_COLUMNS_FAILURE,
   ADD_NEW_COLUMN_LOCAL,
-  DELETE_COLUMNS_BY_BOARD_LOCAL,
-  SET_CURRENT_COLUMN_DATA,
-  DELETE_COLUMN_LOCAL,
-  DELETE_CARD_LOCAL,
+  ADD_NEW_COLUMN_SERVER_FAILURE,
   EDIT_COLUMN_LOCAL,
+  EDIT_COLUMN_SERVER_SUCCESS,
+  EDIT_COLUMN_SERVER_FAILURE,
+  DELETE_COLUMN_LOCAL,
+  DELETE_COLUMN_SERVER_SUCCESS,
+  DELETE_COLUMN_SERVER_FAILURE,
+  DELETE_CARD_LOCAL,
   ADD_NEW_CARD_LOCAL,
   EDIT_CARD_LOCAL,
   CHANGE_CARD_ORDER_LOCAL,
-  SET_CURRENT_CARD_DATA,
   REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL,
   CHANGE_CARD_COLUMN_LOCAL,
   ENTER_CARD_SEARCH_KEY,
+  SET_CURRENT_COLUMN_DATA,
+  SET_CURRENT_CARD_DATA,
   CHANGE_CARD_COLUMN_ID,
+  CLEAR_COLUMNS,
 } from "./columnTypes";
 
 const initialState = {
   cardSearchKeyWord: "",
-  selectColummn: {},
+  selectColumn: {},
   selectCard: {},
   error: "",
+  loading: false,
   columns: [],
 };
 
 const columnReducer = (state = initialState, action) => {
   switch (action.type) {
+    case FETCH_COLUMNS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        columns: [],
+        error: "",
+      };
+
+    case FETCH_COLUMNS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        columns: action.payLoad,
+      };
+
+    case FETCH_COLUMNS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payLoad,
+      };
+
     case ADD_NEW_COLUMN_LOCAL:
       return {
         ...state,
         columns: [...state.columns, action.payLoad],
       };
 
-    case DELETE_COLUMNS_BY_BOARD_LOCAL:
+    case ADD_NEW_COLUMN_SERVER_FAILURE:
       return {
         ...state,
-        columns: state.columns.filter(
-          (columnItem) => columnItem.boardId !== action.payLoad
-        ),
-        selectColummn: {},
-      };
-
-    case SET_CURRENT_COLUMN_DATA:
-      return {
-        ...state,
-        currentColumnId: action.payLoad.id,
-        currentColumnTitle: action.payLoad.title,
-      };
-
-    case DELETE_COLUMN_LOCAL:
-      return {
-        ...state,
-        columns: state.columns.filter(
-          (columnItem) => columnItem.id !== action.payLoad
-        ),
+        error: action.payLoad,
       };
 
     case EDIT_COLUMN_LOCAL:
@@ -63,6 +76,39 @@ const columnReducer = (state = initialState, action) => {
             ? { ...columnItem, title: action.payLoad.title }
             : columnItem
         ),
+        selectColumn: {},
+      };
+
+    case EDIT_COLUMN_SERVER_SUCCESS:
+      return {
+        ...state,
+        error: "",
+      };
+
+    case EDIT_COLUMN_SERVER_FAILURE:
+      return {
+        ...state,
+        error: action.payLoad,
+      };
+
+    case DELETE_COLUMN_LOCAL:
+      return {
+        ...state,
+        columns: state.columns.filter(
+          (columnItem) => columnItem.id !== action.payLoad
+        ),
+      };
+
+    case DELETE_COLUMN_SERVER_SUCCESS:
+      return {
+        ...state,
+        error: "",
+      };
+
+    case DELETE_COLUMN_SERVER_FAILURE:
+      return {
+        ...state,
+        error: action.payLoad,
       };
 
     case ADD_NEW_CARD_LOCAL:
@@ -137,12 +183,6 @@ const columnReducer = (state = initialState, action) => {
         ),
       };
 
-    case SET_CURRENT_CARD_DATA:
-      return {
-        ...state,
-        selectCard: action.payLoad,
-      };
-
     case REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL:
       return {
         ...state,
@@ -181,10 +221,28 @@ const columnReducer = (state = initialState, action) => {
         selectCard: { ...state.selectCard, columnId: action.payLoad },
       };
 
+    case SET_CURRENT_COLUMN_DATA:
+      return {
+        ...state,
+        selectColumn: action.payLoad,
+      };
+
+    case SET_CURRENT_CARD_DATA:
+      return {
+        ...state,
+        selectCard: action.payLoad,
+      };
+
     case ENTER_CARD_SEARCH_KEY:
       return {
         ...state,
         cardSearchKeyWord: action.payLoad,
+      };
+
+    case CLEAR_COLUMNS:
+      return {
+        ...state,
+        columns: [],
       };
 
     default:

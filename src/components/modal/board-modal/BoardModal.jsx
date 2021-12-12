@@ -9,7 +9,7 @@ import {
   createNewBoardServer,
   editCurrentBoardLocal,
   editBoardServer,
-  deleteCurrentBoardLocal,
+  handleDeleteBoardLocal,
   handleDeleteBoardServer,
 } from "../../../redux";
 import { ADD, EDIT, DELETE } from "../../../redux/modal/modalTypes";
@@ -153,7 +153,7 @@ const mapDispatchToProps = (dispatch) => {
     editBoardLocal: (boardObj) => dispatch(editCurrentBoardLocal(boardObj)),
     updateBoardServer: (boardId, boardObj, token) =>
       dispatch(editBoardServer(boardId, boardObj, token)),
-    deleteBoardLocal: (boardId) => dispatch(deleteCurrentBoardLocal(boardId)),
+    deleteBoardLocal: (boardId) => dispatch(handleDeleteBoardLocal(boardId)),
     deleteBoardServer: (boardId, token) =>
       dispatch(handleDeleteBoardServer(boardId, token)),
   };

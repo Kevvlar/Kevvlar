@@ -9,7 +9,7 @@ import { withRouter } from "react-router";
 import "./appbar.css";
 import "./kevvlar-logo.svg";
 
-const AppBar = ({ history }) => (
+const AppBar = ({ history, boardState }) => (
   <header>
     <div className="appbar-container">
       <div className="appbar-menu-container">
@@ -17,6 +17,9 @@ const AppBar = ({ history }) => (
           <button
             className="appbar-logo"
             onClick={() => {
+              if (boardState === true) {
+                return;
+              }
               history.push("/boards");
             }}
           >
@@ -68,6 +71,7 @@ const AppBar = ({ history }) => (
 const mapStateToProps = (state) => {
   return {
     boards: state.board.boards,
+    boardState: state.board.loading,
   };
 };
 

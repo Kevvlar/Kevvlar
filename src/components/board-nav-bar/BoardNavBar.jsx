@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import ScrollContainer from "react-indiana-drag-scroll";
-import { showLeftSideNav } from "../../redux/index";
 import CardSearchBar from "../../components/CardSearchBar/CardSearchBar";
 
 import {
@@ -14,7 +13,7 @@ import {
 
 import "./boardnavbar.css";
 
-const BoardNavBar = ({ boardTitle, toggleLeftSideNav, history }) => (
+const BoardNavBar = ({ boardTitle, history, boardState }) => (
   <ScrollContainer
     className="scroll-container boardnavbar-scroll-container"
     horizontal={true}
@@ -23,6 +22,9 @@ const BoardNavBar = ({ boardTitle, toggleLeftSideNav, history }) => (
       <button
         className="boardnavbar-btn"
         onClick={() => {
+          if (boardState === true) {
+            return;
+          }
           history.push("/boards");
         }}
       >
@@ -47,16 +49,8 @@ const BoardNavBar = ({ boardTitle, toggleLeftSideNav, history }) => (
 const mapStateToProps = (state) => {
   return {
     boardTitle: state.board.selectBoard.title,
+    boardState: state.board.loading,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    toggleLeftSideNav: () => dispatch(showLeftSideNav()),
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(BoardNavBar));
+export default connect(mapStateToProps, null)(withRouter(BoardNavBar));

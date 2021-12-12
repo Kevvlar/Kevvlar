@@ -6,7 +6,6 @@ import {
   ADD_NEW_BOARD_LOCAL,
   ADD_NEW_BOARD_SERVER,
   ADD_NEW_BOARD_SERVER_FAILURE,
-  SET_CURRENT_BOARD_DATA,
   EDIT_BOARD_LOCAL,
   EDIT_BOARD_SERVER,
   EDIT_BOARD_SERVER_FAILURE,
@@ -14,8 +13,14 @@ import {
   DELETE_BOARD_SERVER,
   DELTE_BOARD_SERVER_FAILURE,
   ENTER_SEARCH_TEXT,
+  SET_CURRENT_BOARD_DATA,
+  ADD_COLUMN_TO_COLUMNS_ORDER_LOCAL,
+  REMOVE_COLUM_FROM_COLUMNS_ORDER_LOCAL,
+  CHANGE_COLUMNS_ORDER_LOCAL,
 } from "./boardTypes";
+import { clearColumns } from "../index";
 
+// FETCH BOARDS
 export const fetchBoardsRequest = () => {
   return {
     type: FETCH_BOARDS_REQUEST,
@@ -56,6 +61,7 @@ export const fetchBoards = (token) => {
   };
 };
 
+// ADD NEW BOARDS
 export const addNewBoardLocal = (boardObj) => {
   return {
     type: ADD_NEW_BOARD_LOCAL,
@@ -85,7 +91,7 @@ export const createNewBoardServer = (boardObj, token) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => {
+      .then(() => {
         dispatch(addNewBoardServer());
       })
       .catch((error) => {
@@ -94,13 +100,7 @@ export const createNewBoardServer = (boardObj, token) => {
   };
 };
 
-export const setCurrentBoardData = (board) => {
-  return {
-    type: SET_CURRENT_BOARD_DATA,
-    payLoad: board,
-  };
-};
-
+//EDIT BOARDS
 export const editCurrentBoardLocal = (boardObj) => {
   return {
     type: EDIT_BOARD_LOCAL,
@@ -133,7 +133,7 @@ export const editBoardServer = (boardId, boardObj, token) => {
           boardId,
         },
       })
-      .then((response) => {
+      .then(() => {
         dispatch(editCurrentBoardServer());
       })
       .catch((error) => {
@@ -142,10 +142,18 @@ export const editBoardServer = (boardId, boardObj, token) => {
   };
 };
 
+// DELETE BOARDS
 export const deleteCurrentBoardLocal = (boardId) => {
   return {
     type: DELETE_BOARD_LOCAL,
     payLoad: boardId,
+  };
+};
+
+export const handleDeleteBoardLocal = (boardId) => {
+  return (dispatch) => {
+    dispatch(deleteCurrentBoardLocal(boardId));
+    dispatch(clearColumns());
   };
 };
 
@@ -174,7 +182,7 @@ export const handleDeleteBoardServer = (boardId, token) => {
           boardId,
         },
       })
-      .then((response) => {
+      .then(() => {
         dispatch(deleteCurrentBoardServer());
       })
       .catch((error) => {
@@ -187,5 +195,33 @@ export const enterSearchText = (text) => {
   return {
     type: ENTER_SEARCH_TEXT,
     payLoad: text,
+  };
+};
+
+export const setCurrentBoardData = (board) => {
+  return {
+    type: SET_CURRENT_BOARD_DATA,
+    payLoad: board,
+  };
+};
+
+export const addColumnToColumnsOrderLocal = (columnId) => {
+  return {
+    type: ADD_COLUMN_TO_COLUMNS_ORDER_LOCAL,
+    payLoad: columnId,
+  };
+};
+
+export const removeColumnFromColumnsOrderLocal = (columnId) => {
+  return {
+    type: REMOVE_COLUM_FROM_COLUMNS_ORDER_LOCAL,
+    payLoad: columnId,
+  };
+};
+
+export const changeColumnsOrderLocal = (changeObj) => {
+  return {
+    type: CHANGE_COLUMNS_ORDER_LOCAL,
+    payLoad: changeObj,
   };
 };
