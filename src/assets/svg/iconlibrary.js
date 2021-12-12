@@ -141,12 +141,12 @@ const LoadingIcon = () => {
     <svg
       style={{
         margin: "auto",
-        background: "rgb(241, 242, 243)",
+        background: "transparent",
         display: "block",
         shapeRendering: "auto",
       }}
-      width="200px"
-      height="200px"
+      width="40px"
+      height="40px"
       viewBox="0 0 100 100"
       preserveAspectRatio="xMidYMid"
       transform="rotate(45)"

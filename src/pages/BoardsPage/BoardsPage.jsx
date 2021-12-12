@@ -23,6 +23,8 @@ class BoardsPage extends React.Component {
       <div>
         <AppBar />
         {this.props.boardState ? (
+          <LoadingIcon />
+        ) : (
           <div className="boards-page">
             <div className="board-main">
               <SearchBar />
@@ -36,8 +38,6 @@ class BoardsPage extends React.Component {
               </div>
             </div>
           </div>
-        ) : (
-          <LoadingIcon />
         )}
         {this.props.showModal ? <Modal /> : null}
         {this.props.rightSideNav ? <RightSideNav /> : null}
