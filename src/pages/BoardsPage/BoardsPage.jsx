@@ -11,11 +11,9 @@ import { fetchBoards } from "../../redux";
 
 import "./boardsPage.css";
 
-const BoardsPage = ({ rightSideNav, showModal, getBoards, user, boards }) => {
+const BoardsPage = ({ rightSideNav, showModal, getBoards, user }) => {
   useEffect(() => {
-    if (boards.length <= 0) {
-      getBoards(user.token);
-    }
+    getBoards(user.token);
   }, []);
 
   return (
@@ -46,7 +44,6 @@ const mapStateToProps = (state) => {
     rightSideNav: state.sideNavRight.rightSideNav,
     showModal: state.modal.showModal,
     user: state.user.userData,
-    boards: state.board.boards,
   };
 };
 
