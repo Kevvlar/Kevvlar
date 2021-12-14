@@ -3,6 +3,8 @@ import ScrollContainer from "react-indiana-drag-scroll";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
 
+import { LoadingIcon } from "../../assets/svg/iconlibrary";
+
 import {
   setColumnModal,
   editBoardServer,
@@ -34,6 +36,7 @@ const ColumnHolder = ({
   boardId,
   addNewColumnModal,
   columns,
+  columnsState,
   getBoards,
   columnsOrder,
   updateBoardServer,
@@ -97,19 +100,32 @@ const ColumnHolder = ({
           type="column"
         >
           {(provided) => (
-            <div
-              className="column-holder"
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-              {mapOrder(columns, columnsOrder, "id").map((column, index) => (
-                <Column key={column.id} column={column} index={index} />
-              ))}
-              {provided.placeholder}
-              <button onClick={addNewColumnModal} className="new-column-button">
-                + Add New Column
-              </button>
-            </div>
+            <>
+              {columnsState ? (
+                <div style={{ marginTop: "20px" }}>
+                  <LoadingIcon />
+                </div>
+              ) : (
+                <div
+                  className="column-holder"
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {mapOrder(columns, columnsOrder, "id").map(
+                    (column, index) => (
+                      <Column key={column.id} column={column} index={index} />
+                    )
+                  )}
+                  {provided.placeholder}
+                  <button
+                    onClick={addNewColumnModal}
+                    className="new-column-button"
+                  >
+                    + Add New Column
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </Droppable>
       </DragDropContext>
@@ -121,6 +137,7 @@ const mapStateToProps = (state) => {
   return {
     columnsOrder: state.board.selectBoard.columnsOrder,
     columns: state.column.columns,
+    columnsState: state.column.loading,
     boardId: state.board.selectBoard.id,
     user: state.user.userData,
   };

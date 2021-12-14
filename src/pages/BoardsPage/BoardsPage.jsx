@@ -22,23 +22,24 @@ class BoardsPage extends React.Component {
     return (
       <div>
         <AppBar />
-        {this.props.boardState ? (
-          <LoadingIcon />
-        ) : (
-          <div className="boards-page">
-            <div className="board-main">
-              <SearchBar />
-              <div className="boards-container">
-                <h2 className="all-boards-title">All Boards</h2>
-                <BoardList />
-              </div>
-
-              <div className="boards-container">
-                <h2 className="all-boards-title">Team Boards</h2>
-              </div>
-            </div>
+        <div className="boards-page">
+          <div className="board-main">
+            <SearchBar />
+            {this.props.boardState ? (
+              <LoadingIcon />
+            ) : (
+              <>
+                <div className="boards-container">
+                  <h2 className="all-boards-title">All Boards</h2>
+                  <BoardList />
+                </div>
+                <div className="boards-container">
+                  <h2 className="all-boards-title">Team Boards</h2>
+                </div>
+              </>
+            )}
           </div>
-        )}
+        </div>
         {this.props.showModal ? <Modal /> : null}
         {this.props.rightSideNav ? <RightSideNav /> : null}
       </div>
