@@ -3,12 +3,14 @@ import ScrollContainer from "react-indiana-drag-scroll";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
 
-import { LoadingIcon } from "../../assets/svg/iconlibrary";
+// import { LoadingIcon } from "../../assets/svg/iconlibrary";
 
 import {
   setColumnModal,
   editBoardServer,
   changeColumnsOrderLocal,
+  editColumnServer,
+  changeCardsOrderLocal,
   fetchBoards,
 } from "../../redux/index";
 
@@ -34,6 +36,7 @@ const mapOrder = (array, order, key) => {
 const ColumnHolder = ({
   user,
   boardId,
+  columnId,
   addNewColumnModal,
   columns,
   columnsState,
@@ -41,6 +44,8 @@ const ColumnHolder = ({
   columnsOrder,
   updateBoardServer,
   updateColumnsOrderLocal,
+  updateCardsOrderLocal,
+  updateCardsOrderServer,
 }) => {
   const onDragEnd = (result) => {
     const { destination, draggableId, source, type } = result;
@@ -71,7 +76,10 @@ const ColumnHolder = ({
       const newCardOrder = Array.from(currentColumn.cardsOrder);
       const [reOrderedCards] = newCardOrder.splice(source.index, 1);
       newCardOrder.splice(destination.index, 0, reOrderedCards);
-      console.log(newCardOrder);
+      updateCardsOrderLocal(newCardOrder);
+      updateCardsOrderServer(user.token, boardId, columnId, {
+        cardsOrder: newCardOrder,
+      });
     }
 
     // move card into another column
@@ -100,32 +108,19 @@ const ColumnHolder = ({
           type="column"
         >
           {(provided) => (
-            <>
-              {columnsState ? (
-                <div style={{ marginTop: "20px" }}>
-                  <LoadingIcon />
-                </div>
-              ) : (
-                <div
-                  className="column-holder"
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                >
-                  {mapOrder(columns, columnsOrder, "id").map(
-                    (column, index) => (
-                      <Column key={column.id} column={column} index={index} />
-                    )
-                  )}
-                  {provided.placeholder}
-                  <button
-                    onClick={addNewColumnModal}
-                    className="new-column-button"
-                  >
-                    + Add New Column
-                  </button>
-                </div>
-              )}
-            </>
+            <div
+              className="column-holder"
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              {mapOrder(columns, columnsOrder, "id").map((column, index) => (
+                <Column key={column.id} column={column} index={index} />
+              ))}
+              {provided.placeholder}
+              <button onClick={addNewColumnModal} className="new-column-button">
+                + Add New Column
+              </button>
+            </div>
           )}
         </Droppable>
       </DragDropContext>
@@ -139,6 +134,7 @@ const mapStateToProps = (state) => {
     columns: state.column.columns,
     columnsState: state.column.loading,
     boardId: state.board.selectBoard.id,
+    columnId: state.column.selectColumn.id,
     user: state.user.userData,
   };
 };
@@ -151,6 +147,9 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(editBoardServer(boardId, boardObj, token)),
     updateColumnsOrderLocal: (changeObj) =>
       dispatch(changeColumnsOrderLocal(changeObj)),
+    updateCardsOrderLocal: (order) => dispatch(changeCardsOrderLocal(order)),
+    updateCardsOrderServer: (token, boardId, columnId, columnObj) =>
+      dispatch(editColumnServer(token, boardId, columnId, columnObj)),
   };
 };
 

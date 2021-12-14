@@ -14,7 +14,7 @@ import {
   ADD_NEW_CARD_LOCAL,
   ADD_NEW_CARD_SERVER_FAILURE,
   EDIT_CARD_LOCAL,
-  CHANGE_CARD_ORDER_LOCAL,
+  CHANGE_CARDS_ORDER_LOCAL,
   REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL,
   CHANGE_CARD_COLUMN_LOCAL,
   ENTER_CARD_SEARCH_KEY,
@@ -177,11 +177,11 @@ const columnReducer = (state = initialState, action) => {
         selectCard: {},
       };
 
-    case CHANGE_CARD_ORDER_LOCAL:
+    case CHANGE_CARDS_ORDER_LOCAL:
       return {
         ...state,
         columns: state.columns.map((columnItem) =>
-          columnItem.id === state.currentColumnId
+          columnItem.id === state.selectColumn.id
             ? {
                 ...columnItem,
                 cardsOrder: action.payLoad,

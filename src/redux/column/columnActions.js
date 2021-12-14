@@ -17,7 +17,7 @@ import {
   ADD_NEW_CARD_SERVER_FAILURE,
   DELETE_CARD_LOCAL,
   EDIT_CARD_LOCAL,
-  CHANGE_CARD_ORDER_LOCAL,
+  CHANGE_CARDS_ORDER_LOCAL,
   REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL,
   ENTER_CARD_SEARCH_KEY,
   SET_CURRENT_COLUMN_DATA,
@@ -144,9 +144,6 @@ export const editColumnServer = (token, boardId, columnId, columnObj) => {
           boardId,
         },
       })
-      .then((response) => {
-        dispatch(fetchBoards(token));
-      })
       .catch((error) => {
         dispatch(editColumnServerFailure(error.message));
       });
@@ -256,9 +253,9 @@ export const deleteCardLocal = (deleteObj) => {
   };
 };
 
-export const changeCardOrderLocal = (order) => {
+export const changeCardsOrderLocal = (order) => {
   return {
-    type: CHANGE_CARD_ORDER_LOCAL,
+    type: CHANGE_CARDS_ORDER_LOCAL,
     payLoad: order,
   };
 };
