@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import {
   closeModal,
   addNewCardLocal,
+  addNewCardServer,
   editCardLocal,
   deleteCardLocal,
 } from "../../../redux";
@@ -14,11 +15,13 @@ import { ADD, EDIT } from "../../../redux/modal/modalTypes";
 import "./cardModal.css";
 
 const CardModal = ({
+  user,
   closeModal,
   type,
   currrentBoardId,
   currentColumnId,
   createCardLocal,
+  createCardServer,
   currentCard,
   updateCardLocal,
   deleteCard,
@@ -85,15 +88,17 @@ const CardModal = ({
           <button
             className="modal-board-button"
             onClick={() => {
-              createCardLocal({
+              const cardObj = {
                 id: uuidv4(),
                 columnId: currentColumnId,
                 boardId: currrentBoardId,
                 title: cardTitle,
                 description: cardBody,
                 date: cardDate,
-                label: cardLabel,
-              });
+                colorLabel: cardLabel,
+              };
+              createCardLocal(cardObj);
+              createCardServer(user.token, currrentBoardId, cardObj);
               setCardTitle("");
               setCardBody("");
               setCardDate("");
@@ -199,9 +204,10 @@ const CardModal = ({
 
 const mapStateToProps = (state) => {
   return {
+    user: state.user.userData,
     type: state.modal.modalActionType,
-    currrentBoardId: state.board.selectBoardId,
-    currentColumnId: state.column.currentColumnId,
+    currrentBoardId: state.board.selectBoard.id,
+    currentColumnId: state.column.selectColumn.id,
     currentCard: state.column.currentCard,
   };
 };
@@ -210,6 +216,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
     createCardLocal: (cardObj) => dispatch(addNewCardLocal(cardObj)),
+    createCardServer: (token, boardId, cardObj) =>
+      dispatch(addNewCardServer(token, boardId, cardObj)),
     updateCardLocal: (cardObj) => dispatch(editCardLocal(cardObj)),
     deleteCard: (deleteObj) => dispatch(deleteCardLocal(deleteObj)),
   };

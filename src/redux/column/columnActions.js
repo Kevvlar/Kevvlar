@@ -14,6 +14,7 @@ import {
   CHANGE_CARD_COLUMN_ID,
   CHANGE_CARD_COLUMN_LOCAL,
   ADD_NEW_CARD_LOCAL,
+  ADD_NEW_CARD_SERVER_FAILURE,
   DELETE_CARD_LOCAL,
   EDIT_CARD_LOCAL,
   CHANGE_CARD_ORDER_LOCAL,
@@ -212,6 +213,32 @@ export const addNewCardLocal = (cardObj) => {
   return {
     type: ADD_NEW_CARD_LOCAL,
     payLoad: cardObj,
+  };
+};
+
+export const addNewCardServerFailure = (error) => {
+  return {
+    type: ADD_NEW_CARD_SERVER_FAILURE,
+    payLoad: error,
+  };
+};
+
+export const addNewCardServer = (token, boardId, cardObj) => {
+  return (dispatch) => {
+    axios
+      .post("http://localhost:8000/api/v1/cards", cardObj, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          boardId,
+        },
+      })
+      .then((response) => {})
+      .catch((error) => {
+        dispatch(addNewCardServerFailure(error.message));
+      });
   };
 };
 

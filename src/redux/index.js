@@ -42,6 +42,7 @@ export {
   handleDeleteColumnLocal,
   deleteColumnServer,
   addNewCardLocal,
+  addNewCardServer,
   deleteCardLocal,
   editCardLocal,
   setCurrentCardData,

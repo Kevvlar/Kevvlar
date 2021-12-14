@@ -1,5 +1,5 @@
 import React from "react";
-import * as classNames from 'classnames';
+import * as classNames from "classnames";
 import { connect } from "react-redux";
 import { FaEllipsisH } from "react-icons/fa";
 import { Draggable } from "react-beautiful-dnd";
@@ -25,7 +25,7 @@ const Card = ({
   <Draggable draggableId={card.id} index={index}>
     {(provided, snapshot) => (
       <div
-        className={classNames('card', snapshot.isDragging && 'dragging')}
+        className={classNames("card", snapshot.isDragging && "dragging")}
         {...provided.draggableProps}
         {...provided.dragHandleProps}
         ref={provided.innerRef}
@@ -39,7 +39,7 @@ const Card = ({
       >
         <div className="card-color-label-holder">
           <div
-            style={{ backgroundColor: `${card.label}` }}
+            style={{ backgroundColor: `${card.colorLabel}` }}
             className="card-color-label"
           ></div>
         </div>

@@ -12,6 +12,7 @@ import {
   DELETE_COLUMN_SERVER_FAILURE,
   DELETE_CARD_LOCAL,
   ADD_NEW_CARD_LOCAL,
+  ADD_NEW_CARD_SERVER_FAILURE,
   EDIT_CARD_LOCAL,
   CHANGE_CARD_ORDER_LOCAL,
   REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL,
@@ -124,6 +125,12 @@ const columnReducer = (state = initialState, action) => {
           }
           return columnItem;
         }),
+      };
+
+    case ADD_NEW_CARD_SERVER_FAILURE:
+      return {
+        ...state,
+        error: action.payLoad,
       };
 
     case EDIT_CARD_LOCAL:
