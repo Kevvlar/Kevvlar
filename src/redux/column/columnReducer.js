@@ -4,16 +4,18 @@ import {
   FETCH_COLUMNS_FAILURE,
   ADD_NEW_COLUMN_LOCAL,
   ADD_NEW_COLUMN_SERVER_FAILURE,
+  ADD_NEW_CARD_LOCAL,
+  ADD_NEW_CARD_SERVER_FAILURE,
   EDIT_COLUMN_LOCAL,
   EDIT_COLUMN_SERVER_SUCCESS,
   EDIT_COLUMN_SERVER_FAILURE,
+  EDIT_CARD_LOCAL,
+  EDIT_CARD_SERVER_FAILURE,
   DELETE_COLUMN_LOCAL,
   DELETE_COLUMN_SERVER_SUCCESS,
   DELETE_COLUMN_SERVER_FAILURE,
   DELETE_CARD_LOCAL,
-  ADD_NEW_CARD_LOCAL,
-  ADD_NEW_CARD_SERVER_FAILURE,
-  EDIT_CARD_LOCAL,
+  DELETE_CARD_SERVER_FAILURE,
   CHANGE_CARDS_ORDER_LOCAL,
   REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL,
   CHANGE_CARD_COLUMN_LOCAL,
@@ -147,7 +149,7 @@ const columnReducer = (state = initialState, action) => {
                       title: action.payLoad.title,
                       description: action.payLoad.description,
                       date: action.payLoad.date,
-                      label: action.payLoad.label,
+                      colorLabel: action.payLoad.colorLabel,
                     }
                   : cardItem
               ),
@@ -155,6 +157,12 @@ const columnReducer = (state = initialState, action) => {
           }
           return columnItem;
         }),
+      };
+
+    case EDIT_CARD_SERVER_FAILURE:
+      return {
+        ...state,
+        error: action.payLoad,
       };
 
     case DELETE_CARD_LOCAL:
@@ -175,6 +183,12 @@ const columnReducer = (state = initialState, action) => {
           return columnItem;
         }),
         selectCard: {},
+      };
+
+    case DELETE_CARD_SERVER_FAILURE:
+      return {
+        ...state,
+        error: action.payLoad,
       };
 
     case CHANGE_CARDS_ORDER_LOCAL:

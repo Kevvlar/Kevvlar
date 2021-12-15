@@ -8,7 +8,9 @@ import {
   addNewCardLocal,
   addNewCardServer,
   editCardLocal,
+  editCardServer,
   deleteCardLocal,
+  deleteCardServer,
 } from "../../../redux";
 import { ADD, EDIT } from "../../../redux/modal/modalTypes";
 
@@ -24,7 +26,9 @@ const CardModal = ({
   createCardServer,
   currentCard,
   updateCardLocal,
-  deleteCard,
+  updateCardServer,
+  handleDeleteCardLocal,
+  handleDeleteCardServer,
 }) => {
   const AddCardModal = () => {
     const [cardTitle, setCardTitle] = useState("");
@@ -117,7 +121,7 @@ const CardModal = ({
     const [editCardTitle, setEditCardTitle] = useState(currentCard.title);
     const [editCardBody, setEditCardBody] = useState(currentCard.description);
     const [editCardDate, setEditCardDate] = useState(currentCard.date);
-    const [editCardColor, setEditCardColor] = useState(currentCard.label);
+    const [editCardColor, setEditCardColor] = useState(currentCard.colorLabel);
 
     return (
       <div className="modal-body">
@@ -161,14 +165,21 @@ const CardModal = ({
           <button
             className="modal-board-button"
             onClick={() => {
-              updateCardLocal({
+              const cardObj = {
                 id: currentCard.id,
                 columnId: currentCard.columnId,
                 title: editCardTitle,
                 description: editCardBody,
                 date: editCardDate,
-                label: editCardColor,
-              });
+                colorLabel: editCardColor,
+              };
+              updateCardLocal(cardObj);
+              updateCardServer(
+                user.token,
+                currrentBoardId,
+                currentCard.id,
+                cardObj
+              );
               closeModal();
             }}
           >
@@ -177,10 +188,15 @@ const CardModal = ({
           <button
             className="delete-button"
             onClick={() => {
-              deleteCard({
+              handleDeleteCardLocal({
                 columnId: currentCard.columnId,
                 cardId: currentCard.id,
               });
+              handleDeleteCardServer(
+                user.token,
+                currrentBoardId,
+                currentCard.id
+              );
               closeModal();
             }}
           >
@@ -208,7 +224,7 @@ const mapStateToProps = (state) => {
     type: state.modal.modalActionType,
     currrentBoardId: state.board.selectBoard.id,
     currentColumnId: state.column.selectColumn.id,
-    currentCard: state.column.currentCard,
+    currentCard: state.column.selectCard,
   };
 };
 
@@ -219,7 +235,11 @@ const mapDispatchToProps = (dispatch) => {
     createCardServer: (token, boardId, cardObj) =>
       dispatch(addNewCardServer(token, boardId, cardObj)),
     updateCardLocal: (cardObj) => dispatch(editCardLocal(cardObj)),
-    deleteCard: (deleteObj) => dispatch(deleteCardLocal(deleteObj)),
+    updateCardServer: (token, boardId, cardId, cardObj) =>
+      dispatch(editCardServer(token, boardId, cardId, cardObj)),
+    handleDeleteCardLocal: (deleteObj) => dispatch(deleteCardLocal(deleteObj)),
+    handleDeleteCardServer: (token, boardId, cardId) =>
+      dispatch(deleteCardServer(token, boardId, cardId)),
   };
 };
 

@@ -91,8 +91,7 @@ const Column = ({
                       key={card.id}
                       card={card}
                       index={index}
-                      columnId={column.id}
-                      columnTitle={column.title}
+                      column={column}
                     />
                   ))}
 

@@ -17,8 +17,7 @@ const Card = ({
   index,
   isGrid,
   editCardModal,
-  columnId,
-  columnTitle,
+  column,
   getColumnData,
   getCardData,
 }) => (
@@ -30,10 +29,7 @@ const Card = ({
         {...provided.dragHandleProps}
         ref={provided.innerRef}
         onMouseDown={() => {
-          getColumnData({
-            id: columnId,
-            title: columnTitle,
-          });
+          getColumnData(column);
           getCardData(card);
         }}
       >
@@ -56,10 +52,7 @@ const Card = ({
                 <FaEllipsisH
                   onClick={() => {
                     getCardData(card);
-                    getColumnData({
-                      id: columnId,
-                      title: columnTitle,
-                    });
+                    getColumnData(column);
                     editCardModal("EDIT");
                   }}
                   className="card-more-icon"

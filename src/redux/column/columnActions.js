@@ -15,8 +15,10 @@ import {
   CHANGE_CARD_COLUMN_LOCAL,
   ADD_NEW_CARD_LOCAL,
   ADD_NEW_CARD_SERVER_FAILURE,
-  DELETE_CARD_LOCAL,
   EDIT_CARD_LOCAL,
+  EDIT_CARD_SERVER_FAILURE,
+  DELETE_CARD_LOCAL,
+  DELETE_CARD_SERVER_FAILURE,
   CHANGE_CARDS_ORDER_LOCAL,
   REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL,
   ENTER_CARD_SEARCH_KEY,
@@ -232,7 +234,6 @@ export const addNewCardServer = (token, boardId, cardObj) => {
           boardId,
         },
       })
-      .then((response) => {})
       .catch((error) => {
         dispatch(addNewCardServerFailure(error.message));
       });
@@ -246,10 +247,61 @@ export const editCardLocal = (cardObj) => {
   };
 };
 
+export const editCardServerFailure = (error) => {
+  return {
+    type: EDIT_CARD_SERVER_FAILURE,
+    payLoad: error,
+  };
+};
+
+export const editCardServer = (token, boardId, cardId, cardObj) => {
+  return (dispatch) => {
+    axios
+      .patch(`http://localhost:8000/api/v1/cards/${cardId}`, cardObj, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          boardId,
+        },
+      })
+      .catch((error) => {
+        dispatch(editColumnServerFailure(error.message));
+      });
+  };
+};
+
 export const deleteCardLocal = (deleteObj) => {
   return {
     type: DELETE_CARD_LOCAL,
     payLoad: deleteObj,
+  };
+};
+
+export const deleteCardServerFailure = (error) => {
+  return {
+    type: DELETE_CARD_SERVER_FAILURE,
+    payLoad: error,
+  };
+};
+
+export const deleteCardServer = (token, boardId, cardId) => {
+  return (dispatch) => {
+    axios
+      .delete(`http://localhost:8000/api/v1/cards/${cardId}`, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          boardId,
+        },
+      })
+      .then((response) => console.log(response.data.data))
+      .catch((error) => {
+        dispatch(editColumnServerFailure(error.message));
+      });
   };
 };
 
