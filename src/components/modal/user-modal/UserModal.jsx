@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { connect } from "react-redux";
 
@@ -6,30 +6,45 @@ import { closeModal } from "../../../redux";
 
 import "./userModal.css";
 
-const AddUserModal = ({ closeModal }) => {
+const UserModal = ({ closeModal, type }) => {
+  const AddUserModal = () => {
+    const [userEmail, setUserEmail] = useState("");
+
+    return (
+      <div className="modal-body">
+        <h2 className="modal-title">Add User To Board</h2>
+        <input
+          className="modal-board-text"
+          type="email"
+          name="userEmail"
+          value={userEmail}
+          onChange={(e) => setUserEmail(e.target.value)}
+        />
+        <div className="modal-button-container">
+          <button className="modal-cancel-button" onClick={closeModal}>
+            Add User
+          </button>
+        </div>
+      </div>
+    );
+  };
+
+  const RemoveUserModal = () => (
+    <div className="modal-body">
+      <h2 className="modal-title">Add User To Board</h2>
+      <div className="modal-button-container">
+        <button className="modal-cancel-button" onClick={closeModal}>
+          Remove User
+        </button>
+      </div>
+    </div>
+  );
+
   return (
     <div className="modal-board">
       <div className="close-icon-container">
         <FaTimes onClick={closeModal} className="close-icon" />
-        <div className="modal-body">
-          <h2 className="modal-title">Add User To Board</h2>
-          <span className="modal-sub-text">
-            <input type="text" />
-          </span>
-          <div className="modal-button-container">
-            <button
-              className="delete-button"
-              onClick={() => {
-                closeModal();
-              }}
-            >
-              Delete
-            </button>
-            <button className="modal-cancel-button" onClick={closeModal}>
-              Cancel
-            </button>
-          </div>
-        </div>
+        {type === "ADD" ? <AddUserModal /> : <RemoveUserModal />}
       </div>
     </div>
   );
@@ -47,4 +62,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddUserModal);
+export default connect(mapStateToProps, mapDispatchToProps)(UserModal);
