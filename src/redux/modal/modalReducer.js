@@ -3,6 +3,7 @@ import {
   BOARD_MODAL,
   COLUMN_MODAL,
   CARD_MODAL,
+  USER_MODAL,
 } from "./modalTypes";
 
 const initialState = {
@@ -34,6 +35,14 @@ const modalReducer = (state = initialState, action) => {
         ...state,
         showModal: true,
         modalType: CARD_MODAL,
+        modalActionType: action.payLoad,
+      };
+
+    case USER_MODAL:
+      return {
+        ...state,
+        showModal: true,
+        modalType: USER_MODAL,
         modalActionType: action.payLoad,
       };
 

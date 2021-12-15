@@ -16,6 +16,7 @@ export {
   setBoardModal,
   setColumnModal,
   setCardModal,
+  setUserModal,
 } from "./modal/modalActions";
 
 export {

@@ -3,6 +3,7 @@ import {
   BOARD_MODAL,
   COLUMN_MODAL,
   CARD_MODAL,
+  USER_MODAL,
   ADD,
 } from "./modalTypes";
 
@@ -15,6 +16,13 @@ export const closeModal = () => {
 export const setBoardModal = (actionType = ADD) => {
   return {
     type: BOARD_MODAL,
+    payLoad: actionType,
+  };
+};
+
+export const setUserModal = (actionType = ADD) => {
+  return {
+    type: USER_MODAL,
     payLoad: actionType,
   };
 };

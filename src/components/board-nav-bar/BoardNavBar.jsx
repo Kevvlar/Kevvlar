@@ -4,6 +4,8 @@ import { withRouter } from "react-router";
 import ScrollContainer from "react-indiana-drag-scroll";
 import CardSearchBar from "../../components/CardSearchBar/CardSearchBar";
 
+import { setUserModal } from "../../redux";
+
 import {
   LockIcon,
   BoardIcon,
@@ -13,7 +15,7 @@ import {
 
 import "./boardnavbar.css";
 
-const BoardNavBar = ({ boardTitle, history, boardState }) => (
+const BoardNavBar = ({ boardTitle, history, boardState, showUserModal }) => (
   <ScrollContainer
     className="scroll-container boardnavbar-scroll-container"
     horizontal={true}
@@ -39,7 +41,12 @@ const BoardNavBar = ({ boardTitle, history, boardState }) => (
         <TeamIcon />
         <div className="boardnavbar-boardtitle">Team Name</div>
       </button>
-      <button className="add-user-icon">
+      <button
+        className="add-user-icon"
+        onClick={() => {
+          showUserModal();
+        }}
+      >
         <AddUserIcon />
       </button>
       <CardSearchBar />
@@ -53,4 +60,13 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(withRouter(BoardNavBar));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    showUserModal: (type) => dispatch(setUserModal(type)),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(BoardNavBar));
