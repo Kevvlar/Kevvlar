@@ -11,6 +11,8 @@ import {
   changeColumnsOrderLocal,
   editColumnServer,
   changeCardsOrderLocal,
+  handleChangeCardColumnLocal,
+  editCardServer,
   fetchBoards,
 } from "../../redux/index";
 
@@ -37,6 +39,7 @@ const ColumnHolder = ({
   user,
   boardId,
   columnId,
+  cardId,
   addNewColumnModal,
   columns,
   columnsState,
@@ -46,6 +49,8 @@ const ColumnHolder = ({
   updateColumnsOrderLocal,
   updateCardsOrderLocal,
   updateCardsOrderServer,
+  changeCardColumnLocal,
+  updateCardServer,
 }) => {
   const onDragEnd = (result) => {
     const { destination, draggableId, source, type } = result;
@@ -91,7 +96,17 @@ const ColumnHolder = ({
       const targetColumnCardOrder = targetColumn.cardsOrder;
       const newTargetColumnCardOrder = [...targetColumnCardOrder];
       newTargetColumnCardOrder.splice(destination.index, 0, draggableId);
-      console.log(newTargetColumnCardOrder);
+
+      changeCardColumnLocal(source.droppableId, {
+        destinationColumn: destination.droppableId,
+        newOrder: newTargetColumnCardOrder,
+      });
+      updateCardsOrderServer(user.token, boardId, destination.droppableId, {
+        cardsOrder: newTargetColumnCardOrder,
+      });
+      updateCardServer(user.token, boardId, cardId, {
+        columnId: destination.droppableId,
+      });
     }
   };
 
@@ -135,6 +150,7 @@ const mapStateToProps = (state) => {
     columnsState: state.column.loading,
     boardId: state.board.selectBoard.id,
     columnId: state.column.selectColumn.id,
+    cardId: state.column.selectCard.id,
     user: state.user.userData,
   };
 };
@@ -150,6 +166,10 @@ const mapDispatchToProps = (dispatch) => {
     updateCardsOrderLocal: (order) => dispatch(changeCardsOrderLocal(order)),
     updateCardsOrderServer: (token, boardId, columnId, columnObj) =>
       dispatch(editColumnServer(token, boardId, columnId, columnObj)),
+    changeCardColumnLocal: (sourceColumn, changeObj) =>
+      dispatch(handleChangeCardColumnLocal(sourceColumn, changeObj)),
+    updateCardServer: (token, boardId, cardId, cardObj) =>
+      dispatch(editCardServer(token, boardId, cardId, cardObj)),
   };
 };
 

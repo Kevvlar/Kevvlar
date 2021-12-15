@@ -48,7 +48,7 @@ const Column = ({
         >
           <div className="column-header-container">
             <div className="column-handle" {...provided.dragHandleProps}>
-              <p className="column-header-title">{column.title}</p>
+              <p className="column-header-title">{column.id}</p>
             </div>
             <div className="column-header-icon-container">
               <FaTrash

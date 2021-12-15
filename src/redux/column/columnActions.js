@@ -319,17 +319,17 @@ export const removeCardFromSourceColumnLocal = (sourceColumnId) => {
   };
 };
 
-export const changeCardColumnLocal = (changeObj) => {
-  return {
-    type: CHANGE_CARD_COLUMN_LOCAL,
-    payLoad: changeObj,
-  };
-};
-
 export const changeCardColumnId = (columnId) => {
   return {
     type: CHANGE_CARD_COLUMN_ID,
     payLoad: columnId,
+  };
+};
+
+export const changeCardColumnLocal = (changeObj) => {
+  return {
+    type: CHANGE_CARD_COLUMN_LOCAL,
+    payLoad: changeObj,
   };
 };
 

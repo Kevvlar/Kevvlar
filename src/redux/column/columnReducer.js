@@ -18,11 +18,11 @@ import {
   DELETE_CARD_SERVER_FAILURE,
   CHANGE_CARDS_ORDER_LOCAL,
   REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL,
+  CHANGE_CARD_COLUMN_ID,
   CHANGE_CARD_COLUMN_LOCAL,
   ENTER_CARD_SEARCH_KEY,
   SET_CURRENT_COLUMN_DATA,
   SET_CURRENT_CARD_DATA,
-  CHANGE_CARD_COLUMN_ID,
   CLEAR_COLUMNS,
 } from "./columnTypes";
 
@@ -222,6 +222,12 @@ const columnReducer = (state = initialState, action) => {
         ),
       };
 
+    case CHANGE_CARD_COLUMN_ID:
+      return {
+        ...state,
+        selectCard: { ...state.selectCard, columnId: action.payLoad },
+      };
+
     case CHANGE_CARD_COLUMN_LOCAL:
       return {
         ...state,
@@ -234,12 +240,6 @@ const columnReducer = (state = initialState, action) => {
               }
             : columnItem
         ),
-      };
-
-    case CHANGE_CARD_COLUMN_ID:
-      return {
-        ...state,
-        selectCard: { ...state.selectCard, columnId: action.payLoad },
       };
 
     case SET_CURRENT_COLUMN_DATA:
