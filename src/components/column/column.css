@@ -3,6 +3,7 @@
   min-width: 300px;
   flex-direction: column;
   padding-right: 10px;
+  margin-bottom: 25px;
 }
 
 .column-handle {
@@ -11,6 +12,7 @@
 
 .card-container {
   min-height: 100px;
+  height: 100%;
 }
 
 .card-container::-webkit-scrollbar {
