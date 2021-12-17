@@ -21,7 +21,7 @@ const UserModal = ({ closeModal, type }) => {
           onChange={(e) => setUserEmail(e.target.value)}
         />
         <div className="modal-button-container">
-          <button className="modal-cancel-button" onClick={closeModal}>
+          <button className="modal-board-button" onClick={closeModal}>
             Add User
           </button>
         </div>
