@@ -13,6 +13,7 @@
 .card-container {
   min-height: 100px;
   height: 100%;
+  overflow: hidden auto;
 }
 
 .card-container::-webkit-scrollbar {
@@ -25,7 +26,7 @@
 
 .column-header-container {
   display: flex;
-  width: 285px;
+  width: 300px;
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
