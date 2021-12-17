@@ -1,5 +1,4 @@
 import React from "react";
-import ScrollContainer from "react-indiana-drag-scroll";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
 
@@ -111,35 +110,25 @@ const ColumnHolder = ({
   };
 
   return (
-    <ScrollContainer
-      className="scroll-container"
-      vertical={true}
-      horizontal={true}
-    >
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable
-          droppableId="all-columns"
-          direction="horizontal"
-          type="column"
-        >
-          {(provided) => (
-            <div
-              className="column-holder"
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-              {mapOrder(columns, columnsOrder, "id").map((column, index) => (
-                <Column key={column.id} column={column} index={index} />
-              ))}
-              {provided.placeholder}
-              <button onClick={addNewColumnModal} className="new-column-button">
-                + Add New Column
-              </button>
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-    </ScrollContainer>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Droppable droppableId="all-columns" direction="horizontal" type="column">
+        {(provided) => (
+          <div
+            className="column-holder"
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+          >
+            {mapOrder(columns, columnsOrder, "id").map((column, index) => (
+              <Column key={column.id} column={column} index={index} />
+            ))}
+            {provided.placeholder}
+            <button onClick={addNewColumnModal} className="new-column-button">
+              + Add New Column
+            </button>
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
   );
 };
 

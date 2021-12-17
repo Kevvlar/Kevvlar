@@ -1,8 +1,14 @@
+.column-parent {
+  overflow: hidden;
+  height: 100%;
+}
+
 .column-holder {
-  height: calc(100% - 100px);
+  height: 100%;
   display: flex;
-  flex-direction: row;
-  padding: 0px 20px;
+  column-gap: 10px;
+  margin: 0px 10px;
+  overflow-x: auto;
 }
 
 .new-column-button {

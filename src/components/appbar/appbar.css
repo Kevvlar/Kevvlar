@@ -7,6 +7,7 @@
   box-shadow: 0 1px 10px 5px rgb(0 0 0 / 10%);
   padding: 0px 5px;
   height: 50px;
+  width: 100%;
 }
 
 .board-lead {

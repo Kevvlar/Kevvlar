@@ -2,7 +2,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: Roboto;
-  background-color: #202026;
+  background-color: #1f252a;
+  overflow: hidden;
 }
 
 .primary-text-color {

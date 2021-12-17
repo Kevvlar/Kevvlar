@@ -1,9 +1,9 @@
 .todopage {
-  height: 100vh;
+  height: 100%;
   background-color: #1f252a;
 }
 
-.no-active-board {
+/* .no-active-board {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,4 +22,4 @@
 .content-body {
   text-align: center;
   color: #ffff;
-}
+} */
