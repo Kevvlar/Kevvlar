@@ -3,6 +3,8 @@
 	display: flex;
 	margin-top: 15px;
 	margin-left: 30px;
+	position: fixed;
+	top: 50px;
 }
 
 .boardnavbar-btn {
