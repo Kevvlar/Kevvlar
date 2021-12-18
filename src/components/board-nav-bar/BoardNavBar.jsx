@@ -31,7 +31,9 @@ const BoardNavBar = ({ boardTitle, history, boardState, showUserModal }) => (
         }}
       >
         <BoardIcon />
-        <div className="boardnavbar-boardtitle">{boardTitle}</div>
+        <div className="boardnavbar-boardtitle">
+          {boardState ? "Loading..." : boardTitle}
+        </div>
       </button>
       <button className="boardnavbar-btn">
         <LockIcon />
