@@ -91,11 +91,9 @@ const ColumnHolder = ({
       const targetColumn = columns.find((column) =>
         column.id === destination.droppableId ? column : null
       );
-
       const targetColumnCardOrder = targetColumn.cardsOrder;
       const newTargetColumnCardOrder = [...targetColumnCardOrder];
       newTargetColumnCardOrder.splice(destination.index, 0, draggableId);
-
       changeCardColumnLocal(source.droppableId, {
         destinationColumn: destination.droppableId,
         newOrder: newTargetColumnCardOrder,

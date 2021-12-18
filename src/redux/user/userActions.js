@@ -66,7 +66,7 @@ export const signUserUp = (userData, history) => {
   return (dispatch) => {
     dispatch(signUpUserRequest());
     axios
-      .post("http://localhost:8000/api/v1/users/signup", userData, {
+      .post("https://kevvlar.herokuapp.com/api/v1/users/signup", userData, {
         headers: {
           "content-type": "application/json",
         },
@@ -86,7 +86,7 @@ export const signUserIn = (userData, history) => {
   return (dispatch) => {
     dispatch(signInUserRequest());
     axios
-      .post("http://localhost:8000/api/v1/users/signin", userData, {
+      .post("https://kevvlar.herokuapp.com/api/v1/users/signin", userData, {
         headers: {
           "content-type": "application/json",
         },

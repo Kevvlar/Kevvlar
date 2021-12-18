@@ -45,7 +45,7 @@ export const fetchBoards = (token) => {
   return (dispatch) => {
     dispatch(fetchBoardsRequest());
     axios
-      .get("http://localhost:8000/api/v1/boards", {
+      .get("https://kevvlar.herokuapp.com/api/v1/boards", {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -85,7 +85,7 @@ export const addNewBoardFailure = (error) => {
 export const createNewBoardServer = (boardObj, token) => {
   return (dispatch) => {
     axios
-      .post("http://localhost:8000/api/v1/boards", boardObj, {
+      .post("https://kevvlar.herokuapp.com/api/v1/boards", boardObj, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -124,15 +124,19 @@ export const editCurrentBoardServerFailure = (error) => {
 export const editBoardServer = (boardId, boardObj, token) => {
   return (dispatch) => {
     axios
-      .patch(`http://localhost:8000/api/v1/boards/${boardId}`, boardObj, {
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        params: {
-          boardId,
-        },
-      })
+      .patch(
+        `https://kevvlar.herokuapp.com/api/v1/boards/${boardId}`,
+        boardObj,
+        {
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          params: {
+            boardId,
+          },
+        }
+      )
       .then(() => {
         dispatch(editCurrentBoardServer());
       })
@@ -173,7 +177,7 @@ export const deleteCurrentBoardServerFailure = (error) => {
 export const handleDeleteBoardServer = (boardId, token) => {
   return (dispatch) => {
     axios
-      .delete(`http://localhost:8000/api/v1/boards/${boardId}`, {
+      .delete(`https://kevvlar.herokuapp.com/api/v1/boards/${boardId}`, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
