@@ -5,6 +5,12 @@
 	margin-left: 30px;
 	position: fixed;
 	top: 50px;
+	width: 100%;
+	overflow: auto;
+}
+
+.boardnavbar::-webkit-scrollbar {
+  display: none;
 }
 
 .boardnavbar-btn {

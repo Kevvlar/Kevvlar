@@ -16,44 +16,39 @@ import {
 import "./boardnavbar.css";
 
 const BoardNavBar = ({ boardTitle, history, boardState, showUserModal }) => (
-  <ScrollContainer
-    className="scroll-container boardnavbar-scroll-container"
-    horizontal={true}
-  >
-    <div className="boardnavbar">
-      <button
-        className="boardnavbar-btn"
-        onClick={() => {
-          if (boardState === true) {
-            return;
-          }
-          history.push("/boards");
-        }}
-      >
-        <BoardIcon />
-        <div className="boardnavbar-boardtitle">
-          {boardState ? "Loading..." : boardTitle}
-        </div>
-      </button>
-      <button className="boardnavbar-btn">
-        <LockIcon />
-        <div className="boardnavbar-boardtitle">Private</div>
-      </button>
-      <button className="boardnavbar-btn">
-        <TeamIcon />
-        <div className="boardnavbar-boardtitle">Team Name</div>
-      </button>
-      <button
-        className="add-user-icon"
-        onClick={() => {
-          showUserModal();
-        }}
-      >
-        <AddUserIcon />
-      </button>
-      <CardSearchBar />
-    </div>
-  </ScrollContainer>
+  <div className="boardnavbar">
+    <button
+      className="boardnavbar-btn"
+      onClick={() => {
+        if (boardState === true) {
+          return;
+        }
+        history.push("/boards");
+      }}
+    >
+      <BoardIcon />
+      <div className="boardnavbar-boardtitle">
+        {boardState ? "Loading..." : boardTitle}
+      </div>
+    </button>
+    <button className="boardnavbar-btn">
+      <LockIcon />
+      <div className="boardnavbar-boardtitle">Private</div>
+    </button>
+    <button className="boardnavbar-btn">
+      <TeamIcon />
+      <div className="boardnavbar-boardtitle">Team Name</div>
+    </button>
+    <button
+      className="add-user-icon"
+      onClick={() => {
+        showUserModal();
+      }}
+    >
+      <AddUserIcon />
+    </button>
+    <CardSearchBar />
+  </div>
 );
 const mapStateToProps = (state) => {
   return {
