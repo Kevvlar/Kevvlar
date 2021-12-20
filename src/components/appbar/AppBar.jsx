@@ -16,9 +16,6 @@ const AppBar = ({ history, boardState }) => (
         <button
           className="appbar-logo"
           onClick={() => {
-            if (boardState === true) {
-              return;
-            }
             history.push("/boards");
           }}
         >

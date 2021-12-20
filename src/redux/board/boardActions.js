@@ -6,6 +6,8 @@ import {
   ADD_NEW_BOARD_LOCAL,
   ADD_NEW_BOARD_SERVER,
   ADD_NEW_BOARD_SERVER_FAILURE,
+  ADD_MEMBER_TO_BOARD_FAILURE,
+  ADD_COLUMN_TO_COLUMNS_ORDER_LOCAL,
   EDIT_BOARD_LOCAL,
   EDIT_BOARD_SERVER,
   EDIT_BOARD_SERVER_FAILURE,
@@ -14,7 +16,6 @@ import {
   DELTE_BOARD_SERVER_FAILURE,
   ENTER_SEARCH_TEXT,
   SET_CURRENT_BOARD_DATA,
-  ADD_COLUMN_TO_COLUMNS_ORDER_LOCAL,
   REMOVE_COLUM_FROM_COLUMNS_ORDER_LOCAL,
   CHANGE_COLUMNS_ORDER_LOCAL,
 } from "./boardTypes";
@@ -191,6 +192,33 @@ export const handleDeleteBoardServer = (boardId, token) => {
       })
       .catch((error) => {
         dispatch(deleteCurrentBoardServerFailure(error.message));
+      });
+  };
+};
+
+export const addMemberToBoardFailure = (error) => {
+  return {
+    type: ADD_MEMBER_TO_BOARD_FAILURE,
+    payLoad: error,
+  };
+};
+
+export const addMemberToBoard = (token, addObj) => {
+  return (dispatch) => {
+    axios
+      .patch(`https://kevvlar.herokuapp.com/api/v1/boards/addmember`, addObj, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data.data);
+        alert("User with email added");
+      })
+      .catch((error) => {
+        dispatch(addMemberToBoardFailure(error.message));
+        alert(error.message);
       });
   };
 };

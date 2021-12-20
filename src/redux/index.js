@@ -22,6 +22,7 @@ export {
 export {
   fetchBoards,
   addNewBoardLocal,
+  addMemberToBoard,
   createNewBoardServer,
   editCurrentBoardLocal,
   editBoardServer,

@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { connect } from "react-redux";
 
-import { closeModal } from "../../../redux";
+import { closeModal, addMemberToBoard } from "../../../redux";
 
 import "./userModal.css";
 
-const UserModal = ({ closeModal, type }) => {
+const UserModal = ({ closeModal, type, addMember, user, currrentBoardId }) => {
   const AddUserModal = () => {
     const [userEmail, setUserEmail] = useState("");
 
@@ -21,7 +21,16 @@ const UserModal = ({ closeModal, type }) => {
           onChange={(e) => setUserEmail(e.target.value)}
         />
         <div className="modal-button-container">
-          <button className="modal-board-button" onClick={closeModal}>
+          <button
+            className="modal-board-button"
+            onClick={() => {
+              addMember(user.token, {
+                userEmail: userEmail,
+                boardId: currrentBoardId,
+              });
+              closeModal();
+            }}
+          >
             Add User
           </button>
         </div>
@@ -53,12 +62,15 @@ const UserModal = ({ closeModal, type }) => {
 const mapStateToProps = (state) => {
   return {
     type: state.modal.modalActionType,
+    user: state.user.userData,
+    currrentBoardId: state.board.selectBoard.id,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
+    addMember: (token, addObj) => dispatch(addMemberToBoard(token, addObj)),
   };
 };
 

@@ -5,6 +5,7 @@ import {
   ADD_NEW_BOARD_LOCAL,
   ADD_NEW_BOARD_SERVER,
   ADD_NEW_BOARD_SERVER_FAILURE,
+  ADD_MEMBER_TO_BOARD_FAILURE,
   EDIT_BOARD_LOCAL,
   EDIT_BOARD_SERVER,
   EDIT_BOARD_SERVER_FAILURE,
@@ -62,6 +63,12 @@ const boardReducer = (state = initialState, action) => {
       };
 
     case ADD_NEW_BOARD_SERVER_FAILURE:
+      return {
+        ...state,
+        error: action.payLoad,
+      };
+
+    case ADD_MEMBER_TO_BOARD_FAILURE:
       return {
         ...state,
         error: action.payLoad,

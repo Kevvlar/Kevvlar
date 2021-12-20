@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-import ScrollContainer from "react-indiana-drag-scroll";
 import CardSearchBar from "../../components/CardSearchBar/CardSearchBar";
+import ProfileImage from "../profile-image/ProfileImage";
 
 import { setUserModal } from "../../redux";
 
@@ -20,16 +20,11 @@ const BoardNavBar = ({ boardTitle, history, boardState, showUserModal }) => (
     <button
       className="boardnavbar-btn"
       onClick={() => {
-        if (boardState === true) {
-          return;
-        }
         history.push("/boards");
       }}
     >
       <BoardIcon />
-      <div className="boardnavbar-boardtitle">
-        {boardState ? "Loading..." : boardTitle}
-      </div>
+      <div className="boardnavbar-boardtitle">{boardTitle}</div>
     </button>
     <button className="boardnavbar-btn">
       <LockIcon />
@@ -39,6 +34,8 @@ const BoardNavBar = ({ boardTitle, history, boardState, showUserModal }) => (
       <TeamIcon />
       <div className="boardnavbar-boardtitle">Team Name</div>
     </button>
+    <ProfileImage />
+    <ProfileImage />
     <button
       className="add-user-icon"
       onClick={() => {
