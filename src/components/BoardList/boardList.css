@@ -17,6 +17,7 @@
   background: #343d45;
   padding: 15px;
   min-width: 300px;
+  max-width: 300px;
   height: 140px;
   border-radius: 6px;
   cursor: pointer;

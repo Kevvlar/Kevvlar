@@ -23,6 +23,7 @@ const BoardIcon = () => {
       viewBox="0 0 16 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      style={{minWidth: '20px'}}
     >
       <path
         d="M4.66683 12.6665H11.3335V2.6665H4.66683V12.6665ZM1.3335 11.3332H4.00016V3.99984H1.3335V11.3332ZM12.0002 3.99984V11.3332H14.6668V3.99984H12.0002Z"
