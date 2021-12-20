@@ -1,8 +1,8 @@
 .boardnavbar {
 	height: 50px;
 	display: flex;
-	margin-top: 15px;
-	margin-left: 30px;
+	padding-top: 15px;
+	margin-left: 20px;
 	position: fixed;
 	top: 50px;
 	width: 100%;
