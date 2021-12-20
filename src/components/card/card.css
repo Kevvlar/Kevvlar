@@ -34,6 +34,9 @@
   margin-bottom: 0px;
   max-height: 18px;
   overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px;
+  white-space: nowrap;
 }
 
 .card-description {

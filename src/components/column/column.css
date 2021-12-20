@@ -8,6 +8,7 @@
 
 .column-handle {
   width: 100%;
+  white-space: nowrap;
 }
 
 .card-container {
@@ -40,6 +41,10 @@
   font-size: 16px;
   border: none;
   margin-left: 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 200px;
 }
 
 .column-header-icon-container {
