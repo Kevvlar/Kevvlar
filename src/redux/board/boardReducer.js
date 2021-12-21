@@ -5,6 +5,7 @@ import {
   ADD_NEW_BOARD_LOCAL,
   ADD_NEW_BOARD_SERVER,
   ADD_NEW_BOARD_SERVER_FAILURE,
+  ADD_MEMBER_TO_BOARD_SUCCESS,
   ADD_MEMBER_TO_BOARD_FAILURE,
   EDIT_BOARD_LOCAL,
   EDIT_BOARD_SERVER,
@@ -66,6 +67,15 @@ const boardReducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.payLoad,
+      };
+
+    case ADD_MEMBER_TO_BOARD_SUCCESS:
+      return {
+        ...state,
+        selectBoard: {
+          ...state.selectBoard,
+          members: action.payLoad,
+        },
       };
 
     case ADD_MEMBER_TO_BOARD_FAILURE:

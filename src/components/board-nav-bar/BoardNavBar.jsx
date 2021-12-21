@@ -15,7 +15,7 @@ import {
 
 import "./boardnavbar.css";
 
-const BoardNavBar = ({ boardTitle, history, boardState, showUserModal }) => (
+const BoardNavBar = ({ board, history, boardState, showUserModal }) => (
   <div className="boardnavbar">
     <button
       className="boardnavbar-btn"
@@ -24,7 +24,7 @@ const BoardNavBar = ({ boardTitle, history, boardState, showUserModal }) => (
       }}
     >
       <BoardIcon />
-      <div className="boardnavbar-boardtitle">{boardTitle}</div>
+      <div className="boardnavbar-boardtitle">{board.title}</div>
     </button>
     <button className="boardnavbar-btn">
       <LockIcon />
@@ -34,8 +34,9 @@ const BoardNavBar = ({ boardTitle, history, boardState, showUserModal }) => (
       <TeamIcon />
       <div className="boardnavbar-boardtitle">Team Name</div>
     </button>
-    <UserAvatar />
-    <UserAvatar />
+    {board.members.map((member) => (
+      <UserAvatar key={member._id} user={member} />
+    ))}
     <button
       className="add-user-icon"
       onClick={() => {
@@ -49,7 +50,7 @@ const BoardNavBar = ({ boardTitle, history, boardState, showUserModal }) => (
 );
 const mapStateToProps = (state) => {
   return {
-    boardTitle: state.board.selectBoard.title,
+    board: state.board.selectBoard,
     boardState: state.board.loading,
   };
 };

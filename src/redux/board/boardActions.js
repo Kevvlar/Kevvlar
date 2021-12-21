@@ -8,6 +8,7 @@ import {
   ADD_NEW_BOARD_SERVER_FAILURE,
   ADD_MEMBER_TO_BOARD_FAILURE,
   ADD_COLUMN_TO_COLUMNS_ORDER_LOCAL,
+  ADD_MEMBER_TO_BOARD_SUCCESS,
   EDIT_BOARD_LOCAL,
   EDIT_BOARD_SERVER,
   EDIT_BOARD_SERVER_FAILURE,
@@ -196,6 +197,13 @@ export const handleDeleteBoardServer = (boardId, token) => {
   };
 };
 
+export const addMemberToBoardSuccess = (members) => {
+  return {
+    type: ADD_MEMBER_TO_BOARD_SUCCESS,
+    payLoad: members,
+  };
+};
+
 export const addMemberToBoardFailure = (error) => {
   return {
     type: ADD_MEMBER_TO_BOARD_FAILURE,
@@ -213,12 +221,12 @@ export const addMemberToBoard = (token, addObj) => {
         },
       })
       .then((response) => {
-        console.log(response.data.data);
-        alert("User with email added");
+        const members = response.data.data.board.members;
+        dispatch(addMemberToBoardSuccess(members));
       })
       .catch((error) => {
-        dispatch(addMemberToBoardFailure(error.message));
-        alert(error.message);
+        dispatch(addMemberToBoardFailure("Could not add user to board"));
+        alert("Could not add user to board");
       });
   };
 };
