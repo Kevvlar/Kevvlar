@@ -5,9 +5,15 @@
   margin-left: 10px;
   height: 35px;
 }
+
 .user-avatar-image {
   width: 30px;
   height: 30px;
   border-radius: 25px;
   border: 1px solid greenyellow;
+  cursor: pointer;
+}
+
+.user-avatar-image:hover {
+	opacity: 0.5;
 }
