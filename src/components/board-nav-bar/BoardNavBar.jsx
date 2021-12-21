@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import CardSearchBar from "../../components/CardSearchBar/CardSearchBar";
-import ProfileImage from "../profile-image/ProfileImage";
+import UserAvatar from "../user-avatar/UserAvatar";
 
 import { setUserModal } from "../../redux";
 
@@ -34,8 +34,8 @@ const BoardNavBar = ({ boardTitle, history, boardState, showUserModal }) => (
       <TeamIcon />
       <div className="boardnavbar-boardtitle">Team Name</div>
     </button>
-    <ProfileImage />
-    <ProfileImage />
+    <UserAvatar />
+    <UserAvatar />
     <button
       className="add-user-icon"
       onClick={() => {
