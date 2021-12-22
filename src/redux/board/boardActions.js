@@ -225,7 +225,7 @@ export const addMemberToBoard = (token, addObj) => {
       })
       .catch((error) => {
         dispatch(addMemberToBoardFailure("Could not add user to board"));
-        alert("Could not add user to board");
+        console.log("Could not add user to board");
       });
   };
 };
