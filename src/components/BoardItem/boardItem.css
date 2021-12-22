@@ -42,8 +42,7 @@
 }
 
 .board-num-members {
-  width: 100px;
-  padding: 5px;
+  padding: 5px 10px;
   background: #f8f8f81c;
   border-radius: 4px;
 }

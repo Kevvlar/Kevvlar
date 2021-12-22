@@ -8,8 +8,9 @@
   width: 25px;
   height: 25px;
   margin-right: 10px;
-  border-radius: 15px;
-  border: 1px solid greenyellow;
+  border-radius: 25px;
+  background: #2c3136;
+  cursor: pointer;
 }
 
 .user-profile-name {
