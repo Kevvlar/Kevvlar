@@ -23,7 +23,7 @@ class ColumnHolder extends React.Component {
   componentDidMount() {
     this.interval = setInterval(() => {
       this.props.fetchUpdates(this.props.user.token, this.props.boardId);
-    }, 1500);
+    }, 5000);
   }
 
   componentWillUnmount() {
@@ -65,7 +65,6 @@ class ColumnHolder extends React.Component {
         { columnsOrder: newColumnOrder },
         this.props.user.token
       );
-      clearInterval(this.interval);
     }
 
     // move card within column
@@ -89,7 +88,6 @@ class ColumnHolder extends React.Component {
           cardsOrder: newCardOrder,
         }
       );
-      clearInterval(this.interval);
     }
 
     // move card into another column
@@ -120,7 +118,6 @@ class ColumnHolder extends React.Component {
           columnId: destination.droppableId,
         }
       );
-      clearInterval(this.interval);
     }
   };
 
