@@ -7,10 +7,10 @@
 }
 
 .user-avatar-image {
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   border-radius: 25px;
-  border: 1px solid greenyellow;
+  background: #2c3136;
   cursor: pointer;
 }
 
