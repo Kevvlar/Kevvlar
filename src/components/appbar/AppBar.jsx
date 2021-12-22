@@ -6,16 +6,19 @@ import UserProfile from "../profile-image/ProfileImage";
 import { HomeIcon } from "../../assets/svg/iconlibrary";
 import { withRouter } from "react-router";
 
+import { clearColumns } from "../../redux";
+
 import "./appbar.css";
 import "./kevvlar-logo.svg";
 
-const AppBar = ({ history, boardState }) => (
+const AppBar = ({ history, emptyColumns }) => (
   <div className="appbar-container">
     <div className="appbar-menu-container">
       <div className="appbar-ham-icon-container">
         <button
           className="appbar-logo"
           onClick={() => {
+            emptyColumns();
             history.push("/boards");
           }}
         >
@@ -70,4 +73,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(withRouter(AppBar));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    emptyColumns: () => dispatch(clearColumns()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AppBar));

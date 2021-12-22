@@ -4,7 +4,7 @@ import { withRouter } from "react-router";
 import CardSearchBar from "../../components/CardSearchBar/CardSearchBar";
 import UserAvatar from "../user-avatar/UserAvatar";
 
-import { setUserModal } from "../../redux";
+import { setUserModal, clearColumns } from "../../redux";
 
 import {
   LockIcon,
@@ -15,11 +15,12 @@ import {
 
 import "./boardnavbar.css";
 
-const BoardNavBar = ({ board, history, boardState, showUserModal }) => (
+const BoardNavBar = ({ board, history, showUserModal, emptyColumns }) => (
   <div className="boardnavbar">
     <button
       className="boardnavbar-btn"
       onClick={() => {
+        emptyColumns();
         history.push("/boards");
       }}
     >
@@ -58,6 +59,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     showUserModal: (type) => dispatch(setUserModal(type)),
+    emptyColumns: () => dispatch(clearColumns()),
   };
 };
 
