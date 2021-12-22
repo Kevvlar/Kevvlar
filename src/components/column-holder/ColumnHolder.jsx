@@ -12,7 +12,6 @@ import {
   changeCardsOrderLocal,
   handleChangeCardColumnLocal,
   editCardServer,
-  fetchBoards,
   getUpdate,
 } from "../../redux/index";
 
@@ -64,7 +63,6 @@ class ColumnHolder extends React.Component {
         { columnsOrder: newColumnOrder },
         this.props.user.token
       );
-      this.props.getBoards(this.props.user.token);
     }
 
     // move card within column
@@ -171,7 +169,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getBoards: (token) => dispatch(fetchBoards(token)),
     fetchUpdates: (token, boardId) => dispatch(getUpdate(token, boardId)),
     addNewColumnModal: () => dispatch(setColumnModal()),
     updateBoardServer: (boardId, boardObj, token) =>
