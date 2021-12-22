@@ -52,6 +52,8 @@ class ColumnHolder extends React.Component {
       return;
     }
 
+    console.log(destination);
+
     // move column
     if (type === "column" && destination.index !== source.index) {
       const newColumnOrder = Array.from(this.props.columnsOrder);
