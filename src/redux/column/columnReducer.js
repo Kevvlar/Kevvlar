@@ -1,5 +1,4 @@
 import {
-  FETCH_COLUMNS_REQUEST,
   FETCH_COLUMNS_SUCCESS,
   FETCH_COLUMNS_FAILURE,
   ADD_NEW_COLUMN_LOCAL,
@@ -37,14 +36,6 @@ const initialState = {
 
 const columnReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_COLUMNS_REQUEST:
-      return {
-        ...state,
-        loading: true,
-        columns: [],
-        error: "",
-      };
-
     case FETCH_COLUMNS_SUCCESS:
       return {
         ...state,

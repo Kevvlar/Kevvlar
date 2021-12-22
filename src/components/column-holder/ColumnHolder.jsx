@@ -58,6 +58,7 @@ class ColumnHolder extends React.Component {
       const [reOrderedItem] = newColumnOrder.splice(source.index, 1);
       newColumnOrder.splice(destination.index, 0, reOrderedItem);
       this.props.updateColumnsOrderLocal(newColumnOrder);
+      clearInterval(this.interval);
       this.props.updateBoardServer(
         this.props.boardId,
         { columnsOrder: newColumnOrder },
@@ -77,6 +78,7 @@ class ColumnHolder extends React.Component {
       const newCardOrder = Array.from(currentColumn.cardsOrder);
       const [reOrderedCards] = newCardOrder.splice(source.index, 1);
       newCardOrder.splice(destination.index, 0, reOrderedCards);
+      clearInterval(this.interval);
       this.props.updateCardsOrderLocal(newCardOrder);
       this.props.updateCardsOrderServer(
         this.props.user.token,
@@ -100,6 +102,7 @@ class ColumnHolder extends React.Component {
         destinationColumn: destination.droppableId,
         newOrder: newTargetColumnCardOrder,
       });
+      clearInterval(this.interval);
       this.props.updateCardsOrderServer(
         this.props.user.token,
         this.props.boardId,
