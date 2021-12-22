@@ -29,7 +29,6 @@ import {
 
 import {
   addColumnToColumnsOrderLocal,
-  fetchBoards,
   fetchBoard,
   removeColumnFromColumnsOrderLocal,
 } from "../index";
@@ -118,9 +117,6 @@ export const createColumnServer = (token, boardId, columnObj) => {
           boardId,
         },
       })
-      .then((response) => {
-        dispatch(fetchBoards(token));
-      })
       .catch((error) => {
         dispatch(addNewColumnServerFailure(error.message));
       });
@@ -195,9 +191,6 @@ export const deleteColumnServer = (token, boardId, columnId) => {
         params: {
           boardId,
         },
-      })
-      .then((response) => {
-        dispatch(fetchBoards(token));
       })
       .catch((error) => {
         dispatch(deleteColumnServerFailure(error.message));
@@ -309,7 +302,6 @@ export const deleteCardServer = (token, boardId, cardId) => {
           boardId,
         },
       })
-      .then((response) => console.log(response.data.data))
       .catch((error) => {
         dispatch(editColumnServerFailure(error.message));
       });

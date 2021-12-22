@@ -24,7 +24,7 @@ class ColumnHolder extends React.Component {
   componentDidMount() {
     this.interval = setInterval(() => {
       this.props.fetchUpdates(this.props.user.token, this.props.boardId);
-    }, 3000);
+    }, 1500);
   }
 
   componentWillUnmount() {

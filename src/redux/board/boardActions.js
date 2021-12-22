@@ -45,7 +45,6 @@ export const fetchBoardsFailure = (error) => {
 
 export const fetchBoards = (token) => {
   return (dispatch) => {
-    dispatch(fetchBoardsRequest());
     axios
       .get("https://kevvlar.herokuapp.com/api/v1/boards", {
         headers: {

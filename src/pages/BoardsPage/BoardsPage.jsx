@@ -16,6 +16,13 @@ import "./boardsPage.css";
 class BoardsPage extends React.Component {
   componentDidMount() {
     this.props.getBoards(this.props.user.token);
+    this.interval = setInterval(() => {
+      this.props.getBoards(this.props.user.token);
+    }, 5000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   render() {
