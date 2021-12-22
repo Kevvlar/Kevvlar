@@ -30,6 +30,7 @@ import {
 import {
   addColumnToColumnsOrderLocal,
   fetchBoards,
+  fetchBoard,
   removeColumnFromColumnsOrderLocal,
 } from "../index";
 
@@ -56,7 +57,6 @@ export const fetchColumnsFailure = (error) => {
 
 export const fetchColumns = (token, boardId) => {
   return (dispatch) => {
-    dispatch(fetchColumnsRequest());
     axios
       .get("https://kevvlar.herokuapp.com/api/v1/columns", {
         headers: {
@@ -74,6 +74,13 @@ export const fetchColumns = (token, boardId) => {
       .catch((error) => {
         dispatch(fetchColumnsFailure(error.message));
       });
+  };
+};
+
+export const getUpdate = (token, boardId) => {
+  return (dispatch) => {
+    dispatch(fetchBoard(token, boardId));
+    dispatch(fetchColumns(token, boardId));
   };
 };
 

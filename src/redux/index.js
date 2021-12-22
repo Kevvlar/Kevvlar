@@ -21,6 +21,7 @@ export {
 
 export {
   fetchBoards,
+  fetchBoard,
   addNewBoardLocal,
   addMemberToBoard,
   createNewBoardServer,
@@ -50,6 +51,7 @@ export {
   fetchColumns,
   handleAddNewColumnLocal,
   setCurrentCardData,
+  getUpdate,
   changeCardsOrderLocal,
   handleChangeCardColumnLocal,
   enterCardSearchKey,

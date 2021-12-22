@@ -245,6 +245,25 @@ export const setCurrentBoardData = (board) => {
   };
 };
 
+export const fetchBoard = (token, boardId) => {
+  return (dispatch) => {
+    axios
+      .get(`https://kevvlar.herokuapp.com/api/v1/boards/${boardId}`, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const board = response.data.data.board;
+        dispatch(setCurrentBoardData(board));
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
+};
+
 export const addColumnToColumnsOrderLocal = (columnId) => {
   return {
     type: ADD_COLUMN_TO_COLUMNS_ORDER_LOCAL,
