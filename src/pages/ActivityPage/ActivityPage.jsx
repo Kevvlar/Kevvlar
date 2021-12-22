@@ -7,28 +7,46 @@ import RightSideNav from "../../components/sidenav-right/SideNavRight";
 import ColumnHolder from "../../components/column-holder/ColumnHolder";
 import BoardNavBar from "../../components/board-nav-bar/BoardNavBar";
 
-import {} from "../../redux";
+import { getUpdate } from "../../redux";
 
 import "./activityPage.css";
 
-const MainPage = ({ showModal, rightSideNav }) => {
-  return (
-    <div className="todopage">
-      <AppBar />
-      <BoardNavBar />
-      {rightSideNav ? <RightSideNav /> : null}
-      <ColumnHolder />
-      {showModal ? <Modal /> : null}
-    </div>
-  );
-};
+class MainPage extends React.Component {
+  componentDidMount() {
+    this.props.fetchUpdates(this.props.user.token, this.props.boardId);
+    this.interval = setInterval(() => {
+      this.props.fetchUpdates(this.props.user.token, this.props.boardId);
+      console.log("5sec passed");
+    }, 5000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  render() {
+    return (
+      <div className="todopage">
+        <AppBar />
+        <BoardNavBar />
+        {this.props.rightSideNav ? <RightSideNav /> : null}
+        <ColumnHolder />
+        {this.props.showModal ? <Modal /> : null}
+      </div>
+    );
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    fetchUpdates: (token, boardId) => dispatch(getUpdate(token, boardId)),
+  };
 };
 
 const mapStateToProps = (state) => {
   return {
+    boardId: state.board.selectBoard.id,
+    user: state.user.userData,
     leftSideNav: state.sideNavLeft.leftSideNav,
     rightSideNav: state.sideNavRight.rightSideNav,
     showModal: state.modal.showModal,
