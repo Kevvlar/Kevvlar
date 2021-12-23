@@ -3,6 +3,7 @@ import {
   FETCH_BOARDS_REQUEST,
   FETCH_BOARDS_SUCCESS,
   FETCH_BOARDS_FAILURE,
+  CLEAR_BOARDS,
   ADD_NEW_BOARD_LOCAL,
   ADD_NEW_BOARD_SERVER,
   ADD_NEW_BOARD_SERVER_FAILURE,
@@ -59,6 +60,12 @@ export const fetchBoards = (token) => {
       .catch((error) => {
         dispatch(fetchBoardsFailure(error.message));
       });
+  };
+};
+
+export const clearBoards = () => {
+  return {
+    type: CLEAR_BOARDS,
   };
 };
 
@@ -143,6 +150,31 @@ export const editBoardServer = (boardId, boardObj, token) => {
       })
       .catch((error) => {
         dispatch(editCurrentBoardServerFailure(error.message));
+      });
+  };
+};
+
+export const changeColumnsOrderServer = (boardId, boardObj, token) => {
+  return (dispatch) => {
+    axios
+      .patch(
+        `https://kevvlar.herokuapp.com/api/v1/boards/changecolumnsorder/${boardId}`,
+        boardObj,
+        {
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          params: {
+            boardId,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error.message);
       });
   };
 };

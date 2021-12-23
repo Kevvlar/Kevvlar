@@ -255,6 +255,8 @@ const columnReducer = (state = initialState, action) => {
       return {
         ...state,
         columns: [],
+        selectColumn: {},
+        selectCard: {},
       };
 
     default:

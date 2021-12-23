@@ -8,6 +8,8 @@ import {
   toggleFlatCard,
   handleLogOutUser,
   toggleRightSideNav,
+  clearBoards,
+  clearColumns,
 } from "../../redux/index.js";
 
 import TaskList from "../task-list/TaskList";
@@ -20,9 +22,13 @@ const RightSideNav = ({
   logUserOut,
   toggleRightSideNav,
   history,
+  emptyBoards,
+  emptyColumns,
 }) => {
   const handleSignOut = () => {
     toggleRightSideNav();
+    emptyBoards();
+    emptyColumns();
     logUserOut(history);
   };
 
@@ -57,6 +63,8 @@ const mapDispatchToProps = (dispatch) => {
     toggleFlat: () => dispatch(toggleFlatCard()),
     logUserOut: (history) => dispatch(handleLogOutUser(history)),
     toggleRightSideNav: () => dispatch(toggleRightSideNav()),
+    emptyBoards: () => dispatch(clearBoards()),
+    emptyColumns: () => dispatch(clearColumns()),
   };
 };
 

@@ -6,9 +6,9 @@ import { connect } from "react-redux";
 
 import {
   setColumnModal,
-  editBoardServer,
   changeColumnsOrderLocal,
   editColumnServer,
+  changeColumnsOrderServer,
   changeCardsOrderLocal,
   handleChangeCardColumnLocal,
   editCardServer,
@@ -160,7 +160,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addNewColumnModal: () => dispatch(setColumnModal()),
     updateBoardServer: (boardId, boardObj, token) =>
-      dispatch(editBoardServer(boardId, boardObj, token)),
+      dispatch(changeColumnsOrderServer(boardId, boardObj, token)),
     updateColumnsOrderLocal: (changeObj) =>
       dispatch(changeColumnsOrderLocal(changeObj)),
     updateCardsOrderLocal: (order) => dispatch(changeCardsOrderLocal(order)),
