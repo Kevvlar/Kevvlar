@@ -6,13 +6,12 @@ import { connect } from "react-redux";
 
 import {
   setColumnModal,
-  editBoardServer,
   changeColumnsOrderLocal,
   editColumnServer,
+  changeColumnsOrderServer,
   changeCardsOrderLocal,
   handleChangeCardColumnLocal,
   editCardServer,
-  getUpdate,
 } from "../../redux/index";
 
 import Column from "../column/Column";
@@ -20,16 +19,6 @@ import Column from "../column/Column";
 import "./columnHolder.css";
 
 class ColumnHolder extends React.Component {
-  componentDidMount() {
-    this.interval = setInterval(() => {
-      this.props.fetchUpdates(this.props.user.token, this.props.boardId);
-    }, 1500);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
   mapOrder = (array, order, key) => {
     array.sort(function (a, b) {
       var A = a[key],
@@ -58,7 +47,6 @@ class ColumnHolder extends React.Component {
       const [reOrderedItem] = newColumnOrder.splice(source.index, 1);
       newColumnOrder.splice(destination.index, 0, reOrderedItem);
       this.props.updateColumnsOrderLocal(newColumnOrder);
-      clearInterval(this.interval);
       this.props.updateBoardServer(
         this.props.boardId,
         { columnsOrder: newColumnOrder },
@@ -78,7 +66,6 @@ class ColumnHolder extends React.Component {
       const newCardOrder = Array.from(currentColumn.cardsOrder);
       const [reOrderedCards] = newCardOrder.splice(source.index, 1);
       newCardOrder.splice(destination.index, 0, reOrderedCards);
-      clearInterval(this.interval);
       this.props.updateCardsOrderLocal(newCardOrder);
       this.props.updateCardsOrderServer(
         this.props.user.token,
@@ -102,7 +89,6 @@ class ColumnHolder extends React.Component {
         destinationColumn: destination.droppableId,
         newOrder: newTargetColumnCardOrder,
       });
-      clearInterval(this.interval);
       this.props.updateCardsOrderServer(
         this.props.user.token,
         this.props.boardId,
@@ -172,10 +158,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchUpdates: (token, boardId) => dispatch(getUpdate(token, boardId)),
     addNewColumnModal: () => dispatch(setColumnModal()),
     updateBoardServer: (boardId, boardObj, token) =>
-      dispatch(editBoardServer(boardId, boardObj, token)),
+      dispatch(changeColumnsOrderServer(boardId, boardObj, token)),
     updateColumnsOrderLocal: (changeObj) =>
       dispatch(changeColumnsOrderLocal(changeObj)),
     updateCardsOrderLocal: (order) => dispatch(changeCardsOrderLocal(order)),

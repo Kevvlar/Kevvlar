@@ -24,6 +24,7 @@ export {
   fetchBoard,
   addNewBoardLocal,
   addMemberToBoard,
+  changeColumnsOrderServer,
   createNewBoardServer,
   editCurrentBoardLocal,
   editBoardServer,
@@ -34,6 +35,7 @@ export {
   changeColumnsOrderLocal,
   setCurrentBoardData,
   enterSearchText,
+  clearBoards,
 } from "./board/boardActions";
 
 export {

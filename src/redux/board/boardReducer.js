@@ -2,6 +2,7 @@ import {
   FETCH_BOARDS_REQUEST,
   FETCH_BOARDS_SUCCESS,
   FETCH_BOARDS_FAILURE,
+  CLEAR_BOARDS,
   ADD_NEW_BOARD_LOCAL,
   ADD_NEW_BOARD_SERVER,
   ADD_NEW_BOARD_SERVER_FAILURE,
@@ -50,6 +51,13 @@ const boardReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.payLoad,
+      };
+
+    case CLEAR_BOARDS:
+      return {
+        ...state,
+        boards: [],
+        selectBoard: {},
       };
 
     case ADD_NEW_BOARD_LOCAL:

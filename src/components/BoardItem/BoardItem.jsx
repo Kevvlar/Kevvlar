@@ -46,22 +46,24 @@ const boardItem = ({
         <div className="board-num-members sub-color">
           {board.members.length + board.admins.length} Users
         </div>
-        <div className="board-item-icons">
-          <FaEdit
-            className="edit-board-icon"
-            onClick={() => {
-              setSelectBoardData(board);
-              showModal(EDIT);
-            }}
-          />
-          <FaTrash
-            className="delete-board-icon"
-            onClick={() => {
-              setSelectBoardData(board);
-              showModal(DELETE);
-            }}
-          />
-        </div>
+        {board.admins.includes(user._id) ? (
+          <div className="board-item-icons">
+            <FaEdit
+              className="edit-board-icon"
+              onClick={() => {
+                setSelectBoardData(board);
+                showModal(EDIT);
+              }}
+            />
+            <FaTrash
+              className="delete-board-icon"
+              onClick={() => {
+                setSelectBoardData(board);
+                showModal(DELETE);
+              }}
+            />
+          </div>
+        ) : null}
       </div>
     </div>
   );
