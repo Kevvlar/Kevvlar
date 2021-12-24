@@ -2,11 +2,25 @@ import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { connect } from "react-redux";
 
-import { closeModal, addMemberToBoard } from "../../../redux";
+import {
+  closeModal,
+  addMemberToBoard,
+  removeMemberFromBoard,
+  getUserEmail,
+} from "../../../redux";
 
 import "./userModal.css";
 
-const UserModal = ({ closeModal, type, addMember, user, currrentBoardId }) => {
+const UserModal = ({
+  closeModal,
+  type,
+  addMember,
+  removeMember,
+  user,
+  currrentBoardId,
+  removeUserEmail,
+  setUserEmail,
+}) => {
   const AddUserModal = () => {
     const [userEmail, setUserEmail] = useState("");
 
@@ -40,9 +54,20 @@ const UserModal = ({ closeModal, type, addMember, user, currrentBoardId }) => {
 
   const RemoveUserModal = () => (
     <div className="modal-body">
-      <h2 className="modal-title">Add User To Board</h2>
+      <h2 className="modal-title">Remove User from Board</h2>
+      <p className="user-email">{removeUserEmail}</p>
       <div className="modal-button-container">
-        <button className="modal-cancel-button" onClick={closeModal}>
+        <button
+          className="modal-cancel-button"
+          onClick={() => {
+            removeMember(user.token, {
+              userEmail: removeUserEmail,
+              boardId: currrentBoardId,
+            });
+            setUserEmail("");
+            closeModal();
+          }}
+        >
           Remove User
         </button>
       </div>
@@ -53,7 +78,8 @@ const UserModal = ({ closeModal, type, addMember, user, currrentBoardId }) => {
     <div className="modal-board">
       <div className="close-icon-container">
         <FaTimes onClick={closeModal} className="close-icon" />
-        {type === "ADD" ? <AddUserModal /> : <RemoveUserModal />}
+        {type === "ADD" ? <AddUserModal /> : null}
+        {type === "REMOVE" ? <RemoveUserModal /> : null}
       </div>
     </div>
   );
@@ -64,13 +90,17 @@ const mapStateToProps = (state) => {
     type: state.modal.modalActionType,
     user: state.user.userData,
     currrentBoardId: state.board.selectBoard.id,
+    removeUserEmail: state.board.userEmail,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
+    setUserEmail: (email) => dispatch(getUserEmail(email)),
     addMember: (token, addObj) => dispatch(addMemberToBoard(token, addObj)),
+    removeMember: (token, removeObj) =>
+      dispatch(removeMemberFromBoard(token, removeObj)),
   };
 };
 

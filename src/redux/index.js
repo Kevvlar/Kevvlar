@@ -32,10 +32,12 @@ export {
   handleDeleteBoardServer,
   addColumnToColumnsOrderLocal,
   removeColumnFromColumnsOrderLocal,
+  removeMemberFromBoard,
   changeColumnsOrderLocal,
   setCurrentBoardData,
   enterSearchText,
   clearBoards,
+  getUserEmail,
 } from "./board/boardActions";
 
 export {
