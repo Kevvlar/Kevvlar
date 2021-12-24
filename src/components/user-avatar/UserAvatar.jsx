@@ -1,10 +1,8 @@
 import React from "react";
-import { connect } from "react-redux";
-
-import { getUserEmail, setUserModal } from "../../redux";
 
 import "./userAvatar.css";
 
+<<<<<<< HEAD
 const UserAvatar = ({ user, showUserModal, setUserEmail, selectBoard }) => (
   <div
     className="user-avatar-container"
@@ -15,6 +13,10 @@ const UserAvatar = ({ user, showUserModal, setUserEmail, selectBoard }) => (
       }
     }}
   >
+=======
+const UserAvatar = ({ user }) => (
+  <div className="user-avatar-container">
+>>>>>>> parent of 47dbad0 (Added the remove user from board feature)
     <img
       className="user-avatar-image"
       alt="img"
@@ -24,6 +26,7 @@ const UserAvatar = ({ user, showUserModal, setUserEmail, selectBoard }) => (
   </div>
 );
 
+<<<<<<< HEAD
 const mapStateToProps = (state) => {
   return {
     type: state.modal.modalActionType,
@@ -39,3 +42,6 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserAvatar);
+=======
+export default UserAvatar;
+>>>>>>> parent of 47dbad0 (Added the remove user from board feature)
