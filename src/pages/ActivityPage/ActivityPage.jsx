@@ -16,8 +16,7 @@ class MainPage extends React.Component {
     this.props.fetchUpdates(this.props.user.token, this.props.boardId);
     this.interval = setInterval(() => {
       this.props.fetchUpdates(this.props.user.token, this.props.boardId);
-      console.log("5sec passed");
-    }, 5000);
+    }, 3000);
   }
 
   componentWillUnmount() {
