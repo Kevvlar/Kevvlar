@@ -5,11 +5,17 @@ import { getUserEmail, setUserModal } from "../../redux";
 
 import "./userAvatar.css";
 
-const UserAvatar = ({ user, showUserModal, setUserEmail, selectBoard }) => (
+const UserAvatar = ({
+  user,
+  userId,
+  showUserModal,
+  setUserEmail,
+  selectBoard,
+}) => (
   <div
     className="user-avatar-container"
     onClick={() => {
-      if (selectBoard.admins.includes(user._id)) {
+      if (selectBoard.admins.includes(userId)) {
         setUserEmail(user.email);
         showUserModal("REMOVE");
       }
@@ -28,6 +34,7 @@ const mapStateToProps = (state) => {
   return {
     type: state.modal.modalActionType,
     selectBoard: state.board.selectBoard,
+    userId: state.user.userData._id,
   };
 };
 
