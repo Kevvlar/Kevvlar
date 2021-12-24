@@ -58,7 +58,8 @@ const UserModal = ({
       <p className="user-email">{removeUserEmail}</p>
       <div className="modal-button-container">
         <button
-          className="modal-cancel-button"
+          className="delete-button"
+          style={{margin: '0px'}}
           onClick={() => {
             removeMember(user.token, {
               userEmail: removeUserEmail,
