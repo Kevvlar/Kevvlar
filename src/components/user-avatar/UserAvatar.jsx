@@ -3,6 +3,9 @@ import React from "react";
 import "./userAvatar.css";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 6db4c0f (fixed prevent member from removing memeber bug)
 const UserAvatar = ({ user, showUserModal, setUserEmail, selectBoard }) => (
   <div
     className="user-avatar-container"
