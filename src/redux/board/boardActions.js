@@ -16,10 +16,13 @@ import {
   DELETE_BOARD_LOCAL,
   DELETE_BOARD_SERVER,
   DELTE_BOARD_SERVER_FAILURE,
+  REMOVE_MEMBER_FROM_BOARD_SUCCESS,
+  REMOVE_MEMBER_FROM_BOARD_FAILURE,
   ENTER_SEARCH_TEXT,
   SET_CURRENT_BOARD_DATA,
   REMOVE_COLUM_FROM_COLUMNS_ORDER_LOCAL,
   CHANGE_COLUMNS_ORDER_LOCAL,
+  GET_USER_EMAIL,
 } from "./boardTypes";
 import { clearColumns } from "../index";
 
@@ -170,9 +173,6 @@ export const changeColumnsOrderServer = (boardId, boardObj, token) => {
           },
         }
       )
-      .then((response) => {
-        console.log(response.data.data);
-      })
       .catch((error) => {
         console.log(error.message);
       });
@@ -262,6 +262,44 @@ export const addMemberToBoard = (token, addObj) => {
   };
 };
 
+export const removeMemberFromBoardSuccess = (members) => {
+  return {
+    type: REMOVE_MEMBER_FROM_BOARD_SUCCESS,
+    payLoad: members,
+  };
+};
+
+export const removeMemberFromBoardFailure = (error) => {
+  return {
+    type: REMOVE_MEMBER_FROM_BOARD_FAILURE,
+    payLoad: error,
+  };
+};
+
+export const removeMemberFromBoard = (token, removeObj) => {
+  return (dispatch) => {
+    axios
+      .patch(
+        `https://kevvlar.herokuapp.com/api/v1/boards/removemember`,
+        removeObj,
+        {
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        const members = response.data.data.board.members;
+        dispatch(removeMemberFromBoardSuccess(members));
+      })
+      .catch((error) => {
+        dispatch(removeMemberFromBoardFailure("Could not add user to board"));
+        console.log("Could not add user to board");
+      });
+  };
+};
+
 export const enterSearchText = (text) => {
   return {
     type: ENTER_SEARCH_TEXT,
@@ -313,5 +351,12 @@ export const changeColumnsOrderLocal = (changeObj) => {
   return {
     type: CHANGE_COLUMNS_ORDER_LOCAL,
     payLoad: changeObj,
+  };
+};
+
+export const getUserEmail = (email) => {
+  return {
+    type: GET_USER_EMAIL,
+    payLoad: email,
   };
 };
