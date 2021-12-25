@@ -173,9 +173,6 @@ export const changeColumnsOrderServer = (boardId, boardObj, token) => {
           },
         }
       )
-      .then((response) => {
-        console.log(response.data.data);
-      })
       .catch((error) => {
         console.log(error.message);
       });
