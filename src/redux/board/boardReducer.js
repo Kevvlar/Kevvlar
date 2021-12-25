@@ -15,13 +15,10 @@ import {
   DELETE_BOARD_SERVER,
   DELTE_BOARD_SERVER_FAILURE,
   ADD_COLUMN_TO_COLUMNS_ORDER_LOCAL,
-  REMOVE_COLUMN_FROM_COLUMNS_ORDER_LOCAL,
-  REMOVE_MEMBER_FROM_BOARD_SUCCESS,
-  REMOVE_MEMBER_FROM_BOARD_FAILURE,
+  REMOVE_COLUM_FROM_COLUMNS_ORDER_LOCAL,
   CHANGE_COLUMNS_ORDER_LOCAL,
   SET_CURRENT_BOARD_DATA,
   ENTER_SEARCH_TEXT,
-  GET_USER_EMAIL,
 } from "./boardTypes";
 
 const initialState = {
@@ -30,7 +27,6 @@ const initialState = {
   error: "",
   boards: [],
   loading: false,
-  userEmail: "",
 };
 
 const boardReducer = (state = initialState, action) => {
@@ -147,7 +143,7 @@ const boardReducer = (state = initialState, action) => {
         },
       };
 
-    case REMOVE_COLUMN_FROM_COLUMNS_ORDER_LOCAL:
+    case REMOVE_COLUM_FROM_COLUMNS_ORDER_LOCAL:
       return {
         ...state,
         selectBoard: {
@@ -156,21 +152,6 @@ const boardReducer = (state = initialState, action) => {
             (columnId) => columnId !== action.payLoad
           ),
         },
-      };
-
-    case REMOVE_MEMBER_FROM_BOARD_SUCCESS:
-      return {
-        ...state,
-        selectBoard: {
-          ...state.selectBoard,
-          members: action.payLoad,
-        },
-      };
-
-    case REMOVE_MEMBER_FROM_BOARD_FAILURE:
-      return {
-        ...state,
-        error: action.payLoad,
       };
 
     case CHANGE_COLUMNS_ORDER_LOCAL:
@@ -193,12 +174,6 @@ const boardReducer = (state = initialState, action) => {
       return {
         ...state,
         searchKey: action.payLoad.toLowerCase(),
-      };
-
-    case GET_USER_EMAIL:
-      return {
-        ...state,
-        userEmail: action.payLoad,
       };
 
     default:

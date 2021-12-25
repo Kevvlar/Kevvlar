@@ -43,11 +43,6 @@
   color: #e4745d;
 }
 
-.user-email {
-  font-weight: bold;
-  text-align: center;
-}
-
 /*RESPONSIVE BREAKPOINTS*/
 
 @media only screen and (max-width: 600px) {

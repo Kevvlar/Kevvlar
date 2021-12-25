@@ -7,11 +7,9 @@ import {
   ADD_NEW_BOARD_LOCAL,
   ADD_NEW_BOARD_SERVER,
   ADD_NEW_BOARD_SERVER_FAILURE,
-  ADD_COLUMN_TO_COLUMNS_ORDER_LOCAL,
   ADD_MEMBER_TO_BOARD_FAILURE,
+  ADD_COLUMN_TO_COLUMNS_ORDER_LOCAL,
   ADD_MEMBER_TO_BOARD_SUCCESS,
-  REMOVE_MEMBER_FROM_BOARD_SUCCESS,
-  REMOVE_MEMBER_FROM_BOARD_FAILURE,
   EDIT_BOARD_LOCAL,
   EDIT_BOARD_SERVER,
   EDIT_BOARD_SERVER_FAILURE,
@@ -20,9 +18,8 @@ import {
   DELTE_BOARD_SERVER_FAILURE,
   ENTER_SEARCH_TEXT,
   SET_CURRENT_BOARD_DATA,
-  REMOVE_COLUMN_FROM_COLUMNS_ORDER_LOCAL,
+  REMOVE_COLUM_FROM_COLUMNS_ORDER_LOCAL,
   CHANGE_COLUMNS_ORDER_LOCAL,
-  GET_USER_EMAIL,
 } from "./boardTypes";
 import { clearColumns } from "../index";
 
@@ -256,45 +253,7 @@ export const addMemberToBoard = (token, addObj) => {
         dispatch(addMemberToBoardSuccess(members));
       })
       .catch((error) => {
-        dispatch(addMemberToBoardFailure(error.message));
-        console.log("Could not add user to board");
-      });
-  };
-};
-
-export const removeMemberFromBoardSuccess = (members) => {
-  return {
-    type: REMOVE_MEMBER_FROM_BOARD_SUCCESS,
-    payLoad: members,
-  };
-};
-
-export const removeMemberFromBoardFailure = (error) => {
-  return {
-    type: REMOVE_MEMBER_FROM_BOARD_FAILURE,
-    payLoad: error,
-  };
-};
-
-export const removeMemberFromBoard = (token, removeObj) => {
-  return (dispatch) => {
-    axios
-      .patch(
-        `https://kevvlar.herokuapp.com/api/v1/boards/removemember`,
-        removeObj,
-        {
-          headers: {
-            "content-type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((response) => {
-        const members = response.data.data.board.members;
-        dispatch(removeMemberFromBoardSuccess(members));
-      })
-      .catch((error) => {
-        dispatch(removeMemberFromBoardFailure(error.message));
+        dispatch(addMemberToBoardFailure("Could not add user to board"));
         console.log("Could not add user to board");
       });
   };
@@ -342,7 +301,7 @@ export const addColumnToColumnsOrderLocal = (columnId) => {
 
 export const removeColumnFromColumnsOrderLocal = (columnId) => {
   return {
-    type: REMOVE_COLUMN_FROM_COLUMNS_ORDER_LOCAL,
+    type: REMOVE_COLUM_FROM_COLUMNS_ORDER_LOCAL,
     payLoad: columnId,
   };
 };
@@ -351,12 +310,5 @@ export const changeColumnsOrderLocal = (changeObj) => {
   return {
     type: CHANGE_COLUMNS_ORDER_LOCAL,
     payLoad: changeObj,
-  };
-};
-
-export const getUserEmail = (email) => {
-  return {
-    type: GET_USER_EMAIL,
-    payLoad: email,
   };
 };
