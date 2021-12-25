@@ -315,13 +315,6 @@ export const changeCardsOrderLocal = (order) => {
   };
 };
 
-export const changeCardColumnLocal = (changeObj) => {
-  return {
-    type: CHANGE_CARD_COLUMN_LOCAL,
-    payLoad: changeObj,
-  };
-};
-
 export const removeCardFromSourceColumnLocal = (sourceColumnId) => {
   return {
     type: REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL,
@@ -333,6 +326,13 @@ export const changeCardColumnId = (columnId) => {
   return {
     type: CHANGE_CARD_COLUMN_ID,
     payLoad: columnId,
+  };
+};
+
+export const changeCardColumnLocal = (changeObj) => {
+  return {
+    type: CHANGE_CARD_COLUMN_LOCAL,
+    payLoad: changeObj,
   };
 };
 
