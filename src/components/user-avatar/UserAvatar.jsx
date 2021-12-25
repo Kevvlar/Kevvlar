@@ -1,25 +1,26 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import "./userAvatar.css";
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of 6db4c0f (fixed prevent member from removing memeber bug)
-const UserAvatar = ({ user, showUserModal, setUserEmail, selectBoard }) => (
+import { setUserModal, getUserEmail } from "../../redux";
+
+const UserAvatar = ({
+  user,
+  showUserModal,
+  setUserEmail,
+  currentUserId,
+  selectBoard,
+}) => (
   <div
     className="user-avatar-container"
     onClick={() => {
-      if (selectBoard.admins.includes(user._id)) {
+      if (selectBoard.admins.includes(currentUserId)) {
         setUserEmail(user.email);
         showUserModal("REMOVE");
       }
     }}
   >
-=======
-const UserAvatar = ({ user }) => (
-  <div className="user-avatar-container">
->>>>>>> parent of 47dbad0 (Added the remove user from board feature)
     <img
       className="user-avatar-image"
       alt="img"
@@ -29,11 +30,11 @@ const UserAvatar = ({ user }) => (
   </div>
 );
 
-<<<<<<< HEAD
 const mapStateToProps = (state) => {
   return {
     type: state.modal.modalActionType,
     selectBoard: state.board.selectBoard,
+    currentUserId: state.user.userData._id,
   };
 };
 
@@ -45,6 +46,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserAvatar);
-=======
-export default UserAvatar;
->>>>>>> parent of 47dbad0 (Added the remove user from board feature)
