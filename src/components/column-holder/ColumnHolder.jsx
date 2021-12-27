@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
+import { io } from "socket.io-client";
+import { useParams } from "react-router-dom";
+
+import Column from "../column/Column";
+
+import "./columnHolder.css";
 
 // import { LoadingIcon } from "../../assets/svg/iconlibrary";
 
@@ -10,31 +16,108 @@ import {
   editColumnServer,
   changeColumnsOrderServer,
   changeCardsOrderLocal,
+  changeCardsOderIo,
   handleChangeCardColumnLocal,
+  handleChangeCardColumnIO,
   editCardServer,
 } from "../../redux/index";
 
-import Column from "../column/Column";
+const mapOrder = (array, order, key) => {
+  array.sort(function (a, b) {
+    var A = a[key],
+      B = b[key];
 
-import "./columnHolder.css";
+    if (order.indexOf(A) > order.indexOf(B)) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
 
-class ColumnHolder extends React.Component {
-  mapOrder = (array, order, key) => {
-    array.sort(function (a, b) {
-      var A = a[key],
-        B = b[key];
+  return array;
+};
 
-      if (order.indexOf(A) > order.indexOf(B)) {
-        return 1;
-      } else {
-        return -1;
-      }
-    });
+const ColumnHolder = ({
+  columns,
+  columnsOrder,
+  updateColumnsOrderLocal,
+  updateBoardServer,
+  boardId,
+  user,
+  updateCardsOrderLocal,
+  updateCardsOrderIO,
+  updateCardsOrderServer,
+  columnId,
+  changeCardColumnLocal,
+  changeCardColumnIo,
+  updateCardServer,
+  selectCard,
+  addNewColumnModal,
+}) => {
+  const { boardId: selectBoardId } = useParams();
+  const [socket, setSocket] = useState();
 
-    return array;
-  };
+  useEffect(() => {
+    const s = io("https://kevvlar.herokuapp.com");
+    setSocket(s);
 
-  onDragEnd = (result) => {
+    return () => {
+      s.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (socket == null) return;
+    socket.emit("join-board", selectBoardId);
+    return () => {
+      socket.off("join-board", selectBoardId);
+    };
+  }, [socket, selectBoardId]);
+
+  useEffect(() => {
+    if (socket == null) return;
+
+    const handler = (change) => {
+      updateColumnsOrderLocal(change);
+    };
+
+    socket.on("receive-columns-order", handler);
+
+    return () => {
+      socket.off("receive-columns-order", handler);
+    };
+  }, [socket, updateColumnsOrderLocal]);
+
+  useEffect(() => {
+    if (socket == null) return;
+
+    const handler = (changeObj) => {
+      updateCardsOrderIO(changeObj);
+    };
+
+    socket.on("receive-cards-order-change", handler);
+
+    return () => {
+      socket.off("receive-cards-order-change", handler);
+    };
+  }, [socket, updateCardsOrderIO]);
+
+  useEffect(() => {
+    if (socket == null) return;
+
+    const handler = (changeObj) => {
+      console.log(changeObj);
+      changeCardColumnIo(changeObj);
+    };
+
+    socket.on("receive-card-column-change", handler);
+
+    return () => {
+      socket.off("receive-card-column-change", handler);
+    };
+  }, [socket, changeCardColumnIo]);
+
+  const onDragEnd = (result) => {
     const { destination, draggableId, source, type } = result;
 
     if (!destination) {
@@ -43,15 +126,12 @@ class ColumnHolder extends React.Component {
 
     // move column
     if (type === "column" && destination.index !== source.index) {
-      const newColumnOrder = Array.from(this.props.columnsOrder);
+      const newColumnOrder = Array.from(columnsOrder);
       const [reOrderedItem] = newColumnOrder.splice(source.index, 1);
       newColumnOrder.splice(destination.index, 0, reOrderedItem);
-      this.props.updateColumnsOrderLocal(newColumnOrder);
-      this.props.updateBoardServer(
-        this.props.boardId,
-        { columnsOrder: newColumnOrder },
-        this.props.user.token
-      );
+      updateColumnsOrderLocal(newColumnOrder);
+      socket.emit("columns-order-change", newColumnOrder);
+      updateBoardServer(boardId, { columnsOrder: newColumnOrder }, user.token);
     }
 
     // move card within column
@@ -60,89 +140,72 @@ class ColumnHolder extends React.Component {
       source.index !== destination.index &&
       type === "card"
     ) {
-      const currentColumn = this.props.columns.find((column) =>
+      const currentColumn = columns.find((column) =>
         column.id === destination.droppableId ? column : null
       );
       const newCardOrder = Array.from(currentColumn.cardsOrder);
       const [reOrderedCards] = newCardOrder.splice(source.index, 1);
       newCardOrder.splice(destination.index, 0, reOrderedCards);
-      this.props.updateCardsOrderLocal(newCardOrder);
-      this.props.updateCardsOrderServer(
-        this.props.user.token,
-        this.props.boardId,
-        this.props.columnId,
-        {
-          cardsOrder: newCardOrder,
-        }
-      );
+      updateCardsOrderLocal(newCardOrder);
+      socket.emit("cards-order-change", {
+        columnId: columnId,
+        cardsOrder: newCardOrder,
+      });
+      updateCardsOrderServer(user.token, boardId, columnId, {
+        cardsOrder: newCardOrder,
+      });
     }
 
     // move card into another column
     if (source.droppableId !== destination.droppableId && type === "card") {
-      const targetColumn = this.props.columns.find((column) =>
+      const targetColumn = columns.find((column) =>
         column.id === destination.droppableId ? column : null
       );
       const targetColumnCardOrder = targetColumn.cardsOrder;
       const newTargetColumnCardOrder = [...targetColumnCardOrder];
       newTargetColumnCardOrder.splice(destination.index, 0, draggableId);
-      this.props.changeCardColumnLocal(source.droppableId, {
+      changeCardColumnLocal(source.droppableId, {
         destinationColumn: destination.droppableId,
         newOrder: newTargetColumnCardOrder,
       });
-      this.props.updateCardsOrderServer(
-        this.props.user.token,
-        this.props.boardId,
-        destination.droppableId,
-        {
-          cardsOrder: newTargetColumnCardOrder,
-        }
-      );
-      this.props.updateCardServer(
-        this.props.user.token,
-        this.props.boardId,
-        this.props.cardId,
-        {
-          columnId: destination.droppableId,
-        }
-      );
+      socket.emit("card-column-change", {
+        card: selectCard,
+        cardId: selectCard.id,
+        sourceColumnId: source.droppableId,
+        destinationColumnId: destination.droppableId,
+        newOrder: newTargetColumnCardOrder,
+      });
+      updateCardsOrderServer(user.token, boardId, destination.droppableId, {
+        cardsOrder: newTargetColumnCardOrder,
+      });
+      updateCardServer(user.token, boardId, selectCard.id, {
+        columnId: destination.droppableId,
+      });
     }
   };
 
-  render() {
-    return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <Droppable
-          droppableId="all-columns"
-          direction="horizontal"
-          type="column"
-        >
-          {(provided) => (
-            <div
-              className="column-holder"
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-              {this.mapOrder(
-                this.props.columns,
-                this.props.columnsOrder,
-                "id"
-              ).map((column, index) => (
-                <Column key={column.id} column={column} index={index} />
-              ))}
-              {provided.placeholder}
-              <button
-                onClick={this.props.addNewColumnModal}
-                className="new-column-button"
-              >
-                + Add New Column
-              </button>
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-    );
-  }
-}
+  return (
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Droppable droppableId="all-columns" direction="horizontal" type="column">
+        {(provided) => (
+          <div
+            className="column-holder"
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+          >
+            {mapOrder(columns, columnsOrder, "id").map((column, index) => (
+              <Column key={column.id} column={column} index={index} />
+            ))}
+            {provided.placeholder}
+            <button onClick={addNewColumnModal} className="new-column-button">
+              + Add New Column
+            </button>
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
+  );
+};
 
 const mapStateToProps = (state) => {
   return {
@@ -151,7 +214,7 @@ const mapStateToProps = (state) => {
     columnsState: state.column.loading,
     boardId: state.board.selectBoard.id,
     columnId: state.column.selectColumn.id,
-    cardId: state.column.selectCard.id,
+    selectCard: state.column.selectCard,
     user: state.user.userData,
   };
 };
@@ -168,8 +231,11 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(editColumnServer(token, boardId, columnId, columnObj)),
     changeCardColumnLocal: (sourceColumn, changeObj) =>
       dispatch(handleChangeCardColumnLocal(sourceColumn, changeObj)),
+    changeCardColumnIo: (changeObj) =>
+      dispatch(handleChangeCardColumnIO(changeObj)),
     updateCardServer: (token, boardId, cardId, cardObj) =>
       dispatch(editCardServer(token, boardId, cardId, cardObj)),
+    updateCardsOrderIO: (changeObj) => dispatch(changeCardsOderIo(changeObj)),
   };
 };
 

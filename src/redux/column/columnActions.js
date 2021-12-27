@@ -13,6 +13,7 @@ import {
   DELETE_COLUMN_SERVER_FAILURE,
   CHANGE_CARD_COLUMN_ID,
   CHANGE_CARD_COLUMN_LOCAL,
+  CHANGE_CARD_COLUMN_IO,
   ADD_NEW_CARD_LOCAL,
   ADD_NEW_CARD_SERVER_FAILURE,
   EDIT_CARD_LOCAL,
@@ -20,7 +21,9 @@ import {
   DELETE_CARD_LOCAL,
   DELETE_CARD_SERVER_FAILURE,
   CHANGE_CARDS_ORDER_LOCAL,
+  CHANGE_CARDS_ORDER_IO,
   REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL,
+  REMOVE_CARD_FROM_SOURCE_COLUMN_IO,
   ENTER_CARD_SEARCH_KEY,
   SET_CURRENT_COLUMN_DATA,
   SET_CURRENT_CARD_DATA,
@@ -315,9 +318,9 @@ export const changeCardsOrderLocal = (order) => {
   };
 };
 
-export const changeCardColumnLocal = (changeObj) => {
+export const changeCardsOderIo = (changeObj) => {
   return {
-    type: CHANGE_CARD_COLUMN_LOCAL,
+    type: CHANGE_CARDS_ORDER_IO,
     payLoad: changeObj,
   };
 };
@@ -336,11 +339,50 @@ export const changeCardColumnId = (columnId) => {
   };
 };
 
+export const changeCardColumnLocal = (changeObj) => {
+  return {
+    type: CHANGE_CARD_COLUMN_LOCAL,
+    payLoad: changeObj,
+  };
+};
+
+export const removeCardFromSourceColumnIO = (removeObj) => {
+  return {
+    type: REMOVE_CARD_FROM_SOURCE_COLUMN_IO,
+    payLoad: removeObj,
+  };
+};
+
+export const changeCardColumnIO = (cardObj) => {
+  return {
+    type: CHANGE_CARD_COLUMN_IO,
+    payLoad: cardObj,
+  };
+};
+
 export const handleChangeCardColumnLocal = (sourceColumnId, changeObj) => {
   return (dispatch) => {
     dispatch(removeCardFromSourceColumnLocal(sourceColumnId));
     dispatch(changeCardColumnId(changeObj.destinationColumn));
     dispatch(changeCardColumnLocal(changeObj));
+  };
+};
+
+export const handleChangeCardColumnIO = (changeObj) => {
+  return (dispatch) => {
+    dispatch(
+      removeCardFromSourceColumnIO({
+        sourceColumnId: changeObj.sourceColumnId,
+        cardId: changeObj.cardId,
+      })
+    );
+    dispatch(
+      changeCardColumnIO({
+        destinationColumnId: changeObj.destinationColumnId,
+        card: changeObj.card,
+        newOrder: changeObj.newOrder,
+      })
+    );
   };
 };
 

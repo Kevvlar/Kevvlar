@@ -14,20 +14,7 @@ import "./activityPage.css";
 class MainPage extends React.Component {
   componentDidMount() {
     this.props.fetchUpdates(this.props.user.token, this.props.boardId);
-
-    // this.interval = setInterval(() => {
-    //   if (this.props.showModal === false) {
-    //     this.props.fetchUpdates(this.props.user.token, this.props.boardId);
-    //     console.log("yes");
-    //   } else {
-    //     clearInterval(this.interval);
-    //   }
-    // }, 8000);
   }
-
-  // componentWillUnmount() {
-  //   clearInterval(this.interval);
-  // }
 
   render() {
     return (
