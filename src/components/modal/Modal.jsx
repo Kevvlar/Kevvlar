@@ -21,28 +21,48 @@ const Modal = ({ closeModal, modalType }) => {
     case BOARD_MODAL:
       return (
         <div className="modal-wrapper">
-          <div className="modal-close-overlay" onClick={closeModal}></div>
+          <div
+            className="modal-close-overlay"
+            onClick={() => {
+              closeModal();
+            }}
+          ></div>
           <BoardModal />
         </div>
       );
     case CARD_MODAL:
       return (
         <div className="modal-wrapper">
-          <div className="modal-close-overlay" onClick={closeModal}></div>
+          <div
+            className="modal-close-overlay"
+            onClick={() => {
+              closeModal();
+            }}
+          ></div>
           <CardModal />
         </div>
       );
     case COLUMN_MODAL:
       return (
         <div className="modal-wrapper">
-          <div className="modal-close-overlay" onClick={closeModal}></div>
+          <div
+            className="modal-close-overlay"
+            onClick={() => {
+              closeModal();
+            }}
+          ></div>
           <ColumnModal />
         </div>
       );
     case USER_MODAL:
       return (
         <div className="modal-wrapper">
-          <div className="modal-close-overlay" onClick={closeModal}></div>
+          <div
+            className="modal-close-overlay"
+            onClick={() => {
+              closeModal();
+            }}
+          ></div>
           <UserModal />
         </div>
       );

@@ -22,9 +22,13 @@ import {
   SET_CURRENT_BOARD_DATA,
   ENTER_SEARCH_TEXT,
   GET_USER_EMAIL,
+  SET_SOCKET_STATE,
+  SET_IO_DATA,
 } from "./boardTypes";
 
 const initialState = {
+  socketState: "",
+  ioData: {},
   selectBoard: {},
   searchKey: "",
   error: "",
@@ -199,6 +203,17 @@ const boardReducer = (state = initialState, action) => {
       return {
         ...state,
         userEmail: action.payLoad,
+      };
+
+    case SET_SOCKET_STATE:
+      return {
+        ...state,
+        socketState: action.payLoad,
+      };
+    case SET_IO_DATA:
+      return {
+        ...state,
+        ioData: action.payLoad,
       };
 
     default:

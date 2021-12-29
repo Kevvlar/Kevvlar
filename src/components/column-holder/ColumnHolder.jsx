@@ -20,6 +20,10 @@ import {
   handleChangeCardColumnLocal,
   handleChangeCardColumnIO,
   editCardServer,
+  handleSetIOAction,
+  handleAddNewColumnLocal,
+  editColumnLocal,
+  handleDeleteColumnLocal,
 } from "../../redux/index";
 
 const mapOrder = (array, order, key) => {
@@ -53,18 +57,27 @@ const ColumnHolder = ({
   updateCardServer,
   selectCard,
   addNewColumnModal,
+  socketState,
+  sendIOAction,
+  ioData,
+  addNewColumnIO,
+  updateColumnIO,
+  removeColumnIO,
 }) => {
   const { boardId: selectBoardId } = useParams();
   const [socket, setSocket] = useState();
 
+  const url = "https://kevvlar.herokuapp.com";
+  // const url = "http://localhost:8000";
+
   useEffect(() => {
-    const s = io("https://kevvlar.herokuapp.com");
+    const s = io(url);
     setSocket(s);
 
     return () => {
       s.disconnect();
     };
-  }, []);
+  }, [socketState]);
 
   useEffect(() => {
     if (socket == null) return;
@@ -90,13 +103,10 @@ const ColumnHolder = ({
 
   useEffect(() => {
     if (socket == null) return;
-
     const handler = (changeObj) => {
       updateCardsOrderIO(changeObj);
     };
-
     socket.on("receive-cards-order-change", handler);
-
     return () => {
       socket.off("receive-cards-order-change", handler);
     };
@@ -106,7 +116,6 @@ const ColumnHolder = ({
     if (socket == null) return;
 
     const handler = (changeObj) => {
-      console.log(changeObj);
       changeCardColumnIo(changeObj);
     };
 
@@ -116,6 +125,60 @@ const ColumnHolder = ({
       socket.off("receive-card-column-change", handler);
     };
   }, [socket, changeCardColumnIo]);
+
+  useEffect(() => {
+    if (socket == null) return;
+
+    const handler = (changeObj) => {
+      addNewColumnIO(changeObj);
+    };
+
+    socket.on("receive-new-column", handler);
+    return () => {
+      socket.off("receive-new-column", handler);
+    };
+  }, [socket, addNewColumnIO]);
+
+  useEffect(() => {
+    if (socket == null) return;
+
+    const handler = (changeObj) => {
+      updateColumnIO(changeObj);
+    };
+
+    socket.on("receive-edit-column", handler);
+    return () => {
+      socket.off("receive-edit-column", handler);
+    };
+  }, [socket, updateColumnIO]);
+
+  useEffect(() => {
+    if (socket == null) return;
+
+    const handler = (changeObj) => {
+      removeColumnIO(changeObj);
+    };
+
+    socket.on("receive-delete-column", handler);
+    return () => {
+      socket.off("receive-delete-column", handler);
+    };
+  }, [socket, removeColumnIO]);
+
+  if (socketState === "ADD_NEW_COLUMN") {
+    socket.emit("add-new-column", ioData);
+    sendIOAction("", {});
+  }
+
+  if (socketState === "EDIT_COLUMN") {
+    socket.emit("edit-column", ioData);
+    sendIOAction("", {});
+  }
+
+  if (socketState === "DELETE_COLUMN") {
+    socket.emit("delete-column", ioData);
+    sendIOAction("", {});
+  }
 
   const onDragEnd = (result) => {
     const { destination, draggableId, source, type } = result;
@@ -197,7 +260,12 @@ const ColumnHolder = ({
               <Column key={column.id} column={column} index={index} />
             ))}
             {provided.placeholder}
-            <button onClick={addNewColumnModal} className="new-column-button">
+            <button
+              onClick={() => {
+                addNewColumnModal();
+              }}
+              className="new-column-button"
+            >
               + Add New Column
             </button>
           </div>
@@ -215,7 +283,9 @@ const mapStateToProps = (state) => {
     boardId: state.board.selectBoard.id,
     columnId: state.column.selectColumn.id,
     selectCard: state.column.selectCard,
+    socketState: state.board.socketState,
     user: state.user.userData,
+    ioData: state.board.ioData,
   };
 };
 
@@ -236,6 +306,10 @@ const mapDispatchToProps = (dispatch) => {
     updateCardServer: (token, boardId, cardId, cardObj) =>
       dispatch(editCardServer(token, boardId, cardId, cardObj)),
     updateCardsOrderIO: (changeObj) => dispatch(changeCardsOderIo(changeObj)),
+    sendIOAction: (state, data) => dispatch(handleSetIOAction(state, data)),
+    addNewColumnIO: (columnObj) => dispatch(handleAddNewColumnLocal(columnObj)),
+    updateColumnIO: (columnObj) => dispatch(editColumnLocal(columnObj)),
+    removeColumnIO: (columnId) => dispatch(handleDeleteColumnLocal(columnId)),
   };
 };
 

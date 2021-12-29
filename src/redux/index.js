@@ -38,6 +38,7 @@ export {
   enterSearchText,
   clearBoards,
   getUserEmail,
+  handleSetIOAction,
 } from "./board/boardActions";
 
 export {
