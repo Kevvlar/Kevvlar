@@ -23,8 +23,6 @@ import {
   REMOVE_COLUM_FROM_COLUMNS_ORDER_LOCAL,
   CHANGE_COLUMNS_ORDER_LOCAL,
   GET_USER_EMAIL,
-  SET_SOCKET_STATE,
-  SET_IO_DATA,
 } from "./boardTypes";
 import { clearColumns } from "../index";
 
@@ -360,26 +358,5 @@ export const getUserEmail = (email) => {
   return {
     type: GET_USER_EMAIL,
     payLoad: email,
-  };
-};
-
-export const setSocketState = (state) => {
-  return {
-    type: SET_SOCKET_STATE,
-    payLoad: state,
-  };
-};
-
-export const setIOData = (data) => {
-  return {
-    type: SET_IO_DATA,
-    payLoad: data,
-  };
-};
-
-export const handleSetIOAction = (state, data) => {
-  return (dispatch) => {
-    dispatch(setSocketState(state));
-    dispatch(setIOData(data));
   };
 };

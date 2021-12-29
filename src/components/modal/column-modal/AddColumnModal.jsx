@@ -3,11 +3,12 @@ import { FaTimes } from "react-icons/fa";
 import { connect } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
+import socket from "../../../Socket";
+
 import {
   closeModal,
   handleAddNewColumnLocal,
   createColumnServer,
-  handleSetIOAction,
 } from "../../../redux";
 
 const AddColumnModal = ({
@@ -16,7 +17,6 @@ const AddColumnModal = ({
   boardId,
   addNewColumnLocal,
   addNewColumnServer,
-  sendIOAction,
 }) => {
   const [columnTitle, setColumnTitle] = useState("");
 
@@ -49,9 +49,9 @@ const AddColumnModal = ({
                 cards: [],
                 cardsOrder: [],
               };
-              sendIOAction("ADD_NEW_COLUMN", columnObj);
               addNewColumnLocal(columnObj);
               addNewColumnServer(user.token, boardId, columnObj);
+              socket.emit("add-new-column", columnObj);
               setColumnTitle("");
               closeModal();
             }}
@@ -78,7 +78,6 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(handleAddNewColumnLocal(columnObj)),
     addNewColumnServer: (token, boardId, columnObj) =>
       dispatch(createColumnServer(token, boardId, columnObj)),
-    sendIOAction: (state, data) => dispatch(handleSetIOAction(state, data)),
   };
 };
 

@@ -412,3 +412,9 @@ export const setCurrentCardData = (cardObj) => {
     payLoad: cardObj,
   };
 };
+
+export const emitCreateNewColumnIO = (socket, data) => {
+  return () => {
+    socket.emit("add-new-column", data);
+  };
+};

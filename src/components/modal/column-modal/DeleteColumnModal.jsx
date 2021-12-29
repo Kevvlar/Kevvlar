@@ -1,11 +1,12 @@
 import { connect } from "react-redux";
 import { FaTimes } from "react-icons/fa";
 
+import socket from "../../../Socket";
+
 import {
   closeModal,
   handleDeleteColumnLocal,
   deleteColumnServer,
-  handleSetIOAction,
 } from "../../../redux";
 
 const DeleteColumnModal = ({
@@ -15,7 +16,6 @@ const DeleteColumnModal = ({
   currentColumnId,
   removeColumnLocal,
   deleteCurrentColumnServer,
-  sendIOAction,
 }) => {
   return (
     <div className="modal-board">
@@ -31,8 +31,8 @@ const DeleteColumnModal = ({
               className="delete-button"
               onClick={() => {
                 removeColumnLocal(currentColumnId);
-                sendIOAction("DELETE_COLUMN", currentColumnId);
                 deleteCurrentColumnServer(user.token, boardId, currentColumnId);
+                socket.emit("delete-column", currentColumnId);
                 closeModal();
               }}
             >
@@ -65,7 +65,6 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(handleDeleteColumnLocal(columnId)),
     deleteCurrentColumnServer: (token, boardId, columnId) =>
       dispatch(deleteColumnServer(token, boardId, columnId)),
-    sendIOAction: (state, data) => dispatch(handleSetIOAction(state, data)),
   };
 };
 

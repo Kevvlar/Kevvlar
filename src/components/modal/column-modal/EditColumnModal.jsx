@@ -2,12 +2,9 @@ import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { connect } from "react-redux";
 
-import {
-  closeModal,
-  editColumnLocal,
-  editColumnServer,
-  handleSetIOAction,
-} from "../../../redux";
+import socket from "../../../Socket";
+
+import { closeModal, editColumnLocal, editColumnServer } from "../../../redux";
 
 const EditColumnModal = ({
   closeModal,
@@ -17,7 +14,6 @@ const EditColumnModal = ({
   currentColumnTitle,
   updateColumnLocal,
   updateColumnServer,
-  sendIOAction,
 }) => {
   const [columnEditTitle, setColumnEditTitle] = useState(currentColumnTitle);
 
@@ -42,7 +38,7 @@ const EditColumnModal = ({
                 title: columnEditTitle,
               };
               updateColumnLocal(columnObj);
-              sendIOAction("EDIT_COLUMN", columnObj);
+              socket.emit("edit-column", columnObj);
               updateColumnServer(user.token, boardId, currentColumnId, {
                 title: columnEditTitle,
               });
@@ -73,7 +69,6 @@ const mapDispatchToProps = (dispatch) => {
     updateColumnLocal: (columnObj) => dispatch(editColumnLocal(columnObj)),
     updateColumnServer: (token, boardId, columnId, columnObj) =>
       dispatch(editColumnServer(token, boardId, columnId, columnObj)),
-    sendIOAction: (state, data) => dispatch(handleSetIOAction(state, data)),
   };
 };
 

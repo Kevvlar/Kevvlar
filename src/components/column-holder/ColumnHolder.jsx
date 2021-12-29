@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
-import { io } from "socket.io-client";
-import { useParams } from "react-router-dom";
+
+import socket from "../../Socket";
 
 import Column from "../column/Column";
 
 import "./columnHolder.css";
-
-// import { LoadingIcon } from "../../assets/svg/iconlibrary";
 
 import {
   setColumnModal,
@@ -16,14 +14,8 @@ import {
   editColumnServer,
   changeColumnsOrderServer,
   changeCardsOrderLocal,
-  changeCardsOderIo,
   handleChangeCardColumnLocal,
-  handleChangeCardColumnIO,
   editCardServer,
-  handleSetIOAction,
-  handleAddNewColumnLocal,
-  editColumnLocal,
-  handleDeleteColumnLocal,
 } from "../../redux/index";
 
 const mapOrder = (array, order, key) => {
@@ -49,139 +41,13 @@ const ColumnHolder = ({
   boardId,
   user,
   updateCardsOrderLocal,
-  updateCardsOrderIO,
   updateCardsOrderServer,
   columnId,
   changeCardColumnLocal,
-  changeCardColumnIo,
   updateCardServer,
   selectCard,
   addNewColumnModal,
-  socketState,
-  sendIOAction,
-  ioData,
-  addNewColumnIO,
-  updateColumnIO,
-  removeColumnIO,
 }) => {
-  const { boardId: selectBoardId } = useParams();
-  const [socket, setSocket] = useState();
-
-  const url = "https://kevvlar.herokuapp.com";
-  // const url = "http://localhost:8000";
-
-  useEffect(() => {
-    const s = io(url);
-    setSocket(s);
-
-    return () => {
-      s.disconnect();
-    };
-  }, [socketState]);
-
-  useEffect(() => {
-    if (socket == null) return;
-    socket.emit("join-board", selectBoardId);
-    return () => {
-      socket.off("join-board", selectBoardId);
-    };
-  }, [socket, selectBoardId]);
-
-  useEffect(() => {
-    if (socket == null) return;
-
-    const handler = (change) => {
-      updateColumnsOrderLocal(change);
-    };
-
-    socket.on("receive-columns-order", handler);
-
-    return () => {
-      socket.off("receive-columns-order", handler);
-    };
-  }, [socket, updateColumnsOrderLocal]);
-
-  useEffect(() => {
-    if (socket == null) return;
-    const handler = (changeObj) => {
-      updateCardsOrderIO(changeObj);
-    };
-    socket.on("receive-cards-order-change", handler);
-    return () => {
-      socket.off("receive-cards-order-change", handler);
-    };
-  }, [socket, updateCardsOrderIO]);
-
-  useEffect(() => {
-    if (socket == null) return;
-
-    const handler = (changeObj) => {
-      changeCardColumnIo(changeObj);
-    };
-
-    socket.on("receive-card-column-change", handler);
-
-    return () => {
-      socket.off("receive-card-column-change", handler);
-    };
-  }, [socket, changeCardColumnIo]);
-
-  useEffect(() => {
-    if (socket == null) return;
-
-    const handler = (changeObj) => {
-      addNewColumnIO(changeObj);
-    };
-
-    socket.on("receive-new-column", handler);
-    return () => {
-      socket.off("receive-new-column", handler);
-    };
-  }, [socket, addNewColumnIO]);
-
-  useEffect(() => {
-    if (socket == null) return;
-
-    const handler = (changeObj) => {
-      updateColumnIO(changeObj);
-    };
-
-    socket.on("receive-edit-column", handler);
-    return () => {
-      socket.off("receive-edit-column", handler);
-    };
-  }, [socket, updateColumnIO]);
-
-  useEffect(() => {
-    if (socket == null) return;
-
-    const handler = (changeObj) => {
-      removeColumnIO(changeObj);
-    };
-
-    socket.on("receive-delete-column", handler);
-    return () => {
-      socket.off("receive-delete-column", handler);
-    };
-  }, [socket, removeColumnIO]);
-
-  useEffect(() => {
-    if (socketState === "ADD_NEW_COLUMN") {
-      socket.emit("add-new-column", ioData);
-      sendIOAction("", {});
-    }
-
-    if (socketState === "EDIT_COLUMN") {
-      socket.emit("edit-column", ioData);
-      sendIOAction("", {});
-    }
-
-    if (socketState === "DELETE_COLUMN") {
-      socket.emit("delete-column", ioData);
-      sendIOAction("", {});
-    }
-  }, [sendIOAction, socketState, socket, ioData]);
-
   const onDragEnd = (result) => {
     const { destination, draggableId, source, type } = result;
 
@@ -195,8 +61,8 @@ const ColumnHolder = ({
       const [reOrderedItem] = newColumnOrder.splice(source.index, 1);
       newColumnOrder.splice(destination.index, 0, reOrderedItem);
       updateColumnsOrderLocal(newColumnOrder);
-      socket.emit("columns-order-change", newColumnOrder);
       updateBoardServer(boardId, { columnsOrder: newColumnOrder }, user.token);
+      socket.emit("columns-order-change", newColumnOrder);
     }
 
     // move card within column
@@ -212,11 +78,11 @@ const ColumnHolder = ({
       const [reOrderedCards] = newCardOrder.splice(source.index, 1);
       newCardOrder.splice(destination.index, 0, reOrderedCards);
       updateCardsOrderLocal(newCardOrder);
-      socket.emit("cards-order-change", {
-        columnId: columnId,
+      updateCardsOrderServer(user.token, boardId, columnId, {
         cardsOrder: newCardOrder,
       });
-      updateCardsOrderServer(user.token, boardId, columnId, {
+      socket.emit("cards-order-change", {
+        columnId: columnId,
         cardsOrder: newCardOrder,
       });
     }
@@ -233,18 +99,18 @@ const ColumnHolder = ({
         destinationColumn: destination.droppableId,
         newOrder: newTargetColumnCardOrder,
       });
+      updateCardsOrderServer(user.token, boardId, destination.droppableId, {
+        cardsOrder: newTargetColumnCardOrder,
+      });
+      updateCardServer(user.token, boardId, selectCard.id, {
+        columnId: destination.droppableId,
+      });
       socket.emit("card-column-change", {
         card: selectCard,
         cardId: selectCard.id,
         sourceColumnId: source.droppableId,
         destinationColumnId: destination.droppableId,
         newOrder: newTargetColumnCardOrder,
-      });
-      updateCardsOrderServer(user.token, boardId, destination.droppableId, {
-        cardsOrder: newTargetColumnCardOrder,
-      });
-      updateCardServer(user.token, boardId, selectCard.id, {
-        columnId: destination.droppableId,
       });
     }
   };
@@ -285,9 +151,7 @@ const mapStateToProps = (state) => {
     boardId: state.board.selectBoard.id,
     columnId: state.column.selectColumn.id,
     selectCard: state.column.selectCard,
-    socketState: state.board.socketState,
     user: state.user.userData,
-    ioData: state.board.ioData,
   };
 };
 
@@ -303,15 +167,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(editColumnServer(token, boardId, columnId, columnObj)),
     changeCardColumnLocal: (sourceColumn, changeObj) =>
       dispatch(handleChangeCardColumnLocal(sourceColumn, changeObj)),
-    changeCardColumnIo: (changeObj) =>
-      dispatch(handleChangeCardColumnIO(changeObj)),
     updateCardServer: (token, boardId, cardId, cardObj) =>
       dispatch(editCardServer(token, boardId, cardId, cardObj)),
-    updateCardsOrderIO: (changeObj) => dispatch(changeCardsOderIo(changeObj)),
-    sendIOAction: (state, data) => dispatch(handleSetIOAction(state, data)),
-    addNewColumnIO: (columnObj) => dispatch(handleAddNewColumnLocal(columnObj)),
-    updateColumnIO: (columnObj) => dispatch(editColumnLocal(columnObj)),
-    removeColumnIO: (columnId) => dispatch(handleDeleteColumnLocal(columnId)),
   };
 };
 
