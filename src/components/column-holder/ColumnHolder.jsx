@@ -165,20 +165,22 @@ const ColumnHolder = ({
     };
   }, [socket, removeColumnIO]);
 
-  if (socketState === "ADD_NEW_COLUMN") {
-    socket.emit("add-new-column", ioData);
-    sendIOAction("", {});
-  }
+  useEffect(() => {
+    if (socketState === "ADD_NEW_COLUMN") {
+      socket.emit("add-new-column", ioData);
+      sendIOAction("", {});
+    }
 
-  if (socketState === "EDIT_COLUMN") {
-    socket.emit("edit-column", ioData);
-    sendIOAction("", {});
-  }
+    if (socketState === "EDIT_COLUMN") {
+      socket.emit("edit-column", ioData);
+      sendIOAction("", {});
+    }
 
-  if (socketState === "DELETE_COLUMN") {
-    socket.emit("delete-column", ioData);
-    sendIOAction("", {});
-  }
+    if (socketState === "DELETE_COLUMN") {
+      socket.emit("delete-column", ioData);
+      sendIOAction("", {});
+    }
+  }, [sendIOAction, socketState, socket, ioData]);
 
   const onDragEnd = (result) => {
     const { destination, draggableId, source, type } = result;
