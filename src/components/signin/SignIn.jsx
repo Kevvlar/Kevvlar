@@ -56,7 +56,7 @@ const SignIn = ({ signInUser, history }) => {
             />
           </div>
           <button type="submit" className="sign-in-form-submit-button">
-            Sign in
+            Log in
           </button>
         </form>
         <p className="sign-in-here">
