@@ -6,6 +6,10 @@ import { signUserUp } from "../../redux";
 
 import "./signup.css";
 
+import {
+  KevvlarIcon
+} from "../../assets/svg/iconlibrary";
+
 const SignUp = ({ signUpUser, history }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -29,6 +33,8 @@ const SignUp = ({ signUpUser, history }) => {
   return (
     <div className="signup-container">
       <div className="signup-content">
+        <KevvlarIcon />
+        <h2 className="signup-white">Sign Up</h2>
         <form onSubmit={handleSubmit} className="signup-form">
           <div className="signup-form-group">
             <input
@@ -71,9 +77,9 @@ const SignUp = ({ signUpUser, history }) => {
           </div>
         </form>
         <p className="loginhere">
-          Have already an account ?
+          Already have an account?{" "}
           <Link to="/signin" className="signup-form-login-link">
-            Sign in here
+            Log in here
           </Link>
         </p>
       </div>
