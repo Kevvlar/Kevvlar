@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
 
 import AppBar from "../../components/appbar/AppBar";
 import Modal from "../../components/modal/Modal";
@@ -12,12 +11,9 @@ import socket from "../../Socket";
 
 import {
   getUpdate,
-  handleChangeCardColumnIO,
-  changeCardsOderIo,
-  handleAddNewColumnLocal,
-  editColumnLocal,
   changeColumnsOrderLocal,
-  handleDeleteColumnLocal,
+  changeCardsOderIo,
+  handleChangeCardColumnIO,
 } from "../../redux";
 
 import "./activityPage.css";
@@ -28,85 +24,51 @@ const MainPage = ({
   showModal,
   user,
   boardId,
-  updateCardsOrderIO,
-  changeCardColumnIo,
-  addNewColumnIO,
-  editColumnIO,
-  deleteColumnIO,
   updateColumnsOrderLocal,
+  updateCardsOrder,
+  changeCardColumn,
 }) => {
-  const { boardId: selectBoardId } = useParams();
-
   useEffect(() => {
     fetchUpdates(user.token, boardId);
   }, [boardId, user, fetchUpdates]);
 
   useEffect(() => {
-    socket.emit("join-board", selectBoardId);
-    return () => {
-      socket.off("join-board", selectBoardId);
-    };
-  }, [selectBoardId]);
+    socket.connect();
+    socket.emit("join-board", boardId);
+  }, [boardId]);
 
   useEffect(() => {
-    const handler = (change) => {
-      updateColumnsOrderLocal(change);
+    const handler = (data) => {
+      console.log(data);
+      updateColumnsOrderLocal(data);
     };
-    socket.on("receive-columns-order", handler);
+    socket.on("receive-column-order", handler);
     return () => {
-      socket.off("receive-columns-order", handler);
+      socket.off("receive-column-order", handler);
     };
-  }, [updateColumnsOrderLocal]);
+  });
 
   useEffect(() => {
-    const handler = (changeObj) => {
-      updateCardsOrderIO(changeObj);
+    const handler = (data) => {
+      console.log(data);
+      updateCardsOrder(data);
     };
-    socket.on("receive-cards-order-change", handler);
+    socket.on("receive-cards-order", handler);
     return () => {
-      socket.off("receive-cards-order-change", handler);
+      socket.off("receive-cards-order", handler);
     };
-  }, [updateCardsOrderIO]);
+  });
 
   useEffect(() => {
-    const handler = (changeObj) => {
-      changeCardColumnIo(changeObj);
+    const handler = (data) => {
+      console.log(data);
+      changeCardColumn(data);
     };
-    socket.on("receive-card-column-change", handler);
+    socket.on("receive-card-column", handler);
     return () => {
-      socket.off("receive-card-column-change", handler);
+      socket.off("receive-card-column", handler);
     };
-  }, [changeCardColumnIo]);
-
-  useEffect(() => {
-    const handler = (columnObj) => {
-      addNewColumnIO(columnObj);
-    };
-    socket.on("receive-new-column", handler);
-    return () => {
-      socket.off("receive-new-column", handler);
-    };
-  }, [addNewColumnIO]);
-
-  useEffect(() => {
-    const handler = (columnObj) => {
-      editColumnIO(columnObj);
-    };
-    socket.on("receive-edit-column", handler);
-    return () => {
-      socket.off("receive-edit-column", handler);
-    };
-  }, [editColumnIO]);
-
-  useEffect(() => {
-    const handler = (columnId) => {
-      deleteColumnIO(columnId);
-    };
-    socket.on("receive-delete-column", handler);
-    return () => {
-      socket.off("receive-delete-column", handler);
-    };
-  }, [deleteColumnIO]);
+  });
 
   return (
     <div className="todopage">
@@ -122,14 +84,10 @@ const MainPage = ({
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchUpdates: (token, boardId) => dispatch(getUpdate(token, boardId)),
-    updateCardsOrderIO: (changeObj) => dispatch(changeCardsOderIo(changeObj)),
-    addNewColumnIO: (columnObj) => dispatch(handleAddNewColumnLocal(columnObj)),
-    editColumnIO: (columnObj) => dispatch(editColumnLocal(columnObj)),
-    changeCardColumnIo: (changeObj) =>
-      dispatch(handleChangeCardColumnIO(changeObj)),
-    deleteColumnIO: (columnId) => dispatch(handleDeleteColumnLocal(columnId)),
     updateColumnsOrderLocal: (changeObj) =>
       dispatch(changeColumnsOrderLocal(changeObj)),
+    updateCardsOrder: (changeObj) => dispatch(changeCardsOderIo(changeObj)),
+    changeCardColumn: (data) => dispatch(handleChangeCardColumnIO(data)),
   };
 };
 

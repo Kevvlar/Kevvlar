@@ -18,14 +18,14 @@ import {
   CHANGE_CARDS_ORDER_LOCAL,
   CHANGE_CARDS_ORDER_IO,
   REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL,
-  REMOVE_CARD_FROM_SOURCE_COLUMN_IO,
   CHANGE_CARD_COLUMN_ID,
   CHANGE_CARD_COLUMN_LOCAL,
-  CHANGE_CARD_COLUMN_IO,
   ENTER_CARD_SEARCH_KEY,
   SET_CURRENT_COLUMN_DATA,
   SET_CURRENT_CARD_DATA,
   CLEAR_COLUMNS,
+  REMOVE_CARD_FROM_SOURCE_COLUMN_IO,
+  CHANGE_CARD_COLUMN_IO,
 } from "./columnTypes";
 
 const initialState = {
@@ -211,6 +211,38 @@ const columnReducer = (state = initialState, action) => {
         ),
       };
 
+    case REMOVE_CARD_FROM_SOURCE_COLUMN_IO:
+      return {
+        ...state,
+        columns: state.columns.map((columnItem) =>
+          columnItem.id === action.payLoad.sourceColumnId
+            ? {
+                ...columnItem,
+                cards: columnItem.cards.filter(
+                  (card) => card.id !== action.payLoad.cardId
+                ),
+                cardsOrder: columnItem.cardsOrder.filter(
+                  (id) => id !== action.payLoad.cardId
+                ),
+              }
+            : columnItem
+        ),
+      };
+
+    case CHANGE_CARD_COLUMN_IO:
+      return {
+        ...state,
+        columns: state.columns.map((columnItem) =>
+          columnItem.id === action.payLoad.destinationColumnId
+            ? {
+                ...columnItem,
+                cards: [...columnItem.cards, action.payLoad.card],
+                cardsOrder: action.payLoad.cardsOrder,
+              }
+            : columnItem
+        ),
+      };
+
     case REMOVE_CARD_FROM_SOURCE_COLUMN_LOCAL:
       return {
         ...state,
@@ -243,38 +275,6 @@ const columnReducer = (state = initialState, action) => {
             ? {
                 ...columnItem,
                 cards: [...columnItem.cards, state.selectCard],
-                cardsOrder: action.payLoad.newOrder,
-              }
-            : columnItem
-        ),
-      };
-
-    case REMOVE_CARD_FROM_SOURCE_COLUMN_IO:
-      return {
-        ...state,
-        columns: state.columns.map((columnItem) =>
-          columnItem.id === action.payLoad.sourceColumnId
-            ? {
-                ...columnItem,
-                cards: columnItem.cards.filter(
-                  (card) => card.id !== action.payLoad.cardId
-                ),
-                cardsOrder: columnItem.cardsOrder.filter(
-                  (id) => id !== action.payLoad.cardId
-                ),
-              }
-            : columnItem
-        ),
-      };
-
-    case CHANGE_CARD_COLUMN_IO:
-      return {
-        ...state,
-        columns: state.columns.map((columnItem) =>
-          columnItem.id === action.payLoad.destinationColumnId
-            ? {
-                ...columnItem,
-                cards: [...columnItem.cards, action.payLoad.card],
                 cardsOrder: action.payLoad.newOrder,
               }
             : columnItem

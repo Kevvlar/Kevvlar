@@ -38,7 +38,7 @@ const ColumnHolder = ({
   columnsOrder,
   updateColumnsOrderLocal,
   updateBoardServer,
-  boardId,
+  board,
   user,
   updateCardsOrderLocal,
   updateCardsOrderServer,
@@ -61,8 +61,8 @@ const ColumnHolder = ({
       const [reOrderedItem] = newColumnOrder.splice(source.index, 1);
       newColumnOrder.splice(destination.index, 0, reOrderedItem);
       updateColumnsOrderLocal(newColumnOrder);
-      updateBoardServer(boardId, { columnsOrder: newColumnOrder }, user.token);
-      socket.emit("columns-order-change", newColumnOrder);
+      updateBoardServer(board.id, { columnsOrder: newColumnOrder }, user.token);
+      socket.emit("change-columns-order", newColumnOrder);
     }
 
     // move card within column
@@ -78,10 +78,10 @@ const ColumnHolder = ({
       const [reOrderedCards] = newCardOrder.splice(source.index, 1);
       newCardOrder.splice(destination.index, 0, reOrderedCards);
       updateCardsOrderLocal(newCardOrder);
-      updateCardsOrderServer(user.token, boardId, columnId, {
+      updateCardsOrderServer(user.token, board.id, columnId, {
         cardsOrder: newCardOrder,
       });
-      socket.emit("cards-order-change", {
+      socket.emit("change-cards-order", {
         columnId: columnId,
         cardsOrder: newCardOrder,
       });
@@ -99,18 +99,18 @@ const ColumnHolder = ({
         destinationColumn: destination.droppableId,
         newOrder: newTargetColumnCardOrder,
       });
-      updateCardsOrderServer(user.token, boardId, destination.droppableId, {
+      updateCardsOrderServer(user.token, board.id, destination.droppableId, {
         cardsOrder: newTargetColumnCardOrder,
       });
-      updateCardServer(user.token, boardId, selectCard.id, {
+      updateCardServer(user.token, board.id, selectCard.id, {
         columnId: destination.droppableId,
       });
-      socket.emit("card-column-change", {
-        card: selectCard,
-        cardId: selectCard.id,
+      socket.emit("change-card-column", {
         sourceColumnId: source.droppableId,
         destinationColumnId: destination.droppableId,
-        newOrder: newTargetColumnCardOrder,
+        card: selectCard,
+        cardId: selectCard.id,
+        cardsOrder: newTargetColumnCardOrder,
       });
     }
   };
@@ -148,7 +148,7 @@ const mapStateToProps = (state) => {
     columnsOrder: state.board.selectBoard.columnsOrder,
     columns: state.column.columns,
     columnsState: state.column.loading,
-    boardId: state.board.selectBoard.id,
+    board: state.board.selectBoard,
     columnId: state.column.selectColumn.id,
     selectCard: state.column.selectCard,
     user: state.user.userData,

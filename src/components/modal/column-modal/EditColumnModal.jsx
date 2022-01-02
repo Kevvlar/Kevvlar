@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { connect } from "react-redux";
 
-import socket from "../../../Socket";
+// import socket from "../../../Socket";
 
 import { closeModal, editColumnLocal, editColumnServer } from "../../../redux";
 
@@ -38,7 +38,6 @@ const EditColumnModal = ({
                 title: columnEditTitle,
               };
               updateColumnLocal(columnObj);
-              socket.emit("edit-column", columnObj);
               updateColumnServer(user.token, boardId, currentColumnId, {
                 title: columnEditTitle,
               });

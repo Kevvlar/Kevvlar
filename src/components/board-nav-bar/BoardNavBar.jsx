@@ -4,6 +4,7 @@ import { withRouter } from "react-router";
 import CardSearchBar from "../../components/CardSearchBar/CardSearchBar";
 import UserAvatar from "../user-avatar/UserAvatar";
 
+import socket from "../../Socket";
 import { setUserModal, clearColumns } from "../../redux";
 
 import {
@@ -20,6 +21,7 @@ const BoardNavBar = ({ board, history, showUserModal, emptyColumns }) => (
     <button
       className="boardnavbar-btn"
       onClick={() => {
+        socket.disconnect();
         emptyColumns();
         history.push("/boards");
       }}
