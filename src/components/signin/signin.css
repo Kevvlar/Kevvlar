@@ -12,6 +12,18 @@
   background: #343d46;
   border-radius: 10px;
   padding: 50px 85px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign-in-white {
+  color: white;
+}
+
+.sign-in-form {
+  margin-top: 25px;
 }
 
 .sign-in-form-title {

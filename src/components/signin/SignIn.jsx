@@ -6,6 +6,10 @@ import { signUserIn } from "../../redux";
 
 import "./signin.css";
 
+import {
+  KevvlarIcon
+} from "../../assets/svg/iconlibrary";
+
 const SignIn = ({ signInUser, history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,6 +30,8 @@ const SignIn = ({ signInUser, history }) => {
   return (
     <div className="sign-in-container">
       <div className="sign-in-content">
+        <KevvlarIcon />
+        <h2 className="sign-in-white">Log in</h2>
         <form onSubmit={handleSubmit} className="sign-in-form">
           <div className="sign-in-form-group">
             <input
@@ -50,13 +56,13 @@ const SignIn = ({ signInUser, history }) => {
             />
           </div>
           <button type="submit" className="sign-in-form-submit-button">
-            Sign in
+            Log in
           </button>
         </form>
         <p className="sign-in-here">
-          Don't have an account ?{" "}
+          Don't have an account?{" "}
           <Link to="/signup" className="sign-in-link">
-            Signup here
+            Sign up here
           </Link>
         </p>
       </div>

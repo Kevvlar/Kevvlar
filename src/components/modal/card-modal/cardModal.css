@@ -117,7 +117,7 @@
 }
 
 .date-picker {
-  line-height: 1;
+/*  line-height: 1;
   background: #fff;
   border: none;
   color: #030303;
@@ -125,7 +125,40 @@
   padding: 5px 5px;
   font-size: 14px;
   border-radius: 4px;
-  height: 40px;
+  height: 40px;*/
+
+    /* styling */
+  background-color: transparent;
+  border: thin solid grey;
+  border-radius: 4px;
+  color: grey;
+  display: inline-block;
+  font: inherit;
+  line-height: 1.5em;
+  padding: 5px 8px;
+
+  /* reset */
+
+  margin: 0;     
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.date-picker:focus {
+  outline: none;
+}
+
+[type="date"] {
+  background: url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  92% 50% no-repeat ;
+}
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
 }
 
 .delete-button {
@@ -143,13 +176,36 @@
 }
 
 .select-color {
-  padding: 12px 24px;
-  border: 1px solid #fff;
+  cursor: pointer;
+  /* styling */
+  background-color: transparent;
+  border: thin solid grey;
   border-radius: 4px;
-  /* background: transparent; */
-  /* color: #fff; */
-  margin: 0px 25px;
-  height: 40px;
+  color: grey;
+  display: inline-block;
+  font: inherit;
+  line-height: 1.5em;
+  padding: 0.5em 3.5em 0.5em 1em;
+
+  /* reset */
+
+  margin: 0 20px;    
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-image: linear-gradient(
+  45deg, transparent 50%, gray 50%), linear-gradient(
+  135deg, gray 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc);
+  background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
+  background-size: 5px 5px, 5px 5px, 1px 1.5em;
+  background-repeat: no-repeat;
+}
+
+.select-color:focus {
+  outline: none;
 }
 
 /*RESPONSIVE BREAKPOINTS*/

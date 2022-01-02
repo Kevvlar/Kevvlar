@@ -34,6 +34,10 @@
 	background: #3e444a;
 }
 
+.boardnavbar-btn-end:hover {
+	background: #3e444a;
+}
+
 .boardnavbar-scroll-container{
 	max-height: 75px;
 }

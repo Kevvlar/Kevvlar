@@ -12,6 +12,8 @@ import {
   BoardIcon,
   TeamIcon,
   AddUserIcon,
+  FileshareIcon,
+  ActivityIcon
 } from "../../assets/svg/iconlibrary";
 
 import "./boardnavbar.css";
@@ -49,6 +51,14 @@ const BoardNavBar = ({ board, history, showUserModal, emptyColumns }) => (
       <AddUserIcon />
     </button>
     <CardSearchBar />
+    <button className="boardnavbar-btn">
+      <ActivityIcon />
+      <div className="boardnavbar-boardtitle">Activity</div>
+    </button>
+    <button className="boardnavbar-btn">
+      <FileshareIcon />
+      <div className="boardnavbar-boardtitle">Files</div>
+    </button>
   </div>
 );
 const mapStateToProps = (state) => {
