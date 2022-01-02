@@ -13,12 +13,12 @@ import {
   TeamIcon,
   AddUserIcon,
   FileshareIcon,
-  ActivityIcon
+  ActivityIcon,
 } from "../../assets/svg/iconlibrary";
 
 import "./boardnavbar.css";
 
-const BoardNavBar = ({ board, history, showUserModal, emptyColumns }) => (
+const BoardNavBar = ({ board, history, showUserModal, emptyColumns, user }) => (
   <div className="boardnavbar">
     <button
       className="boardnavbar-btn"
@@ -42,14 +42,16 @@ const BoardNavBar = ({ board, history, showUserModal, emptyColumns }) => (
     {board.members.map((member) => (
       <UserAvatar key={member._id} user={member} />
     ))}
-    <button
-      className="add-user-icon"
-      onClick={() => {
-        showUserModal();
-      }}
-    >
-      <AddUserIcon />
-    </button>
+    {board.admins.includes(user._id) ? (
+      <button
+        className="add-user-icon"
+        onClick={() => {
+          showUserModal();
+        }}
+      >
+        <AddUserIcon />
+      </button>
+    ) : null}
     <CardSearchBar />
     <button className="boardnavbar-btn">
       <ActivityIcon />
@@ -65,6 +67,7 @@ const mapStateToProps = (state) => {
   return {
     board: state.board.selectBoard,
     boardState: state.board.loading,
+    user: state.user.userData,
   };
 };
 

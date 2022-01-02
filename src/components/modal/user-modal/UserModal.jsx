@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { connect } from "react-redux";
 
+import socket from "../../../Socket";
+
 import {
   closeModal,
   addMemberToBoard,
@@ -65,6 +67,7 @@ const UserModal = ({
               userEmail: userToRemoveEmail,
               boardId: currrentBoardId,
             });
+            socket.emit("remove-member", userToRemoveEmail);
             setUserEmail("");
             closeModal();
           }}

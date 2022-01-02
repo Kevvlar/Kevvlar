@@ -3,7 +3,7 @@ import { FaTimes } from "react-icons/fa";
 import { connect } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
-// import socket from "../../../Socket";
+import socket from "../../../Socket";
 
 import {
   closeModal,
@@ -51,6 +51,7 @@ const AddColumnModal = ({
               };
               addNewColumnLocal(columnObj);
               addNewColumnServer(user.token, boardId, columnObj);
+              socket.emit("create-new-column", columnObj);
               setColumnTitle("");
               closeModal();
             }}

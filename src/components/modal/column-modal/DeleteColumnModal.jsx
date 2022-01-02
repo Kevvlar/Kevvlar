@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { FaTimes } from "react-icons/fa";
 
-// import socket from "../../../Socket";
+import socket from "../../../Socket";
 
 import {
   closeModal,
@@ -32,6 +32,7 @@ const DeleteColumnModal = ({
               onClick={() => {
                 removeColumnLocal(currentColumnId);
                 deleteCurrentColumnServer(user.token, boardId, currentColumnId);
+                socket.emit("delete-column", currentColumnId);
                 closeModal();
               }}
             >
