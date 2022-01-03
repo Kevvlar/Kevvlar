@@ -20,18 +20,12 @@ function Greeting() {
 
   return (
     <div className="greeting-container section-margin">
-      <h2 className="greeting-heading">Simple. Fast. Clean.</h2>
+      <h2 className="greeting-heading">Currently In Development</h2>
       <h5 className="greeting-main-text primary-text-color">
-        Everyone could use some better organization, so we built an app just for
-        that. With dead-simple drag and drop functionality and color coded
-        notes, you will be sure to finish your work faster and never miss a
-        thing.
+        Feel free to try it and give us feedback! (Data might be deleted at any point)
       </h5>
       <div className="greeting-buttons-container">
         <GetStartedButon />
-        <div onClick={handleClick} className="greeting-pricing-link">
-          Pricing
-        </div>
       </div>
       {showPricing ? handleShowPricing() : null}
     </div>
