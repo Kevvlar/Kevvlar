@@ -10,9 +10,10 @@ import "./directory.css";
 const Directory = () => (
   <div className="directory-container">
     <Greeting />
-    <Video />
+ {/*   <Video />
     <Why />
-    <Imagesection />
+    <Imagesection /> 
+*/}
   </div>
 );
 
