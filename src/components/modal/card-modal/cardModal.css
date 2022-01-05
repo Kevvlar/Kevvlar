@@ -137,6 +137,7 @@
   font: inherit;
   line-height: 1.5em;
   padding: 5px 8px;
+  min-width: 170px;
 
   /* reset */
 
