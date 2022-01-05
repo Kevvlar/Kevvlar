@@ -16,28 +16,16 @@ import {
 
 const MODULES = {
   toolbar: [
-    [{ font: [] }],
-    [{ size: ["small", false, "large", "huge"] }],
-    ["bold", "italic", "underline"],
+    [{ header: [1, 2, false] }],
     [{ list: "ordered" }, { list: "bullet" }],
+    ["bold", "italic", "underline"],
     [{ align: [] }],
-    [{ color: [] }, { background: [] }],
-    ["clean"],
+    ["image", "code-block", "blockquote"],
   ],
+  clipboard: {
+            matchVisual: false
+        }
 };
-
-const FORMATS = [
-  "font",
-  "size",
-  "bold",
-  "italic",
-  "underline",
-  "list",
-  "bullet",
-  "align",
-  "color",
-  "background",
-];
 
 const EditCardModal = ({
   closeModal,
@@ -77,7 +65,6 @@ const EditCardModal = ({
         <ReactQuill
           theme="snow"
           modules={MODULES}
-          formats={FORMATS}
           onChange={rteChange}
           value={editCardBody}
         />

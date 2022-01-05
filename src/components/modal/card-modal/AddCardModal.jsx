@@ -11,28 +11,16 @@ import { closeModal, addNewCardLocal, addNewCardServer } from "../../../redux";
 
 const MODULES = {
   toolbar: [
-    [{ font: [] }],
-    [{ size: ["small", false, "large", "huge"] }],
-    ["bold", "italic", "underline"],
+    [{ header: [1, 2, false] }],
     [{ list: "ordered" }, { list: "bullet" }],
+    ["bold", "italic", "underline"],
     [{ align: [] }],
-    [{ color: [] }, { background: [] }],
-    ["clean"],
+    ["image", "code-block", "blockquote"],
   ],
+  clipboard: {
+            matchVisual: false
+        }
 };
-
-const FORMATS = [
-  "font",
-  "size",
-  "bold",
-  "italic",
-  "underline",
-  "list",
-  "bullet",
-  "align",
-  "color",
-  "background",
-];
 
 const AddCardModal = ({
   closeModal,
@@ -71,7 +59,6 @@ const AddCardModal = ({
         <ReactQuill
           theme="snow"
           modules={MODULES}
-          formats={FORMATS}
           onChange={rteChange}
           value={cardBody}
         />
