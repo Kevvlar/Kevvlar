@@ -3,6 +3,9 @@ import * as classNames from "classnames";
 import { connect } from "react-redux";
 import { FaEllipsisH } from "react-icons/fa";
 import { Draggable } from "react-beautiful-dnd";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import "react-quill/dist/quill.bubble.css";
 
 import {
   setCardModal,
@@ -46,7 +49,13 @@ const Card = ({
           <p className="card-title">{card.title}</p>
           {isGrid ? (
             <span>
-              <p className="card-description">{card.description}</p>
+              <div className="card-description">
+                <ReactQuill
+                  value={card.description}
+                  readOnly={true}
+                  theme={"bubble"}
+                />
+              </div>
               <div className="card-menu">
                 <p className="card-date">{card.date}</p>
                 <FaEllipsisH

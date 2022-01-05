@@ -56,9 +56,12 @@ const EditCardModal = ({
 
   const rteChange = (content, delta, source, editor) => {
     setEditCardBody(editor.getHTML());
-    console.log(editor.getHTML()); // rich text
-    console.log(editor.getText()); // plain text
-    console.log(editor.getLength()); // number of characters
+    // console.log(editor.getHTML()); // rich text
+    // console.log(editor.getText()); // plain text
+    // console.log(editor.getLength()); // number of characters
+    // console.log("C: ", content);
+    // console.log("Delta: ", delta);
+    // console.log("Source: ", source);
   };
 
   return (

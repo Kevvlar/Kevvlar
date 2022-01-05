@@ -1,5 +1,5 @@
 import io from "socket.io-client";
-const ENDPOINT = "http://localhost:8000";
+const ENDPOINT = "https://kevvlar.herokuapp.com";
 export default io(ENDPOINT);
 
 // const url = "https://kevvlar.herokuapp.com";
