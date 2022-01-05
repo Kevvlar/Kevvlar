@@ -37,7 +37,7 @@
   max-width: 250px;
   white-space: nowrap;
   margin-bottom: 3px;
-  margin-top: 15px;
+  margin-top: 25px;
 }
 
 .card-description {
@@ -57,7 +57,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 38px;
+  height: 17px;
 }
 
 .card-date {
