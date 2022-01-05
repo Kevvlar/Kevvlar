@@ -38,7 +38,7 @@
   color: #41ba8e;
   width: 100%;
   border: none;
-  font-size: 18px;
+  font-size: 16px;
   border-radius: 3px;
 }
 
@@ -60,7 +60,7 @@
   min-height: 200px;
   height: 65%;
   resize: none;
-  margin: 20px 0;
+  margin: 10px 0;
   font-family: "Roboto";
 }
 

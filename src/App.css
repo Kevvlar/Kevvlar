@@ -9,6 +9,7 @@
 .ql-toolbar {
 	border: none !important;
 	padding: 0px !important;
+	margin-bottom: 10px !important;
 }
 
 .ql-font {
@@ -44,8 +45,12 @@
 
 .ql-editor {
 	padding: 5px 0px;
-	margin: 20px 0px;
 	font-family: 'Roboto';
+	overflow: auto;
+}
+
+.ql-editor::-webkit-scrollbar {
+  display: none;
 }
 
 .ql-editor:focus {

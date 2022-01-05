@@ -19,6 +19,7 @@
 
 .card-inner {
   width: 100%;
+  height: 100%;
   padding-right: 15px;
 }
 
@@ -30,13 +31,13 @@
   border: none;
   font-size: 14px;
   border-radius: 3px;
-  margin-top: 16px;
-  margin-bottom: 0px;
   max-height: 18px;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 250px;
   white-space: nowrap;
+  margin-bottom: 3px;
+  margin-top: 15px;
 }
 
 .card-description {
@@ -47,9 +48,8 @@
   width: 100%;
   overflow-wrap: anywhere;
   resize: none;
-  height: 29px;
+  height: 50px;
   overflow: hidden;
-  margin-bottom: 5px;
 }
 
 .card-menu {
