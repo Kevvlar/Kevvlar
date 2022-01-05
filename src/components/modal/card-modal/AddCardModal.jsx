@@ -12,7 +12,7 @@ import { closeModal, addNewCardLocal, addNewCardServer } from "../../../redux";
 const MODULES = {
   toolbar: [
     [{ header: [1, 2, false] }],
-    [{ list: "ordered" }, { list: "bullet" }],
+    [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
     ["bold", "italic", "underline"],
     [{ align: [] }],
     ["image", "code-block", "blockquote"],
