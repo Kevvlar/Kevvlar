@@ -1,16 +1,16 @@
 import React from "react";
 
 import Greeting from "../greeting/Greeting";
-import Video from "../video/Video";
-import Why from "../why-section/Why";
-import Imagesection from "../image-section/ImageSection";
+// import Video from "../video/Video";
+// import Why from "../why-section/Why";
+// import Imagesection from "../image-section/ImageSection";
 
 import "./directory.css";
 
 const Directory = () => (
   <div className="directory-container">
     <Greeting />
- {/*   <Video />
+    {/*   <Video />
     <Why />
     <Imagesection /> 
 */}
