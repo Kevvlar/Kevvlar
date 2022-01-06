@@ -70,9 +70,6 @@
 
 li::before {
 	color: white !important;
-	font-size: 20px;
-	top: 1px;
-    position: relative;
 }
 
 .ql-editor ul li:not(.ql-direction-rtl) {
@@ -82,7 +79,20 @@ li::before {
 .ql-editor ul[data-checked="true"] li {
 	text-decoration: line-through;
 	opacity: 0.5;
-  }  
+}  
+
+.ql-editor ul[data-checked="true"] li::before {
+	opacity: 0.5;
+	font-size: 20px;
+	top: 1px;
+    position: relative;
+} 
+
+.ql-editor ul[data-checked="false"] li::before {
+	font-size: 20px;
+	top: 1px;
+    position: relative;
+} 
 
 .ql-stroke {
 	stroke: #727272 !important;
