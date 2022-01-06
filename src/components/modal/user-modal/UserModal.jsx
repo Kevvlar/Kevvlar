@@ -58,7 +58,7 @@ const UserModal = ({
     <div className="modal-body">
       <h2 className="modal-title">Remove User From Board</h2>
       <div className="modal-button-container">
-        <p>{userToRemoveEmail}</p>
+        <p className="remove-user-email">{userToRemoveEmail}</p>
         <button
           className="delete-button"
           style={{ margin: "0px" }}
