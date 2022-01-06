@@ -73,7 +73,7 @@ li::before {
 }
 
 .ql-editor ul li:not(.ql-direction-rtl) {
-    height: 26px;
+    /* height: 26px; */
 }
 
 .ql-editor ul[data-checked="true"] li {
