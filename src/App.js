@@ -24,7 +24,7 @@ const App = () => (
           <Route exact path="/signin" component={SignIn} />
           <PrivateRoute
             exact
-            path="/boards/:boardName/:boardId"
+            path="/boards/:boardId"
             component={ActivityPage}
           />
           <PrivateRoute path="/boards" component={BoardsPage} />

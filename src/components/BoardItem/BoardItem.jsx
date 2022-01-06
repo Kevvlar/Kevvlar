@@ -26,7 +26,7 @@ const boardItem = ({
         onClick={() => {
           setSelectBoardData(board);
           getColumns(user.token, board.id);
-          history.push(`${match.url}/${board.title.toLowerCase()}/${board.id}`);
+          history.push(`${match.url}/${board.id}`);
         }}
       >
         <div className="title-container">
