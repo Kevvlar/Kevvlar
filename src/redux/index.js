@@ -55,7 +55,6 @@ export {
   fetchColumns,
   handleAddNewColumnLocal,
   setCurrentCardData,
-  getUpdate,
   changeCardsOrderLocal,
   changeCardsOderIo,
   handleChangeCardColumnIO,

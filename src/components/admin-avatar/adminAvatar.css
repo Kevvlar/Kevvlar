@@ -1,0 +1,19 @@
+.admin-avatar-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 10px;
+  height: 35px;
+}
+
+.admin-avatar-image {
+  width: 35px;
+  height: 35px;
+  border-radius: 25px;
+  background: #2c3136;
+  cursor: pointer;
+}
+
+.admin-avatar-image:hover {
+  opacity: 0.5;
+}

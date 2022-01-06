@@ -11,7 +11,6 @@ import BoardNavBar from "../../components/board-nav-bar/BoardNavBar";
 import socket from "../../Socket";
 
 import {
-  getUpdate,
   changeColumnsOrderLocal,
   changeCardsOderIo,
   handleChangeCardColumnIO,
@@ -27,7 +26,6 @@ import "./activityPage.css";
 
 const MainPage = ({
   history,
-  fetchUpdates,
   rightSideNav,
   showModal,
   user,
@@ -42,10 +40,6 @@ const MainPage = ({
   updateCard,
   handleDeleteCard,
 }) => {
-  useEffect(() => {
-    fetchUpdates(user.token, boardId);
-  }, [boardId, user, fetchUpdates]);
-
   useEffect(() => {
     socket.connect();
     socket.emit("join-board", boardId);
@@ -175,7 +169,6 @@ const MainPage = ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchUpdates: (token, boardId) => dispatch(getUpdate(token, boardId)),
     updateColumnsOrderLocal: (changeObj) =>
       dispatch(changeColumnsOrderLocal(changeObj)),
     updateCardsOrder: (changeObj) => dispatch(changeCardsOderIo(changeObj)),

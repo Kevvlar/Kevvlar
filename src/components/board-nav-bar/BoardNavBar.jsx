@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import CardSearchBar from "../../components/CardSearchBar/CardSearchBar";
 import UserAvatar from "../user-avatar/UserAvatar";
+import AdminAvatar from "../admin-avatar/AdminAvatar";
 
 import socket from "../../Socket";
 import { setUserModal, clearColumns } from "../../redux";
@@ -39,19 +40,20 @@ const BoardNavBar = ({ board, history, showUserModal, emptyColumns, user }) => (
       <TeamIcon />
       <div className="boardnavbar-boardtitle">Team Name</div>
     </button>
-    {board.members.map((member) => (
-      <UserAvatar key={member._id} user={member} />
+    {board.members.map((member, index) => (
+      <UserAvatar key={index} user={member} />
     ))}
-    {board.admins.includes(user._id) ? (
-      <button
-        className="add-user-icon"
-        onClick={() => {
-          showUserModal();
-        }}
-      >
-        <AddUserIcon />
-      </button>
-    ) : null}
+    {board.admins.map((admin, index) => (
+      <AdminAvatar key={index} admin={admin} />
+    ))}
+    <button
+      className="add-user-icon"
+      onClick={() => {
+        showUserModal();
+      }}
+    >
+      <AddUserIcon />
+    </button>
     <CardSearchBar />
     <button className="boardnavbar-btn">
       <ActivityIcon />

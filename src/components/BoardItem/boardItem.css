@@ -54,3 +54,7 @@
 .delete-board-icon:hover {
   cursor: pointer;
 }
+
+.admin-name {
+  color: white;
+}

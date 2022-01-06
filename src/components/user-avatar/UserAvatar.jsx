@@ -15,10 +15,8 @@ const UserAvatar = ({
   <div
     className="user-avatar-container"
     onClick={() => {
-      if (selectBoard.admins.includes(currentUserId)) {
-        setUserEmail(user.email);
-        showUserModal("REMOVE");
-      }
+      setUserEmail(user.email);
+      showUserModal("REMOVE");
     }}
   >
     <img

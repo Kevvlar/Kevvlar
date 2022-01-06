@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { FaEllipsisH } from "react-icons/fa";
 import { Draggable } from "react-beautiful-dnd";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
 
 import {
