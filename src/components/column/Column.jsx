@@ -1,5 +1,4 @@
 import React from "react";
-import { FaTrash, FaEdit } from "react-icons/fa";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
 
@@ -13,6 +12,11 @@ import Card from "../card/Card";
 
 import "./column.css";
 import { DELETE, EDIT } from "../../redux/modal/modalTypes";
+
+import {
+  EditIcon,
+  TrashIcon,
+} from "../../assets/svg/iconlibrary";
 
 const mapOrder = (array, order, key) => {
   array.sort(function (a, b) {
@@ -51,14 +55,14 @@ const Column = ({
               <p className="column-header-title">{column.title}</p>
             </div>
             <div className="column-header-icon-container">
-              <FaTrash
+              <TrashIcon
                 onClick={() => {
                   getColumnData(column);
                   deleteColumnModal();
                 }}
                 className="column-header-trash-icon"
               />
-              <FaEdit
+              <EditIcon
                 onClick={() => {
                   getColumnData(column);
                   editColumnModal();
