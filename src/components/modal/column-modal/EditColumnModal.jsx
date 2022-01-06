@@ -17,8 +17,28 @@ const EditColumnModal = ({
 }) => {
   const [columnEditTitle, setColumnEditTitle] = useState(currentColumnTitle);
 
+  const handleSubmit = () => {
+    const columnObj = {
+      id: currentColumnId,
+      title: columnEditTitle,
+    };
+    updateColumnLocal(columnObj);
+    updateColumnServer(user.token, boardId, currentColumnId, {
+      title: columnEditTitle,
+    });
+    socket.emit("edit-column", columnObj);
+    setColumnEditTitle("");
+    closeModal();
+  };
+
   return (
-    <div className="modal-board">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit();
+      }}
+      className="modal-board"
+    >
       <div className="close-icon-container">
         <FaTimes onClick={closeModal} className="close-icon" />
         <div className="modal-body">
@@ -30,27 +50,12 @@ const EditColumnModal = ({
             value={columnEditTitle}
             onChange={(e) => setColumnEditTitle(e.target.value)}
           />
-          <button
-            className="modal-board-button"
-            onClick={() => {
-              const columnObj = {
-                id: currentColumnId,
-                title: columnEditTitle,
-              };
-              updateColumnLocal(columnObj);
-              updateColumnServer(user.token, boardId, currentColumnId, {
-                title: columnEditTitle,
-              });
-              socket.emit("edit-column", columnObj);
-              setColumnEditTitle("");
-              closeModal();
-            }}
-          >
+          <button className="modal-board-button" type="submit">
             Save
           </button>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

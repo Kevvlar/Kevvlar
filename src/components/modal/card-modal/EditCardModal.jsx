@@ -23,8 +23,8 @@ const MODULES = {
     ["image", "code-block", "blockquote"],
   ],
   clipboard: {
-            matchVisual: false
-        }
+    matchVisual: false,
+  },
 };
 
 const EditCardModal = ({
@@ -52,8 +52,29 @@ const EditCardModal = ({
     // console.log("Source: ", source);
   };
 
+  const handleSubmit = () => {
+    const cardObj = {
+      id: currentCard.id,
+      columnId: currentCard.columnId,
+      title: editCardTitle,
+      description: editCardBody,
+      date: editCardDate,
+      colorLabel: editCardColor,
+    };
+    updateCardLocal(cardObj);
+    updateCardServer(user.token, currrentBoardId, currentCard.id, cardObj);
+    socket.emit("edit-card", cardObj);
+    closeModal();
+  };
+
   return (
-    <div className="modal-body">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit();
+      }}
+      className="modal-body"
+    >
       <h2 className="modal-title">Edit Card</h2>
       <input
         type="text"
@@ -90,31 +111,10 @@ const EditCardModal = ({
           <option value="#F8BE7A">yellow</option>
           <option value="#E34B4B">red</option>
         </select>
-        <button
-          className="modal-board-button"
-          onClick={() => {
-            const cardObj = {
-              id: currentCard.id,
-              columnId: currentCard.columnId,
-              title: editCardTitle,
-              description: editCardBody,
-              date: editCardDate,
-              colorLabel: editCardColor,
-            };
-            updateCardLocal(cardObj);
-            updateCardServer(
-              user.token,
-              currrentBoardId,
-              currentCard.id,
-              cardObj
-            );
-            socket.emit("edit-card", cardObj);
-            closeModal();
-          }}
-        >
+        <button className="modal-board-button" type="submit">
           Save
         </button>
-        <button
+        <div
           className="delete-button"
           onClick={() => {
             const deleteObj = {
@@ -128,9 +128,9 @@ const EditCardModal = ({
           }}
         >
           Delete
-        </button>
+        </div>
       </div>
-    </div>
+    </form>
   );
 };
 

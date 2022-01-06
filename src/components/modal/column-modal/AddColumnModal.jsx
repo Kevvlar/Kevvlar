@@ -20,8 +20,29 @@ const AddColumnModal = ({
 }) => {
   const [columnTitle, setColumnTitle] = useState("");
 
+  const handleSubmit = () => {
+    const columnObj = {
+      id: uuidv4(),
+      boardId: boardId,
+      title: columnTitle,
+      cards: [],
+      cardsOrder: [],
+    };
+    addNewColumnLocal(columnObj);
+    addNewColumnServer(user.token, boardId, columnObj);
+    socket.emit("create-new-column", columnObj);
+    setColumnTitle("");
+    closeModal();
+  };
+
   return (
-    <div className="modal-board">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit();
+      }}
+      className="modal-board"
+    >
       <div className="close-icon-container">
         <FaTimes
           onClick={() => {
@@ -39,28 +60,12 @@ const AddColumnModal = ({
             onChange={(e) => setColumnTitle(e.target.value)}
           />
 
-          <button
-            className="modal-board-button"
-            onClick={() => {
-              const columnObj = {
-                id: uuidv4(),
-                boardId: boardId,
-                title: columnTitle,
-                cards: [],
-                cardsOrder: [],
-              };
-              addNewColumnLocal(columnObj);
-              addNewColumnServer(user.token, boardId, columnObj);
-              socket.emit("create-new-column", columnObj);
-              setColumnTitle("");
-              closeModal();
-            }}
-          >
+          <button className="modal-board-button" type="submit">
             Save
           </button>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

@@ -44,9 +44,9 @@ const boardItem = ({
       </span>
       <div className="board-item-footer">
         <div className="board-num-members sub-color">
-          {board.members.length + board.admins.length} Users
+          {board?.members.length + board?.admins.length} Users
         </div>
-        {board.admins[0]._id.includes(user._id) ? (
+        {board?.admins[0]._id.includes(user._id) ? (
           <div className="board-item-icons">
             <FaEdit
               className="edit-board-icon"
@@ -67,7 +67,7 @@ const boardItem = ({
           <div className="admin-name">
             <p>
               <strong>Admin: </strong>
-              {board.admins[0].name}
+              {board?.admins[0].name}
             </p>
           </div>
         )}

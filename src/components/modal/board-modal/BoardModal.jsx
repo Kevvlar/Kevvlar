@@ -31,8 +31,32 @@ const BoardModal = ({
 }) => {
   const AddBoard = () => {
     const [boardName, setBoardName] = useState("");
+
+    const handleSubmit = () => {
+      const boardId = uuidv4();
+      const boardObj = {
+        id: boardId,
+        title: boardName,
+        numberOfColumns: 0,
+        numberOfCards: 0,
+        columnsOrder: [],
+        admins: [user],
+        members: [],
+      };
+      addBoardLocal(boardObj);
+      addBoardServer(boardObj, user.token);
+      setBoardName("");
+      closeModal();
+    };
+
     return (
-      <div className="modal-body">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
+        className="modal-body"
+      >
         <h2 className="modal-title">Add New Board</h2>
         <input
           className="modal-board-text"
@@ -42,35 +66,33 @@ const BoardModal = ({
           onChange={(e) => setBoardName(e.target.value)}
           placeholder="New Board"
         />
-        <button
-          className="modal-board-button"
-          onClick={() => {
-            const boardId = uuidv4();
-            const boardObj = {
-              id: boardId,
-              title: boardName,
-              numberOfColumns: 0,
-              numberOfCards: 0,
-              columnsOrder: [],
-              admins: [user._id],
-              members: [],
-            };
-            addBoardLocal(boardObj);
-            addBoardServer(boardObj, user.token);
-            setBoardName("");
-            closeModal();
-          }}
-        >
+        <button className="modal-board-button" type="submit">
           Save
         </button>
-      </div>
+      </form>
     );
   };
 
   const EditBoard = () => {
     const [editBoardName, setEditBoardName] = useState(boardTitle);
+
+    const handleSubmit = () => {
+      editBoardLocal({
+        id: boardId,
+        title: editBoardName,
+      });
+      updateBoardServer(boardId, { title: editBoardName }, user.token);
+      setEditBoardName("");
+      closeModal();
+    };
     return (
-      <div className="modal-body">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
+        className="modal-body"
+      >
         <h2 className="modal-title">Edit Board</h2>
         <input
           className="modal-board-text"
@@ -79,21 +101,10 @@ const BoardModal = ({
           value={editBoardName}
           onChange={(e) => setEditBoardName(e.target.value)}
         />
-        <button
-          className="modal-board-button"
-          onClick={() => {
-            editBoardLocal({
-              id: boardId,
-              title: editBoardName,
-            });
-            updateBoardServer(boardId, { title: editBoardName }, user.token);
-            setEditBoardName("");
-            closeModal();
-          }}
-        >
+        <button className="modal-board-button" type="submit">
           Save
         </button>
-      </div>
+      </form>
     );
   };
 
