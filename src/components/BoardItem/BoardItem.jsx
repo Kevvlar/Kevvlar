@@ -1,5 +1,4 @@
 import React from "react";
-import { FaTrash, FaEdit } from "react-icons/fa";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
@@ -7,6 +6,7 @@ import { BoardIcon } from "../../assets/svg/iconlibrary";
 
 import { setCurrentBoardData, setBoardModal, fetchColumns } from "../../redux";
 import { EDIT, DELETE } from "../../redux/modal/modalTypes";
+import { EditIcon, TrashIcon } from "../../assets/svg/iconlibrary";
 
 import "./boardItem.css";
 
@@ -48,19 +48,19 @@ const boardItem = ({
         </div>
         {board?.admins[0]._id.includes(user._id) ? (
           <div className="board-item-icons">
-            <FaEdit
-              className="edit-board-icon"
-              onClick={() => {
-                setSelectBoardData(board);
-                showModal(EDIT);
-              }}
-            />
-            <FaTrash
-              className="delete-board-icon"
-              onClick={() => {
+            <TrashIcon
+              handleDelete={() => {
                 setSelectBoardData(board);
                 showModal(DELETE);
               }}
+              className="column-header-trash-icon"
+            />
+            <EditIcon
+              handleEdit={() => {
+                setSelectBoardData(board);
+                showModal(EDIT);
+              }}
+              className="column-header-edit-icon"
             />
           </div>
         ) : (
