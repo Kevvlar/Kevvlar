@@ -113,7 +113,7 @@ const BoardModal = ({
       <div className="modal-body">
         <h2 className="modal-title">Are You Sure?</h2>
         <span className="modal-sub-text">
-          All information contained in this board will be delete
+          All information contained in this board will be deleted
         </span>
         <div className="modal-button-container">
           <button
