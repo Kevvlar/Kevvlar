@@ -16,6 +16,7 @@
   font-size: 18px;
   padding-bottom: 10px;
   border-bottom: 1px solid #ffffff24;
+  width: 100%;
 }
 
 .close-icon-container {
@@ -49,6 +50,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .modal-body-description {

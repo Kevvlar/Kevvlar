@@ -40,11 +40,11 @@ const BoardNavBar = ({ board, history, showUserModal, emptyColumns, user }) => (
       <TeamIcon />
       <div className="boardnavbar-boardtitle">Team Name</div>
     </button>
-    {board.members.map((member, index) => (
-      <UserAvatar key={index} user={member} />
-    ))}
     {board.admins.map((admin, index) => (
       <AdminAvatar key={index} admin={admin} />
+    ))}
+    {board.members.map((member, index) => (
+      <UserAvatar key={index} user={member} />
     ))}
     <button
       className="add-user-icon"

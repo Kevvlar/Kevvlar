@@ -9,7 +9,7 @@ const UserAvatar = ({ admin }) => (
       className="admin-avatar-image"
       alt="img"
       src={admin.photo}
-      title={admin.name}
+      title={admin.name + " (Admin)"}
     />
   </div>
 );
