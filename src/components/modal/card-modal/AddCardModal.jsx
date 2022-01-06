@@ -18,8 +18,8 @@ const MODULES = {
     ["image", "code-block", "blockquote"],
   ],
   clipboard: {
-            matchVisual: false
-        }
+    matchVisual: false,
+  },
 };
 
 const AddCardModal = ({
@@ -45,8 +45,34 @@ const AddCardModal = ({
     // console.log("Source: ", source);
   };
 
+  const handleSubmit = () => {
+    const cardObj = {
+      id: uuidv4(),
+      columnId: currentColumnId,
+      boardId: currrentBoardId,
+      title: cardTitle,
+      description: cardBody,
+      date: cardDate,
+      colorLabel: cardLabel,
+    };
+    createCardLocal(cardObj);
+    createCardServer(user.token, currrentBoardId, cardObj);
+    socket.emit("add-new-card", cardObj);
+    setCardTitle("");
+    setCardBody("");
+    setCardDate("");
+    setCardLable("");
+    closeModal();
+  };
+
   return (
-    <div className="modal-body">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit();
+      }}
+      className="modal-body"
+    >
       <h2 className="modal-title">Add New Card</h2>
       <input
         type="text"
@@ -84,32 +110,11 @@ const AddCardModal = ({
           <option value="#F8BE7A">yellow</option>
           <option value="#E34B4B">red</option>
         </select>
-        <button
-          className="modal-board-button"
-          onClick={() => {
-            const cardObj = {
-              id: uuidv4(),
-              columnId: currentColumnId,
-              boardId: currrentBoardId,
-              title: cardTitle,
-              description: cardBody,
-              date: cardDate,
-              colorLabel: cardLabel,
-            };
-            createCardLocal(cardObj);
-            createCardServer(user.token, currrentBoardId, cardObj);
-            socket.emit("add-new-card", cardObj);
-            setCardTitle("");
-            setCardBody("");
-            setCardDate("");
-            setCardLable("");
-            closeModal();
-          }}
-        >
+        <button className="modal-board-button" type="submit">
           Save
         </button>
       </div>
-    </div>
+    </form>
   );
 };
 
