@@ -13,10 +13,7 @@ import Card from "../card/Card";
 import "./column.css";
 import { DELETE, EDIT } from "../../redux/modal/modalTypes";
 
-import {
-  EditIcon,
-  TrashIcon,
-} from "../../assets/svg/iconlibrary";
+import { EditIcon, TrashIcon } from "../../assets/svg/iconlibrary";
 
 const mapOrder = (array, order, key) => {
   array.sort(function (a, b) {
@@ -56,14 +53,14 @@ const Column = ({
             </div>
             <div className="column-header-icon-container">
               <TrashIcon
-                onClick={() => {
+                handleDelete={() => {
                   getColumnData(column);
                   deleteColumnModal();
                 }}
                 className="column-header-trash-icon"
               />
               <EditIcon
-                onClick={() => {
+                handleEdit={() => {
                   getColumnData(column);
                   editColumnModal();
                 }}

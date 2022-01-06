@@ -178,7 +178,7 @@ const SearchIcon = () => {
   );
 };
 
-const EditIcon = () => {
+const EditIcon = ({ handleEdit }) => {
   return (
     <svg
       width="20"
@@ -190,6 +190,7 @@ const EditIcon = () => {
         marginTop: "3px",
         marginLeft: "5px",
       }}
+      onClick={handleEdit}
     >
       <path
         fillRule="evenodd"
@@ -219,7 +220,7 @@ const DeleteIcon = () => {
   );
 };
 
-const HomeIcon = () => {
+const HomeIcon = ({ handleDelete }) => {
   return (
     <svg
       width="20"
@@ -267,7 +268,7 @@ const ActivityIcon = () => {
   );
 };
 
-const TrashIcon = () => {
+const TrashIcon = ({ handleDelete }) => {
   return (
     <svg
       width="24"
@@ -275,6 +276,7 @@ const TrashIcon = () => {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      onClick={handleDelete}
     >
       <path
         d="M6 19C6 20.105 6.895 21 8 21H16C17.105 21 18 20.105 18 19V7H6V19ZM19 4H15.5L14.5 3H9.5L8.5 4H5V6H19V4Z"
