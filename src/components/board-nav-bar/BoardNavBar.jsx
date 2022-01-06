@@ -43,9 +43,10 @@ const BoardNavBar = ({ board, history, showUserModal, emptyColumns, user }) => (
     {board.admins.map((admin, index) => (
       <AdminAvatar key={index} admin={admin} />
     ))}
-    {board.members.map((member, index) => (
+    {board.members.slice(0, 2).map((member, index) => (
       <UserAvatar key={index} user={member} />
     ))}
+    {(board.members.length > 2) ? <div className="avatar-more" title={board.members.slice(2).map((member) => (member.name))}>{("+" + (board.members.length - 2))}</div> : null}
     <button
       className="add-user-icon"
       onClick={() => {
