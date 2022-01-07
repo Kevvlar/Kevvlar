@@ -42,7 +42,6 @@
   display: flex;
   flex-direction: column;
   width: 290px;
-  z-index: 50;
   align-items: center;
 }
 
@@ -82,4 +81,13 @@
   color: white;
   font-size: 16px;
   margin-top: 10px;
+}
+
+.close-wrapper {
+  height: 100vh;
+  width: 100vw;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
 }

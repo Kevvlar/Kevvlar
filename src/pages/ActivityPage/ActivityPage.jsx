@@ -158,10 +158,10 @@ const MainPage = ({
 
   return (
     <div className="todopage">
-      <AppBar />
       <BoardNavBar />
-      {rightSideNav ? <RightSideNav /> : null}
       <ColumnHolder />
+      <AppBar />
+      {rightSideNav ? <RightSideNav /> : null}
       {showModal ? <Modal /> : null}
     </div>
   );

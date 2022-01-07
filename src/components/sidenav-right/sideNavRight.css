@@ -12,6 +12,15 @@
   width: 290px;
 }
 
+.sidenav-right-close-wrapper {
+  height: 100vh;
+  width: 100vw;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .sidenav-right-menu-icons-container {
   height: 8%;
   margin-left: 15px;

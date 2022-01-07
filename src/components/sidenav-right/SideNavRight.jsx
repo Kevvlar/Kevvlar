@@ -22,20 +22,23 @@ const RightSideNav = ({
 }) => {
 
   return (
-    <nav className="sidenav-right-container">
-      {/* <div className="sidenav-right-menu-icons-container">
-        <button className="sidenav-right-grid-icon">
-          <FaThLarge onClick={() => toggleGrid()} />
-        </button>
-        <button className="sidenav-right-minus-icon">
-          <FaMinus onClick={() => toggleFlat()} />
-        </button>
-      </div> */}
-      <div className="sidenav-right-menu-activity">
-        <div className="sidenav-right-activity-title">Tasks due</div>
-        <TaskList length={20} />
-      </div>
-    </nav>
+    <div>
+      <div className="sidenav-right-close-wrapper" onClick={toggleRightSideNav}></div>
+      <nav className="sidenav-right-container">
+        {/* <div className="sidenav-right-menu-icons-container">
+          <button className="sidenav-right-grid-icon">
+            <FaThLarge onClick={() => toggleGrid()} />
+          </button>
+          <button className="sidenav-right-minus-icon">
+            <FaMinus onClick={() => toggleFlat()} />
+          </button>
+        </div> */}
+        <div className="sidenav-right-menu-activity">
+          <div className="sidenav-right-activity-title">Tasks due</div>
+          <TaskList length={20} />
+        </div>
+      </nav>
+    </div>
   );
 };
 

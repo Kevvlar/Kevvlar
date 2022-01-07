@@ -24,12 +24,15 @@ const UserProfile = ({
   }
 
   const UserMenu = () => (
-    <div className="user-profile-menu">
-      <img className="user-profile-menu-image" alt="img" src={user.photo} />
-      <div className="user-profile-menu-name">{user.name}</div>
-      <div className="user-profile-email">{user.email}</div>
-      <div onClick={handleSignOut} className="user-profile-logout">
-        <div className="user-profile-logout-text">Log out</div>
+    <div>
+      <div className="close-wrapper" onClick={handleUserMenu}></div>
+      <div className="user-profile-menu">
+        <img className="user-profile-menu-image" alt="img" src={user.photo} />
+        <div className="user-profile-menu-name">{user.name}</div>
+        <div className="user-profile-email">{user.email}</div>
+        <div onClick={handleSignOut} className="user-profile-logout">
+          <div className="user-profile-logout-text">Log out</div>
+        </div>
       </div>
     </div>
   );
