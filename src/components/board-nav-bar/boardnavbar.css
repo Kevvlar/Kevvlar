@@ -1,8 +1,8 @@
 .boardnavbar {
 	height: 50px;
 	display: flex;
+	justify-content: space-between;
 	padding-top: 15px;
-	margin-left: 20px;
 	position: fixed;
 	top: 50px;
 	width: 100%;
@@ -80,4 +80,9 @@
 	color: #b4b4b4;
 	cursor: default;
 	font-size: 14px;
+}
+
+.boardnavbar-group {
+	display: flex;
+	padding-left: 15px;
 }
