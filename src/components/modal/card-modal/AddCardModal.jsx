@@ -15,7 +15,7 @@ const MODULES = {
     [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
     ["bold", "italic", "underline"],
     [{ align: [] }],
-    ["image", "code-block", "blockquote"],
+    ["image", "code-block", "blockquote", "link"],
   ],
   clipboard: {
     matchVisual: false,

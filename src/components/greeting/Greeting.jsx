@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 
 import GetStartedButon from "../get-started-button/GetStartedButton";
 
@@ -18,6 +19,17 @@ function Greeting() {
   //   </div>
   // );
 
+  const [input, setInput] = useState('');
+
+  const [showButton, setShowButton] = useState(false);
+
+  const handlePassword = (e) => {
+    e.preventDefault();
+    if (input.includes("beta")) {
+      setShowButton(true);      
+    }
+  }
+
   return (
     <div className="greeting-container section-margin">
       <h2 className="greeting-heading">Currently In Development</h2>
@@ -26,9 +38,12 @@ function Greeting() {
         point)
       </h5>
       <div className="greeting-buttons-container">
-        <GetStartedButon />
+        {/* <GetStartedButon /> */}
+        <form onSubmit={handlePassword}>
+          <input value={input} type="text" placeholder="password" className="modal-board-text" onInput={e => setInput(e.target.value)} />
+        </form>
       </div>
-      {/*{showPricing ? handleShowPricing() : null}*/}
+      {showButton ? <GetStartedButon /> : null}
     </div>
   );
 }

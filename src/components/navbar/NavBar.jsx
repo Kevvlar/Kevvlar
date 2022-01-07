@@ -10,9 +10,9 @@ const NavBar = ({ menuItem }) => (
   <header>
     <div className="navbar-container">
       <KevvlarLogo />
-      <Link className="navbar-button" to="/signup">
+      {/* <Link className="navbar-button" to="/signup">
         Try it
-      </Link>
+      </Link> */}
     </div>
   </header>
 );
