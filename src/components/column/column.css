@@ -101,6 +101,10 @@
   box-shadow: none;
 }
 
+.finished-column {
+  opacity: 0.3;
+}
+
 /*MOBILE BREAKPOINTS*/
 
 @media only screen and (max-width: 600px) {

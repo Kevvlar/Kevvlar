@@ -1,6 +1,7 @@
 import React from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
+import { useState, useEffect } from "react";
 
 import {
   setCardModal,
@@ -39,11 +40,37 @@ const Column = ({
   getColumnData,
   searchKeyWord,
 }) => {
+
+  const [addFinishedClass, setAddFinishedClass] = useState(false);
+
+
+  useEffect(() => {
+    console.log("in check finished function");
+    if (column.title.toLowerCase().includes("finished")) {
+      setAddFinishedClass(true);  
+    }
+    else {
+      setAddFinishedClass(false); 
+    }
+  });
+
+  // needs to fire on render and after editing/creating a column
+  const checkFinished = () => {
+    console.log("in check finished function");
+    if (column.title.toLowerCase().includes("finished")) {
+      setAddFinishedClass(true);  
+    }
+    else {
+      setAddFinishedClass(false); 
+    }
+    
+  }
+
   return (
     <Draggable draggableId={column.id} index={index}>
       {(provided) => (
         <div
-          className="column"
+          className={addFinishedClass ? "column finished-column" : "column"}
           {...provided.draggableProps}
           ref={provided.innerRef}
         >
@@ -63,6 +90,7 @@ const Column = ({
                 handleEdit={() => {
                   getColumnData(column);
                   editColumnModal();
+                  checkFinished();
                 }}
                 className="column-header-edit-icon"
               />
