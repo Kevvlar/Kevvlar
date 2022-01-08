@@ -9,7 +9,6 @@ import "./Cardsearchbar.css";
 
 function CardSearchBar({inputSearchKey}) {
   const [inputValue, setInputValue] = useState('');
-  const [showButton, setShowButton] = useState(false);
 
   
   const handleInputChange = (e) => {
@@ -38,22 +37,6 @@ function CardSearchBar({inputSearchKey}) {
     </div>
   )
 };
-
-{/*  const CardSearchBar = ({ inputSearchKey }) => (
-   <div className="cardsearch-bar-container">
-     <FaSearch className="cardsearch-icon" />
-     <input
-       type="text"
-       placeholder="Search"
-       className="cards-search"
-       value={inputValue}
-       onChange={(e) =>
-         inputSearchKey(e.target.value.toLocaleLowerCase().replace(/\s/g, ""))
-       }
-     />
-     <div className="clear-search-button" onClick={(e) => inputSearchKey(e.target.value = '')}>x</div>
-   </div>
- ); */}
 
 const mapDispatchToProps = (dispatch) => {
   return {

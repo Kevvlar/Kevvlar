@@ -43,6 +43,11 @@
   border-radius: 3px;
 }
 
+.modal-body-title:focus {
+  outline: none;
+  border: none
+}
+
 .modal-body {
   padding: 0 20px;
   color: #d1d1d2;
