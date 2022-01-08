@@ -1,4 +1,9 @@
-export { signUserUp, signUserIn, handleLogOutUser } from "./user/userActions";
+export {
+  signUserUp,
+  signUserIn,
+  handleLogOutUser,
+  clearErrorMessage,
+} from "./user/userActions";
 
 export {
   showLeftSideNav,

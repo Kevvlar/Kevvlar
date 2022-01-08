@@ -7,6 +7,7 @@ import {
   SIGN_IN_USER_SUCCESS,
   SIGN_IN_USER_FAILURE,
   LOG_USER_OUT,
+  CLEAR_ERROR_MESSAGE,
 } from "./userTypes";
 
 export const signUpUserRequest = () => {
@@ -99,5 +100,11 @@ export const signUserIn = (userData, history) => {
       .catch((error) => {
         dispatch(signInUserFailure(error.response.data.message));
       });
+  };
+};
+
+export const clearErrorMessage = () => {
+  return {
+    type: CLEAR_ERROR_MESSAGE,
   };
 };

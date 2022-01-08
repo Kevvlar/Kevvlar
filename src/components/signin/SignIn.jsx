@@ -5,11 +5,11 @@ import { connect } from "react-redux";
 import { LoadingIcon } from "../../assets/svg/iconlibrary";
 import { KevvlarIcon } from "../../assets/svg/iconlibrary";
 
-import { signUserIn } from "../../redux";
+import { signUserIn, clearErrorMessage } from "../../redux";
 
 import "./signin.css";
 
-const SignIn = ({ signInUser, history, loading, error }) => {
+const SignIn = ({ signInUser, history, loading, error, clearError }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -66,7 +66,13 @@ const SignIn = ({ signInUser, history, loading, error }) => {
           </form>
           <p className="sign-in-here">
             Don't have an account?{" "}
-            <Link to="/signup" className="sign-in-link">
+            <Link
+              onClick={() => {
+                clearError();
+              }}
+              to="/signup"
+              className="sign-in-link"
+            >
               Sign up here
             </Link>
           </p>
@@ -86,6 +92,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     signInUser: (userData, history) => dispatch(signUserIn(userData, history)),
+    clearError: () => dispatch(clearErrorMessage()),
   };
 };
 

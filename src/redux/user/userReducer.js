@@ -6,6 +6,7 @@ import {
   SIGN_IN_USER_SUCCESS,
   SIGN_IN_USER_FAILURE,
   LOG_USER_OUT,
+  CLEAR_ERROR_MESSAGE,
 } from "./userTypes";
 
 const initialState = {
@@ -62,6 +63,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         userData: {},
+        error: "",
+      };
+    case CLEAR_ERROR_MESSAGE:
+      return {
+        ...state,
         error: "",
       };
 
