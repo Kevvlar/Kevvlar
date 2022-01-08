@@ -48,6 +48,11 @@
   border: none
 }
 
+.modal-body-title::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+	color: #9b9b9ba9;
+	opacity: 1; /* Firefox */
+}
+
 .modal-body {
   padding: 0 20px;
   color: #d1d1d2;
