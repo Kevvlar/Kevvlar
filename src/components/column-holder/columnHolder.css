@@ -6,7 +6,6 @@
 .column-holder {
   height: calc( 100vh - 150px);
   display: flex;
-  column-gap: 10px;
   margin: 0px 10px;
   padding-top: 120px;
 }
