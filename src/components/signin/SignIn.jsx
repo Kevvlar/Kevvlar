@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
+import { LoadingIcon } from "../../assets/svg/iconlibrary";
+import { KevvlarIcon } from "../../assets/svg/iconlibrary";
+
 import { signUserIn } from "../../redux";
 
 import "./signin.css";
 
-import {
-  KevvlarIcon
-} from "../../assets/svg/iconlibrary";
-
-const SignIn = ({ signInUser, history }) => {
+const SignIn = ({ signInUser, history, loading, error }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -29,45 +28,59 @@ const SignIn = ({ signInUser, history }) => {
 
   return (
     <div className="sign-in-container">
-      <div className="sign-in-content">
-        <KevvlarIcon />
-        <h2 className="sign-in-white">Log in</h2>
-        <form onSubmit={handleSubmit} className="sign-in-form">
-          <div className="sign-in-form-group">
-            <input
-              type="email"
-              className="sign-in-form-input"
-              name="email"
-              placeholder="Your Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="sign-in-form-group">
-            <input
-              type="password"
-              className="sign-in-form-input"
-              name="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <button type="submit" className="sign-in-form-submit-button">
-            Log in
-          </button>
-        </form>
-        <p className="sign-in-here">
-          Don't have an account?{" "}
-          <Link to="/signup" className="sign-in-link">
-            Sign up here
-          </Link>
-        </p>
-      </div>
+      {loading ? (
+        <LoadingIcon />
+      ) : (
+        <div className="sign-in-content">
+          <KevvlarIcon />
+          <h2 className="sign-in-white">Log in</h2>
+          <form onSubmit={handleSubmit} className="sign-in-form">
+            <div className="sign-in-form-group">
+              <div className="sign-in-error">{error}</div>
+            </div>
+            <div className="sign-in-form-group">
+              <input
+                type="email"
+                className="sign-in-form-input"
+                name="email"
+                placeholder="Your Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="sign-in-form-group">
+              <input
+                type="password"
+                className="sign-in-form-input"
+                name="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <button type="submit" className="sign-in-form-submit-button">
+              Log in
+            </button>
+          </form>
+          <p className="sign-in-here">
+            Don't have an account?{" "}
+            <Link to="/signup" className="sign-in-link">
+              Sign up here
+            </Link>
+          </p>
+        </div>
+      )}
     </div>
   );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    loading: state.user.loading,
+    error: state.user.error,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -76,4 +89,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(withRouter(SignIn));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SignIn));

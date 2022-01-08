@@ -22,6 +22,12 @@
   color: white;
 }
 
+.sigup-in-error {
+  color: red;
+  font-size: 20px;
+  text-align: center;
+}
+
 .signup-form {
   margin-top: 25px;
 }

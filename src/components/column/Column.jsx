@@ -40,29 +40,24 @@ const Column = ({
   getColumnData,
   searchKeyWord,
 }) => {
-
   const [addFinishedClass, setAddFinishedClass] = useState(false);
-
 
   useEffect(() => {
     if (column.title.toLowerCase().includes("finished")) {
-      setAddFinishedClass(true);  
+      setAddFinishedClass(true);
+    } else {
+      setAddFinishedClass(false);
     }
-    else {
-      setAddFinishedClass(false); 
-    }
-  });
+  }, [setAddFinishedClass, column]);
 
   // needs to fire on render and after editing/creating a column
   const checkFinished = () => {
     if (column.title.toLowerCase().includes("finished")) {
-      setAddFinishedClass(true);  
+      setAddFinishedClass(true);
+    } else {
+      setAddFinishedClass(false);
     }
-    else {
-      setAddFinishedClass(false); 
-    }
-    
-  }
+  };
 
   return (
     <Draggable draggableId={column.id} index={index}>

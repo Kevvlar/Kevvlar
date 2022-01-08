@@ -77,7 +77,7 @@ export const signUserUp = (userData, history) => {
         history.push("/boards");
       })
       .catch((error) => {
-        dispatch(signUpUserFailure(error.message));
+        dispatch(signUpUserFailure(error.response.data.message));
       });
   };
 };
@@ -97,7 +97,7 @@ export const signUserIn = (userData, history) => {
         history.push("/boards");
       })
       .catch((error) => {
-        dispatch(signInUserFailure(error.message));
+        dispatch(signInUserFailure(error.response.data.message));
       });
   };
 };
