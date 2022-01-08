@@ -45,7 +45,6 @@ const Column = ({
 
 
   useEffect(() => {
-    console.log("in check finished function");
     if (column.title.toLowerCase().includes("finished")) {
       setAddFinishedClass(true);  
     }
@@ -56,7 +55,6 @@ const Column = ({
 
   // needs to fire on render and after editing/creating a column
   const checkFinished = () => {
-    console.log("in check finished function");
     if (column.title.toLowerCase().includes("finished")) {
       setAddFinishedClass(true);  
     }

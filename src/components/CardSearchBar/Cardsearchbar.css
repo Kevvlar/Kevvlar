@@ -21,10 +21,21 @@
   color: white;
 }
 
+.search-focused {
+  outline: none !important;
+  border-color: #719ECE;
+  box-shadow: 0 0 6px 0px #ffc107b0;
+}
+
+.cardsearch-margin-fix {
+  margin-right: -5px;
+}
+
 .cards-search:focus { 
   outline: none !important;
   border-color: #719ECE;
   box-shadow: 0 0 6px 0px #ffc107b0;
+  margin-right: 0px;
 }
 
 .cards-search::placeholder {
@@ -38,4 +49,23 @@
   left: 30px;
   width: 15px;
   height: 15px;
+}
+
+.clear-search-button {
+  color: #ffffff78;
+  background-color: #1f2529;
+  padding: 5px;
+  width: 15px;
+  height: 15px;
+  border-radius: 25px;
+  position: relative;
+  right: 31px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 11px;
+  cursor: pointer;
+}
+
+.clear-search-button:hover {
+  opacity: 0.5;
 }
