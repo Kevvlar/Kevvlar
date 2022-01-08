@@ -34,10 +34,8 @@ const SignIn = ({ signInUser, history, loading, error, clearError }) => {
         <div className="sign-in-content">
           <KevvlarIcon />
           <h2 className="sign-in-white">Log in</h2>
+          <div className="sign-in-error">{error}</div>
           <form onSubmit={handleSubmit} className="sign-in-form">
-            <div className="sign-in-form-group">
-              <div className="sign-in-error">{error}</div>
-            </div>
             <div className="sign-in-form-group">
               <input
                 type="email"

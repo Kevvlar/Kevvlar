@@ -36,10 +36,8 @@ const SignUp = ({ signUpUser, history, loading, error, clearError }) => {
         <div className="signup-content">
           <KevvlarIcon />
           <h2 className="signup-white">Sign Up</h2>
+          <div className="sign-in-error">{error}</div>
           <form onSubmit={handleSubmit} className="signup-form">
-            <div className="sign-in-form-group">
-              <div className="sign-in-error">{error}</div>
-            </div>
             <div className="signup-form-group">
               <input
                 type="text"
