@@ -24,3 +24,8 @@
 .new-column-button:hover {
   background: #80808051;
 }
+
+.scroll-enabled {
+  display: flex;
+  flex-direction: row;
+}
