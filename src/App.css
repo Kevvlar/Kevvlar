@@ -98,6 +98,10 @@ li::before {
     position: relative;
 } 
 
+.ql-editor img {
+	max-width: 75% !important;
+}
+
 .ql-stroke {
 	stroke: #727272 !important;
 }
