@@ -35,15 +35,17 @@ const mapOrder = (array, order, key) => {
 };
 
 const enableScrolling = () => {
-  var parent = document.getElementsByClassName("scroll-enabled")[0];
-  parent.classList.add('indiana-scroll-container');
-  parent.classList.add('indiana-scroll-container--hide-scrollbars');
+  // var parent = document.getElementsByClassName("scroll-enabled")[0];
+  // parent.classList.add('indiana-scroll-container');
+  // parent.classList.remove('testing');
+  // parent.classList.add('indiana-scroll-container--hide-scrollbars');
 };
 
 const disableScrolling = () => {
   var parent = document.getElementsByClassName("scroll-enabled")[0];
-  parent.classList.remove('indiana-scroll-container');
-  parent.classList.remove('indiana-scroll-container--hide-scrollbars');
+  // parent.classList.remove('indiana-scroll-container');
+  // parent.classList.add('testing');
+  // parent.classList.remove('indiana-scroll-container--hide-scrollbars');
 };
 
 const ColumnHolder = ({
