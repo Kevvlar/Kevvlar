@@ -52,14 +52,14 @@
 
 .signup-form-input {
   width: 100%;
-  border: 1px solid #ebebeb;
+  border: 0px solid #ebebeb;
   border-radius: 5px;
   padding: 17px 20px;
   box-sizing: border-box;
   font-size: 14px;
   font-weight: 500;
   color: #fff;
-  background: #343d46;
+  background: #a1a1a1;
 }
 
 .signup-form-submit {

@@ -2,6 +2,11 @@ h2 {
 	font-size: 20px;
 }
 
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+	color: #363636;
+	opacity: 1; /* Firefox */
+  }
+
 .quill {
 	height: 80%;
 }

@@ -39,6 +39,11 @@
   margin: 40px auto;
 }
 
+.modal-board-text::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+	color: #9b9b9ba9;
+	opacity: 1; /* Firefox */
+}
+
 .modal-delete-button:hover {
   background-color: #bb4e3b;
 }
