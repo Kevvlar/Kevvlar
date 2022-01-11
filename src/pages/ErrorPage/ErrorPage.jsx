@@ -6,7 +6,7 @@ import "./errorPage.css";
 const ErrorPage = () => (
   <div className="error-page">
     <LoadingIcon />
-    Establishing connection...
+    <h2 className="error-page-h2">Establishing connection...</h2>
   </div>
 );
 
