@@ -24,3 +24,14 @@
 .new-column-button:hover {
   background: #80808051;
 }
+
+.scroll-enabled {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.testing {
+/*  overflow: initial;*/
+}

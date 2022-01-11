@@ -1,6 +1,7 @@
 import React from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
+import ScrollContainer from 'react-indiana-drag-scroll';
 
 import socket from "../../Socket";
 
@@ -33,6 +34,20 @@ const mapOrder = (array, order, key) => {
   return array;
 };
 
+const enableScrolling = () => {
+  // var parent = document.getElementsByClassName("scroll-enabled")[0];
+  // parent.classList.add('indiana-scroll-container');
+  // parent.classList.remove('testing');
+  // parent.classList.add('indiana-scroll-container--hide-scrollbars');
+};
+
+const disableScrolling = () => {
+  var parent = document.getElementsByClassName("scroll-enabled")[0];
+  // parent.classList.remove('indiana-scroll-container');
+  // parent.classList.add('testing');
+  // parent.classList.remove('indiana-scroll-container--hide-scrollbars');
+};
+
 const ColumnHolder = ({
   columns,
   columnsOrder,
@@ -49,6 +64,7 @@ const ColumnHolder = ({
   addNewColumnModal,
 }) => {
   const onDragEnd = (result) => {
+    enableScrolling();
     const { destination, draggableId, source, type } = result;
 
     if (!destination) {
@@ -116,26 +132,32 @@ const ColumnHolder = ({
   };
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
+    <DragDropContext onDragEnd={onDragEnd} onDragStart={disableScrolling}>
       <Droppable droppableId="all-columns" direction="horizontal" type="column">
         {(provided) => (
           <div
             className="column-holder"
             {...provided.droppableProps}
             ref={provided.innerRef}
+            
           >
-            {mapOrder(columns, columnsOrder, "id").map((column, index) => (
-              <Column key={column.id} column={column} index={index} />
-            ))}
-            {provided.placeholder}
-            <button
-              onClick={() => {
-                addNewColumnModal();
-              }}
-              className="new-column-button"
+            <ScrollContainer
+              className="scroll-enabled"
+              ignoreElements=".card"
             >
-              + Add New Column
-            </button>
+              {mapOrder(columns, columnsOrder, "id").map((column, index) => (
+                <Column key={column.id} column={column} index={index} />
+              ))}
+              {provided.placeholder}
+              <button
+                onClick={() => {
+                  addNewColumnModal();
+                }}
+                className="new-column-button"
+              >
+                + Add New Column
+              </button>
+            </ScrollContainer>
           </div>
         )}
       </Droppable>
