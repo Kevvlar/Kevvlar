@@ -41,6 +41,7 @@ const EditCardModal = ({
   const [editCardBody, setEditCardBody] = useState(currentCard.description);
   const [editCardDate, setEditCardDate] = useState(currentCard.date);
   const [editCardColor, setEditCardColor] = useState(currentCard.colorLabel);
+  const [editCardUsers, setEditCardUsers] = useState(currentCard?.users);
 
   const rteChange = (content, delta, source, editor) => {
     setEditCardBody(editor.getHTML());

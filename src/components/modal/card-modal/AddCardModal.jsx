@@ -54,6 +54,7 @@ const AddCardModal = ({
       description: cardBody,
       date: cardDate,
       colorLabel: cardLabel,
+      users: [],
     };
     createCardLocal(cardObj);
     createCardServer(user.token, currrentBoardId, cardObj);
