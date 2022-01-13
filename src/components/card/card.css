@@ -71,7 +71,7 @@
   text-decoration: none;
   cursor: pointer;
   float: right;
-  opacity: 0;
+  opacity: 0.5;
   transition: 0.2s;
 }
 
