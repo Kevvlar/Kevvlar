@@ -82,99 +82,107 @@ const EditCardModal = ({
       className="modal-body"
     >
       <h2 className="modal-title">Edit Card</h2>
-      <input
-        type="text"
-        id="input-big"
-        maxLength={75}
-        placeholder="Card title"
-        className="modal-body-title"
-        value={editCardTitle}
-        onChange={(e) => setEditCardTitle(e.target.value)}
-      />
-      <div className="modal-body-description">
-        <ReactQuill
-          theme="snow"
-          modules={MODULES}
-          onChange={rteChange}
-          value={editCardBody}
-        />
-      </div>
-      <div className="modal-footer-container">
-        <input
-          className="date-picker"
-          value={editCardDate}
-          onChange={(e) => setEditCardDate(e.target.value)}
-          type="date"
-          name="Due Date"
-        />
-        <select
-          className="select-color"
-          onChange={(e) => setEditCardColor(e.target.value)}
-          value={editCardColor}
-        >
-          <option value="">Color Label</option>
-          <option value="#B0B0B0">grey</option>
-          <option value="#F8BE7A">yellow</option>
-          <option value="#E34B4B">red</option>
-        </select>
+      <div className="big-card-container">
+        <div className="input-description-container">
+          <input
+            type="text"
+            id="input-big"
+            maxLength={75}
+            placeholder="Card title"
+            className="modal-body-title"
+            value={editCardTitle}
+            onChange={(e) => setEditCardTitle(e.target.value)}
+          />
+          <div className="modal-body-description">
+            <ReactQuill
+              theme="snow"
+              modules={MODULES}
+              onChange={rteChange}
+              value={editCardBody}
+            />
+          </div>
+        </div>
+        <div className="modal-footer-container">
+        <div className="action-buttons-container">
+          <input
+            className="date-picker"
+            value={editCardDate}
+            onChange={(e) => setEditCardDate(e.target.value)}
+            type="date"
+            name="Due Date"
+          />
+          <select
+            className="select-color"
+            onChange={(e) => setEditCardColor(e.target.value)}
+            value={editCardColor}
+          >
+            <option value="">Color Label</option>
+            <option value="#B0B0B0">grey</option>
+            <option value="#F8BE7A">yellow</option>
+            <option value="#E34B4B">red</option>
+          </select>
 
-        <div className={`assign-user-dropdown ${showDropDown ? "is-active" : ""}`}>
-          <div
+          <div className={`assign-user-dropdown ${showDropDown ? "is-active" : ""}`}>
+            <div
+              onClick={() => {
+                setShowDropDown(!showDropDown);
+              }}
+            >
+              Assign User
+            </div>
+            <div className={`assign-user-wrapper ${showDropDown ? "active-wrapper" : ""}`}
             onClick={() => {
               setShowDropDown(!showDropDown);
+              console.log('clicked wrapper');
+            }}>
+            
+              
+            </div>
+            <ul className="assign-user-dropdown-list">
+            <h2 className="modal-title">Assign a User</h2>
+              {users.map((user, index) => (
+                <li className="assign-user-list-item" key={index}>
+                  <label>
+                    <input type="checkbox" name={user.name} value={user._id} />
+                  </label>
+                  <div className="assign-user-list-container">
+                  <img
+                    className="user-avatar-image assign-user-image"
+                    alt="img"
+                    src={user.photo}
+                    title={user.name}
+                  />
+                  <div>
+                    <div className="assign-user-list-name">{user.name}</div>
+                    <div className="assign-user-list-email">{user.email}</div>
+                  </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className="save-delete-container">      
+          <button className="modal-board-button" type="submit">
+            Save
+          </button>
+          <div
+            className="delete-button"
+            onClick={() => {
+              const deleteObj = {
+                columnId: currentCard.columnId,
+                cardId: currentCard.id,
+              };
+              handleDeleteCardLocal(deleteObj);
+              handleDeleteCardServer(user.token, currrentBoardId, currentCard.id);
+              socket.emit("delete-card", deleteObj);
+              closeModal();
             }}
           >
-            Assign User
+            Delete
           </div>
-          <div className={`assign-user-wrapper ${showDropDown ? "active-wrapper" : ""}`}
-          onClick={() => {
-            setShowDropDown(!showDropDown);
-            console.log('clicked wrapper');
-          }}>
-          
-            
-          </div>
-          <ul className="assign-user-dropdown-list">
-          <h2 className="modal-title">Assign a User</h2>
-            {users.map((user, index) => (
-              <li className="assign-user-list-item" key={index}>
-                <label>
-                  <input type="checkbox" name={user.name} value={user._id} />
-                </label>
-                <div className="assign-user-list-container">
-                <img
-                  className="user-avatar-image assign-user-image"
-                  alt="img"
-                  src={user.photo}
-                  title={user.name}
-                />
-                <div>
-                  <div className="assign-user-list-name">{user.name}</div>
-                  <div className="assign-user-list-email">{user.email}</div>
-                </div>
-                </div>
-              </li>
-            ))}
-          </ul>
         </div>
-
-        <button className="modal-board-button" type="submit">
-          Save
-        </button>
-        <div
-          className="delete-button"
-          onClick={() => {
-            const deleteObj = {
-              columnId: currentCard.columnId,
-              cardId: currentCard.id,
-            };
-            handleDeleteCardLocal(deleteObj);
-            handleDeleteCardServer(user.token, currrentBoardId, currentCard.id);
-            socket.emit("delete-card", deleteObj);
-            closeModal();
-          }}
-        >
-          Delete
+      
         </div>
       </div>
     </form>

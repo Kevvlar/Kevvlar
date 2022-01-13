@@ -27,6 +27,8 @@
   border-radius: 4px;
   color: #03a9f4;
   width: fit-content;
+  width: 170px;
+  cursor: pointer;
 }
 
 .modal-board-button:hover {
