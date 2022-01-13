@@ -4,8 +4,6 @@ import { v4 as uuidv4 } from "uuid";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
-import UserAvatar from "../../user-avatar/UserAvatar";
-import AdminAvatar from "../../admin-avatar/AdminAvatar";
 
 import socket from "../../../Socket";
 

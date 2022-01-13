@@ -36,12 +36,17 @@ const EditCardModal = ({
   user,
   currrentBoardId,
   currentCard,
+  admins,
+  members,
 }) => {
+  const users = [...admins, ...members];
+
   const [editCardTitle, setEditCardTitle] = useState(currentCard.title);
   const [editCardBody, setEditCardBody] = useState(currentCard.description);
   const [editCardDate, setEditCardDate] = useState(currentCard.date);
   const [editCardColor, setEditCardColor] = useState(currentCard.colorLabel);
   const [editCardUsers, setEditCardUsers] = useState(currentCard?.users);
+  const [showDropDown, setShowDropDown] = useState(false);
 
   const rteChange = (content, delta, source, editor) => {
     setEditCardBody(editor.getHTML());
@@ -112,6 +117,31 @@ const EditCardModal = ({
           <option value="#F8BE7A">yellow</option>
           <option value="#E34B4B">red</option>
         </select>
+
+        <div className={`assign-user-dropdown ${showDropDown ? "is-active" : ""}`}>
+          <div
+            onClick={() => {
+              setShowDropDown(!showDropDown);
+            }}
+          >
+            Assign User
+          </div>
+          <ul className="assign-user-dropdown-list">
+          <h2 className="modal-title">Assign a User</h2>
+            {users.map((user, index) => (
+              <li className="assign-user-list-item" key={index}>
+                <label>
+                  <input type="checkbox" name={user.name} value={user._id} />
+                </label>
+                <div className="assign-user-list-container">
+                  <div className="assign-user-list-name">{user.name}</div>
+                  <div className="assign-user-list-email">{user.email}</div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
         <button className="modal-board-button" type="submit">
           Save
         </button>
@@ -140,6 +170,8 @@ const mapStateToProps = (state) => {
     user: state.user.userData,
     currrentBoardId: state.board.selectBoard.id,
     currentCard: state.column.selectCard,
+    admins: state.board.selectBoard.admins,
+    members: state.board.selectBoard.members,
   };
 };
 
