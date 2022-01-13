@@ -126,6 +126,14 @@ const EditCardModal = ({
           >
             Assign User
           </div>
+          <div className={`assign-user-wrapper ${showDropDown ? "active-wrapper" : ""}`}
+          onClick={() => {
+            setShowDropDown(!showDropDown);
+            console.log('clicked wrapper');
+          }}>
+          
+            
+          </div>
           <ul className="assign-user-dropdown-list">
           <h2 className="modal-title">Assign a User</h2>
             {users.map((user, index) => (
