@@ -4,6 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
+import UserAvatar from "../../user-avatar/UserAvatar";
+import AdminAvatar from "../../admin-avatar/AdminAvatar";
 
 import socket from "../../../Socket";
 
@@ -117,21 +119,25 @@ const AddCardModal = ({
           <option value="#E34B4B">red</option>
         </select>
 
-        <div className={`checkbox-dropdown ${showDropDown ? "is-active" : ""}`}>
+        <div className={`assign-user-dropdown ${showDropDown ? "is-active" : ""}`}>
           <div
             onClick={() => {
               setShowDropDown(!showDropDown);
             }}
           >
-            Assign Member
+            Assign User
           </div>
-          <ul className="checkbox-dropdown-list">
+          <ul className="assign-user-dropdown-list">
+          <h2 className="modal-title">Assign a User</h2>
             {users.map((user, index) => (
-              <li key={index}>
+              <li className="assign-user-list-item" key={index}>
                 <label>
                   <input type="checkbox" name={user.name} value={user._id} />
-                  {user.name}
                 </label>
+                <div className="assign-user-list-container">
+                  <div className="assign-user-list-name">{user.name}</div>
+                  <div className="assign-user-list-email">{user.email}</div>
+                </div>
               </li>
             ))}
           </ul>

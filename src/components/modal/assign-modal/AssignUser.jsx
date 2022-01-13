@@ -3,7 +3,7 @@ import React from "react";
 const AssignUser = () => {
   return (
     <form>
-      <ul class="items">
+      <ul class="assign-user-items">
         <li>
           <input type="checkbox" />
           Berry

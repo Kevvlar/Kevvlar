@@ -128,6 +128,7 @@
   flex-direction: row;
   justify-content: flex-end;
   flex-wrap: wrap;
+  row-gap: 10px;
 }
 
 .date-picker {
@@ -155,7 +156,7 @@
 
   /* reset */
 
-  margin: 0;
+  margin: 0px 5px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -191,12 +192,14 @@
   padding: 12px 24px;
   font-size: 14px;
   border-radius: 4px;
-  margin-left: 25px;
+  margin: 0px 5px;
   height: 40px;
 }
 
 .select-color {
   cursor: pointer;
+  width: 170px;
+  height: 40px;
   /* styling */
   background-color: transparent;
   border: thin solid grey;
@@ -209,7 +212,7 @@
 
   /* reset */
 
-  margin: 0 20px;
+  margin: 0px 5px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -261,13 +264,30 @@
 
 /* Drop down code */
 
-.checkbox-dropdown {
-  width: 150px;
-  border: 1px solid #aaa;
-  padding: 8px;
-  position: relative;
-  margin: 0 auto;
-  user-select: none;
+.assign-user-dropdown {
+  width: 170px;
+  height: 40px;
+  cursor: pointer;
+  background-color: transparent;
+  border: thin solid grey;
+  border-radius: 4px;
+  color: grey;
+  display: inline-block;
+  font: inherit;
+  line-height: 1.5em;
+  padding: 0.5em 0.5em 0.5em 1em;
+  margin: 0px 5px;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: linear-gradient(
+45deg
+, transparent 50%, gray 50%), linear-gradient(
+135deg
+, gray 50%, transparent 50%), linear-gradient(to right, #4c4c4c, #ccc);
+  background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
+  background-size: 5px 5px, 5px 5px, 1px 1.5em;
+  background-repeat: no-repeat;
 }
 
 /* Display CSS arrow to the right of the dropdown text */
@@ -290,35 +310,57 @@
   margin-top: -9px;
 } */
 
-.checkbox-dropdown-list {
+ul.assign-user-dropdown-list {
   list-style: none;
+  width: 300px;
+  height: 200px;
   margin: 0;
   padding: 0;
-  position: absolute;
-  top: 100%; /* align the dropdown right below the dropdown text */
-  border: inherit;
-  border-top: none;
-  left: -1px; /* align the dropdown to the left */
-  right: -1px; /* align the dropdown to the right */
-  opacity: 0; /* hide the dropdown */
-
-  transition: opacity 0.4s ease-in-out;
-  height: 100px;
-  overflow: scroll;
+  position: relative;
+  bottom: 230px;
+  left: -15px;
+  opacity: 0;
+  border-radius: 4px;
+  background-color: #262F37;
+  transition: opacity 0.1s ease-in-out;
   overflow-x: hidden;
-  pointer-events: none; /* avoid mouse click events inside the dropdown */
+  pointer-events: none;
 }
-.is-active .checkbox-dropdown-list {
+
+.is-active .assign-user-dropdown-list {
   opacity: 1; /* display the dropdown */
   pointer-events: auto; /* make sure that the user still can select checkboxes */
 }
 
-.checkbox-dropdown-list li label {
+.assign-user-dropdown-list li label {
   display: block;
   padding: 10px;
   transition: all 0.2s ease-out;
 }
 
-.checkbox-dropdown-list li label:hover {
+.assign-user-dropdown-list li label input {
+  margin-right: 20px;
+}
+
+.assign-user-dropdown-list li label:hover {
   cursor: pointer;
+}
+
+.assign-user-list-item {
+  display: flex;
+  padding: 5px 5px;
+}
+
+.assign-user-list-name {
+  font-weight: 600;
+  color: #ffffff9b;
+}
+
+.assign-user-wrapper {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: red;
 }

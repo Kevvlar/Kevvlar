@@ -21,6 +21,7 @@
 .modal-board-button {
   background: transparent;
   padding: 12px 24px;
+  margin: 0px 5px;
   height: 40px;
   border: 1px solid #03a9f4;
   border-radius: 4px;
