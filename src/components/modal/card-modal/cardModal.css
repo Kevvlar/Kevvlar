@@ -312,16 +312,16 @@
 
 ul.assign-user-dropdown-list {
   list-style: none;
-  width: 300px;
-  height: 200px;
+  width: 330px;
+  height: 300px;
   margin: 0;
   padding: 0;
   position: relative;
-  bottom: 230px;
+  bottom: 330px;
   left: -15px;
   opacity: 0;
   border-radius: 4px;
-  background-color: #262F37;
+  background-color: #1F2529;
   transition: opacity 0.1s ease-in-out;
   overflow-x: hidden;
   pointer-events: none;
@@ -340,6 +340,8 @@ ul.assign-user-dropdown-list {
 
 .assign-user-dropdown-list li label input {
   margin-right: 20px;
+  margin-left: 10px;
+  opacity: 0.7;
 }
 
 .assign-user-dropdown-list li label:hover {
@@ -363,4 +365,12 @@ ul.assign-user-dropdown-list {
   top: 0;
   left: 0;
   color: red;
+}
+
+.assign-user-list-container {
+  display: flex;
+}
+
+.assign-user-image {
+  margin-right: 15px;
 }

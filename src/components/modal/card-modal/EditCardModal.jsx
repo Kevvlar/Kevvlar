@@ -134,8 +134,16 @@ const EditCardModal = ({
                   <input type="checkbox" name={user.name} value={user._id} />
                 </label>
                 <div className="assign-user-list-container">
+                <img
+                  className="user-avatar-image assign-user-image"
+                  alt="img"
+                  src={user.photo}
+                  title={user.name}
+                />
+                <div>
                   <div className="assign-user-list-name">{user.name}</div>
                   <div className="assign-user-list-email">{user.email}</div>
+                </div>
                 </div>
               </li>
             ))}
