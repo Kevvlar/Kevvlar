@@ -45,12 +45,13 @@
 
 .modal-body-title:focus {
   outline: none;
-  border: none
+  border: none;
 }
 
-.modal-body-title::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-	color: #9b9b9ba9;
-	opacity: 1; /* Firefox */
+.modal-body-title::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #9b9b9ba9;
+  opacity: 1; /* Firefox */
 }
 
 .modal-body {
@@ -171,8 +172,7 @@
 }
 
 [type="date"] {
-  background: url(./CalendarIcon.svg)
-    92% 50% no-repeat;
+  background: url(./CalendarIcon.svg) 92% 50% no-repeat;
 }
 [type="date"]::-webkit-inner-spin-button {
   display: none;
@@ -257,4 +257,68 @@
   .modal-footer-container {
     justify-content: center;
   }
+}
+
+/* Drop down code */
+
+.checkbox-dropdown {
+  width: 150px;
+  border: 1px solid #aaa;
+  padding: 8px;
+  position: relative;
+  margin: 0 auto;
+  user-select: none;
+}
+
+/* Display CSS arrow to the right of the dropdown text */
+/* .checkbox-dropdown:after {
+  content: "";
+  height: 0;
+  position: absolute;
+  width: 0;
+  border: 6px solid transparent;
+  border-top-color: #000;
+  top: 50%;
+  right: 10px;
+  margin-top: -3px;
+} */
+
+/* Reverse the CSS arrow when the dropdown is active
+.checkbox-dropdown.is-active:after {
+  border-bottom-color: #000;
+  border-top-color: #fff;
+  margin-top: -9px;
+} */
+
+.checkbox-dropdown-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 100%; /* align the dropdown right below the dropdown text */
+  border: inherit;
+  border-top: none;
+  left: -1px; /* align the dropdown to the left */
+  right: -1px; /* align the dropdown to the right */
+  opacity: 0; /* hide the dropdown */
+
+  transition: opacity 0.4s ease-in-out;
+  height: 100px;
+  overflow: scroll;
+  overflow-x: hidden;
+  pointer-events: none; /* avoid mouse click events inside the dropdown */
+}
+.is-active .checkbox-dropdown-list {
+  opacity: 1; /* display the dropdown */
+  pointer-events: auto; /* make sure that the user still can select checkboxes */
+}
+
+.checkbox-dropdown-list li label {
+  display: block;
+  padding: 10px;
+  transition: all 0.2s ease-out;
+}
+
+.checkbox-dropdown-list li label:hover {
+  cursor: pointer;
 }

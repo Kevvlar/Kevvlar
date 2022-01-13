@@ -29,11 +29,16 @@ const AddCardModal = ({
   user,
   currentColumnId,
   currrentBoardId,
+  admins,
+  members,
 }) => {
+  const users = [...admins, ...members];
+
   const [cardTitle, setCardTitle] = useState("");
   const [cardBody, setCardBody] = useState("");
   const [cardDate, setCardDate] = useState("");
   const [cardLabel, setCardLable] = useState("");
+  const [showDropDown, setShowDropDown] = useState(false);
 
   const rteChange = (content, delta, source, editor) => {
     setCardBody(editor.getHTML());
@@ -111,6 +116,27 @@ const AddCardModal = ({
           <option value="#F8BE7A">yellow</option>
           <option value="#E34B4B">red</option>
         </select>
+
+        <div className={`checkbox-dropdown ${showDropDown ? "is-active" : ""}`}>
+          <div
+            onClick={() => {
+              setShowDropDown(!showDropDown);
+            }}
+          >
+            Assign Member
+          </div>
+          <ul className="checkbox-dropdown-list">
+            {users.map((user, index) => (
+              <li key={index}>
+                <label>
+                  <input type="checkbox" name={user.name} value={user._id} />
+                  {user.name}
+                </label>
+              </li>
+            ))}
+          </ul>
+        </div>
+
         <button className="modal-board-button" type="submit">
           Save
         </button>
@@ -124,6 +150,8 @@ const mapStateToProps = (state) => {
     user: state.user.userData,
     currrentBoardId: state.board.selectBoard.id,
     currentColumnId: state.column.selectColumn.id,
+    admins: state.board.selectBoard.admins,
+    members: state.board.selectBoard.members,
   };
 };
 
