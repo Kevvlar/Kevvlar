@@ -58,15 +58,18 @@ const Card = ({
 
               <div className="card-menu">
                 <p className="card-date">{card.date}</p>
-                {card.users.map((user, index) => (
-                  <img
-                    key={index}
-                    className="user-avatar-image"
-                    alt="img"
-                    src={user.photo}
-                    title={user.name}
-                  />
-                ))}
+                <div className="user-avatar-card-container">
+                  {card.users.slice(0, 3).map((user, index) => (
+                    <img
+                      key={index}
+                      className="user-avatar-image card-avatar-image"
+                      alt="img"
+                      src={user.photo}
+                      title={user.name}
+                    />
+                  ))}
+                  {(card.users.length > 3) ? <div className="card-avatar-more" title={card.users.slice(3).map((user) => (user.name))}>{("+" + (card.users.length - 3))}</div> : null}
+                </div>
                 <FaEllipsisH
                   onClick={() => {
                     getCardData(card);
