@@ -55,8 +55,15 @@ const Card = ({
                   theme={"bubble"}
                 />
               </div>
+
               <div className="card-menu">
                 <p className="card-date">{card.date}</p>
+                <img
+                  className="user-avatar-image"
+                  alt="img"
+                  src="https://robohash.org/138.246.253.15.png"
+                  title={card.title}
+                />
                 <FaEllipsisH
                   onClick={() => {
                     getCardData(card);
