@@ -161,12 +161,14 @@ const AddCardModal = ({
                 <h2 className="modal-title">Assign a User</h2>
                 {users.map((user, index) => (
                   <li className="assign-user-list-item" key={index}>
-                    <input
-                      type="checkbox"
-                      name={user.email}
-                      value={user._id}
-                      onChange={handleChange}
-                    />
+                    <label>
+                      <input
+                        type="checkbox"
+                        name={user.email}
+                        value={user._id}
+                        onChange={handleChange}
+                      />
+                    </label>
                     <div className="assign-user-list-container">
                       <img
                         className="user-avatar-image assign-user-image"

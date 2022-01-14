@@ -144,6 +144,7 @@ const columnReducer = (state = initialState, action) => {
                       description: action.payLoad.description,
                       date: action.payLoad.date,
                       colorLabel: action.payLoad.colorLabel,
+                      users: action.payLoad.users,
                     }
                   : cardItem
               ),

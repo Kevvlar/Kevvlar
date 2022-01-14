@@ -66,11 +66,25 @@ const EditCardModal = ({
       description: editCardBody,
       date: editCardDate,
       colorLabel: editCardColor,
+      users: editCardUsers,
     };
     updateCardLocal(cardObj);
     updateCardServer(user.token, currrentBoardId, currentCard.id, cardObj);
     socket.emit("edit-card", cardObj);
     closeModal();
+  };
+
+  const handleChange = (e) => {
+    const isChecked = e.target.checked;
+    if (isChecked) {
+      const checkedUser = users.find((user) => user._id === e.target.value);
+      setEditCardUsers([...editCardUsers, checkedUser]);
+    } else {
+      const unCheckedUser = e.target.value;
+      setEditCardUsers(
+        editCardUsers.filter((user) => user._id !== unCheckedUser)
+      );
+    }
   };
 
   return (
@@ -82,6 +96,7 @@ const EditCardModal = ({
       className="modal-body"
     >
       <h2 className="modal-title">Edit Card</h2>
+      {console.log(editCardUsers)}
       <div className="big-card-container">
         <div className="input-description-container">
           <input
@@ -141,7 +156,6 @@ const EditCardModal = ({
                 }`}
                 onClick={() => {
                   setShowDropDown(!showDropDown);
-                  console.log("clicked wrapper");
                 }}
               ></div>
               <ul className="assign-user-dropdown-list">
@@ -153,6 +167,10 @@ const EditCardModal = ({
                         type="checkbox"
                         name={user.name}
                         value={user._id}
+                        defaultChecked={editCardUsers.some((userObj) =>
+                          userObj._id === user._id ? true : false
+                        )}
+                        onChange={handleChange}
                       />
                     </label>
                     <div className="assign-user-list-container">

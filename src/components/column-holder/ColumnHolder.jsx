@@ -1,7 +1,7 @@
 import React from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
-import ScrollContainer from 'react-indiana-drag-scroll';
+import ScrollContainer from "react-indiana-drag-scroll";
 
 import socket from "../../Socket";
 
@@ -42,7 +42,7 @@ const enableScrolling = () => {
 };
 
 const disableScrolling = () => {
-  var parent = document.getElementsByClassName("scroll-enabled")[0];
+  // var parent = document.getElementsByClassName("scroll-enabled")[0];
   // parent.classList.remove('indiana-scroll-container');
   // parent.classList.add('testing');
   // parent.classList.remove('indiana-scroll-container--hide-scrollbars');
@@ -139,12 +139,8 @@ const ColumnHolder = ({
             className="column-holder"
             {...provided.droppableProps}
             ref={provided.innerRef}
-            
           >
-            <ScrollContainer
-              className="scroll-enabled"
-              ignoreElements=".card"
-            >
+            <ScrollContainer className="scroll-enabled" ignoreElements=".card">
               {mapOrder(columns, columnsOrder, "id").map((column, index) => (
                 <Column key={column.id} column={column} index={index} />
               ))}
