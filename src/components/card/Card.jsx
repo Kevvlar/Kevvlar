@@ -58,12 +58,15 @@ const Card = ({
 
               <div className="card-menu">
                 <p className="card-date">{card.date}</p>
-                <img
-                  className="user-avatar-image"
-                  alt="img"
-                  src="https://robohash.org/138.246.253.15.png"
-                  title={card.title}
-                />
+                {card.users.map((user, index) => (
+                  <img
+                    key={index}
+                    className="user-avatar-image"
+                    alt="img"
+                    src={user.photo}
+                    title={user.name}
+                  />
+                ))}
                 <FaEllipsisH
                   onClick={() => {
                     getCardData(card);

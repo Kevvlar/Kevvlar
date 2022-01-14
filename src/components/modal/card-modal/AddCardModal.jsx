@@ -76,10 +76,13 @@ const AddCardModal = ({
   const handleChange = (e) => {
     const isChecked = e.target.checked;
     if (isChecked) {
-      setAssignUsers([...assignedUsers, e.target.value]);
+      const checkedUser = users.find((user) => user._id === e.target.value);
+      setAssignUsers([...assignedUsers, checkedUser]);
     } else {
       const unCheckedUser = e.target.value;
-      setAssignUsers(assignedUsers.filter((item) => item !== unCheckedUser));
+      setAssignUsers(
+        assignedUsers.filter((user) => user._id !== unCheckedUser)
+      );
     }
   };
 

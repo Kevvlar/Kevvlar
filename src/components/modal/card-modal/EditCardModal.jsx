@@ -45,7 +45,7 @@ const EditCardModal = ({
   const [editCardBody, setEditCardBody] = useState(currentCard.description);
   const [editCardDate, setEditCardDate] = useState(currentCard.date);
   const [editCardColor, setEditCardColor] = useState(currentCard.colorLabel);
-  const [editCardUsers, setEditCardUsers] = useState(currentCard?.users);
+  const [editCardUsers, setEditCardUsers] = useState(currentCard.users);
   const [showDropDown, setShowDropDown] = useState(false);
 
   const rteChange = (content, delta, source, editor) => {
@@ -123,7 +123,11 @@ const EditCardModal = ({
               <option value="#E34B4B">red</option>
             </select>
 
-            <div className={`assign-user-dropdown ${showDropDown ? "is-active" : ""}`}>
+            <div
+              className={`assign-user-dropdown ${
+                showDropDown ? "is-active" : ""
+              }`}
+            >
               <div
                 onClick={() => {
                   setShowDropDown(!showDropDown);
@@ -131,39 +135,46 @@ const EditCardModal = ({
               >
                 Assign User
               </div>
-              <div className={`assign-user-wrapper ${showDropDown ? "active-wrapper" : ""}`}
-              onClick={() => {
-                setShowDropDown(!showDropDown);
-                console.log('clicked wrapper');
-              }}>
-              
-                
-              </div>
+              <div
+                className={`assign-user-wrapper ${
+                  showDropDown ? "active-wrapper" : ""
+                }`}
+                onClick={() => {
+                  setShowDropDown(!showDropDown);
+                  console.log("clicked wrapper");
+                }}
+              ></div>
               <ul className="assign-user-dropdown-list">
-              <h2 className="modal-title">Assign a User</h2>
+                <h2 className="modal-title">Assign a User</h2>
                 {users.map((user, index) => (
                   <li className="assign-user-list-item" key={index}>
                     <label>
-                      <input type="checkbox" name={user.name} value={user._id} />
+                      <input
+                        type="checkbox"
+                        name={user.name}
+                        value={user._id}
+                      />
                     </label>
                     <div className="assign-user-list-container">
-                    <img
-                      className="user-avatar-image assign-user-image"
-                      alt="img"
-                      src={user.photo}
-                      title={user.name}
-                    />
-                    <div>
-                      <div className="assign-user-list-name">{user.name}</div>
-                      <div className="assign-user-list-email">{user.email}</div>
-                    </div>
+                      <img
+                        className="user-avatar-image assign-user-image"
+                        alt="img"
+                        src={user.photo}
+                        title={user.name}
+                      />
+                      <div>
+                        <div className="assign-user-list-name">{user.name}</div>
+                        <div className="assign-user-list-email">
+                          {user.email}
+                        </div>
+                      </div>
                     </div>
                   </li>
                 ))}
               </ul>
             </div>
           </div>
-          <div className="save-delete-container">      
+          <div className="save-delete-container">
             <button className="modal-board-button" type="submit">
               Save
             </button>
@@ -175,7 +186,11 @@ const EditCardModal = ({
                   cardId: currentCard.id,
                 };
                 handleDeleteCardLocal(deleteObj);
-                handleDeleteCardServer(user.token, currrentBoardId, currentCard.id);
+                handleDeleteCardServer(
+                  user.token,
+                  currrentBoardId,
+                  currentCard.id
+                );
                 socket.emit("delete-card", deleteObj);
                 closeModal();
               }}
@@ -183,7 +198,6 @@ const EditCardModal = ({
               Delete
             </div>
           </div>
-      
         </div>
       </div>
     </form>
