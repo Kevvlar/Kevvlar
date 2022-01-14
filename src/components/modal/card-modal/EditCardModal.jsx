@@ -96,7 +96,6 @@ const EditCardModal = ({
       className="modal-body"
     >
       <h2 className="modal-title">Edit Card</h2>
-      {console.log(editCardUsers)}
       <div className="big-card-container">
         <div className="input-description-container">
           <input
