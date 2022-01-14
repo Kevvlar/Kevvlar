@@ -83,7 +83,7 @@
 }
 
 .input-description-container {
-
+  max-width: 475px;
 }
 
 .modal-checkbox-area {
