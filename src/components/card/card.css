@@ -37,7 +37,7 @@
   max-width: 250px;
   white-space: nowrap;
   margin-bottom: 3px;
-  margin-top: 25px;
+  margin-top: 15px;
 }
 
 .card-description {
@@ -50,6 +50,7 @@
   resize: none;
   height: 50px;
   overflow: hidden;
+  margin-bottom: 5px;
 }
 
 .card-menu {
