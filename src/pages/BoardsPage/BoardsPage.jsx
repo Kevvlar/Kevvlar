@@ -1,11 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Detector } from "react-detect-offline";
 
 import AppBar from "../../components/appbar/AppBar";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import BoardList from "../../components/BoardList/BoardList";
 import RightSideNav from "../../components/sidenav-right/SideNavRight";
 import Modal from "../../components/modal/Modal";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 import { LoadingIcon } from "../../assets/svg/iconlibrary";
 
@@ -16,40 +18,46 @@ import "./boardsPage.css";
 class BoardsPage extends React.Component {
   componentDidMount() {
     this.props.getBoards(this.props.user.token);
-    this.interval = setInterval(() => {
-      this.props.getBoards(this.props.user.token);
-    }, 20000);
   }
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
+  componentWillUnmount() {}
 
   render() {
     return (
-      <div>
-        <AppBar />
-        <div className="boards-page">
-          <div className="board-main">
-            <SearchBar />
-            {this.props.boardState ? (
-              <LoadingIcon />
-            ) : (
-              <>
-                <div className="boards-container">
-                  <h2 className="all-boards-title">All Boards</h2>
-                  <BoardList />
+      <Detector
+        render={({ online }) => {
+          if (online) {
+            this.props.getBoards(this.props.user.token);
+            return (
+              <div className="boards-page-holder">
+                <AppBar />
+                <div className="boards-page">
+                  <div className="board-main">
+                    <SearchBar />
+                    {this.props.boardState ? (
+                      <LoadingIcon />
+                    ) : (
+                      <span>
+                        <div className="boards-container">
+                          <h2 className="all-boards-title">All Boards</h2>
+                          <BoardList />
+                        </div>
+                        <div className="boards-container">
+                          <h2 className="all-boards-title">Team Boards</h2>
+                        </div>
+                      </span>
+                    )}
+                  </div>
                 </div>
-                <div className="boards-container">
-                  <h2 className="all-boards-title">Team Boards</h2>
-                </div>
-              </>
-            )}
-          </div>
-        </div>
-        {this.props.showModal ? <Modal /> : null}
-        {this.props.rightSideNav ? <RightSideNav /> : null}
-      </div>
+                {this.props.showModal ? <Modal /> : null}
+                {this.props.rightSideNav ? <RightSideNav /> : null}
+              </div>
+            );
+          } else {
+            return <ErrorPage />;
+          }
+        }}
+      />
     );
   }
 }

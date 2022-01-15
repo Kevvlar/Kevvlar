@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import { Detector } from "react-detect-offline";
 
 import AppBar from "../../components/appbar/AppBar";
 import Modal from "../../components/modal/Modal";
 import RightSideNav from "../../components/sidenav-right/SideNavRight";
 import ColumnHolder from "../../components/column-holder/ColumnHolder";
 import BoardNavBar from "../../components/board-nav-bar/BoardNavBar";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 import socket from "../../Socket";
 
@@ -20,6 +22,7 @@ import {
   addNewCardLocal,
   editCardLocal,
   deleteCardLocal,
+  fetchColumns,
 } from "../../redux";
 
 import "./activityPage.css";
@@ -39,6 +42,7 @@ const MainPage = ({
   createCard,
   updateCard,
   handleDeleteCard,
+  getColumns,
 }) => {
   useEffect(() => {
     socket.connect();
@@ -157,13 +161,27 @@ const MainPage = ({
   });
 
   return (
-    <div className="todopage">
-      <BoardNavBar />
-      <ColumnHolder />
-      <AppBar />
-      {rightSideNav ? <RightSideNav /> : null}
-      {showModal ? <Modal /> : null}
-    </div>
+    <Detector
+      render={({ online }) => {
+        if (online) {
+          socket.connect();
+          socket.emit("join-board", boardId);
+          getColumns(user.token, boardId);
+          return (
+            <div className="todopage">
+              <BoardNavBar />
+              <ColumnHolder />
+              <AppBar />
+              {rightSideNav ? <RightSideNav /> : null}
+              {showModal ? <Modal /> : null}
+            </div>
+          );
+        } else {
+          socket.disconnect();
+          return <ErrorPage />;
+        }
+      }}
+    />
   );
 };
 
@@ -179,6 +197,7 @@ const mapDispatchToProps = (dispatch) => {
     createCard: (cardObj) => dispatch(addNewCardLocal(cardObj)),
     updateCard: (cardObj) => dispatch(editCardLocal(cardObj)),
     handleDeleteCard: (deleteObj) => dispatch(deleteCardLocal(deleteObj)),
+    getColumns: (token, boardId) => dispatch(fetchColumns(token, boardId)),
   };
 };
 

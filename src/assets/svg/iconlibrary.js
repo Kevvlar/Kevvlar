@@ -300,11 +300,11 @@ const TrashIcon = ({ handleDelete }) => {
 //   );
 // };
 
+// I removed this code {margin: "auto",} from the LoadingIcon component
 const LoadingIcon = () => {
   return (
     <svg
       style={{
-        margin: "auto",
         background: "transparent",
         display: "block",
         shapeRendering: "auto",
