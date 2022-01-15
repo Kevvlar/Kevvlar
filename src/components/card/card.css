@@ -91,6 +91,7 @@
   display: flex;
   column-gap: 5px;
   width: 130px;
+  justify-content: flex-end;
 }
 
 .card-more-icon {
