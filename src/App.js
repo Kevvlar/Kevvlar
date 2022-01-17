@@ -7,6 +7,7 @@ import { Switch, Route } from "react-router-dom";
 import BoardsPage from "./pages/BoardsPage/BoardsPage";
 import Homepage from "./pages/HomePage/HomePage";
 import ActivityPage from "./pages/ActivityPage/ActivityPage";
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import SignUp from "./components/signup/SignUp";
 import SignIn from "./components/signin/SignIn";
 import PrivateRoute from "./components/auth/PrivateRoute";
@@ -22,6 +23,7 @@ const App = () => (
           <RedirectToMainPage exact path="/" component={Homepage} />
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/signin" component={SignIn} />
+          <Route exact path="/error" component={ErrorPage} />
           <PrivateRoute
             exact
             path="/boards/:boardId"

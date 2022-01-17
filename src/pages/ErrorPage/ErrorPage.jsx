@@ -1,13 +1,24 @@
 import React from "react";
 import { LoadingIcon } from "../../assets/svg/iconlibrary";
+import { withRouter } from "react-router-dom";
 
 import "./errorPage.css";
 
-const ErrorPage = () => (
-  <div className="error-page">
-    <LoadingIcon />
-    <h2 className="error-page-h2">Establishing connection</h2>
-  </div>
-);
+class ErrorPage extends React.Component {
+  componentDidMount() {
+    window.ononline = (event) => {
+      this.props.history.goBack();
+    };
+  }
 
-export default ErrorPage;
+  render() {
+    return (
+      <div className="error-page">
+        <LoadingIcon />
+        <h2 className="error-page-h2">Establishing connection</h2>
+      </div>
+    );
+  }
+}
+
+export default withRouter(ErrorPage);

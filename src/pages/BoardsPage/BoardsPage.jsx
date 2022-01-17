@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Detector } from "react-detect-offline";
+import { withRouter } from "react-router";
 
 import AppBar from "../../components/appbar/AppBar";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import BoardList from "../../components/BoardList/BoardList";
 import RightSideNav from "../../components/sidenav-right/SideNavRight";
 import Modal from "../../components/modal/Modal";
-import ErrorPage from "../ErrorPage/ErrorPage";
+// import ErrorPage from "../ErrorPage/ErrorPage";
 
 import { LoadingIcon } from "../../assets/svg/iconlibrary";
 
@@ -18,46 +18,36 @@ import "./boardsPage.css";
 class BoardsPage extends React.Component {
   componentDidMount() {
     this.props.getBoards(this.props.user.token);
+    window.onoffline = (event) => {
+      this.props.history.push("/error");
+    };
   }
-
-  componentWillUnmount() {}
 
   render() {
     return (
-      <Detector
-        render={({ online }) => {
-          if (online) {
-            this.props.getBoards(this.props.user.token);
-            return (
-              <div className="boards-page-holder">
-                <AppBar />
-                <div className="boards-page">
-                  <div className="board-main">
-                    <SearchBar />
-                    {this.props.boardState ? (
-                      <LoadingIcon />
-                    ) : (
-                      <span>
-                        <div className="boards-container">
-                          <h2 className="all-boards-title">All Boards</h2>
-                          <BoardList />
-                        </div>
-                        <div className="boards-container">
-                          <h2 className="all-boards-title">Team Boards</h2>
-                        </div>
-                      </span>
-                    )}
-                  </div>
+      <div className="boards-page-holder">
+        <AppBar />
+        <div className="boards-page">
+          <div className="board-main">
+            <SearchBar />
+            {this.props.boardState ? (
+              <LoadingIcon />
+            ) : (
+              <span>
+                <div className="boards-container">
+                  <h2 className="all-boards-title">All Boards</h2>
+                  <BoardList />
                 </div>
-                {this.props.showModal ? <Modal /> : null}
-                {this.props.rightSideNav ? <RightSideNav /> : null}
-              </div>
-            );
-          } else {
-            return <ErrorPage />;
-          }
-        }}
-      />
+                <div className="boards-container">
+                  <h2 className="all-boards-title">Team Boards</h2>
+                </div>
+              </span>
+            )}
+          </div>
+        </div>
+        {this.props.showModal ? <Modal /> : null}
+        {this.props.rightSideNav ? <RightSideNav /> : null}
+      </div>
     );
   }
 }
@@ -77,4 +67,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BoardsPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(BoardsPage));

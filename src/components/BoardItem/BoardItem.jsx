@@ -25,7 +25,7 @@ const boardItem = ({
         className="class-for-item-on-click-event"
         onClick={() => {
           setSelectBoardData(board);
-          getColumns(user.token, board.id);
+          // getColumns(user.token, board.id);
           history.push(`${match.url}/${board.id}`);
         }}
       >

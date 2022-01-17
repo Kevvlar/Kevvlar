@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-import { Detector } from "react-detect-offline";
 
 import AppBar from "../../components/appbar/AppBar";
 import Modal from "../../components/modal/Modal";
 import RightSideNav from "../../components/sidenav-right/SideNavRight";
 import ColumnHolder from "../../components/column-holder/ColumnHolder";
 import BoardNavBar from "../../components/board-nav-bar/BoardNavBar";
-import ErrorPage from "../ErrorPage/ErrorPage";
+// import ErrorPage from "../ErrorPage/ErrorPage";
 
 import socket from "../../Socket";
 
@@ -27,163 +26,105 @@ import {
 
 import "./activityPage.css";
 
-const MainPage = ({
-  history,
-  rightSideNav,
-  showModal,
-  user,
-  boardId,
-  updateColumnsOrderLocal,
-  updateCardsOrder,
-  changeCardColumn,
-  addNewColumn,
-  updateColumn,
-  removeColumn,
-  createCard,
-  updateCard,
-  handleDeleteCard,
-  getColumns,
-}) => {
-  useEffect(() => {
+class MainPage extends React.Component {
+  componentDidMount() {
     socket.connect();
-    socket.emit("join-board", boardId);
-  }, [boardId]);
+    socket.emit("join-board", this.props.boardId);
+    this.props.getColumns(this.props.user.token, this.props.boardId);
 
-  useEffect(() => {
-    const handler = (data) => {
+    window.onoffline = (event) => {
+      socket.disconnect();
+      this.props.history.push("/error");
+    };
+
+    socket.on("receive-column-order", (data) => {
       // console.log(data);
-      updateColumnsOrderLocal(data);
-    };
-    socket.on("receive-column-order", handler);
-    return () => {
-      socket.off("receive-column-order", handler);
-    };
-  });
+      this.props.updateColumnsOrderLocal(data);
+    });
 
-  useEffect(() => {
-    const handler = (data) => {
+    socket.on("receive-cards-order", (data) => {
       // console.log(data);
-      updateCardsOrder(data);
-    };
-    socket.on("receive-cards-order", handler);
-    return () => {
-      socket.off("receive-cards-order", handler);
-    };
-  });
+      this.props.updateCardsOrder(data);
+    });
 
-  useEffect(() => {
-    const handler = (data) => {
+    socket.on("receive-card-column", (data) => {
       // console.log(data);
-      changeCardColumn(data);
-    };
-    socket.on("receive-card-column", handler);
-    return () => {
-      socket.off("receive-card-column", handler);
-    };
-  });
+      this.props.changeCardColumn(data);
+    });
 
-  useEffect(() => {
-    const handler = (data) => {
+    socket.on("receive-new-column", (data) => {
       // console.log(data);
-      addNewColumn(data);
-    };
-    socket.on("receive-new-column", handler);
-    return () => {
-      socket.off("receive-new-column", handler);
-    };
-  });
+      this.props.addNewColumn(data);
+    });
 
-  useEffect(() => {
-    const handler = (data) => {
+    socket.on("receive-edit-column", (data) => {
       // console.log(data);
-      updateColumn(data);
-    };
-    socket.on("receive-edit-column", handler);
-    return () => {
-      socket.off("receive-edit-column", handler);
-    };
-  });
+      this.props.updateColumn(data);
+    });
 
-  useEffect(() => {
-    const handler = (data) => {
+    socket.on("receive-delete-column", (data) => {
       // console.log(data);
-      removeColumn(data);
-    };
-    socket.on("receive-delete-column", handler);
-    return () => {
-      socket.off("receive-delete-column", handler);
-    };
-  });
+      this.props.removeColumn(data);
+    });
 
-  useEffect(() => {
-    const handler = (data) => {
+    socket.on("receive-new-card", (data) => {
       // console.log(data);
-      createCard(data);
-    };
-    socket.on("receive-new-card", handler);
-    return () => {
-      socket.off("receive-new-card", handler);
-    };
-  });
+      this.props.createCard(data);
+    });
 
-  useEffect(() => {
-    const handler = (data) => {
+    socket.on("receive-edit-card", (data) => {
       // console.log(data);
-      updateCard(data);
-    };
-    socket.on("receive-edit-card", handler);
-    return () => {
-      socket.off("receive-edit-card", handler);
-    };
-  });
+      this.props.updateCard(data);
+    });
 
-  useEffect(() => {
-    const handler = (data) => {
+    socket.on("receive-delete-card", (data) => {
       // console.log(data);
-      handleDeleteCard(data);
-    };
-    socket.on("receive-delete-card", handler);
-    return () => {
-      socket.off("receive-delete-card", handler);
-    };
-  });
+      this.props.handleDeleteCard(data);
+    });
 
-  useEffect(() => {
-    const handler = (email) => {
-      if (user.email === email) {
-        history.push("/boards");
+    socket.on("receive-email", (email) => {
+      if (this.props.user.email === email) {
+        this.props.history.push("/boards");
       }
-    };
-    socket.on("receive-email", handler);
-    return () => {
-      socket.off("receive-email", handler);
-    };
-  });
+    });
+  }
 
-  return (
-    <Detector
-      render={({ online }) => {
-        if (online) {
-          socket.connect();
-          socket.emit("join-board", boardId);
-          getColumns(user.token, boardId);
-          return (
-            <div className="todopage">
-              <BoardNavBar />
-              <ColumnHolder />
-              <AppBar />
-              {rightSideNav ? <RightSideNav /> : null}
-              {showModal ? <Modal /> : null}
-            </div>
-          );
-        } else {
-          socket.disconnect();
-          return <ErrorPage />;
-        }
-      }}
-    />
-  );
-};
+  componentWillUnmount() {
+    socket.off("receive-new-column");
+
+    socket.off("receive-column-order");
+
+    socket.off("receive-cards-order");
+
+    socket.off("receive-card-column");
+
+    socket.off("receive-edit-column");
+
+    socket.off("receive-delete-column");
+
+    socket.off("receive-new-card");
+
+    socket.off("receive-edit-card");
+
+    socket.off("receive-delete-card");
+
+    socket.off("receive-email");
+
+    socket.disconnect();
+  }
+
+  render() {
+    return (
+      <div className="todopage">
+        <BoardNavBar />
+        <ColumnHolder />
+        <AppBar />
+        {this.props.rightSideNav ? <RightSideNav /> : null}
+        {this.props.showModal ? <Modal /> : null}
+      </div>
+    );
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {

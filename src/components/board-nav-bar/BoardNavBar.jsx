@@ -5,7 +5,6 @@ import CardSearchBar from "../../components/CardSearchBar/CardSearchBar";
 import UserAvatar from "../user-avatar/UserAvatar";
 import AdminAvatar from "../admin-avatar/AdminAvatar";
 
-import socket from "../../Socket";
 import { setUserModal, clearColumns } from "../../redux";
 
 import {
@@ -25,7 +24,6 @@ const BoardNavBar = ({ board, history, showUserModal, emptyColumns, user }) => (
       <button
         className="boardnavbar-btn"
         onClick={() => {
-          socket.disconnect();
           emptyColumns();
           history.push("/boards");
         }}
@@ -47,7 +45,14 @@ const BoardNavBar = ({ board, history, showUserModal, emptyColumns, user }) => (
       {board.members.slice(0, 2).map((member, index) => (
         <UserAvatar key={index} user={member} />
       ))}
-      {(board.members.length > 2) ? <div className="avatar-more" title={board.members.slice(2).map((member) => (member.name))}>{("+" + (board.members.length - 2))}</div> : null}
+      {board.members.length > 2 ? (
+        <div
+          className="avatar-more"
+          title={board.members.slice(2).map((member) => member.name)}
+        >
+          {"+" + (board.members.length - 2)}
+        </div>
+      ) : null}
       <button
         className="add-user-icon"
         onClick={() => {
