@@ -1,26 +1,15 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
+import ImageCompress from 'quill-image-compress';
+import ImageResize from "quill-image-resize";
 
 import socket from "../../../Socket";
 
 import { closeModal, addNewCardLocal, addNewCardServer } from "../../../redux";
-
-const MODULES = {
-  toolbar: [
-    [{ header: [1, 2, false] }],
-    [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
-    ["bold", "italic", "underline"],
-    [{ align: [] }],
-    ["image", "code-block", "blockquote", "link"],
-  ],
-  clipboard: {
-    matchVisual: false,
-  },
-};
 
 const AddCardModal = ({
   closeModal,
@@ -32,6 +21,33 @@ const AddCardModal = ({
   admins,
   members,
 }) => {
+
+  Quill.register("modules/imageCompress", ImageCompress);
+  Quill.register("modules/ImageResize", ImageResize);
+
+  const MODULES = {
+    toolbar: [
+      [{ header: [1, 2, false] }],
+      [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
+      ["bold", "italic", "underline"],
+      [{ align: [] }],
+      ["image", "code-block", "blockquote", "link"],
+    ],
+    clipboard: {
+      matchVisual: false,
+    },
+    ImageResize: {
+      modules: [ 'Resize', 'DisplaySize', ]
+    },
+    imageCompress: {
+      quality: 0.5, // default
+      maxWidth: 500, // default
+      maxHeight: 500, // default
+      imageType: 'image/jpeg', // default
+      debug: true, // default
+    },
+  };
+
   const users = [...admins, ...members];
 
   const [cardTitle, setCardTitle] = useState("");
