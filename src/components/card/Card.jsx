@@ -68,7 +68,14 @@ const Card = ({
                       title={user.name}
                     />
                   ))}
-                  {(card.users.length > 3) ? <div className="card-avatar-more" title={card.users.slice(3).map((user) => (user.name))}>{("+" + (card.users.length - 3))}</div> : null}
+                  {card.users.length > 3 ? (
+                    <div
+                      className="card-avatar-more"
+                      title={card.users.slice(3).map((user) => user.name)}
+                    >
+                      {"+" + (card.users.length - 3)}
+                    </div>
+                  ) : null}
                 </div>
                 <FaEllipsisH
                   onClick={() => {

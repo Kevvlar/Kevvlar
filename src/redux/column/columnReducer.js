@@ -8,6 +8,8 @@ import {
   EDIT_COLUMN_LOCAL,
   EDIT_COLUMN_SERVER_SUCCESS,
   EDIT_COLUMN_SERVER_FAILURE,
+  REMOVE_CARD_FROM_CARD_FROM_COLUMN_SERVER_SUCCESS,
+  REOMVE_CARD_FROM_CARD_FROM_COLUMN_SERVER_FAILURE,
   EDIT_CARD_LOCAL,
   EDIT_CARD_SERVER_FAILURE,
   DELETE_COLUMN_LOCAL,
@@ -83,6 +85,18 @@ const columnReducer = (state = initialState, action) => {
       };
 
     case EDIT_COLUMN_SERVER_FAILURE:
+      return {
+        ...state,
+        error: action.payLoad,
+      };
+
+    case REMOVE_CARD_FROM_CARD_FROM_COLUMN_SERVER_SUCCESS:
+      return {
+        ...state,
+        error: "",
+      };
+
+    case REOMVE_CARD_FROM_CARD_FROM_COLUMN_SERVER_FAILURE:
       return {
         ...state,
         error: action.payLoad,
@@ -197,6 +211,10 @@ const columnReducer = (state = initialState, action) => {
               }
             : columnItem
         ),
+        selectColumn: {
+          ...state.selectColumn,
+          cardsOrder: action.payLoad,
+        },
       };
 
     case CHANGE_CARDS_ORDER_IO:

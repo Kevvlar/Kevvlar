@@ -51,6 +51,7 @@ export {
   addNewCardServer,
   editColumnLocal,
   editColumnServer,
+  removeCardFromColumnsOrderServer,
   editCardLocal,
   editCardServer,
   deleteCardLocal,

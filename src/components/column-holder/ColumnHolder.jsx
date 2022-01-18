@@ -13,6 +13,7 @@ import {
   setColumnModal,
   changeColumnsOrderLocal,
   editColumnServer,
+  removeCardFromColumnsOrderServer,
   changeColumnsOrderServer,
   changeCardsOrderLocal,
   handleChangeCardColumnLocal,
@@ -62,6 +63,7 @@ const ColumnHolder = ({
   updateCardServer,
   selectCard,
   addNewColumnModal,
+  removecardFromColumn,
 }) => {
   const onDragEnd = (result) => {
     enableScrolling();
@@ -114,6 +116,9 @@ const ColumnHolder = ({
       changeCardColumnLocal(source.droppableId, {
         destinationColumn: destination.droppableId,
         newOrder: newTargetColumnCardOrder,
+      });
+      removecardFromColumn(user.token, board.id, source.droppableId, {
+        cardId: draggableId,
       });
       updateCardsOrderServer(user.token, board.id, destination.droppableId, {
         cardsOrder: newTargetColumnCardOrder,
@@ -187,6 +192,10 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(handleChangeCardColumnLocal(sourceColumn, changeObj)),
     updateCardServer: (token, boardId, cardId, cardObj) =>
       dispatch(editCardServer(token, boardId, cardId, cardObj)),
+    removecardFromColumn: (token, boardId, columnId, columnObj) =>
+      dispatch(
+        removeCardFromColumnsOrderServer(token, boardId, columnId, columnObj)
+      ),
   };
 };
 

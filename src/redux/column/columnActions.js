@@ -8,6 +8,8 @@ import {
   EDIT_COLUMN_LOCAL,
   EDIT_COLUMN_SERVER_SUCCESS,
   EDIT_COLUMN_SERVER_FAILURE,
+  REMOVE_CARD_FROM_CARD_FROM_COLUMN_SERVER_SUCCESS,
+  REOMVE_CARD_FROM_CARD_FROM_COLUMN_SERVER_FAILURE,
   DELETE_COLUMN_LOCAL,
   DELETE_COLUMN_SERVER_SUCCESS,
   DELETE_COLUMN_SERVER_FAILURE,
@@ -136,6 +138,47 @@ export const editColumnServerFailure = (error) => {
   return {
     type: EDIT_COLUMN_SERVER_FAILURE,
     payLoad: error,
+  };
+};
+
+export const removeCardFromColumnServerSuccess = () => {
+  return {
+    type: REMOVE_CARD_FROM_CARD_FROM_COLUMN_SERVER_SUCCESS,
+  };
+};
+
+export const removeCardFromColumnServerFailure = (error) => {
+  return {
+    type: REOMVE_CARD_FROM_CARD_FROM_COLUMN_SERVER_FAILURE,
+    payLoad: error,
+  };
+};
+
+export const removeCardFromColumnsOrderServer = (
+  token,
+  boardId,
+  columnId,
+  columnObj
+) => {
+  return (dispatch) => {
+    dispatch(removeCardFromColumnServerSuccess());
+    axios
+      .patch(
+        `https://kevvlar.herokuapp.com/api/v1/columns/removecardcolumn/${columnId}`,
+        columnObj,
+        {
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          params: {
+            boardId,
+          },
+        }
+      )
+      .catch((error) => {
+        dispatch(removeCardFromColumnServerFailure(error.message));
+      });
   };
 };
 
