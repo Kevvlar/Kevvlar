@@ -114,3 +114,15 @@ li::before {
 .ql-fill {
 	fill: #727272 !important;
 }
+
+#tab-panel {
+	background-color: #1F2529;
+}
+
+#tab-toolbar {
+	background-color: #1F2529;
+}
+
+.emoji_completions {
+	background-color: #1F2529;
+}

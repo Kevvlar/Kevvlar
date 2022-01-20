@@ -5,6 +5,10 @@ import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
 import ImageCompress from 'quill-image-compress';
 import ImageResize from "quill-image-resize";
+import MagicUrl from 'quill-magic-url';
+import * as Emoji from "quill-emoji";
+
+import "quill-emoji/dist/quill-emoji.css";
 
 import socket from "../../../Socket";
 
@@ -31,6 +35,8 @@ const EditCardModal = ({
 
   Quill.register("modules/imageCompress", ImageCompress);
   Quill.register("modules/ImageResize", ImageResize);
+  Quill.register('modules/magicUrl', MagicUrl);
+  Quill.register("modules/emoji", Emoji);
 
   const MODULES = {
     toolbar: [
@@ -39,6 +45,7 @@ const EditCardModal = ({
       ["bold", "italic", "underline"],
       [{ align: [] }],
       ["image", "code-block", "blockquote", "link"],
+      ['emoji'],
     ],
     clipboard: {
       matchVisual: false,
@@ -53,6 +60,9 @@ const EditCardModal = ({
       imageType: 'image/jpeg', // default
       debug: true, // default
     },
+    magicUrl: true,
+    "emoji-toolbar": true,
+    "emoji-shortname": true,
   };
 
 
