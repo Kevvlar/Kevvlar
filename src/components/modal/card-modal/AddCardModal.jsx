@@ -50,7 +50,6 @@ const AddCardModal = ({
       maxWidth: 500, // default
       maxHeight: 500, // default
       imageType: 'image/jpeg', // default
-      debug: true, // default
     },
     magicUrl: true,
     "emoji-toolbar": true,
