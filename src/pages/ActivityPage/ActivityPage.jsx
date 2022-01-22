@@ -110,7 +110,7 @@ class MainPage extends React.Component {
 
     socket.off("receive-email");
 
-    socket.disconnect();
+    socket.close();
   }
 
   render() {

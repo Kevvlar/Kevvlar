@@ -1,6 +1,8 @@
 export {
   signUserUp,
   signUserIn,
+  sendNotification,
+  getNotifications,
   handleLogOutUser,
   clearErrorMessage,
 } from "./user/userActions";

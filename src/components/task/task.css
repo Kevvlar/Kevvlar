@@ -20,3 +20,9 @@
   cursor: pointer;
   padding-right: 10px;
 }
+
+.board-title-link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  color: blue;
+}

@@ -1,16 +1,67 @@
 import React from "react";
-import { FaTimes } from "react-icons/fa";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import socket from "../../Socket";
+
+import {
+  setCurrentBoardData,
+  toggleRightSideNav,
+  clearColumns,
+  fetchColumns,
+} from "../../redux";
 
 import "./task.css";
 
-const TaskItem = () => (
+const TaskItem = ({
+  info,
+  setSelectBoardData,
+  toggleRightSideNav,
+  history,
+  resetColumns,
+  user,
+  getColumns,
+}) => (
   <div className="task-item-holder">
     <div className="task-item">
-      Card title - 08/17/2021
-      <div className="task-item-board">Feature 3</div>
+      <span
+        className="board-title-link"
+        onClick={() => {
+          socket.close();
+          resetColumns();
+          setSelectBoardData(info.boardData);
+          socket.connect();
+          socket.emit("join-board", info.boardData.id);
+          history.push({
+            pathname: `/boards/${info.boardData.id}`,
+          });
+          getColumns(user.token, info.boardData.id);
+          toggleRightSideNav();
+        }}
+      >
+        {info.boardData.title}
+      </span>
+      <div className="task-item-board">{info.message}</div>
+      <div>{info.date}</div>
     </div>
-    <FaTimes className="task-cancel-icon" />
   </div>
 );
 
-export default TaskItem;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user.userData,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setSelectBoardData: (board) => dispatch(setCurrentBoardData(board)),
+    toggleRightSideNav: () => dispatch(toggleRightSideNav()),
+    resetColumns: () => dispatch(clearColumns()),
+    getColumns: (token, boardId) => dispatch(fetchColumns(token, boardId)),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(TaskItem));

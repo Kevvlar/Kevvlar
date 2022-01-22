@@ -7,11 +7,15 @@ import {
   SIGN_IN_USER_FAILURE,
   LOG_USER_OUT,
   CLEAR_ERROR_MESSAGE,
+  FETCH_NOTIFICATIONS_REQUEST,
+  FETCH_NOTIFICATIONS_SUCCESS,
+  FETCH_NOTIFICATIONS_FAILURE,
 } from "./userTypes";
 
 const initialState = {
   userData: {},
   loading: false,
+  notifications: [],
   error: "",
 };
 
@@ -59,12 +63,35 @@ const userReducer = (state = initialState, action) => {
         error: action.payLoad,
       };
 
+    case FETCH_NOTIFICATIONS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: "",
+      };
+
+    case FETCH_NOTIFICATIONS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        notifications: action.payLoad,
+      };
+
+    case FETCH_NOTIFICATIONS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payLoad,
+      };
+
     case LOG_USER_OUT:
       return {
         ...state,
         userData: {},
+        notifications: [],
         error: "",
       };
+
     case CLEAR_ERROR_MESSAGE:
       return {
         ...state,

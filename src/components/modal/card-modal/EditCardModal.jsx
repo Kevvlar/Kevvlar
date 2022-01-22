@@ -3,10 +3,11 @@ import { connect } from "react-redux";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
-import ImageCompress from 'quill-image-compress';
+import ImageCompress from "quill-image-compress";
 import ImageResize from "quill-image-resize";
-import MagicUrl from 'quill-magic-url';
+import MagicUrl from "quill-magic-url";
 import * as Emoji from "quill-emoji";
+import dateFormat from "dateformat";
 
 import "quill-emoji/dist/quill-emoji.css";
 
@@ -18,6 +19,7 @@ import {
   editCardServer,
   deleteCardLocal,
   deleteCardServer,
+  sendNotification,
 } from "../../../redux";
 
 const EditCardModal = ({
@@ -31,11 +33,12 @@ const EditCardModal = ({
   currentCard,
   admins,
   members,
+  notify,
+  currentBoard,
 }) => {
-
   Quill.register("modules/imageCompress", ImageCompress);
   Quill.register("modules/ImageResize", ImageResize);
-  Quill.register('modules/magicUrl', MagicUrl);
+  Quill.register("modules/magicUrl", MagicUrl);
   Quill.register("modules/emoji", Emoji);
 
   const MODULES = {
@@ -45,25 +48,24 @@ const EditCardModal = ({
       ["bold", "italic", "underline"],
       [{ align: [] }],
       ["image", "code-block", "blockquote", "link"],
-      ['emoji'],
+      ["emoji"],
     ],
     clipboard: {
       matchVisual: false,
     },
     ImageResize: {
-      modules: [ 'Resize', 'DisplaySize', ]
+      modules: ["Resize", "DisplaySize"],
     },
     imageCompress: {
       quality: 0.5, // default
       maxWidth: 500, // default
       maxHeight: 500, // default
-      imageType: 'image/jpeg', // default
+      imageType: "image/jpeg", // default
     },
     magicUrl: true,
     "emoji-toolbar": true,
     "emoji-shortname": true,
   };
-
 
   const users = [...admins, ...members];
 
@@ -72,6 +74,7 @@ const EditCardModal = ({
   const [editCardDate, setEditCardDate] = useState(currentCard.date);
   const [editCardColor, setEditCardColor] = useState(currentCard.colorLabel);
   const [editCardUsers, setEditCardUsers] = useState(currentCard.users);
+  const [newCheckedUsers, setNewCheckedUsers] = useState([]);
   const [showDropDown, setShowDropDown] = useState(false);
 
   const rteChange = (content, delta, source, editor) => {
@@ -96,6 +99,21 @@ const EditCardModal = ({
     };
     updateCardLocal(cardObj);
     updateCardServer(user.token, currrentBoardId, currentCard.id, cardObj);
+
+    if (newCheckedUsers.length > 0) {
+      for (let i = 0; i < newCheckedUsers.length; i++) {
+        const now = Date.now();
+        notify(user.token, currrentBoardId, {
+          user: newCheckedUsers[i]._id,
+          info: {
+            boardData: currentBoard,
+            date: dateFormat(now, "mm/dd/yy"),
+            message: `@${user.email} assigned you [${newCheckedUsers[i].email}] to this card [${editCardTitle}]`,
+          },
+        });
+      }
+    }
+
     socket.emit("edit-card", cardObj);
     closeModal();
   };
@@ -104,6 +122,7 @@ const EditCardModal = ({
     const isChecked = e.target.checked;
     if (isChecked) {
       const checkedUser = users.find((user) => user._id === e.target.value);
+      setNewCheckedUsers([...newCheckedUsers, checkedUser]);
       setEditCardUsers([...editCardUsers, checkedUser]);
     } else {
       const unCheckedUser = e.target.value;
@@ -251,6 +270,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.user.userData,
     currrentBoardId: state.board.selectBoard.id,
+    currentBoard: state.board.selectBoard,
     currentCard: state.column.selectCard,
     admins: state.board.selectBoard.admins,
     members: state.board.selectBoard.members,
@@ -266,6 +286,8 @@ const mapDispatchToProps = (dispatch) => {
     handleDeleteCardLocal: (deleteObj) => dispatch(deleteCardLocal(deleteObj)),
     handleDeleteCardServer: (token, boardId, cardId) =>
       dispatch(deleteCardServer(token, boardId, cardId)),
+    notify: (token, boardId, notificationObj) =>
+      dispatch(sendNotification(token, boardId, notificationObj)),
   };
 };
 

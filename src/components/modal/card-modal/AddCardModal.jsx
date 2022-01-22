@@ -4,16 +4,22 @@ import { v4 as uuidv4 } from "uuid";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
-import ImageCompress from 'quill-image-compress';
+import ImageCompress from "quill-image-compress";
 import ImageResize from "quill-image-resize";
-import MagicUrl from 'quill-magic-url';
+import MagicUrl from "quill-magic-url";
 import * as Emoji from "quill-emoji";
+import dateFormat from "dateformat";
 
 import "quill-emoji/dist/quill-emoji.css";
 
 import socket from "../../../Socket";
 
-import { closeModal, addNewCardLocal, addNewCardServer } from "../../../redux";
+import {
+  closeModal,
+  addNewCardLocal,
+  addNewCardServer,
+  sendNotification,
+} from "../../../redux";
 
 const AddCardModal = ({
   closeModal,
@@ -22,13 +28,14 @@ const AddCardModal = ({
   user,
   currentColumnId,
   currrentBoardId,
+  currentBoard,
   admins,
   members,
+  notify,
 }) => {
-
   Quill.register("modules/imageCompress", ImageCompress);
   Quill.register("modules/ImageResize", ImageResize);
-  Quill.register('modules/magicUrl', MagicUrl);
+  Quill.register("modules/magicUrl", MagicUrl);
   Quill.register("modules/emoji", Emoji);
 
   const MODULES = {
@@ -43,13 +50,13 @@ const AddCardModal = ({
       matchVisual: false,
     },
     ImageResize: {
-      modules: [ 'Resize', 'DisplaySize', ]
+      modules: ["Resize", "DisplaySize"],
     },
     imageCompress: {
       quality: 0.5, // default
       maxWidth: 500, // default
       maxHeight: 500, // default
-      imageType: 'image/jpeg', // default
+      imageType: "image/jpeg", // default
     },
     magicUrl: true,
     "emoji-toolbar": true,
@@ -88,6 +95,20 @@ const AddCardModal = ({
     };
     createCardLocal(cardObj);
     createCardServer(user.token, currrentBoardId, cardObj);
+
+    if (assignedUsers.length > 0) {
+      for (let i = 0; i < assignedUsers.length; i++) {
+        const now = Date.now();
+        notify(user.token, currrentBoardId, {
+          user: assignedUsers[i]._id,
+          info: {
+            boardData: currentBoard,
+            date: dateFormat(now, "mm/dd/yy"),
+            message: `@${user.email} assigned you [${assignedUsers[i].email}] to this card [${cardTitle}]`,
+          },
+        });
+      }
+    }
     socket.emit("add-new-card", cardObj);
     setCardTitle("");
     setCardBody("");
@@ -212,7 +233,6 @@ const AddCardModal = ({
               </ul>
             </div>
           </div>
-
           <button className="modal-board-button" type="submit">
             Save
           </button>
@@ -226,6 +246,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.user.userData,
     currrentBoardId: state.board.selectBoard.id,
+    currentBoard: state.board.selectBoard,
     currentColumnId: state.column.selectColumn.id,
     admins: state.board.selectBoard.admins,
     members: state.board.selectBoard.members,
@@ -238,17 +259,9 @@ const mapDispatchToProps = (dispatch) => {
     createCardLocal: (cardObj) => dispatch(addNewCardLocal(cardObj)),
     createCardServer: (token, boardId, cardObj) =>
       dispatch(addNewCardServer(token, boardId, cardObj)),
+    notify: (token, boardId, notificationObj) =>
+      dispatch(sendNotification(token, boardId, notificationObj)),
   };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddCardModal);
-
-// <textarea
-// type="text"
-// id="desc-big"
-// maxLength={1000}
-// value={cardBody}
-// onChange={(e) => setCardBody(e.target.value)}
-// placeholder="Write something..."
-// className="modal-body-description"
-// ></textarea>

@@ -6,6 +6,9 @@ import {
   SIGN_IN_USER_REQUEST,
   SIGN_IN_USER_SUCCESS,
   SIGN_IN_USER_FAILURE,
+  FETCH_NOTIFICATIONS_REQUEST,
+  FETCH_NOTIFICATIONS_SUCCESS,
+  FETCH_NOTIFICATIONS_FAILURE,
   LOG_USER_OUT,
   CLEAR_ERROR_MESSAGE,
 } from "./userTypes";
@@ -99,6 +102,68 @@ export const signUserIn = (userData, history) => {
       })
       .catch((error) => {
         dispatch(signInUserFailure(error.response.data.message));
+      });
+  };
+};
+
+export const sendNotification = (token, boardId, notificationObject) => {
+  return (dispatch) => {
+    axios
+      .post(
+        `https://kevvlar.herokuapp.com/api/v1/notifications/`,
+        notificationObject,
+        {
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          params: {
+            boardId,
+          },
+        }
+      )
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
+};
+
+export const fetchNotificationsRequest = () => {
+  return {
+    type: FETCH_NOTIFICATIONS_REQUEST,
+  };
+};
+
+export const fetchNotificationsSuccess = (notifications) => {
+  return {
+    type: FETCH_NOTIFICATIONS_SUCCESS,
+    payLoad: notifications,
+  };
+};
+
+export const fetchNotificationsFailure = (error) => {
+  return {
+    type: FETCH_NOTIFICATIONS_FAILURE,
+    payLoad: error,
+  };
+};
+
+export const getNotifications = (token) => {
+  return (dispatch) => {
+    dispatch(fetchNotificationsRequest());
+    axios
+      .get(`https://kevvlar.herokuapp.com/api/v1/notifications`, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const notifications = response.data.data.notifications;
+        dispatch(fetchNotificationsSuccess(notifications));
+      })
+      .catch((error) => {
+        dispatch(fetchNotificationsFailure(error.response));
       });
   };
 };
