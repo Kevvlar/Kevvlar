@@ -38,10 +38,11 @@ const TaskItem = ({
           toggleRightSideNav();
         }}
       >
-        {info.boardData.title}
+        {info.title} | {info.cardTitle}
       </span>
-      <div className="task-item-board">{info.message}</div>
-      <div>{info.date}</div>
+      <div className="task-item-board">
+        {info.date} at {info.time}
+      </div>
     </div>
   </div>
 );

@@ -105,10 +105,13 @@ const EditCardModal = ({
         const now = Date.now();
         notify(user.token, currrentBoardId, {
           user: newCheckedUsers[i]._id,
+          type: "assign",
           info: {
             boardData: currentBoard,
-            date: dateFormat(now, "mm/dd/yy"),
-            message: `@${user.email} assigned you [${newCheckedUsers[i].email}] to this card [${editCardTitle}]`,
+            date: dateFormat(now, "ddd dS, yyyy"),
+            time: dateFormat(now, "h:MM TT"),
+            cardTitle: editCardTitle,
+            title: "Asssign card",
           },
         });
       }
