@@ -11,7 +11,7 @@
 }
 
 .task-item-board {
-  color: #03a9f4;
+  color: #c2c2c2;
   font-size: 12px;
 }
 
@@ -24,5 +24,6 @@
 .board-title-link:hover {
   cursor: pointer;
   text-decoration: underline;
-  color: blue;
+  color: #03a9f4;
+  ;
 }

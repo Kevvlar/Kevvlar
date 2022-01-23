@@ -104,10 +104,10 @@ const AddCardModal = ({
           type: "assign",
           info: {
             boardData: currentBoard,
-            date: dateFormat(now, "ddd dS, yyyy"),
+            date: dateFormat(now, "mmm dS, yyyy"),
             time: dateFormat(now, "h:MM TT"),
             cardTitle: cardTitle,
-            title: "Asssign card",
+            title: "Assigned Card",
           },
         });
       }

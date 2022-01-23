@@ -32,11 +32,11 @@ class RightSideNav extends React.Component {
         ></div>
         <nav className="sidenav-right-container">
           <div className="sidenav-right-menu-activity">
-            <div className="sidenav-right-activity-title">Tasks due</div>
+            <div className="sidenav-right-activity-title">Notifications</div>
             <InfiniteScroll
               dataLength={this.props.notifications.length}
               hasMore={true}
-              height={150}
+              height={350}
             >
               {this.props.notifications.map((notification) => (
                 <TaskItem info={notification.info} key={notification._id} />

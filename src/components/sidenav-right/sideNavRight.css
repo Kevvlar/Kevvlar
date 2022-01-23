@@ -4,12 +4,11 @@
   top: 60px;
   border-radius: 4px;
   box-shadow: 0px 4px 20px 4px #121212b0;
-  height: 80%;
   background-color: #2a323a;
   transition: right 300ms ease-out;
   display: flex;
   flex-direction: column;
-  width: 290px;
+  width: 300px;
 }
 
 .sidenav-right-close-wrapper {
@@ -91,7 +90,7 @@
 .sidenav-right-activity-title {
   top: -15px;
   left: 15px;
-  width: 65px;
+  width: 79px;
   padding: 5px;
   color: #ababab;
   font-size: 14px;
