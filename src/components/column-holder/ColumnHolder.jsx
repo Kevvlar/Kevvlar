@@ -145,7 +145,7 @@ const ColumnHolder = ({
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            <ScrollContainer className="scroll-enabled" ignoreElements=".card">
+            <ScrollContainer className="scroll-enabled" ignoreElements=".card, .column-header-container">
               {mapOrder(columns, columnsOrder, "id").map((column, index) => (
                 <Column key={column.id} column={column} index={index} />
               ))}
