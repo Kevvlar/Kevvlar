@@ -8,6 +8,7 @@ import {
   toggleRightSideNav,
   clearColumns,
   fetchColumns,
+  fetchBoard,
 } from "../../redux";
 
 import "./task.css";
@@ -20,6 +21,7 @@ const TaskItem = ({
   resetColumns,
   user,
   getColumns,
+  getBoard,
 }) => (
   <div className="task-item-holder">
     <div className="task-item">
@@ -28,13 +30,13 @@ const TaskItem = ({
         onClick={() => {
           socket.close();
           resetColumns();
-          setSelectBoardData(info.boardData);
+          getBoard(user.token, info.boardId);
+          getColumns(user.token, info.boardId);
           socket.connect();
-          socket.emit("join-board", info.boardData.id);
+          socket.emit("join-board", info.boardId);
           history.push({
-            pathname: `/boards/${info.boardData.id}`,
+            pathname: `/boards/${info.boardId}`,
           });
-          getColumns(user.token, info.boardData.id);
           toggleRightSideNav();
         }}
       >
@@ -59,6 +61,7 @@ const mapDispatchToProps = (dispatch) => {
     toggleRightSideNav: () => dispatch(toggleRightSideNav()),
     resetColumns: () => dispatch(clearColumns()),
     getColumns: (token, boardId) => dispatch(fetchColumns(token, boardId)),
+    getBoard: (token, boardId) => dispatch(fetchBoard(token, boardId)),
   };
 };
 

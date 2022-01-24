@@ -28,7 +28,6 @@ const AddCardModal = ({
   user,
   currentColumnId,
   currrentBoardId,
-  currentBoard,
   admins,
   members,
   notify,
@@ -103,7 +102,7 @@ const AddCardModal = ({
           user: assignedUsers[i]._id,
           type: "assign",
           info: {
-            boardData: currentBoard,
+            boardId: currrentBoardId,
             date: dateFormat(now, "mmm dS, yyyy"),
             time: dateFormat(now, "h:MM TT"),
             cardTitle: cardTitle,
@@ -249,7 +248,6 @@ const mapStateToProps = (state) => {
   return {
     user: state.user.userData,
     currrentBoardId: state.board.selectBoard.id,
-    currentBoard: state.board.selectBoard,
     currentColumnId: state.column.selectColumn.id,
     admins: state.board.selectBoard.admins,
     members: state.board.selectBoard.members,

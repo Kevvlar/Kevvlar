@@ -66,6 +66,25 @@ export const fetchBoards = (token) => {
   };
 };
 
+export const fetchBoard = (token, boardId) => {
+  return (dispatch) => {
+    axios
+      .get(`https://kevvlar.herokuapp.com/api/v1/boards/${boardId}`, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const board = response.data.data.board;
+        dispatch(setCurrentBoardData(board));
+      })
+      .catch((error) => {
+        dispatch(fetchBoardsFailure(error.message));
+      });
+  };
+};
+
 export const clearBoards = () => {
   return {
     type: CLEAR_BOARDS,
@@ -311,25 +330,6 @@ export const setCurrentBoardData = (board) => {
   return {
     type: SET_CURRENT_BOARD_DATA,
     payLoad: board,
-  };
-};
-
-export const fetchBoard = (token, boardId) => {
-  return (dispatch) => {
-    axios
-      .get(`https://kevvlar.herokuapp.com/api/v1/boards/${boardId}`, {
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        const board = response.data.data.board;
-        dispatch(setCurrentBoardData(board));
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
   };
 };
 

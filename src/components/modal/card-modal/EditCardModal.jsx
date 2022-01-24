@@ -34,7 +34,6 @@ const EditCardModal = ({
   admins,
   members,
   notify,
-  currentBoard,
 }) => {
   Quill.register("modules/imageCompress", ImageCompress);
   Quill.register("modules/ImageResize", ImageResize);
@@ -107,7 +106,7 @@ const EditCardModal = ({
           user: newCheckedUsers[i]._id,
           type: "assign",
           info: {
-            boardData: currentBoard,
+            boardId: currrentBoardId,
             date: dateFormat(now, "mmm dS, yyyy"),
             time: dateFormat(now, "h:MM TT"),
             cardTitle: editCardTitle,
@@ -273,7 +272,6 @@ const mapStateToProps = (state) => {
   return {
     user: state.user.userData,
     currrentBoardId: state.board.selectBoard.id,
-    currentBoard: state.board.selectBoard,
     currentCard: state.column.selectCard,
     admins: state.board.selectBoard.admins,
     members: state.board.selectBoard.members,
