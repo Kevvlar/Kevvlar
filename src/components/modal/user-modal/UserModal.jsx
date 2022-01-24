@@ -26,8 +26,22 @@ const UserModal = ({
   const AddUserModal = () => {
     const [userEmail, setUserEmail] = useState("");
 
+    const handleSubmit = () => {
+      addMember(user.token, {
+        userEmail: userEmail,
+        boardId: currrentBoardId,
+      });
+      closeModal();
+    };
+
     return (
-      <div className="modal-body">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
+        className="modal-body"
+      >
         <h2 className="modal-title">Add User To Board</h2>
         <input
           className="modal-board-text"
@@ -37,20 +51,11 @@ const UserModal = ({
           onChange={(e) => setUserEmail(e.target.value)}
         />
         <div className="modal-button-container">
-          <button
-            className="modal-board-button"
-            onClick={() => {
-              addMember(user.token, {
-                userEmail: userEmail,
-                boardId: currrentBoardId,
-              });
-              closeModal();
-            }}
-          >
+          <button className="modal-board-button" type="submit">
             Add User
           </button>
         </div>
-      </div>
+      </form>
     );
   };
 
