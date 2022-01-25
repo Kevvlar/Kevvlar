@@ -19,30 +19,20 @@ class NotificationIcon extends React.Component {
     socket.on("getNotification", () => {
       this.setState({ isNotified: true });
     });
-
-    this.interval = setInterval(() => {
-      if (this.state.isNotified) {
-        this.setState({ isNotified: false });
-      }
-    }, 10000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
   }
 
   render() {
     return (
       <div className="notification-icon-container">
         <FaBell
-          onClick={() => this.props.toggleRightSideNav()}
+          onClick={() => [this.props.toggleRightSideNav(), this.setState({ isNotified: false })]}
           className="notification-icon"
         />
         <span
           style={
             this.state.isNotified
               ? {
-                  backgroundColor: "red",
+                  backgroundColor: "#03A9F4",
                   borderRadius: "20px",
                   width: "10px",
                   height: "10px",

@@ -43,6 +43,7 @@ const TaskItem = ({
       <div className="task-item-board">
         {info.date} at {info.time}
       </div>
+      <div className="task-item-notification"></div>
     </div>
   </div>
 );

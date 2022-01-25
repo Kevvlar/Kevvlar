@@ -2,11 +2,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 200px;
+  overflow: hidden;
 }
 
 .task-item {
   color: #fff;
-  padding: 10px;
+  padding: 10px 20px;
   font-size: 14px;
 }
 
@@ -21,9 +23,27 @@
   padding-right: 10px;
 }
 
+.board-title-link {
+  white-space: nowrap;
+  width: 180px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block;
+}
+
 .board-title-link:hover {
   cursor: pointer;
   text-decoration: underline;
   color: #03a9f4;
   ;
+}
+
+.task-item-notification {
+  width: 8px;
+  height: 8px;
+  border-radius: 50px;
+  background-color: #03a9f4;
+  position: relative;
+  top: -25px;
+  left: -20px;
 }
