@@ -109,6 +109,10 @@ const AddCardModal = ({
             title: "Assigned Card",
           },
         });
+        socket.emit("sendNotification", {
+          senderId: user._id,
+          receiverId: assignedUsers[i]._id,
+        });
       }
     }
     socket.emit("add-new-card", cardObj);

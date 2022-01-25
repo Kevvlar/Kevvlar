@@ -113,6 +113,10 @@ const EditCardModal = ({
             title: "Assigned Card",
           },
         });
+        socket.emit("sendNotification", {
+          senderId: user._id,
+          receiverId: newCheckedUsers[i]._id,
+        });
       }
     }
 

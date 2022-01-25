@@ -1,13 +1,20 @@
 .notification-icon {
   font-size: 20px;
-  color: #A0A0A0;
+  color: #a0a0a0;
   cursor: pointer;
 }
 
 .notification-icon:hover {
-	filter: opacity(0.5);
+  filter: opacity(0.5);
 }
 
 .notification-icon-container {
-	display: flex;
+  display: flex;
+}
+
+.notification-alert {
+  background-color: "red";
+  border-radius: "20px";
+  width: "10px";
+  height: "10px";
 }

@@ -7,14 +7,12 @@ import { HomeIcon } from "../../assets/svg/iconlibrary";
 import { withRouter } from "react-router";
 
 import { clearColumns } from "../../redux";
-import {
-  KevvlarLogo
-} from "../../assets/svg/iconlibrary";
+import { KevvlarLogo } from "../../assets/svg/iconlibrary";
 
 import "./appbar.css";
 import "./kevvlar-logo.svg";
 
-const AppBar = ({ history, emptyColumns }) => (
+const AppBar = ({ history, emptyColumns, boardId }) => (
   <div className="appbar-container">
     <div className="appbar-menu-container">
       <div className="appbar-ham-icon-container">
@@ -42,6 +40,7 @@ const mapStateToProps = (state) => {
   return {
     boards: state.board.boards,
     boardState: state.board.loading,
+    boardId: state.board.selectBoard.id,
   };
 };
 

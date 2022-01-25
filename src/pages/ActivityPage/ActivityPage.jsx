@@ -28,7 +28,7 @@ import "./activityPage.css";
 
 class MainPage extends React.Component {
   componentDidMount() {
-    socket.connect();
+    socket.emit("newUser", this.props.user._id);
     socket.emit("join-board", this.props.boardId);
     this.props.getColumns(this.props.user.token, this.props.boardId);
 
@@ -110,7 +110,7 @@ class MainPage extends React.Component {
 
     socket.off("receive-email");
 
-    socket.close();
+    socket.emit("leave", this.props.boardId);
   }
 
   render() {
