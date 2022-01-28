@@ -13,7 +13,7 @@ import socket from "../../Socket";
 
 import { LoadingIcon } from "../../assets/svg/iconlibrary";
 
-import { fetchBoards } from "../../redux";
+import { fetchBoards, getNotifications } from "../../redux";
 
 import "./boardsPage.css";
 
@@ -21,6 +21,7 @@ class BoardsPage extends React.Component {
   componentDidMount() {
     socket.emit("newUser", this.props.user._id);
 
+    this.props.getNotifications(this.props.user.token);
     this.props.getBoards(this.props.user.token);
     window.onoffline = (event) => {
       this.props.history.push("/error");
@@ -68,6 +69,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getBoards: (token) => dispatch(fetchBoards(token)),
+    getNotifications: (token) => dispatch(getNotifications(token)),
   };
 };
 

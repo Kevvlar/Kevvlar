@@ -11,6 +11,7 @@ import {
   FETCH_NOTIFICATIONS_FAILURE,
   LOG_USER_OUT,
   CLEAR_ERROR_MESSAGE,
+  TURN_OFF_NOTIFY,
 } from "./userTypes";
 
 export const signUpUserRequest = () => {
@@ -97,6 +98,7 @@ export const signUserIn = (userData, history) => {
       })
       .then((response) => {
         const user = response.data.data.user;
+        console.log(user);
         dispatch(signInUserSuccess(user));
         history.push("/boards");
       })
@@ -125,6 +127,13 @@ export const sendNotification = (token, boardId, notificationObject) => {
       .catch((error) => {
         console.log(error.response);
       });
+  };
+};
+
+export const turnOffNotify = (bool) => {
+  return {
+    type: TURN_OFF_NOTIFY,
+    payLoad: bool,
   };
 };
 

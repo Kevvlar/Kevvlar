@@ -20,6 +20,7 @@ import {
   deleteCardLocal,
   deleteCardServer,
   sendNotification,
+  turnOffNotify,
 } from "../../../redux";
 
 const EditCardModal = ({
@@ -34,6 +35,7 @@ const EditCardModal = ({
   admins,
   members,
   notify,
+  notifyOff,
 }) => {
   Quill.register("modules/imageCompress", ImageCompress);
   Quill.register("modules/ImageResize", ImageResize);
@@ -117,6 +119,7 @@ const EditCardModal = ({
           senderId: user._id,
           receiverId: newCheckedUsers[i]._id,
         });
+        notifyOff(true);
       }
     }
 
@@ -293,6 +296,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(deleteCardServer(token, boardId, cardId)),
     notify: (token, boardId, notificationObj) =>
       dispatch(sendNotification(token, boardId, notificationObj)),
+    notifyOff: (bool) => dispatch(turnOffNotify(bool)),
   };
 };
 

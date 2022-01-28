@@ -5,6 +5,7 @@ export {
   getNotifications,
   handleLogOutUser,
   clearErrorMessage,
+  turnOffNotify,
 } from "./user/userActions";
 
 export {

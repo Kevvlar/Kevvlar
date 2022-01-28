@@ -19,6 +19,7 @@ import {
   addNewCardLocal,
   addNewCardServer,
   sendNotification,
+  turnOffNotify,
 } from "../../../redux";
 
 const AddCardModal = ({
@@ -31,6 +32,7 @@ const AddCardModal = ({
   admins,
   members,
   notify,
+  notifyOff,
 }) => {
   Quill.register("modules/imageCompress", ImageCompress);
   Quill.register("modules/ImageResize", ImageResize);
@@ -113,6 +115,7 @@ const AddCardModal = ({
           senderId: user._id,
           receiverId: assignedUsers[i]._id,
         });
+        notifyOff(true);
       }
     }
     socket.emit("add-new-card", cardObj);
@@ -266,6 +269,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(addNewCardServer(token, boardId, cardObj)),
     notify: (token, boardId, notificationObj) =>
       dispatch(sendNotification(token, boardId, notificationObj)),
+    notifyOff: (bool) => dispatch(turnOffNotify(bool)),
   };
 };
 

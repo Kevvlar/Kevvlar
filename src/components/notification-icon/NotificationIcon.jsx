@@ -3,7 +3,7 @@ import { FaBell } from "react-icons/fa";
 import { connect } from "react-redux";
 
 import socket from "../../Socket";
-import { toggleRightSideNav } from "../../redux/index";
+import { toggleRightSideNav, turnOffNotify } from "../../redux/index";
 
 import "./notificationIcon.css";
 
@@ -19,18 +19,26 @@ class NotificationIcon extends React.Component {
     socket.on("getNotification", () => {
       this.setState({ isNotified: true });
     });
+
+    socket.on("turnOffFlag", () => {
+      this.props.notifyOff(false);
+    });
   }
 
   render() {
     return (
       <div className="notification-icon-container">
         <FaBell
-          onClick={() => [this.props.toggleRightSideNav(), this.setState({ isNotified: false })]}
+          onClick={() => {
+            socket.emit("turnOffNotify", this.props.user._id);
+            this.props.toggleRightSideNav();
+            this.setState({ isNotified: false });
+          }}
           className="notification-icon"
         />
         <span
           style={
-            this.state.isNotified
+            this.state.isNotified || this.props.user.isNotified
               ? {
                   backgroundColor: "#03A9F4",
                   borderRadius: "20px",
@@ -45,10 +53,17 @@ class NotificationIcon extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    toggleRightSideNav: () => dispatch(toggleRightSideNav()),
+    user: state.user.userData,
   };
 };
 
-export default connect(null, mapDispatchToProps)(NotificationIcon);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleRightSideNav: () => dispatch(toggleRightSideNav()),
+    notifyOff: (bool) => dispatch(turnOffNotify(bool)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NotificationIcon);

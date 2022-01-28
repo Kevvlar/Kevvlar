@@ -6,6 +6,7 @@ import {
   SIGN_IN_USER_SUCCESS,
   SIGN_IN_USER_FAILURE,
   LOG_USER_OUT,
+  TURN_OFF_NOTIFY,
   CLEAR_ERROR_MESSAGE,
   FETCH_NOTIFICATIONS_REQUEST,
   FETCH_NOTIFICATIONS_SUCCESS,
@@ -96,6 +97,15 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         error: "",
+      };
+
+    case TURN_OFF_NOTIFY:
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          isNotified: action.payLoad,
+        },
       };
 
     default:
