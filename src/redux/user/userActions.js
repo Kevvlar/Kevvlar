@@ -13,6 +13,7 @@ import {
   CLEAR_ERROR_MESSAGE,
   TURN_OFF_NOTIFY,
   SET_NOTIFY_STATUS,
+  IS_READ,
 } from "./userTypes";
 
 export const signUpUserRequest = () => {
@@ -206,5 +207,35 @@ export const getNotifications = (token) => {
 export const clearErrorMessage = () => {
   return {
     type: CLEAR_ERROR_MESSAGE,
+  };
+};
+
+export const isRead = (id) => {
+  return {
+    type: IS_READ,
+    payLoad: id,
+  };
+};
+
+export const isReadServer = (token, id) => {
+  return (dispatch) => {
+    dispatch(isRead(id));
+    axios
+      .patch(
+        `https://kevvlar.herokuapp.com/api/v1/notifications/${id}`,
+        { isRead: true },
+        {
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
   };
 };

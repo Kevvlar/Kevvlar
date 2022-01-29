@@ -8,11 +8,14 @@ import {
   clearColumns,
   fetchColumns,
   fetchBoard,
+  isReadServer,
 } from "../../redux";
 
-import "./task.css";
+import "./notificationItem.css";
 
-const TaskItem = ({
+const NotificationItem = ({
+  id,
+  read,
   info,
   toggleRightSideNav,
   history,
@@ -21,6 +24,7 @@ const TaskItem = ({
   getColumns,
   getBoard,
   boardId,
+  toggleRead,
 }) => (
   <div className="task-item-holder">
     <div className="task-item">
@@ -31,6 +35,7 @@ const TaskItem = ({
           resetColumns();
           getBoard(user.token, info.boardId);
           getColumns(user.token, info.boardId);
+          toggleRead(user.token, id);
           socket.emit("join-board", info.boardId);
           history.push({
             pathname: `/boards/${info.boardId}`,
@@ -43,7 +48,12 @@ const TaskItem = ({
       <div className="task-item-board">
         {info.date} at {info.time}
       </div>
-      <div className="task-item-notification"></div>
+      <div
+        onClick={() => {
+          toggleRead(user.token, id);
+        }}
+        className={read === false ? "task-item-notification" : null}
+      ></div>
     </div>
   </div>
 );
@@ -61,10 +71,11 @@ const mapDispatchToProps = (dispatch) => {
     resetColumns: () => dispatch(clearColumns()),
     getColumns: (token, boardId) => dispatch(fetchColumns(token, boardId)),
     getBoard: (token, boardId) => dispatch(fetchBoard(token, boardId)),
+    toggleRead: (token, id) => dispatch(isReadServer(token, id)),
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(TaskItem));
+)(withRouter(NotificationItem));

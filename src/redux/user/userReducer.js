@@ -12,6 +12,7 @@ import {
   FETCH_NOTIFICATIONS_REQUEST,
   FETCH_NOTIFICATIONS_SUCCESS,
   FETCH_NOTIFICATIONS_FAILURE,
+  IS_READ,
 } from "./userTypes";
 
 const initialState = {
@@ -27,6 +28,20 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         userData: { ...state.userData, isNotified: action.payLoad },
+      };
+
+    case IS_READ:
+      return {
+        ...state,
+        notifications: state.notifications.map((notification) => {
+          if (notification._id === action.payLoad) {
+            return {
+              ...notification,
+              isRead: true,
+            };
+          }
+          return notification;
+        }),
       };
     case SIGN_UP_USER_REQUEST:
       return {

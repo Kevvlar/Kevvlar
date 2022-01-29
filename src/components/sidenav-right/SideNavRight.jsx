@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
-import TaskItem from "../task/Task";
+import NotificationItem from "../NotificationItem/NotificationItem";
 
 import {
   toggleGridCard,
@@ -39,7 +39,12 @@ class RightSideNav extends React.Component {
               height={350}
             >
               {this.props.notifications.map((notification) => (
-                <TaskItem info={notification.info} key={notification._id} />
+                <NotificationItem
+                  id={notification._id}
+                  read={notification.isRead}
+                  info={notification.info}
+                  key={notification._id}
+                />
               ))}
             </InfiniteScroll>
           </div>
