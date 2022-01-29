@@ -7,6 +7,7 @@ import {
   SIGN_IN_USER_FAILURE,
   LOG_USER_OUT,
   TURN_OFF_NOTIFY,
+  SET_NOTIFY_STATUS,
   CLEAR_ERROR_MESSAGE,
   FETCH_NOTIFICATIONS_REQUEST,
   FETCH_NOTIFICATIONS_SUCCESS,
@@ -22,6 +23,11 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_NOTIFY_STATUS:
+      return {
+        ...state,
+        userData: { ...state.userData, isNotified: action.payLoad },
+      };
     case SIGN_UP_USER_REQUEST:
       return {
         ...state,

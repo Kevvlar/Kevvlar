@@ -115,7 +115,10 @@ const AddCardModal = ({
           senderId: user._id,
           receiverId: assignedUsers[i]._id,
         });
-        notifyOff(true);
+
+        if (user._id === assignedUsers[i]._id) {
+          notifyOff(true);
+        }
       }
     }
     socket.emit("add-new-card", cardObj);

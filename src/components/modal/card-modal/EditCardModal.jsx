@@ -119,7 +119,10 @@ const EditCardModal = ({
           senderId: user._id,
           receiverId: newCheckedUsers[i]._id,
         });
-        notifyOff(true);
+
+        if (user._id === newCheckedUsers[i]._id) {
+          notifyOff(true);
+        }
       }
     }
 

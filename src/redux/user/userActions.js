@@ -12,6 +12,7 @@ import {
   LOG_USER_OUT,
   CLEAR_ERROR_MESSAGE,
   TURN_OFF_NOTIFY,
+  SET_NOTIFY_STATUS,
 } from "./userTypes";
 
 export const signUpUserRequest = () => {
@@ -82,7 +83,7 @@ export const signUserUp = (userData, history) => {
         history.push("/boards");
       })
       .catch((error) => {
-        dispatch(signUpUserFailure(error.response.data.message));
+        dispatch(signUpUserFailure(error.response?.data.message));
       });
   };
 };
@@ -103,13 +104,13 @@ export const signUserIn = (userData, history) => {
         history.push("/boards");
       })
       .catch((error) => {
-        dispatch(signInUserFailure(error.response.data.message));
+        dispatch(signInUserFailure(error.response?.data.message));
       });
   };
 };
 
 export const sendNotification = (token, boardId, notificationObject) => {
-  return (dispatch) => {
+  return () => {
     axios
       .post(
         `https://kevvlar.herokuapp.com/api/v1/notifications/`,
@@ -124,6 +125,31 @@ export const sendNotification = (token, boardId, notificationObject) => {
           },
         }
       )
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
+};
+
+export const setNotifyStatus = (status) => {
+  return {
+    type: SET_NOTIFY_STATUS,
+    payLoad: status,
+  };
+};
+
+export const getNotificationStatus = (token) => {
+  return (dispatch) => {
+    axios
+      .get(`https://kevvlar.herokuapp.com/api/v1/notifications/status`, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        dispatch(setNotifyStatus(response.data.data.status.isNotified));
+      })
       .catch((error) => {
         console.log(error.response);
       });

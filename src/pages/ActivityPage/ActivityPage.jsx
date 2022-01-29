@@ -22,6 +22,7 @@ import {
   editCardLocal,
   deleteCardLocal,
   fetchColumns,
+  getNotificationStatus,
 } from "../../redux";
 
 import "./activityPage.css";
@@ -30,6 +31,7 @@ class MainPage extends React.Component {
   componentDidMount() {
     socket.emit("newUser", this.props.user._id);
     socket.emit("join-board", this.props.boardId);
+    this.props.getNotifyStatus(this.props.user.token);
     this.props.getColumns(this.props.user.token, this.props.boardId);
 
     window.onoffline = (event) => {
@@ -90,6 +92,7 @@ class MainPage extends React.Component {
   }
 
   componentWillUnmount() {
+    socket.off("newUser");
     socket.off("receive-new-column");
 
     socket.off("receive-column-order");
@@ -139,6 +142,7 @@ const mapDispatchToProps = (dispatch) => {
     updateCard: (cardObj) => dispatch(editCardLocal(cardObj)),
     handleDeleteCard: (deleteObj) => dispatch(deleteCardLocal(deleteObj)),
     getColumns: (token, boardId) => dispatch(fetchColumns(token, boardId)),
+    getNotifyStatus: (token) => dispatch(getNotificationStatus(token)),
   };
 };
 
