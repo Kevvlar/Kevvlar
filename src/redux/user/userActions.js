@@ -231,9 +231,6 @@ export const isReadServer = (token, id) => {
           },
         }
       )
-      .then((response) => {
-        console.log(response.data.data);
-      })
       .catch((error) => {
         console.log(error.response);
       });
