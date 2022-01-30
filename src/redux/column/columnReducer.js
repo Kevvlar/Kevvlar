@@ -1,6 +1,9 @@
 import {
   FETCH_COLUMNS_SUCCESS,
   FETCH_COLUMNS_FAILURE,
+  FETCH_ACTIVITIES_REQUEST,
+  FETCH_ACTIVITIES_SUCCESS,
+  FETCH_ACTIVITIES_FAILURE,
   ADD_NEW_COLUMN_LOCAL,
   ADD_NEW_COLUMN_SERVER_FAILURE,
   ADD_NEW_CARD_LOCAL,
@@ -37,6 +40,7 @@ const initialState = {
   error: "",
   loading: false,
   columns: [],
+  activities: [],
 };
 
 const columnReducer = (state = initialState, action) => {
@@ -52,6 +56,24 @@ const columnReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        error: action.payLoad,
+      };
+
+    case FETCH_ACTIVITIES_REQUEST:
+      return {
+        ...state,
+        activities: [],
+      };
+
+    case FETCH_ACTIVITIES_SUCCESS:
+      return {
+        ...state,
+        activities: action.payLoad,
+      };
+
+    case FETCH_ACTIVITIES_FAILURE:
+      return {
+        ...state,
         error: action.payLoad,
       };
 

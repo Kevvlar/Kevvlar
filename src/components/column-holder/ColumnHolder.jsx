@@ -2,6 +2,7 @@ import React from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
 import ScrollContainer from "react-indiana-drag-scroll";
+import dateFormat from "dateformat";
 
 import socket from "../../Socket";
 
@@ -18,6 +19,7 @@ import {
   changeCardsOrderLocal,
   handleChangeCardColumnLocal,
   editCardServer,
+  createActivity,
 } from "../../redux/index";
 
 const mapOrder = (array, order, key) => {
@@ -64,9 +66,11 @@ const ColumnHolder = ({
   selectCard,
   addNewColumnModal,
   removecardFromColumn,
+  addActivity,
 }) => {
   const onDragEnd = (result) => {
     enableScrolling();
+    const now = Date.now();
     const { destination, draggableId, source, type } = result;
 
     if (!destination) {
@@ -99,6 +103,15 @@ const ColumnHolder = ({
       updateCardsOrderServer(user.token, board.id, columnId, {
         cardsOrder: newCardOrder,
       });
+      addActivity(user.token, board.id, {
+        info: {
+          title: "Drag card same column.",
+          date: dateFormat(now, "mmm dS, yyyy"),
+          time: dateFormat(now, "h:MM TT"),
+          message: `${user.email} dragged card within this column: ${currentColumn.title}`,
+        },
+        boardId: board.id,
+      });
       socket.emit("change-cards-order", {
         columnId: columnId,
         cardsOrder: newCardOrder,
@@ -126,6 +139,15 @@ const ColumnHolder = ({
       updateCardServer(user.token, board.id, selectCard.id, {
         columnId: destination.droppableId,
       });
+      addActivity(user.token, board.id, {
+        info: {
+          title: "Drag card different column.",
+          date: dateFormat(now, "mmm dS, yyyy"),
+          time: dateFormat(now, "h:MM TT"),
+          message: `${user.email} dragged card within this column: ${targetColumn.title}`,
+        },
+        boardId: board.id,
+      });
       socket.emit("change-card-column", {
         sourceColumnId: source.droppableId,
         destinationColumnId: destination.droppableId,
@@ -145,7 +167,10 @@ const ColumnHolder = ({
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            <ScrollContainer className="scroll-enabled" ignoreElements=".card, .column-header-container">
+            <ScrollContainer
+              className="scroll-enabled"
+              ignoreElements=".card, .column-header-container"
+            >
               {mapOrder(columns, columnsOrder, "id").map((column, index) => (
                 <Column key={column.id} column={column} index={index} />
               ))}
@@ -196,6 +221,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(
         removeCardFromColumnsOrderServer(token, boardId, columnId, columnObj)
       ),
+    addActivity: (token, boardId, data) =>
+      dispatch(createActivity(token, boardId, data)),
   };
 };
 

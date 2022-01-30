@@ -64,6 +64,8 @@ export {
   deleteCardServer,
   handleDeleteColumnLocal,
   fetchColumns,
+  fetchActivities,
+  createActivity,
   handleAddNewColumnLocal,
   setCurrentCardData,
   changeCardsOrderLocal,

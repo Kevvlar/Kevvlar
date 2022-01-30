@@ -1,12 +1,12 @@
 .boardnavbar {
-	height: 50px;
-	display: flex;
-	justify-content: space-between;
-	padding-top: 15px;
-	position: fixed;
-	top: 50px;
-	width: 100%;
-	overflow: auto;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 15px;
+  position: fixed;
+  top: 50px;
+  width: 100%;
+  overflow: auto;
 }
 
 .boardnavbar::-webkit-scrollbar {
@@ -14,75 +14,99 @@
 }
 
 .boardnavbar-btn {
-	background: #2C3136;
-	color: #A0A0A0;
-	padding: 5px 25px;
-	text-align: center;
-	line-height: 25px;
-	height: 35px;
-	border-radius: 5px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-right: 15px;
-	cursor: pointer;
-	white-space: nowrap;
-	border: none;
+  background: #2c3136;
+  color: #a0a0a0;
+  padding: 5px 25px;
+  text-align: center;
+  line-height: 25px;
+  height: 35px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+  cursor: pointer;
+  white-space: nowrap;
+  border: none;
 }
 
 .boardnavbar-btn:hover {
-	background: #3e444a;
+  background: #3e444a;
 }
 
 .boardnavbar-btn-end:hover {
-	background: #3e444a;
+  background: #3e444a;
 }
 
-.boardnavbar-scroll-container{
-	max-height: 75px;
+.boardnavbar-scroll-container {
+  max-height: 75px;
 }
 
 .add-user-icon {
-	cursor: pointer;
-	background: none;
-	border: none;
-	padding: 0px;
-	margin: 0px;
-	margin-left: 10px;
-	height: 35px;
-	border-radius: 25px;
-	background: #2C3136;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  margin-left: 10px;
+  height: 35px;
+  border-radius: 25px;
+  background: #2c3136;
 }
 
 .add-user-icon:hover {
-	background: #3e444a;
+  background: #3e444a;
 }
 
 .boardnavbar-boardtitle {
-	margin-left: 10px;
-	font-weight: 500;
-	max-width: 125px;
-	overflow: hidden;
-	text-overflow: ellipsis;
+  margin-left: 10px;
+  font-weight: 500;
+  max-width: 125px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .avatar-more {
-	border: none;
-    padding: 0;
-    margin: 0 0 0 10px;
-    height: 35px;
-	min-width: 35px;
-    border-radius: 25px;
-    background: #2c3136;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: #b4b4b4;
-	cursor: default;
-	font-size: 14px;
+  border: none;
+  padding: 0;
+  margin: 0 0 0 10px;
+  height: 35px;
+  min-width: 35px;
+  border-radius: 25px;
+  background: #2c3136;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #b4b4b4;
+  cursor: default;
+  font-size: 14px;
 }
 
 .boardnavbar-group {
-	display: flex;
-	padding-left: 15px;
+  display: flex;
+  padding-left: 15px;
+}
+
+.activity-profile-menu {
+  position: fixed;
+  right: 10px;
+  top: 60px;
+  border-radius: 4px;
+  box-shadow: 0px 4px 20px 4px #121212b0;
+  min-height: 200px;
+  background-color: #2a323a;
+  transition: right 300ms ease-out;
+  display: flex;
+  flex-direction: column;
+  width: 290px;
+  align-items: center;
+}
+
+.close-wrapper {
+  height: 100vh;
+  width: 100vw;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
 }

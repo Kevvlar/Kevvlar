@@ -3,6 +3,9 @@ import {
   FETCH_COLUMNS_REQUEST,
   FETCH_COLUMNS_SUCCESS,
   FETCH_COLUMNS_FAILURE,
+  FETCH_ACTIVITIES_REQUEST,
+  FETCH_ACTIVITIES_SUCCESS,
+  FETCH_ACTIVITIES_FAILURE,
   ADD_NEW_COLUMN_LOCAL,
   ADD_NEW_COLUMN_SERVER_FAILURE,
   EDIT_COLUMN_LOCAL,
@@ -56,6 +59,67 @@ export const fetchColumnsFailure = (error) => {
   return {
     type: FETCH_COLUMNS_FAILURE,
     payLoad: error,
+  };
+};
+
+export const fetchActivitiesRequest = () => {
+  return {
+    type: FETCH_ACTIVITIES_REQUEST,
+  };
+};
+
+export const fetchActivitiesSuccess = (activities) => {
+  return {
+    type: FETCH_ACTIVITIES_SUCCESS,
+    payLoad: activities,
+  };
+};
+
+export const fetchActivitiesFailure = (error) => {
+  return {
+    type: FETCH_ACTIVITIES_FAILURE,
+    payLoad: error,
+  };
+};
+
+export const fetchActivities = (token, boardId) => {
+  return (dispatch) => {
+    dispatch(fetchActivitiesRequest());
+    axios
+      .get("https://kevvlar.herokuapp.com/api/v1/activities", {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          boardId,
+        },
+      })
+      .then((response) => {
+        const activities = response.data.data.activities;
+        dispatch(fetchActivitiesSuccess(activities));
+      })
+      .catch((error) => {
+        dispatch(fetchActivitiesFailure(error.message));
+      });
+  };
+};
+
+export const createActivity = (token, boardId, data) => {
+  return () => {
+    axios
+      .post("https://kevvlar.herokuapp.com/api/v1/activities", data, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          boardId,
+        },
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
 };
 
