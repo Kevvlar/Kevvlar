@@ -90,23 +90,56 @@
 .activity-profile-menu {
   position: fixed;
   right: 10px;
-  top: 60px;
+  top: 109px;
   border-radius: 4px;
   box-shadow: 0px 4px 20px 4px #121212b0;
   min-height: 200px;
+  max-height: 400px;
   background-color: #2a323a;
   transition: right 300ms ease-out;
   display: flex;
   flex-direction: column;
-  width: 290px;
+  max-width: 350px;
   align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-.close-wrapper {
+.activity-item-wrapper {
+  width: 100%;
+}
+
+.activity-close-wrapper {
   height: 100vh;
   width: 100vw;
   background-color: transparent;
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.activity-item-holder {
+  text-align: left;
+  padding: 5px 10px;
+}
+
+.activity-info-holder {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.activity-helper-text {
+  color: #c2c2c2;
+}
+
+.activity-user-name {
+  color: white;
+}
+
+.activity-card-title {
+  color: white;
+}
+
+.activity-assigned-user {
+  color: white;
 }

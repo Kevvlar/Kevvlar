@@ -101,7 +101,7 @@ const AddCardModal = ({
     createCardServer(user.token, currrentBoardId, cardObj);
     addActivity(user.token, currrentBoardId, {
       info: {
-        title: "Created Card",
+        title: "created card",
         username: user.name,
         cardTitle: cardTitle,
         date: dateFormat(now, "mmm dS, yyyy"),
@@ -125,7 +125,7 @@ const AddCardModal = ({
         });
         addActivity(user.token, currrentBoardId, {
           info: {
-            title: "Assigned User",
+            title: "assigned user",
             user: user.name,
             userAssigned: assignedUsers[i].name,
             cardTitle: cardTitle,

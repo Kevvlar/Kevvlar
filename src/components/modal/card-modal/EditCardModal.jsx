@@ -119,7 +119,7 @@ const EditCardModal = ({
         });
         addActivity(user.token, currrentBoardId, {
           info: {
-            title: "Assigned User",
+            title: "assigned user",
             user: user.name,
             userAssigned: newCheckedUsers[i][i].name,
             cardTitle: editCardTitle,
@@ -281,7 +281,7 @@ const EditCardModal = ({
                 );
                 addActivity(user.token, currrentBoardId, {
                   info: {
-                    title: "Deleted Card",
+                    title: "deleted card",
                     user: user.name,
                     cardTitle: currentCard.title,
                     date: dateFormat(now, "mmm dS, yyyy"),

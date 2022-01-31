@@ -142,7 +142,7 @@ const ColumnHolder = ({
       });
       addActivity(user.token, board.id, {
         info: {
-          title: "Drag Card",
+          title: "dragged card",
           columnTitle: targetColumn.title,
           cardTitle: selectCard.title,
           date: dateFormat(now, "mmm dS, yyyy"),

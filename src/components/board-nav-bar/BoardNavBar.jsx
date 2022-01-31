@@ -35,18 +35,18 @@ const BoardNavBar = ({
 
   const ActivityMenu = () => (
     <div>
-      <div className="close-wrapper" onClick={handleActivityMenu}></div>
+      <div className="activity-close-wrapper" onClick={handleActivityMenu}></div>
       <div className="activity-profile-menu">
-        <div>
+        <div className="activity-item-wrapper">
           {activities.map((activity) => (
             <div className="activity-item-holder" key={activity._id}>
-              <span>{activity.info.title}</span>
-              <br />
-              <span>
-                {activity.info.columnTitle} | {activity.info.cardTitle}
-              </span>
-              <br />
-              <div>
+              <div className="activity-info-holder">
+                <div className="activity-user-name">{activity.info.user}</div>
+                <div className="activity-helper-text">{activity.info.title}</div> 
+                <div className="activity-assigned-user">{activity.info.userAssigned}</div>
+                <div className="activity-card-title">{activity.info.cardTitle}</div>
+              </div>
+              <div className="task-item-board">
                 {activity.info.date} at {activity.info.time}
               </div>
             </div>
