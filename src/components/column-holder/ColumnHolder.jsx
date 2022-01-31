@@ -105,10 +105,11 @@ const ColumnHolder = ({
       });
       addActivity(user.token, board.id, {
         info: {
-          title: "Drag card same column.",
+          title: "Drag Card",
+          columnTitle: currentColumn.title,
+          cardTitle: selectCard.title,
           date: dateFormat(now, "mmm dS, yyyy"),
           time: dateFormat(now, "h:MM TT"),
-          message: `${user.email} dragged card within this column: ${currentColumn.title}`,
         },
         boardId: board.id,
       });
@@ -141,10 +142,11 @@ const ColumnHolder = ({
       });
       addActivity(user.token, board.id, {
         info: {
-          title: "Drag card different column.",
+          title: "Drag Card",
+          columnTitle: targetColumn.title,
+          cardTitle: selectCard.title,
           date: dateFormat(now, "mmm dS, yyyy"),
           time: dateFormat(now, "h:MM TT"),
-          message: `${user.email} dragged card within this column: ${targetColumn.title}`,
         },
         boardId: board.id,
       });

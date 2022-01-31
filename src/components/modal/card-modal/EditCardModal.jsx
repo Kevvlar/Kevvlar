@@ -21,6 +21,7 @@ import {
   deleteCardServer,
   sendNotification,
   turnOffNotify,
+  createActivity,
 } from "../../../redux";
 
 const EditCardModal = ({
@@ -36,6 +37,7 @@ const EditCardModal = ({
   members,
   notify,
   notifyOff,
+  addActivity,
 }) => {
   Quill.register("modules/imageCompress", ImageCompress);
   Quill.register("modules/ImageResize", ImageResize);
@@ -114,6 +116,17 @@ const EditCardModal = ({
             cardTitle: editCardTitle,
             title: "Assigned Card",
           },
+        });
+        addActivity(user.token, currrentBoardId, {
+          info: {
+            title: "Assigned User",
+            user: user.name,
+            userAssigned: newCheckedUsers[i][i].name,
+            cardTitle: editCardTitle,
+            date: dateFormat(now, "mmm dS, yyyy"),
+            time: dateFormat(now, "h:MM TT"),
+          },
+          boardId: currrentBoardId,
         });
         socket.emit("sendNotification", {
           senderId: user._id,
@@ -255,6 +268,7 @@ const EditCardModal = ({
             <div
               className="delete-button"
               onClick={() => {
+                const now = Date.now();
                 const deleteObj = {
                   columnId: currentCard.columnId,
                   cardId: currentCard.id,
@@ -265,6 +279,16 @@ const EditCardModal = ({
                   currrentBoardId,
                   currentCard.id
                 );
+                addActivity(user.token, currrentBoardId, {
+                  info: {
+                    title: "Deleted Card",
+                    user: user.name,
+                    cardTitle: currentCard.title,
+                    date: dateFormat(now, "mmm dS, yyyy"),
+                    time: dateFormat(now, "h:MM TT"),
+                  },
+                  boardId: currrentBoardId,
+                });
                 socket.emit("delete-card", deleteObj);
                 closeModal();
               }}
@@ -300,6 +324,8 @@ const mapDispatchToProps = (dispatch) => {
     notify: (token, boardId, notificationObj) =>
       dispatch(sendNotification(token, boardId, notificationObj)),
     notifyOff: (bool) => dispatch(turnOffNotify(bool)),
+    addActivity: (token, boardId, data) =>
+      dispatch(createActivity(token, boardId, data)),
   };
 };
 

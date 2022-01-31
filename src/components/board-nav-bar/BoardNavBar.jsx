@@ -40,9 +40,12 @@ const BoardNavBar = ({
         <div>
           {activities.map((activity) => (
             <div className="activity-item-holder" key={activity._id}>
+              <span>{activity.info.title}</span>
+              <br />
               <span>
-                {activity.info.title} | {"card"}
+                {activity.info.columnTitle} | {activity.info.cardTitle}
               </span>
+              <br />
               <div>
                 {activity.info.date} at {activity.info.time}
               </div>

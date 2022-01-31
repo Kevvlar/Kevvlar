@@ -20,6 +20,7 @@ import {
   addNewCardServer,
   sendNotification,
   turnOffNotify,
+  createActivity,
 } from "../../../redux";
 
 const AddCardModal = ({
@@ -33,6 +34,7 @@ const AddCardModal = ({
   members,
   notify,
   notifyOff,
+  addActivity,
 }) => {
   Quill.register("modules/imageCompress", ImageCompress);
   Quill.register("modules/ImageResize", ImageResize);
@@ -84,6 +86,7 @@ const AddCardModal = ({
   };
 
   const handleSubmit = () => {
+    const now = Date.now();
     const cardObj = {
       id: uuidv4(),
       columnId: currentColumnId,
@@ -96,10 +99,19 @@ const AddCardModal = ({
     };
     createCardLocal(cardObj);
     createCardServer(user.token, currrentBoardId, cardObj);
+    addActivity(user.token, currrentBoardId, {
+      info: {
+        title: "Created Card",
+        username: user.name,
+        cardTitle: cardTitle,
+        date: dateFormat(now, "mmm dS, yyyy"),
+        time: dateFormat(now, "h:MM TT"),
+      },
+      boardId: currrentBoardId,
+    });
 
     if (assignedUsers.length > 0) {
       for (let i = 0; i < assignedUsers.length; i++) {
-        const now = Date.now();
         notify(user.token, currrentBoardId, {
           user: assignedUsers[i]._id,
           type: "assign",
@@ -110,6 +122,17 @@ const AddCardModal = ({
             cardTitle: cardTitle,
             title: "Assigned Card",
           },
+        });
+        addActivity(user.token, currrentBoardId, {
+          info: {
+            title: "Assigned User",
+            user: user.name,
+            userAssigned: assignedUsers[i].name,
+            cardTitle: cardTitle,
+            date: dateFormat(now, "mmm dS, yyyy"),
+            time: dateFormat(now, "h:MM TT"),
+          },
+          boardId: currrentBoardId,
         });
         socket.emit("sendNotification", {
           senderId: user._id,
@@ -273,6 +296,8 @@ const mapDispatchToProps = (dispatch) => {
     notify: (token, boardId, notificationObj) =>
       dispatch(sendNotification(token, boardId, notificationObj)),
     notifyOff: (bool) => dispatch(turnOffNotify(bool)),
+    addActivity: (token, boardId, data) =>
+      dispatch(createActivity(token, boardId, data)),
   };
 };
 
