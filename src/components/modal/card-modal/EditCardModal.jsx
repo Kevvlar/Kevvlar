@@ -31,7 +31,7 @@ const EditCardModal = ({
   handleDeleteCardLocal,
   handleDeleteCardServer,
   user,
-  currrentBoardId,
+  currentBoardId,
   currentCard,
   admins,
   members,
@@ -101,32 +101,32 @@ const EditCardModal = ({
       users: editCardUsers,
     };
     updateCardLocal(cardObj);
-    updateCardServer(user.token, currrentBoardId, currentCard.id, cardObj);
+    updateCardServer(user.token, currentBoardId, currentCard.id, cardObj);
 
     if (newCheckedUsers.length > 0) {
       for (let i = 0; i < newCheckedUsers.length; i++) {
         const now = Date.now();
-        notify(user.token, currrentBoardId, {
+        notify(user.token, currentBoardId, {
           user: newCheckedUsers[i]._id,
           type: "assign",
           info: {
-            boardId: currrentBoardId,
+            boardId: currentBoardId,
             date: dateFormat(now, "mmm dS, yyyy"),
             time: dateFormat(now, "h:MM TT"),
             cardTitle: editCardTitle,
             title: "Assigned Card",
           },
         });
-        addActivity(user.token, currrentBoardId, {
+        addActivity(user.token, currentBoardId, {
           info: {
             title: "assigned user",
             user: user.name,
-            userAssigned: newCheckedUsers[i][i].name,
+            userAssigned: newCheckedUsers[i].name,
             cardTitle: editCardTitle,
             date: dateFormat(now, "mmm dS, yyyy"),
             time: dateFormat(now, "h:MM TT"),
           },
-          boardId: currrentBoardId,
+          boardId: currentBoardId,
         });
         socket.emit("sendNotification", {
           senderId: user._id,
@@ -276,10 +276,10 @@ const EditCardModal = ({
                 handleDeleteCardLocal(deleteObj);
                 handleDeleteCardServer(
                   user.token,
-                  currrentBoardId,
+                  currentBoardId,
                   currentCard.id
                 );
-                addActivity(user.token, currrentBoardId, {
+                addActivity(user.token, currentBoardId, {
                   info: {
                     title: "deleted card",
                     user: user.name,
@@ -287,7 +287,7 @@ const EditCardModal = ({
                     date: dateFormat(now, "mmm dS, yyyy"),
                     time: dateFormat(now, "h:MM TT"),
                   },
-                  boardId: currrentBoardId,
+                  boardId: currentBoardId,
                 });
                 socket.emit("delete-card", deleteObj);
                 closeModal();
@@ -305,7 +305,7 @@ const EditCardModal = ({
 const mapStateToProps = (state) => {
   return {
     user: state.user.userData,
-    currrentBoardId: state.board.selectBoard.id,
+    currentBoardId: state.board.selectBoard.id,
     currentCard: state.column.selectCard,
     admins: state.board.selectBoard.admins,
     members: state.board.selectBoard.members,
