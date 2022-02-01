@@ -105,8 +105,20 @@
   overflow-x: hidden;
 }
 
+.activity-main-title {
+  top: 13px;
+  left: -111px;
+  width: 62px;
+  color: #ababab;
+  font-size: 14px;
+  background: #2a323a;
+  position: relative;
+}
+
 .activity-item-wrapper {
-  width: 100%;
+  width: 87%;
+  padding: 11px 13px;
+  border-top: 1px solid #e0e0e0;
 }
 
 .activity-close-wrapper {
@@ -125,7 +137,7 @@
 
 .activity-info-holder {
   display: flex;
-  flex-wrap: wrap;
+  height: 18px;
 }
 
 .activity-helper-text {
