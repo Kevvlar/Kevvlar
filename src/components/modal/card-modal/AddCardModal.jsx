@@ -102,7 +102,7 @@ const AddCardModal = ({
     addActivity(user.token, currrentBoardId, {
       info: {
         title: "created card",
-        username: user.name,
+        user: user.name,
         cardTitle: cardTitle,
         date: dateFormat(now, "mmm dS, yyyy"),
         time: dateFormat(now, "h:MM TT"),
