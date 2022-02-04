@@ -105,11 +105,12 @@ const ColumnHolder = ({
       });
       addActivity(user.token, board.id, {
         info: {
-          title: "Drag Card",
+          title: "order changed",
           columnTitle: currentColumn.title,
           cardTitle: selectCard.title,
           date: dateFormat(now, "mmm dS, yyyy"),
           time: dateFormat(now, "h:MM TT"),
+          user: user.name
         },
         boardId: board.id,
       });

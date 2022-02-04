@@ -1,3 +1,4 @@
+
 .activity-profile-menu {
   position: fixed;
   right: 10px;
@@ -17,9 +18,10 @@
 }
 
 .activity-main-title {
-  top: 13px;
+  top: 8px;
   left: -111px;
-  width: 62px;
+  width: 48px;
+  padding: 0px 5px;
   color: #ababab;
   font-size: 14px;
   background: #2a323a;
@@ -43,26 +45,32 @@
 
 .activity-item-holder {
   text-align: left;
-  padding: 5px 10px;
+  padding: 10px;
 }
 
 .activity-info-holder {
   display: flex;
   height: 18px;
+  overflow: hidden;
 }
 
 .activity-helper-text {
   color: #c2c2c2;
+  white-space: nowrap;
 }
 
 .activity-user-name {
   color: white;
+  white-space: nowrap;
 }
 
 .activity-card-title {
   color: white;
+  white-space: nowrap;
 }
 
 .activity-assigned-user {
   color: white;
+  white-space: nowrap;
 }
+
