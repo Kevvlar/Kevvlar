@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 // Reducers
 import leftSideNavReducer from "./left-side-nav/leftSideNavReducer";
 import rightSideNavReducer from "./right-side-nav/rightSideNavReducer";
+import activityReducer from "./activity/activityReducer";
 import modalReducer from "./modal/modalReducer";
 import boardReducer from "./board/boardReducer";
 import columnReducer from "./column/columnReducer";
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   board: boardReducer,
   column: columnReducer,
   user: userReducer,
+  activity: activityReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -7,6 +7,7 @@ import Modal from "../../components/modal/Modal";
 import RightSideNav from "../../components/sidenav-right/SideNavRight";
 import ColumnHolder from "../../components/column-holder/ColumnHolder";
 import BoardNavBar from "../../components/board-nav-bar/BoardNavBar";
+import Activity from "../../components/activity-modal/ActivityModal";
 // import ErrorPage from "../ErrorPage/ErrorPage";
 
 import socket from "../../Socket";
@@ -124,6 +125,7 @@ class MainPage extends React.Component {
         <AppBar />
         {this.props.rightSideNav ? <RightSideNav /> : null}
         {this.props.showModal ? <Modal /> : null}
+        {this.props.activity ? <Activity /> : null}
       </div>
     );
   }
@@ -152,6 +154,7 @@ const mapStateToProps = (state) => {
     user: state.user.userData,
     leftSideNav: state.sideNavLeft.leftSideNav,
     rightSideNav: state.sideNavRight.rightSideNav,
+    activity: state.activity.showActivity,
     showModal: state.modal.showModal,
   };
 };

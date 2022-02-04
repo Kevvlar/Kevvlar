@@ -1,0 +1,1 @@
+export const TOGGLE_ACTIVITY = "TOGGLE_ACTIVITY";

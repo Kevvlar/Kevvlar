@@ -15,6 +15,8 @@ export {
   hideLeftSideNav,
 } from "./left-side-nav/leftSideNavActions";
 
+export { toggleActivity } from "./activity/activityActions";
+
 export {
   toggleRightSideNav,
   toggleFlatCard,

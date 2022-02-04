@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import CardSearchBar from "../../components/CardSearchBar/CardSearchBar";
 import UserAvatar from "../user-avatar/UserAvatar";
 import AdminAvatar from "../admin-avatar/AdminAvatar";
 
-import { setUserModal, clearColumns, fetchActivities } from "../../redux";
+import {
+  setUserModal,
+  clearColumns,
+  fetchActivities,
+  toggleActivity,
+} from "../../redux";
 
 import {
   LockIcon,
@@ -25,38 +30,8 @@ const BoardNavBar = ({
   emptyColumns,
   user,
   getActivities,
-  activities,
+  showActivity,
 }) => {
-  const [showMenu, setShowMenu] = useState(false);
-
-  const handleActivityMenu = () => {
-    setShowMenu((showMenu) => !showMenu);
-  };
-
-  const ActivityMenu = () => (
-    <div>
-      <div className="activity-close-wrapper" onClick={handleActivityMenu}></div>
-      <div className="activity-profile-menu">
-        <div className="activity-main-title">Activity</div>
-        <div className="activity-item-wrapper">
-          {activities.map((activity) => (
-            <div className="activity-item-holder" key={activity._id}>
-              <div className="activity-info-holder">
-                <div className="activity-user-name">{activity.info.user}&nbsp;</div>
-                <div className="activity-helper-text">{activity.info.title}&nbsp;</div> 
-                <div className="activity-assigned-user">{activity.info.userAssigned}&nbsp;</div>
-                <div className="activity-card-title">{activity.info.cardTitle}&nbsp;</div>
-              </div>
-              <div className="task-item-board">
-                {activity.info.date} at {activity.info.time}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-
   return (
     <div className="boardnavbar">
       <div className="boardnavbar-group">
@@ -106,13 +81,12 @@ const BoardNavBar = ({
         <button
           className="boardnavbar-btn"
           onClick={() => {
+            showActivity();
             getActivities(user.token, board.id);
-            handleActivityMenu();
           }}
         >
           <ActivityIcon />
           <div className="boardnavbar-boardtitle">Activity</div>
-          {showMenu ? <ActivityMenu /> : null}
         </button>
         <button className="boardnavbar-btn">
           <FileshareIcon />
@@ -137,6 +111,7 @@ const mapDispatchToProps = (dispatch) => {
     emptyColumns: () => dispatch(clearColumns()),
     getActivities: (token, boardId) =>
       dispatch(fetchActivities(token, boardId)),
+    showActivity: () => dispatch(toggleActivity()),
   };
 };
 
