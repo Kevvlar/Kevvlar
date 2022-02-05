@@ -18,7 +18,7 @@
 }
 
 .activity-main-title {
-  top: 8px;
+  top: 17px;
   left: -111px;
   width: 48px;
   padding: 0px 5px;
@@ -31,6 +31,7 @@
 .activity-item-wrapper {
   width: 87%;
   padding: 25px 13px;
+  margin-top: 10px;
   border-top: 1px solid #e0e0e0;
 }
 
