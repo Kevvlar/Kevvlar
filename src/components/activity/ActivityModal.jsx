@@ -3,10 +3,18 @@ import { connect } from "react-redux";
 
 import "./activityModal.css";
 
-const ActivityModal = ({ activities }) => {
+import {
+  toggleActivity,
+} from "../../redux";
+
+const ActivityModal = ({ activities, showActivity }) => {
   return (
     <div>
-      <div className="activity-close-wrapper"></div>
+      <div className="activity-close-wrapper" 
+        onClick={() => {
+          showActivity();
+        }}>
+      </div>
       <div className="activity-profile-menu">
         <div className="activity-main-title">Activity</div>
         <div className="activity-item-wrapper">
@@ -35,4 +43,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(ActivityModal);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    showActivity: () => dispatch(toggleActivity()),
+  };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps, null)(ActivityModal);
