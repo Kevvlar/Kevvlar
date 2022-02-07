@@ -19,16 +19,16 @@ function Greeting() {
   //   </div>
   // );
 
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
 
   const [showButton, setShowButton] = useState(false);
 
   const handlePassword = (e) => {
     e.preventDefault();
     if (input.includes("beta")) {
-      setShowButton(true);      
+      setShowButton(true);
     }
-  }
+  };
 
   return (
     <div className="greeting-container section-margin">
@@ -40,7 +40,13 @@ function Greeting() {
       <div className="greeting-buttons-container">
         {/* <GetStartedButon /> */}
         <form onSubmit={handlePassword}>
-          <input value={input} type="text" placeholder="password" className="modal-board-text" onInput={e => setInput(e.target.value)} />
+          <input
+            value={input}
+            type="text"
+            placeholder="password"
+            className="modal-board-text"
+            onInput={(e) => setInput(e.target.value)}
+          />
         </form>
       </div>
       {showButton ? <GetStartedButon /> : null}
