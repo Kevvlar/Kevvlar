@@ -71,8 +71,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-  null
-)(ActivityModal);
+export default connect(mapStateToProps, mapDispatchToProps)(ActivityModal);

@@ -5,7 +5,12 @@ import CardSearchBar from "../../components/CardSearchBar/CardSearchBar";
 import UserAvatar from "../user-avatar/UserAvatar";
 import AdminAvatar from "../admin-avatar/AdminAvatar";
 
-import { setUserModal, clearColumns, toggleActivity } from "../../redux";
+import {
+  setUserModal,
+  clearColumns,
+  toggleActivity,
+  toggleFileModal,
+} from "../../redux";
 
 import {
   LockIcon,
@@ -25,6 +30,7 @@ const BoardNavBar = ({
   emptyColumns,
   user,
   showActivity,
+  showFile,
 }) => {
   return (
     <div className="boardnavbar">
@@ -81,7 +87,12 @@ const BoardNavBar = ({
           <ActivityIcon />
           <div className="boardnavbar-boardtitle">Activity</div>
         </button>
-        <button className="boardnavbar-btn">
+        <button
+          onClick={() => {
+            showFile();
+          }}
+          className="boardnavbar-btn"
+        >
           <FileshareIcon />
           <div className="boardnavbar-boardtitle">Files</div>
         </button>
@@ -103,6 +114,7 @@ const mapDispatchToProps = (dispatch) => {
     showUserModal: (type) => dispatch(setUserModal(type)),
     emptyColumns: () => dispatch(clearColumns()),
     showActivity: () => dispatch(toggleActivity()),
+    showFile: () => dispatch(toggleFileModal()),
   };
 };
 

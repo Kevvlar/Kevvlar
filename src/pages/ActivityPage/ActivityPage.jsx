@@ -7,8 +7,8 @@ import Modal from "../../components/modal/Modal";
 import RightSideNav from "../../components/sidenav-right/SideNavRight";
 import ColumnHolder from "../../components/column-holder/ColumnHolder";
 import BoardNavBar from "../../components/board-nav-bar/BoardNavBar";
-import ActivityModal from "../../components/activity/ActivityModal";
-// import ErrorPage from "../ErrorPage/ErrorPage";
+import ActivityModal from "../../components/ActivityModal/ActivityModal";
+import FileModal from "../../components/FileModal/FileModal";
 
 import socket from "../../Socket";
 
@@ -126,6 +126,7 @@ class MainPage extends React.Component {
         {this.props.rightSideNav ? <RightSideNav /> : null}
         {this.props.showModal ? <Modal /> : null}
         {this.props.activity ? <ActivityModal /> : null}
+        {this.props.showFile ? <FileModal /> : null}
       </div>
     );
   }
@@ -156,6 +157,7 @@ const mapStateToProps = (state) => {
     rightSideNav: state.sideNavRight.rightSideNav,
     activity: state.activity.showActivity,
     showModal: state.modal.showModal,
+    showFile: state.file.showFile,
   };
 };
 
