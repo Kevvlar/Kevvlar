@@ -45,6 +45,7 @@ const FileReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        showFile: false,
       };
 
     case UPLOAD_FILE_FAILURE:
