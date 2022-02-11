@@ -4,13 +4,13 @@
   top: 109px;
   border-radius: 4px;
   box-shadow: 0px 4px 20px 4px #121212b0;
-  min-height: 200px;
+  width: 400px;
+  height: 450px;
   max-height: 400px;
   background-color: #2a323a;
   transition: right 300ms ease-out;
   display: flex;
   flex-direction: column;
-  max-width: 350px;
   align-items: center;
   overflow-y: auto;
   overflow-x: hidden;

@@ -5,6 +5,8 @@ import axios from "axios";
 
 import { toggleFileModal, uploadFile } from "../../redux";
 
+import { DownloadIcon, DeleteIcon } from "../../assets/svg/iconlibrary";
+
 import "./fileModal.css";
 
 const FileModal = ({ showFile, createFile, user, board, loading, files }) => {
@@ -19,6 +21,7 @@ const FileModal = ({ showFile, createFile, user, board, loading, files }) => {
         <div className="file-button-container">
           <button
             type="button"
+            className="file-download-button"
             onClick={() => {
               axios
                 .get(file.url, {
@@ -42,9 +45,9 @@ const FileModal = ({ showFile, createFile, user, board, loading, files }) => {
                 });
             }}
           >
-            Download
+            <DownloadIcon />
           </button>
-          <button className="file-delete-button">Delete</button>
+          <button className="file-delete-button"><DeleteIcon /></button>
         </div>
       </div>
     );
@@ -75,13 +78,13 @@ const FileModal = ({ showFile, createFile, user, board, loading, files }) => {
                 >
                   <div className="file-user-name">{fileData.name}</div>
                   <div className="file-button-container">
-                    <button className="file-download-button">download</button>
+                    <button className="file-download-button"><DownloadIcon /></button>
                     <button className="file-delete-button">delete</button>
                   </div>
                 </div>
               ) : null}
             </div>
-            <div>
+            <div className="file-button-holder">
               <center>
                 <input
                   type="file"

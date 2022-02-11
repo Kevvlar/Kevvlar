@@ -286,6 +286,17 @@ const TrashIcon = ({ handleDelete }) => {
   );
 };
 
+const DownloadIcon = () => {
+  return (
+    <svg width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path 
+        d="M8 6.5H6.5V1.5H5.5V6.5H4L6 8.5L8 6.5ZM2 9.5V10.5H10V9.5H2Z" 
+        fill="white"
+      />
+    </svg>
+  );
+};
+
 // const EditIcon = () => {
 //   return (
 //     <svg
@@ -374,4 +385,5 @@ export {
   KevvlarLogo,
   CalendarIcon,
   TrashIcon,
+  DownloadIcon,
 };
