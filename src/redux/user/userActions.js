@@ -100,7 +100,6 @@ export const signUserIn = (userData, history) => {
       })
       .then((response) => {
         const user = response.data.data.user;
-        console.log(user);
         dispatch(signInUserSuccess(user));
         history.push("/boards");
       })

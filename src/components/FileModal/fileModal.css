@@ -44,15 +44,11 @@
   left: 0;
 }
 
-.file-item-holder {
-  text-align: left;
-  padding: 10px;
-}
-
-.file-info-holder {
+.file-container {
+  min-height: 100px;
   display: flex;
-  height: 18px;
-  overflow: hidden;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .file-helper-text {
@@ -73,4 +69,28 @@
 .file-assigned-user {
   color: white;
   white-space: nowrap;
+}
+
+.file-item-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+
+.files-holder {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  overflow: hidden;
+}
+
+.file-delete-button {
+  margin-left: 8px;
+}
+
+.file-download-button {
+  margin-right: 8px;
 }

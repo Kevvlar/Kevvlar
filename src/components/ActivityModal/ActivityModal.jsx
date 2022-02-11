@@ -13,7 +13,6 @@ const ActivityModal = ({
   getActivities,
 }) => {
   useEffect(() => {
-    console.log("tees");
     getActivities(user.token, board.id);
   }, [user.token, board.id, getActivities]);
 

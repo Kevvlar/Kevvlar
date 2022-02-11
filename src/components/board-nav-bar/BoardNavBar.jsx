@@ -10,6 +10,7 @@ import {
   clearColumns,
   toggleActivity,
   toggleFileModal,
+  fetchFiles,
 } from "../../redux";
 
 import {
@@ -31,6 +32,7 @@ const BoardNavBar = ({
   user,
   showActivity,
   showFile,
+  getFiles,
 }) => {
   return (
     <div className="boardnavbar">
@@ -90,6 +92,7 @@ const BoardNavBar = ({
         <button
           onClick={() => {
             showFile();
+            getFiles(user.token, board.id);
           }}
           className="boardnavbar-btn"
         >
@@ -115,6 +118,7 @@ const mapDispatchToProps = (dispatch) => {
     emptyColumns: () => dispatch(clearColumns()),
     showActivity: () => dispatch(toggleActivity()),
     showFile: () => dispatch(toggleFileModal()),
+    getFiles: (token, boardId) => dispatch(fetchFiles(token, boardId)),
   };
 };
 
