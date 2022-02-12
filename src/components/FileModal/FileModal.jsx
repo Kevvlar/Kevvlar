@@ -102,7 +102,7 @@ const FileModal = ({
               ) : null}
             </div>
             <div className="file-button-holder">
-              <center>
+              <center className="file-input-holder">
                 <input
                   type="file"
                   id="fileUpload"
@@ -123,7 +123,7 @@ const FileModal = ({
                     }}
                     className="upload-file-button"
                   >
-                    upload
+                    Upload
                   </button>
                 )}
               </center>
