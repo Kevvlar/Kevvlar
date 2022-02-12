@@ -94,10 +94,10 @@ const FileModal = ({
                 <div
                   className="file-item-container"
                   style={{
-                    backgroundColor: "red",
+                    backgroundColor: "#333d46",
                   }}
                 >
-                  <div className="file-user-name">{fileData.name}</div>
+                  <div className="file-user-name">{fileData.name} in progress</div>
                 </div>
               ) : null}
             </div>

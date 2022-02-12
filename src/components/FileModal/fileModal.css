@@ -91,19 +91,17 @@
   background: none;
   outline: none;
   border: none;
+  cursor: pointer;
 }
 .file-delete-button:hover {
   opacity: 0.5;
 }
 
 .file-download-button {
-  margin-right: 8px;
-}
-
-.file-download-button {
   background: none;
   outline: none;
   border: none;
+  cursor: pointer;
 }
 
 .file-download-button:hover {
