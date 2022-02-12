@@ -109,3 +109,45 @@
 .file-download-button:hover {
   opacity: 0.4;
 }
+
+.upload-file-button {
+  background: transparent;
+  padding: 12px 24px;
+  margin: 0px 5px;
+  height: 40px;
+  border: 1px solid #03a9f4;
+  border-radius: 4px;
+  color: #03a9f4;
+  width: fit-content;
+  width: 170px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.upload-file-button:hover {
+  background-color: #03a9f4;
+  color: #fff;
+}
+
+input[type="file"]::file-selector-button {
+  background: transparent;
+  padding: 12px 24px;
+  margin: 0px 5px;
+  height: 40px;
+  border: 1px solid #03a9f4;
+  border-radius: 4px;
+  color: #03a9f4;
+  width: fit-content;
+  width: 170px;
+  cursor: pointer;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #03a9f4;
+  color: #fff;
+}
+
+.file-input {
+  color: white;
+  font-size: 16px;
+}

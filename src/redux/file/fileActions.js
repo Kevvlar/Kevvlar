@@ -6,6 +6,7 @@ import {
   UPLOAD_FILE_FAILURE,
   FETCH_FILE_SUCCESS,
   FETCH_FILE_FAILURE,
+  DELETE_FILE,
 } from "./fileTypes";
 
 export const toggleFileModal = () => {
@@ -44,6 +45,13 @@ export const fetchFilesFailure = (error) => {
   return {
     type: FETCH_FILE_FAILURE,
     payLoad: error,
+  };
+};
+
+export const handleDeleteFile = (fileId) => {
+  return {
+    type: DELETE_FILE,
+    payLoad: fileId,
   };
 };
 
@@ -86,6 +94,27 @@ export const uploadFile = (token, boardId, fileData) => {
       .then((response) => {
         dispatch(uploadFileSuccess());
         dispatch(fetchFiles(token, boardId));
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(uploadFileFailure(error.msg));
+      });
+  };
+};
+
+export const deleteFile = (token, boardId, fileId, publicId) => {
+  return (dispatch) => {
+    dispatch(handleDeleteFile(fileId));
+    axios
+      .delete(`https://kevvlar.herokuapp.com/api/v1/files/${fileId}`, {
+        headers: {
+          "content-type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          boardId,
+          publicId,
+        },
       })
       .catch((error) => {
         console.log(error);

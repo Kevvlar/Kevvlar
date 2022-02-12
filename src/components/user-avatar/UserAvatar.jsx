@@ -5,13 +5,7 @@ import "./userAvatar.css";
 
 import { setUserModal, getUserEmail } from "../../redux";
 
-const UserAvatar = ({
-  user,
-  showUserModal,
-  setUserEmail,
-  currentUserId,
-  selectBoard,
-}) => (
+const UserAvatar = ({ user, showUserModal, setUserEmail }) => (
   <div
     className="user-avatar-container"
     onClick={() => {

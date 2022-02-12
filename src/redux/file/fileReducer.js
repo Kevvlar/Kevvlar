@@ -5,6 +5,7 @@ import {
   UPLOAD_FILE_FAILURE,
   FETCH_FILE_SUCCESS,
   FETCH_FILE_FAILURE,
+  DELETE_FILE,
 } from "./fileTypes";
 
 const initialState = {
@@ -53,6 +54,12 @@ const FileReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.payLoad,
+      };
+
+    case DELETE_FILE:
+      return {
+        ...state,
+        files: state.files.filter((file) => file._id !== action.payLoad),
       };
 
     default:

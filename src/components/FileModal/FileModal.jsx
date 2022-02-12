@@ -3,16 +3,28 @@ import { connect } from "react-redux";
 import dateFormat from "dateformat";
 import axios from "axios";
 
-import { toggleFileModal, uploadFile } from "../../redux";
+import { toggleFileModal, uploadFile, deleteFile } from "../../redux";
 
 import { DownloadIcon, DeleteIcon } from "../../assets/svg/iconlibrary";
 
 import "./fileModal.css";
 
-const FileModal = ({ showFile, createFile, user, board, loading, files }) => {
+const FileModal = ({
+  showFile,
+  createFile,
+  user,
+  board,
+  loading,
+  files,
+  removeFile,
+}) => {
   const [fileData, setFileData] = useState();
 
   const formData = new FormData();
+
+  const isFound = board.admins.some((admin) =>
+    admin._id === user._id ? true : false
+  );
 
   const FileItem = ({ file }) => {
     return (
@@ -47,7 +59,16 @@ const FileModal = ({ showFile, createFile, user, board, loading, files }) => {
           >
             <DownloadIcon />
           </button>
-          <button className="file-delete-button"><DeleteIcon /></button>
+          {isFound || user._id === file.owner ? (
+            <button
+              className="file-delete-button"
+              onClick={() => {
+                removeFile(user.token, board.id, file._id, file.publicId);
+              }}
+            >
+              <DeleteIcon />
+            </button>
+          ) : null}
         </div>
       </div>
     );
@@ -77,10 +98,6 @@ const FileModal = ({ showFile, createFile, user, board, loading, files }) => {
                   }}
                 >
                   <div className="file-user-name">{fileData.name}</div>
-                  <div className="file-button-container">
-                    <button className="file-download-button"><DownloadIcon /></button>
-                    <button className="file-delete-button">delete</button>
-                  </div>
                 </div>
               ) : null}
             </div>
@@ -88,6 +105,8 @@ const FileModal = ({ showFile, createFile, user, board, loading, files }) => {
               <center>
                 <input
                   type="file"
+                  id="fileUpload"
+                  className="file-input"
                   onChange={(e) => {
                     setFileData(e.target.files[0]);
                   }}
@@ -95,12 +114,14 @@ const FileModal = ({ showFile, createFile, user, board, loading, files }) => {
                 {!fileData ? null : (
                   <button
                     onClick={(e) => {
+                      document.getElementById("fileUpload").value = "";
                       const now = Date.now();
                       formData.append("document", fileData);
                       formData.append("date", dateFormat(now, "mmm dS, yyyy"));
                       formData.append("time", dateFormat(now, "h:MM TT"));
                       createFile(user.token, board.id, formData);
                     }}
+                    className="upload-file-button"
                   >
                     upload
                   </button>
@@ -128,6 +149,8 @@ const mapDispatchToProps = (dispatch) => {
     showFile: () => dispatch(toggleFileModal()),
     createFile: (token, boardId, fileData) =>
       dispatch(uploadFile(token, boardId, fileData)),
+    removeFile: (token, boardId, fileId, publicId) =>
+      dispatch(deleteFile(token, boardId, fileId, publicId)),
   };
 };
 

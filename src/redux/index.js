@@ -16,7 +16,12 @@ export {
 } from "./left-side-nav/leftSideNavActions";
 
 export { toggleActivity } from "./activity/activityActions";
-export { toggleFileModal, uploadFile, fetchFiles } from "./file/fileActions";
+export {
+  toggleFileModal,
+  uploadFile,
+  fetchFiles,
+  deleteFile,
+} from "./file/fileActions";
 
 export {
   toggleRightSideNav,
