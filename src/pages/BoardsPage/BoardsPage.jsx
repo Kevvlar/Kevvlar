@@ -23,6 +23,7 @@ import "./boardsPage.css";
 
 class BoardsPage extends React.Component {
   componentDidMount() {
+    socket.connect();
     socket.emit("newUser", this.props.user._id);
 
     this.props.getNotifyStatus(this.props.user.token);

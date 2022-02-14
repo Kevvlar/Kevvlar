@@ -30,6 +30,7 @@ import "./activityPage.css";
 
 class MainPage extends React.Component {
   componentDidMount() {
+    socket.connect();
     socket.emit("newUser", this.props.user._id);
     socket.emit("join-board", this.props.boardId);
     this.props.getNotifyStatus(this.props.user.token);
@@ -40,52 +41,52 @@ class MainPage extends React.Component {
       this.props.history.push("/error");
     };
 
-    socket.on("receive-column-order", (data) => {
+    socket.once("receive-column-order", (data) => {
       // console.log(data);
       this.props.updateColumnsOrderLocal(data);
     });
 
-    socket.on("receive-cards-order", (data) => {
+    socket.once("receive-cards-order", (data) => {
       // console.log(data);
       this.props.updateCardsOrder(data);
     });
 
-    socket.on("receive-card-column", (data) => {
+    socket.once("receive-card-column", (data) => {
       // console.log(data);
       this.props.changeCardColumn(data);
     });
 
-    socket.on("receive-new-column", (data) => {
+    socket.once("receive-new-column", (data) => {
       // console.log(data);
       this.props.addNewColumn(data);
     });
 
-    socket.on("receive-edit-column", (data) => {
+    socket.once("receive-edit-column", (data) => {
       // console.log(data);
       this.props.updateColumn(data);
     });
 
-    socket.on("receive-delete-column", (data) => {
+    socket.once("receive-delete-column", (data) => {
       // console.log(data);
       this.props.removeColumn(data);
     });
 
-    socket.on("receive-new-card", (data) => {
+    socket.once("receive-new-card", (data) => {
       // console.log(data);
       this.props.createCard(data);
     });
 
-    socket.on("receive-edit-card", (data) => {
+    socket.once("receive-edit-card", (data) => {
       // console.log(data);
       this.props.updateCard(data);
     });
 
-    socket.on("receive-delete-card", (data) => {
+    socket.once("receive-delete-card", (data) => {
       // console.log(data);
       this.props.handleDeleteCard(data);
     });
 
-    socket.on("receive-email", (email) => {
+    socket.once("receive-email", (email) => {
       if (this.props.user.email === email) {
         this.props.history.push("/boards");
       }

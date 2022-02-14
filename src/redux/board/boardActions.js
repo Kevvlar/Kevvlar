@@ -26,6 +26,8 @@ import {
 } from "./boardTypes";
 import { clearColumns } from "../index";
 
+import { apiUrl } from "../index";
+
 // FETCH BOARDS
 export const fetchBoardsRequest = () => {
   return {
@@ -50,7 +52,7 @@ export const fetchBoardsFailure = (error) => {
 export const fetchBoards = (token) => {
   return (dispatch) => {
     axios
-      .get("https://kevvlar.herokuapp.com/api/v1/boards", {
+      .get(`${apiUrl}boards`, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -69,7 +71,7 @@ export const fetchBoards = (token) => {
 export const fetchBoard = (token, boardId) => {
   return (dispatch) => {
     axios
-      .get(`https://kevvlar.herokuapp.com/api/v1/boards/${boardId}`, {
+      .get(`${apiUrl}boards/${boardId}`, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -115,7 +117,7 @@ export const addNewBoardFailure = (error) => {
 export const createNewBoardServer = (boardObj, token) => {
   return (dispatch) => {
     axios
-      .post("https://kevvlar.herokuapp.com/api/v1/boards", boardObj, {
+      .post(`${apiUrl}boards`, boardObj, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -154,19 +156,15 @@ export const editCurrentBoardServerFailure = (error) => {
 export const editBoardServer = (boardId, boardObj, token) => {
   return (dispatch) => {
     axios
-      .patch(
-        `https://kevvlar.herokuapp.com/api/v1/boards/${boardId}`,
-        boardObj,
-        {
-          headers: {
-            "content-type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            boardId,
-          },
-        }
-      )
+      .patch(`${apiUrl}boards/${boardId}`, boardObj, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          boardId,
+        },
+      })
       .then(() => {
         dispatch(editCurrentBoardServer());
       })
@@ -179,19 +177,15 @@ export const editBoardServer = (boardId, boardObj, token) => {
 export const changeColumnsOrderServer = (boardId, boardObj, token) => {
   return (dispatch) => {
     axios
-      .patch(
-        `https://kevvlar.herokuapp.com/api/v1/boards/changecolumnsorder/${boardId}`,
-        boardObj,
-        {
-          headers: {
-            "content-type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            boardId,
-          },
-        }
-      )
+      .patch(`${apiUrl}boards/changecolumnsorder/${boardId}`, boardObj, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          boardId,
+        },
+      })
       .catch((error) => {
         console.log(error.message);
       });
@@ -229,7 +223,7 @@ export const deleteCurrentBoardServerFailure = (error) => {
 export const handleDeleteBoardServer = (boardId, token) => {
   return (dispatch) => {
     axios
-      .delete(`https://kevvlar.herokuapp.com/api/v1/boards/${boardId}`, {
+      .delete(`${apiUrl}boards/${boardId}`, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -264,7 +258,7 @@ export const addMemberToBoardFailure = (error) => {
 export const addMemberToBoard = (token, addObj) => {
   return (dispatch) => {
     axios
-      .patch(`https://kevvlar.herokuapp.com/api/v1/boards/addmember`, addObj, {
+      .patch(`${apiUrl}boards/addmember`, addObj, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -298,16 +292,12 @@ export const removeMemberFromBoardFailure = (error) => {
 export const removeMemberFromBoard = (token, removeObj) => {
   return (dispatch) => {
     axios
-      .patch(
-        `https://kevvlar.herokuapp.com/api/v1/boards/removemember`,
-        removeObj,
-        {
-          headers: {
-            "content-type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      .patch(`${apiUrl}boards/removemember`, removeObj, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => {
         const members = response.data.data.board.members;
         dispatch(removeMemberFromBoardSuccess(members));

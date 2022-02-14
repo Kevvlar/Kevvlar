@@ -27,7 +27,6 @@ const boardItem = ({
           setSelectBoardData(board);
           history.push({
             pathname: `${match.url}/${board.id}`,
-            state: board.id,
           });
         }}
       >

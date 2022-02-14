@@ -35,6 +35,8 @@ import {
   CHANGE_CARD_COLUMN_IO,
 } from "./columnTypes";
 
+import { apiUrl } from "../index";
+
 import {
   addColumnToColumnsOrderLocal,
   fetchBoard,
@@ -86,7 +88,7 @@ export const fetchActivities = (token, boardId) => {
   return (dispatch) => {
     dispatch(fetchActivitiesRequest());
     axios
-      .get("https://kevvlar.herokuapp.com/api/v1/activities", {
+      .get(`${apiUrl}activities`, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -108,7 +110,7 @@ export const fetchActivities = (token, boardId) => {
 export const createActivity = (token, boardId, data) => {
   return () => {
     axios
-      .post("https://kevvlar.herokuapp.com/api/v1/activities", data, {
+      .post(`${apiUrl}activities`, data, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -126,7 +128,7 @@ export const createActivity = (token, boardId, data) => {
 export const fetchColumns = (token, boardId) => {
   return (dispatch) => {
     axios
-      .get("https://kevvlar.herokuapp.com/api/v1/columns", {
+      .get(`${apiUrl}columns`, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -177,7 +179,7 @@ export const addNewColumnServerFailure = (error) => {
 export const createColumnServer = (token, boardId, columnObj) => {
   return (dispatch) => {
     axios
-      .post("https://kevvlar.herokuapp.com/api/v1/columns/", columnObj, {
+      .post(`${apiUrl}columns/`, columnObj, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -227,19 +229,15 @@ export const removeCardFromColumnsOrderServer = (
   return (dispatch) => {
     dispatch(removeCardFromColumnServerSuccess());
     axios
-      .patch(
-        `https://kevvlar.herokuapp.com/api/v1/columns/removecardcolumn/${columnId}`,
-        columnObj,
-        {
-          headers: {
-            "content-type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            boardId,
-          },
-        }
-      )
+      .patch(`${apiUrl}columns/removecardcolumn/${columnId}`, columnObj, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          boardId,
+        },
+      })
       .catch((error) => {
         dispatch(removeCardFromColumnServerFailure(error.message));
       });
@@ -250,19 +248,15 @@ export const editColumnServer = (token, boardId, columnId, columnObj) => {
   return (dispatch) => {
     dispatch(editColumnServerSuccess());
     axios
-      .patch(
-        `https://kevvlar.herokuapp.com/api/v1/columns/${columnId}`,
-        columnObj,
-        {
-          headers: {
-            "content-type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            boardId,
-          },
-        }
-      )
+      .patch(`${apiUrl}columns/${columnId}`, columnObj, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          boardId,
+        },
+      })
       .catch((error) => {
         dispatch(editColumnServerFailure(error.message));
       });
@@ -293,7 +287,7 @@ export const deleteColumnServer = (token, boardId, columnId) => {
   return (dispatch) => {
     dispatch(deleteColumnServerSuccess());
     axios
-      .delete(`https://kevvlar.herokuapp.com/api/v1/columns/${columnId}`, {
+      .delete(`${apiUrl}columns/${columnId}`, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -339,7 +333,7 @@ export const addNewCardServerFailure = (error) => {
 export const addNewCardServer = (token, boardId, cardObj) => {
   return (dispatch) => {
     axios
-      .post("https://kevvlar.herokuapp.com/api/v1/cards", cardObj, {
+      .post(`${apiUrl}cards`, cardObj, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -371,7 +365,7 @@ export const editCardServerFailure = (error) => {
 export const editCardServer = (token, boardId, cardId, cardObj) => {
   return (dispatch) => {
     axios
-      .patch(`https://kevvlar.herokuapp.com/api/v1/cards/${cardId}`, cardObj, {
+      .patch(`${apiUrl}cards/${cardId}`, cardObj, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -403,7 +397,7 @@ export const deleteCardServerFailure = (error) => {
 export const deleteCardServer = (token, boardId, cardId) => {
   return (dispatch) => {
     axios
-      .delete(`https://kevvlar.herokuapp.com/api/v1/cards/${cardId}`, {
+      .delete(`${apiUrl}cards/${cardId}`, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
