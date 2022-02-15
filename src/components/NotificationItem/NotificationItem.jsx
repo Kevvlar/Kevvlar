@@ -39,6 +39,7 @@ const NotificationItem = ({
           toggleRead(user.token, id);
           socket.connect();
           socket.emit("join-board", info.boardId);
+          socket.emit("newUser", this.props.user._id);
           history.push({
             pathname: `/boards/${info.boardId}`,
           });
