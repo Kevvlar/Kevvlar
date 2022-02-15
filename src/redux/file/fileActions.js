@@ -9,8 +9,6 @@ import {
   DELETE_FILE,
 } from "./fileTypes";
 
-import { apiUrl } from "../index";
-
 export const toggleFileModal = () => {
   return {
     type: TOGGLE_FILE_MODAL,
@@ -60,7 +58,7 @@ export const handleDeleteFile = (fileId) => {
 export const fetchFiles = (token, boardId) => {
   return (dispatch) => {
     axios
-      .get(`${apiUrl}files`, {
+      .get(`https://kevvlar.herokuapp.com/api/v1/files`, {
         headers: {
           "content-type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -84,7 +82,7 @@ export const uploadFile = (token, boardId, fileData) => {
   return (dispatch) => {
     dispatch(uploadFileRequest());
     axios
-      .post(`${apiUrl}files`, fileData, {
+      .post(`https://kevvlar.herokuapp.com/api/v1/files`, fileData, {
         headers: {
           "content-type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -108,7 +106,7 @@ export const deleteFile = (token, boardId, fileId, publicId) => {
   return (dispatch) => {
     dispatch(handleDeleteFile(fileId));
     axios
-      .delete(`${apiUrl}files/${fileId}`, {
+      .delete(`https://kevvlar.herokuapp.com/api/v1/files/${fileId}`, {
         headers: {
           "content-type": "multipart/form-data",
           Authorization: `Bearer ${token}`,

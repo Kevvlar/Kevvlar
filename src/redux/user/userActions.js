@@ -16,8 +16,6 @@ import {
   IS_READ,
 } from "./userTypes";
 
-import { apiUrl } from "../index";
-
 export const signUpUserRequest = () => {
   return {
     type: SIGN_UP_USER_REQUEST,
@@ -75,7 +73,7 @@ export const signUserUp = (userData, history) => {
   return (dispatch) => {
     dispatch(signUpUserRequest());
     axios
-      .post(`${apiUrl}users/signup`, userData, {
+      .post(`https://kevvlar.herokuapp.com/api/v1/users/signup`, userData, {
         headers: {
           "content-type": "application/json",
         },
@@ -95,7 +93,7 @@ export const signUserIn = (userData, history) => {
   return (dispatch) => {
     dispatch(signInUserRequest());
     axios
-      .post(`${apiUrl}users/signin`, userData, {
+      .post(`https://kevvlar.herokuapp.com/api/v1/users/signin`, userData, {
         headers: {
           "content-type": "application/json",
         },
@@ -114,15 +112,19 @@ export const signUserIn = (userData, history) => {
 export const sendNotification = (token, boardId, notificationObject) => {
   return () => {
     axios
-      .post(`${apiUrl}notifications/`, notificationObject, {
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        params: {
-          boardId,
-        },
-      })
+      .post(
+        `https://kevvlar.herokuapp.com/api/v1/notifications/`,
+        notificationObject,
+        {
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          params: {
+            boardId,
+          },
+        }
+      )
       .catch((error) => {
         console.log(error.response);
       });
@@ -139,7 +141,7 @@ export const setNotifyStatus = (status) => {
 export const getNotificationStatus = (token) => {
   return (dispatch) => {
     axios
-      .get(`${apiUrl}notifications/status`, {
+      .get(`https://kevvlar.herokuapp.com/api/v1/notifications/status`, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -185,7 +187,7 @@ export const getNotifications = (token) => {
   return (dispatch) => {
     dispatch(fetchNotificationsRequest());
     axios
-      .get(`${apiUrl}notifications`, {
+      .get(`https://kevvlar.herokuapp.com/api/v1/notifications`, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -219,7 +221,7 @@ export const isReadServer = (token, id) => {
     dispatch(isRead(id));
     axios
       .patch(
-        `${apiUrl}notifications/${id}`,
+        `https://kevvlar.herokuapp.com/api/v1/notifications/${id}`,
         { isRead: true },
         {
           headers: {
