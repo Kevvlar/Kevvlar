@@ -9,8 +9,6 @@ import RightSideNav from "../../components/sidenav-right/SideNavRight";
 import Modal from "../../components/modal/Modal";
 // import ErrorPage from "../ErrorPage/ErrorPage";
 
-import socket from "../../Socket";
-
 import { LoadingIcon } from "../../assets/svg/iconlibrary";
 
 import {
@@ -23,19 +21,12 @@ import "./boardsPage.css";
 
 class BoardsPage extends React.Component {
   componentDidMount() {
-    socket.connect();
-    socket.emit("newUser", this.props.user._id);
-
     this.props.getNotifyStatus(this.props.user.token);
     this.props.getNotifications(this.props.user.token);
     this.props.getBoards(this.props.user.token);
     window.onoffline = (event) => {
       this.props.history.push("/error");
     };
-  }
-
-  componentWillUnmount() {
-    socket.off("newUser");
   }
 
   render() {

@@ -31,13 +31,13 @@ const NotificationItem = ({
       <span
         className="board-title-link"
         onClick={() => {
+          socket.emit("exit", boardId);
           socket.disconnect();
           resetColumns();
           getBoard(user.token, info.boardId);
           getColumns(user.token, info.boardId);
           toggleRead(user.token, id);
           socket.connect();
-          socket.emit("newUser", user._id);
           socket.emit("join-board", info.boardId);
           history.push({
             pathname: `/boards/${info.boardId}`,

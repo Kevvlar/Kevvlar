@@ -42,6 +42,7 @@ const BoardNavBar = ({
         <button
           className="boardnavbar-btn"
           onClick={() => {
+            socket.emit("exit", board.id);
             socket.disconnect();
             emptyColumns();
             history.push("/boards");

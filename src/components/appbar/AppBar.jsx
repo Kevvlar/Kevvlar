@@ -20,6 +20,7 @@ const AppBar = ({ history, emptyColumns, boardId }) => (
         <button
           className="appbar-logo"
           onClick={() => {
+            socket.emit("exit", boardId);
             socket.disconnect();
             emptyColumns();
             history.push("/boards");

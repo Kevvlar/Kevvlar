@@ -8,6 +8,8 @@ import { setCurrentBoardData, setBoardModal, fetchColumns } from "../../redux";
 import { EDIT, DELETE } from "../../redux/modal/modalTypes";
 import { EditIcon, TrashIcon } from "../../assets/svg/iconlibrary";
 
+import socket from "../../Socket";
+
 import "./boardItem.css";
 
 const boardItem = ({
@@ -24,6 +26,8 @@ const boardItem = ({
       <span
         className="class-for-item-on-click-event"
         onClick={() => {
+          socket.connect();
+          socket.emit("join-board", board.id);
           setSelectBoardData(board);
           history.push({
             pathname: `${match.url}/${board.id}`,
