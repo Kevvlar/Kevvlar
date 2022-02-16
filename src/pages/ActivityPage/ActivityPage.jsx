@@ -40,52 +40,53 @@ class MainPage extends React.Component {
       this.props.history.push("/error");
     };
 
-    socket.on("receive-column-order", (data) => {
+    
+    socket.off("receive-column-order").on("receive-column-order", (data) => {
       // console.log(data);
       this.props.updateColumnsOrderLocal(data);
     });
 
-    socket.on("receive-cards-order", (data) => {
+    socket.off("receive-column-order").on("receive-cards-order", (data) => {
       // console.log(data);
       this.props.updateCardsOrder(data);
     });
 
-    socket.on("receive-card-column", (data) => {
+    socket.off("receive-card-column").on("receive-card-column", (data) => {
       // console.log(data);
       this.props.changeCardColumn(data);
     });
 
-    socket.on("receive-new-column", (data) => {
+    socket.off("receive-new-column").on("receive-new-column", (data) => {
       // console.log(data);
       this.props.addNewColumn(data);
     });
 
-    socket.on("receive-edit-column", (data) => {
+    socket.off("receive-edit-column").on("receive-edit-column", (data) => {
       // console.log(data);
       this.props.updateColumn(data);
     });
 
-    socket.on("receive-delete-column", (data) => {
+    socket.off("receive-delete-column").on("receive-delete-column", (data) => {
       // console.log(data);
       this.props.removeColumn(data);
     });
 
-    socket.on("receive-new-card", (data) => {
+    socket.off("receive-new-card").on("receive-new-card", (data) => {
       // console.log(data);
       this.props.createCard(data);
     });
 
-    socket.on("receive-edit-card", (data) => {
+    socket.off("receive-edit-card").on("receive-edit-card", (data) => {
       // console.log(data);
       this.props.updateCard(data);
     });
 
-    socket.on("receive-delete-card", (data) => {
+    socket.off("receive-delete-card").on("receive-delete-card", (data) => {
       // console.log(data);
       this.props.handleDeleteCard(data);
     });
 
-    socket.on("receive-email", (email) => {
+    socket.off("receive-email").on("receive-email", (email) => {
       if (this.props.user.email === email) {
         this.props.history.push("/boards");
       }
@@ -94,6 +95,7 @@ class MainPage extends React.Component {
 
   componentWillUnmount() {
     socket.off("newUser");
+    
     socket.off("receive-new-column");
 
     socket.off("receive-column-order");
