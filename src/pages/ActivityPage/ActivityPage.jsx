@@ -40,6 +40,13 @@ class MainPage extends React.Component {
       this.props.history.push("/error");
     };
 
+    if (!socket) {
+      console.log("null");
+      socket.connect();
+      socket.emit("exit", this.props.boardId);
+      socket.emit("join-board", this.props.boardId);
+    }
+
     socket.off("kill").on("kill", (data) => {
       console.log(data);
     });
