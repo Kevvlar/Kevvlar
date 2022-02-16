@@ -4,11 +4,9 @@ import { withRouter } from "react-router";
 
 import { BoardIcon } from "../../assets/svg/iconlibrary";
 
-import { setCurrentBoardData, setBoardModal, fetchColumns } from "../../redux";
+import { setCurrentBoardData, setBoardModal } from "../../redux";
 import { EDIT, DELETE } from "../../redux/modal/modalTypes";
 import { EditIcon, TrashIcon } from "../../assets/svg/iconlibrary";
-
-import socket from "../../Socket";
 
 import "./boardItem.css";
 
@@ -19,15 +17,12 @@ const boardItem = ({
   showModal,
   history,
   match,
-  getColumns,
 }) => {
   return (
     <div className="board-item">
       <span
         className="class-for-item-on-click-event"
         onClick={() => {
-          socket.connect();
-          socket.emit("join-board", board.id);
           setSelectBoardData(board);
           history.push({
             pathname: `${match.url}/${board.id}`,
@@ -90,7 +85,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setSelectBoardData: (board) => dispatch(setCurrentBoardData(board)),
-    getColumns: (token, boardId) => dispatch(fetchColumns(token, boardId)),
     showModal: (type) => dispatch(setBoardModal(type)),
   };
 };
