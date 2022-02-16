@@ -5,8 +5,6 @@ import CardSearchBar from "../../components/CardSearchBar/CardSearchBar";
 import UserAvatar from "../user-avatar/UserAvatar";
 import AdminAvatar from "../admin-avatar/AdminAvatar";
 
-import socket from "../../Socket";
-
 import {
   setUserModal,
   clearColumns,
@@ -42,8 +40,6 @@ const BoardNavBar = ({
         <button
           className="boardnavbar-btn"
           onClick={() => {
-            socket.emit("exit", board.id);
-            socket.disconnect();
             emptyColumns();
             history.push("/boards");
           }}

@@ -24,6 +24,7 @@ import {
   deleteCardLocal,
   fetchColumns,
   getNotificationStatus,
+  clearColumns,
 } from "../../redux";
 
 import "./activityPage.css";
@@ -101,6 +102,8 @@ class MainPage extends React.Component {
   componentWillUnmount() {
     console.log("in componentWillUnmound - sockets off");
 
+    socket.emit("exit", this.props.boardId);
+
     socket.off("kill");
 
     socket.off("receive-new-column");
@@ -122,6 +125,8 @@ class MainPage extends React.Component {
     socket.off("receive-delete-card");
 
     socket.off("receive-email");
+    this.props.emptyColumns();
+    socket.disconnect();
   }
 
   render() {
@@ -153,6 +158,7 @@ const mapDispatchToProps = (dispatch) => {
     handleDeleteCard: (deleteObj) => dispatch(deleteCardLocal(deleteObj)),
     getColumns: (token, boardId) => dispatch(fetchColumns(token, boardId)),
     getNotifyStatus: (token) => dispatch(getNotificationStatus(token)),
+    emptyColumns: () => dispatch(clearColumns()),
   };
 };
 

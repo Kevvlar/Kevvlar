@@ -8,20 +8,17 @@ import { withRouter } from "react-router";
 
 import { clearColumns } from "../../redux";
 import { KevvlarLogo } from "../../assets/svg/iconlibrary";
-import socket from "../../Socket";
 
 import "./appbar.css";
 import "./kevvlar-logo.svg";
 
-const AppBar = ({ history, emptyColumns, boardId }) => (
+const AppBar = ({ history, emptyColumns }) => (
   <div className="appbar-container">
     <div className="appbar-menu-container">
       <div className="appbar-ham-icon-container">
         <button
           className="appbar-logo"
           onClick={() => {
-            socket.emit("exit", boardId);
-            socket.disconnect();
             emptyColumns();
             history.push("/boards");
           }}
