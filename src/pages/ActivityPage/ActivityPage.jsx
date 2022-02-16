@@ -40,7 +40,10 @@ class MainPage extends React.Component {
       this.props.history.push("/error");
     };
 
-    
+    socket.off("kill").on("kill", (data) => {
+      console.log(data);
+    });
+
     socket.off("receive-column-order").on("receive-column-order", (data) => {
       // console.log(data);
       this.props.updateColumnsOrderLocal(data);
@@ -94,10 +97,9 @@ class MainPage extends React.Component {
   }
 
   componentWillUnmount() {
-    
     console.log("in componentWillUnmound - sockets off");
 
-    socket.off("newUser");
+    socket.off("kill");
 
     socket.off("receive-new-column");
 
