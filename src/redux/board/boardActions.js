@@ -26,8 +26,6 @@ import {
 } from "./boardTypes";
 import { clearColumns } from "../index";
 
-import { apiUrl } from "../index";
-
 // FETCH BOARDS
 export const fetchBoardsRequest = () => {
   return {

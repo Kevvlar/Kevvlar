@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { LoadingIcon } from "../../assets/svg/iconlibrary";
 import { withRouter } from "react-router-dom";
 
+import { fetchColumns, getNotificationStatus } from "../../redux";
+
 import socket from "../../Socket";
 
 import "./errorPage.css";
@@ -11,7 +13,10 @@ class ErrorPage extends React.Component {
   componentDidMount() {
     window.ononline = (event) => {
       socket.connect();
+      socket.emit("newUser", this.props.user._id);
       socket.emit("join-board", this.props.board.id);
+      this.props.getNotifyStatus(this.props.user.token);
+      this.props.getColumns(this.props.user.token, this.props.boardId);
       this.props.history.goBack();
     };
   }
@@ -29,7 +34,18 @@ class ErrorPage extends React.Component {
 const mapStateToProps = (state) => {
   return {
     board: state.board.selectBoard,
+    user: state.user.userData,
   };
 };
 
-export default connect(mapStateToProps, null)(withRouter(ErrorPage));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getColumns: (token, boardId) => dispatch(fetchColumns(token, boardId)),
+    getNotifyStatus: (token) => dispatch(getNotificationStatus(token)),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(ErrorPage));
