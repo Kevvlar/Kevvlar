@@ -52,7 +52,7 @@ class MainPage extends React.Component {
       this.props.updateColumnsOrderLocal(data);
     });
 
-    socket.off("receive-column-order").on("receive-cards-order", (data) => {
+    socket.off("receive-cards-order").on("receive-cards-order", (data) => {
       // console.log(data);
       this.props.updateCardsOrder(data);
     });
