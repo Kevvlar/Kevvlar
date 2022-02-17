@@ -38,8 +38,6 @@ class MainPage extends React.Component {
     this.props.getColumns(this.props.user.token, this.props.boardId);
 
     window.onoffline = (event) => {
-      socket.emit("exit", this.props.boardId);
-      socket.disconnect();
       this.props.history.push("/error");
     };
 
