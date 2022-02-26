@@ -45,7 +45,7 @@ const BoardNavBar = ({
           }}
         >
           <BoardIcon />
-          <div className="boardnavbar-boardtitle">{board.title}</div>
+          <div className="boardnavbar-boardtitle">{board?.title}</div>
         </button>
         <button className="boardnavbar-btn">
           <LockIcon />
@@ -61,12 +61,12 @@ const BoardNavBar = ({
         {board.members.slice(0, 2).map((member, index) => (
           <UserAvatar key={index} user={member} />
         ))}
-        {board.members.length > 2 ? (
+        {board?.members?.length > 2 ? (
           <div
             className="avatar-more"
-            title={board.members.slice(2).map((member) => member.name)}
+            title={board?.members?.slice(2).map((member) => member.name)}
           >
-            {"+" + (board.members.length - 2)}
+            {"+" + (board?.members?.length - 2)}
           </div>
         ) : null}
         <button

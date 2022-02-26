@@ -8,8 +8,8 @@ const UserAvatar = ({ admin }) => (
     <img
       className="admin-avatar-image"
       alt="img"
-      src={admin.photo}
-      title={admin.name + " (Admin)"}
+      src={admin?.photo}
+      title={admin?.name + " (Admin)"}
     />
   </div>
 );

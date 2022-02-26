@@ -12,7 +12,7 @@ const BoardList = ({ addNewBoardModal, boardsList }) => {
   return (
     <div className="sidenav-left-board-list">
       <InfiniteScroll
-        dataLength={boardsList.length}
+        dataLength={boardsList?.length}
         hasMore={true}
         height={300}
       >

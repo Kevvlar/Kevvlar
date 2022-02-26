@@ -22,81 +22,84 @@ const Card = ({
   column,
   getColumnData,
   getCardData,
-}) => (
-  <Draggable draggableId={card.id} index={index}>
-    {(provided, snapshot) => (
-      <div
-        className={classNames("card", snapshot.isDragging && "dragging")}
-        {...provided.draggableProps}
-        {...provided.dragHandleProps}
-        ref={provided.innerRef}
-        onMouseDown={() => {
-          getColumnData(column);
-          getCardData(card);
-        }}
-      >
-        <div className="card-color-label-holder">
-          <div
-            style={{ backgroundColor: `${card.colorLabel}` }}
-            className="card-color-label"
-          ></div>
-        </div>
-        <div className="cardlabelholder">
-          <div id="card-label" className="card-label"></div>
-        </div>
-        <div className="card-inner">
-          <p className="card-title">{card.title}</p>
-          {isGrid ? (
-            <span>
-              <div className="card-description">
-                <ReactQuill
-                  value={card.description}
-                  readOnly={true}
-                  theme={"bubble"}
-                />
-              </div>
-
-              <div className="card-menu">
-                <p className="card-date">{card.date}</p>
-                <div className="user-avatar-card-container">
-                  {card.users.slice(0, 3).map((user, index) => (
-                    <img
-                      key={index}
-                      className="user-avatar-image card-avatar-image"
-                      alt="img"
-                      src={user.photo}
-                      title={user.name}
-                    />
-                  ))}
-                  {card.users.length > 3 ? (
-                    <div
-                      className="card-avatar-more"
-                      title={card.users.slice(3).map((user) => user.name)}
-                    >
-                      {"+" + (card.users.length - 3)}
-                    </div>
-                  ) : null}
+  currentCard,
+}) => {
+  return (
+    <Draggable draggableId={card.id} index={index}>
+      {(provided, snapshot) => (
+        <div
+          className={classNames("card", snapshot.isDragging && "dragging")}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
+          onMouseDownCapture={() => {
+            getCardData(card);
+            getColumnData(column);
+          }}
+        >
+          <div className="card-color-label-holder">
+            <div
+              style={{ backgroundColor: `${card?.colorLabel}` }}
+              className="card-color-label"
+            ></div>
+          </div>
+          <div className="cardlabelholder">
+            <div id="card-label" className="card-label"></div>
+          </div>
+          <div className="card-inner">
+            <p className="card-title">{card?.id}</p>
+            {isGrid ? (
+              <span>
+                <div className="card-description">
+                  <ReactQuill
+                    value={card?.description}
+                    readOnly={true}
+                    theme={"bubble"}
+                  />
                 </div>
-                <FaEllipsisH
-                  onClick={() => {
-                    getCardData(card);
-                    getColumnData(column);
-                    editCardModal("EDIT");
-                  }}
-                  className="card-more-icon"
-                />
-              </div>
-            </span>
-          ) : null}
-        </div>
-      </div>
-    )}
-  </Draggable>
-);
 
+                <div className="card-menu">
+                  <p className="card-date">{card?.date}</p>
+                  <div className="user-avatar-card-container">
+                    {card?.users.slice(0, 3).map((user, index) => (
+                      <img
+                        key={index}
+                        className="user-avatar-image card-avatar-image"
+                        alt="img"
+                        src={user.photo}
+                        title={user.name}
+                      />
+                    ))}
+                    {card?.users.length > 3 ? (
+                      <div
+                        className="card-avatar-more"
+                        title={card.users.slice(3).map((user) => user.name)}
+                      >
+                        {"+" + (card.users.length - 3)}
+                      </div>
+                    ) : null}
+                  </div>
+                  <FaEllipsisH
+                    onClick={() => {
+                      getCardData(card);
+                      getColumnData(column);
+                      editCardModal("EDIT");
+                    }}
+                    className="card-more-icon"
+                  />
+                </div>
+              </span>
+            ) : null}
+          </div>
+        </div>
+      )}
+    </Draggable>
+  );
+};
 const mapStateToProps = (state) => {
   return {
     isGrid: state.sideNavRight.isGrid,
+    currentCard: state.column.selectCard,
   };
 };
 

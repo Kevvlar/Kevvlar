@@ -25,26 +25,26 @@ const boardItem = ({
         onClick={() => {
           setSelectBoardData(board);
           history.push({
-            pathname: `${match.url}/${board.id}`,
+            pathname: `${match.url}/${board?.id}`,
           });
         }}
       >
         <div className="title-container">
           <BoardIcon />
-          <span className="board-item-title">{board.title}</span>
+          <span className="board-item-title">{board?.title}</span>
         </div>
         <div className="board-item-info-container">
           <p className="sub-color board-item-no-margin">
-            {board.numberOfColumns} Columns
+            {board?.numberOfColumns} Columns
           </p>
           <p className="sub-color board-item-no-margin">
-            {board.numberOfCards} Cards
+            {board?.numberOfCards} Cards
           </p>
         </div>
       </span>
       <div className="board-item-footer">
         <div className="board-num-members sub-color">
-          {board?.members.length + board?.admins.length} Users
+          {board?.members?.length + board?.admins?.length} Users
         </div>
         {board?.admins[0]._id.includes(user._id) ? (
           <div className="board-item-icons">

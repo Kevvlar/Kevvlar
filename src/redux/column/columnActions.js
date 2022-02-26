@@ -455,9 +455,9 @@ export const changeCardColumnLocal = (changeObj) => {
 
 export const handleChangeCardColumnLocal = (sourceColumnId, changeObj) => {
   return (dispatch) => {
+    dispatch(changeCardColumnLocal(changeObj));
     dispatch(removeCardFromSourceColumnLocal(sourceColumnId));
     dispatch(changeCardColumnId(changeObj.destinationColumn));
-    dispatch(changeCardColumnLocal(changeObj));
   };
 };
 

@@ -28,23 +28,23 @@ const ActivityModal = ({
         <div className="activity-main-title">Activity</div>
         <div className="activity-item-wrapper">
           {activities.map((activity) => (
-            <div className="activity-item-holder" key={activity._id}>
+            <div className="activity-item-holder" key={activity?._id}>
               <div className="activity-info-holder">
                 <div className="activity-user-name">
-                  {activity.info.user}&nbsp;
+                  {activity?.info?.user}&nbsp;
                 </div>
                 <div className="activity-helper-text">
-                  {activity.info.title}&nbsp;
+                  {activity?.info?.title}&nbsp;
                 </div>
                 <div className="activity-assigned-user">
-                  {activity.info.userAssigned}&nbsp;
+                  {activity?.info?.userAssigned}&nbsp;
                 </div>
                 <div className="activity-card-title">
-                  {activity.info.cardTitle}&nbsp;
+                  {activity?.info?.cardTitle}&nbsp;
                 </div>
               </div>
               <div className="task-item-board">
-                {activity.info.date} at {activity.info.time}
+                {activity?.info?.date} at {activity?.info?.time}
               </div>
             </div>
           ))}

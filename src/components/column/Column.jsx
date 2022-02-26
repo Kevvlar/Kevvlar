@@ -60,7 +60,7 @@ const Column = ({
   };
 
   return (
-    <Draggable draggableId={column.id} index={index}>
+    <Draggable draggableId={column?.id} index={index}>
       {(provided) => (
         <div
           className={addFinishedClass ? "column finished-column" : "column"}
@@ -69,7 +69,7 @@ const Column = ({
         >
           <div className="column-header-container">
             <div className="column-handle" {...provided.dragHandleProps}>
-              <p className="column-header-title">{column.title}</p>
+              <p className="column-header-title">{column?.title}</p>
             </div>
             <div className="column-header-icon-container">
               <TrashIcon
@@ -89,14 +89,14 @@ const Column = ({
               />
             </div>
           </div>
-          <Droppable droppableId={column.id} type="card">
+          <Droppable droppableId={column?.id} type="card">
             {(provided) => (
               <div
                 className="card-container"
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
-                {mapOrder(column.cards, column.cardsOrder, "id")
+                {mapOrder(column?.cards, column?.cardsOrder, "id")
                   .filter(
                     (cardItem) =>
                       cardItem.title
