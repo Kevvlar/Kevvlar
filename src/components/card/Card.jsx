@@ -47,7 +47,7 @@ const Card = ({
             <div id="card-label" className="card-label"></div>
           </div>
           <div className="card-inner">
-            <p className="card-title">{card?.id}</p>
+            <p className="card-title">{card?.title}</p>
             {isGrid ? (
               <span>
                 <div className="card-description">
