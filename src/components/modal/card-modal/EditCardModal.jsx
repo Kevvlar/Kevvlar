@@ -175,7 +175,7 @@ const EditCardModal = ({
             placeholder="Card title"
             className="modal-body-title"
             value={editCardTitle}
-            onChange={(e) => setEditCardTitle(e.target.value)}
+            onChange={(e) => setEditCardTitle(e?.target?.value)}
           />
           <div className="modal-body-description">
             <ReactQuill
@@ -192,13 +192,13 @@ const EditCardModal = ({
             <input
               className="date-picker"
               value={editCardDate}
-              onChange={(e) => setEditCardDate(e.target.value)}
+              onChange={(e) => setEditCardDate(e?.target?.value)}
               type="date"
               name="Due Date"
             />
             <select
               className="select-color"
-              onChange={(e) => setEditCardColor(e.target.value)}
+              onChange={(e) => setEditCardColor(e?.target?.value)}
               value={editCardColor}
             >
               <option value="">Color Label</option>
@@ -234,10 +234,10 @@ const EditCardModal = ({
                     <label>
                       <input
                         type="checkbox"
-                        name={user.name}
-                        value={user._id}
-                        defaultChecked={editCardUsers.some((userObj) =>
-                          userObj._id === user._id ? true : false
+                        name={user?.name}
+                        value={user?._id}
+                        defaultChecked={editCardUsers?.some((userObj) =>
+                          userObj?._id === user?._id ? true : false
                         )}
                         onChange={handleChange}
                       />
@@ -246,13 +246,15 @@ const EditCardModal = ({
                       <img
                         className="user-avatar-image assign-user-image"
                         alt="img"
-                        src={user.photo}
-                        title={user.name}
+                        src={user?.photo}
+                        title={user?.name}
                       />
                       <div>
-                        <div className="assign-user-list-name">{user.name}</div>
+                        <div className="assign-user-list-name">
+                          {user?.name}
+                        </div>
                         <div className="assign-user-list-email">
-                          {user.email}
+                          {user?.email}
                         </div>
                       </div>
                     </div>
