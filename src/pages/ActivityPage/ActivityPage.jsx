@@ -25,6 +25,7 @@ import {
   fetchColumns,
   getNotificationStatus,
   clearColumns,
+  closeModal,
 } from "../../redux";
 
 import "./activityPage.css";
@@ -37,8 +38,12 @@ class MainPage extends React.Component {
     this.props.getNotifyStatus(this.props.user.token);
     this.props.getColumns(this.props.user.token, this.props.boardId);
 
-    window.onoffline = (event) => {
+    window.onoffline = () => {
       this.props.history.push("/error");
+    };
+
+    window.onpopstate = () => {
+      this.props.closeModal();
     };
 
     socket.off("kill").on("kill", (data) => {
@@ -98,8 +103,6 @@ class MainPage extends React.Component {
   }
 
   componentWillUnmount() {
-    console.log("in componentWillUnmound - sockets off");
-
     socket.emit("exit", this.props.boardId);
 
     socket.off("kill");
@@ -123,8 +126,10 @@ class MainPage extends React.Component {
     socket.off("receive-delete-card");
 
     socket.off("receive-email");
-    this.props.emptyColumns();
+
     socket.disconnect();
+
+    this.props.emptyColumns();
   }
 
   render() {
@@ -157,6 +162,7 @@ const mapDispatchToProps = (dispatch) => {
     getColumns: (token, boardId) => dispatch(fetchColumns(token, boardId)),
     getNotifyStatus: (token) => dispatch(getNotificationStatus(token)),
     emptyColumns: () => dispatch(clearColumns()),
+    closeModal: () => dispatch(closeModal()),
   };
 };
 

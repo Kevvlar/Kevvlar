@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 
 import AppBar from "../../components/appbar/AppBar";
 import SearchBar from "../../components/SearchBar/SearchBar";
@@ -24,6 +24,7 @@ class BoardsPage extends React.Component {
     this.props.getNotifyStatus(this.props.user.token);
     this.props.getNotifications(this.props.user.token);
     this.props.getBoards(this.props.user.token);
+
     window.onoffline = (event) => {
       this.props.history.push("/error");
     };
