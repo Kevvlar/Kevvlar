@@ -35,6 +35,7 @@ export {
   setColumnModal,
   setCardModal,
   setUserModal,
+  setChatModal,
 } from "./modal/modalActions";
 
 export {

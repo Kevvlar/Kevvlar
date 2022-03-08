@@ -7,12 +7,14 @@ import {
   COLUMN_MODAL,
   CARD_MODAL,
   USER_MODAL,
+  CHAT_MODAL,
 } from "../../redux/modal/modalTypes";
 
 import BoardModal from "./board-modal/BoardModal";
 import ColumnModal from "./column-modal/ColumnModal";
 import CardModal from "./card-modal/CardModal";
 import UserModal from "./user-modal/UserModal";
+import ChatModal from "./ChatModal/ChatModal";
 
 import "./modal.css";
 
@@ -64,6 +66,18 @@ const Modal = ({ closeModal, modalType }) => {
             }}
           ></div>
           <UserModal />
+        </div>
+      );
+    case CHAT_MODAL:
+      return (
+        <div className="modal-wrapper">
+          <div
+            className="modal-close-overlay"
+            onClick={() => {
+              closeModal();
+            }}
+          ></div>
+          <ChatModal />
         </div>
       );
     default:

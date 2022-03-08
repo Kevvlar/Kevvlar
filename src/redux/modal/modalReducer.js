@@ -4,6 +4,7 @@ import {
   COLUMN_MODAL,
   CARD_MODAL,
   USER_MODAL,
+  CHAT_MODAL,
 } from "./modalTypes";
 
 const initialState = {
@@ -43,6 +44,14 @@ const modalReducer = (state = initialState, action) => {
         ...state,
         showModal: true,
         modalType: USER_MODAL,
+        modalActionType: action.payLoad,
+      };
+
+    case CHAT_MODAL:
+      return {
+        ...state,
+        showModal: true,
+        modalType: CHAT_MODAL,
         modalActionType: action.payLoad,
       };
 
