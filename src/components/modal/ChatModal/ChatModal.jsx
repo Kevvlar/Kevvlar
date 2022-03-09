@@ -6,7 +6,7 @@ import "./chatModal.css";
 
 const ChatModal = () => {
   return (
-    <div className="modal-body">
+    <div className="chat-page-modal">
       <ChatPage />
     </div>
   );
