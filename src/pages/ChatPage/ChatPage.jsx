@@ -1,8 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import "./chatPage.css";
 
-const ChatPage = () => {
+const ChatPage = ({ user }) => {
   return (
     <div className="chat-page-container">
       <div className="chat-main">
@@ -29,4 +30,9 @@ const ChatPage = () => {
   );
 };
 
-export default ChatPage;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user.userData,
+  };
+};
+export default connect(mapStateToProps, null)(ChatPage);

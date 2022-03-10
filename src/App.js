@@ -1,7 +1,6 @@
 import React from "react";
-import { Provider } from "react-redux";
-import { persistor, store } from "./redux/store";
-import { PersistGate } from "redux-persist/integration/react";
+import { StreamChat } from "stream-chat";
+import { connect } from "react-redux";
 import { Switch, Route } from "react-router-dom";
 
 import BoardsPage from "./pages/BoardsPage/BoardsPage";
@@ -14,30 +13,50 @@ import PrivateRoute from "./components/auth/PrivateRoute";
 import RedirectToMainPage from "./components/auth/RedirectToMainPage";
 import ChatButton from "./components/ChatButton/ChatButton";
 
+import "stream-chat-react/dist/css/index.css";
 import "./App.css";
 
-const App = () => (
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <div className="App">
-        <Switch>
-          <RedirectToMainPage exact path="/" component={Homepage} />
-          <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/signin" component={SignIn} />
-          <Route exact path="/error" component={ErrorPage} />
-          <>
-            <PrivateRoute
-              exact
-              path="/boards/:boardId"
-              component={ActivityPage}
-            />
-            <PrivateRoute path="/boards" component={BoardsPage} />
-            <ChatButton />
-          </>
-        </Switch>
-      </div>
-    </PersistGate>
-  </Provider>
-);
+const App = ({ user }) => {
+  const client = StreamChat.getInstance(process.env.REACT_APP_STREAM_API_KEY);
 
-export default App;
+  if (user.chatToken) {
+    client.disconnectUser();
+    client.connectUser(
+      {
+        id: user._id,
+        name: user.name,
+        photo: user.photo,
+        email: user.email,
+      },
+      user.chatToken
+    );
+  }
+
+  return (
+    <div className="App">
+      <Switch>
+        <RedirectToMainPage exact path="/" component={Homepage} />
+        <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/signin" component={SignIn} />
+        <Route exact path="/error" component={ErrorPage} />
+        <>
+          <PrivateRoute
+            exact
+            path="/boards/:boardId"
+            component={ActivityPage}
+          />
+          <PrivateRoute path="/boards" component={BoardsPage} />
+          <ChatButton />
+        </>
+      </Switch>
+    </div>
+  );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user.userData,
+  };
+};
+
+export default connect(mapStateToProps, null)(App);
