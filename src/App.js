@@ -46,7 +46,10 @@ const App = ({ user }) => {
             component={ActivityPage}
           />
           <PrivateRoute path="/boards" component={BoardsPage} />
-          <ChatButton />
+          {user.email === "hotlovac.d@gmail.com" ||
+          user.email === "evangel@gmail.com" ? (
+            <ChatButton />
+          ) : null}
         </>
       </Switch>
     </div>
