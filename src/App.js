@@ -1,5 +1,4 @@
 import React from "react";
-import { StreamChat } from "stream-chat";
 import { connect } from "react-redux";
 import { Switch, Route } from "react-router-dom";
 
@@ -13,25 +12,10 @@ import PrivateRoute from "./components/auth/PrivateRoute";
 import RedirectToMainPage from "./components/auth/RedirectToMainPage";
 import ChatButton from "./components/ChatButton/ChatButton";
 
-import "stream-chat-react/dist/css/index.css";
 import "./App.css";
+import "stream-chat-react/dist/css/index.css";
 
 const App = ({ user }) => {
-  const client = StreamChat.getInstance(process.env.REACT_APP_STREAM_API_KEY);
-
-  if (user.chatToken) {
-    client.disconnectUser();
-    client.connectUser(
-      {
-        id: user._id,
-        name: user.name,
-        photo: user.photo,
-        email: user.email,
-      },
-      user.chatToken
-    );
-  }
-
   return (
     <div className="App">
       <Switch>
@@ -46,8 +30,8 @@ const App = ({ user }) => {
             component={ActivityPage}
           />
           <PrivateRoute path="/boards" component={BoardsPage} />
-          {user.email === "hotlovac.d@gmail.com" ||
-          user.email === "evangel@gmail.com" ? (
+          {user.email === "superchidi@gmail.com" ||
+          user.email === "superevangel@gmail.com" ? (
             <ChatButton />
           ) : null}
         </>

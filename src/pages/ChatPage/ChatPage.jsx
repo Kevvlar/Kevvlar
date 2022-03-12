@@ -1,31 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
+import { Chat } from "stream-chat-react";
 import { connect } from "react-redux";
+
+import ChannelListContainer from "../../components/Chat/ChannelListContainer";
+import ChannelContainer from "../../components/Chat/ChannelContainer";
 
 import "./chatPage.css";
 
-const ChatPage = ({ user }) => {
+const ChatPage = ({ client, user }) => {
+  const [createType, setCreateType] = useState("");
+  const [isCreating, setIsCreating] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+
+  client.connectUser(
+    {
+      id: user._id,
+      name: user.name,
+      photo: user.photo,
+      email: user.email,
+    },
+    user.chatToken
+  );
+
   return (
     <div className="chat-page-container">
-      <div className="chat-main">
-        <div className="chat-header">
-          <h4># {"  "}Kevvlar</h4>
-          <h4>Join voice</h4>
-        </div>
-        <div className="chat-area">
-          <h4>Chat Main</h4>
-        </div>
-        <div className="chat-input">
-          <h4>Chat Input</h4>
-        </div>
-      </div>
-      <div className="chat-channel-messages">
-        <div className="channel-list">
-          <h4>Channel List</h4>
-        </div>
-        <div className="direct-message-list">
-          <h4>Direct Messages</h4>
-        </div>
-      </div>
+      <Chat client={client} theme="team light">
+        <ChannelListContainer
+          isCreating={isCreating}
+          setIsCreating={setIsCreating}
+          setCreateType={setCreateType}
+          setIsEditing={setIsEditing}
+        />
+        <ChannelContainer
+          isCreating={isCreating}
+          setIsCreating={setIsCreating}
+          isEditing={isEditing}
+          setIsEditing={setIsEditing}
+          createType={createType}
+        />
+      </Chat>
     </div>
   );
 };
@@ -35,4 +48,5 @@ const mapStateToProps = (state) => {
     user: state.user.userData,
   };
 };
+
 export default connect(mapStateToProps, null)(ChatPage);
