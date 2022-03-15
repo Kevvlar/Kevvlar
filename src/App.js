@@ -31,7 +31,7 @@ const App = ({ user }) => {
           />
           <PrivateRoute path="/boards" component={BoardsPage} />
           {user.email === "evangel@gmail.com" ||
-          user.email === "Hotlovac.d@gmail.com" ? (
+          user.email === "hotlovac.d@gmail.com" ? (
             <ChatButton />
           ) : null}
         </>
