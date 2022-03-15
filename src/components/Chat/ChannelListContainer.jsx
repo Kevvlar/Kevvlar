@@ -7,7 +7,7 @@ import TeamChannelPreview from "./TeamChannelPreview";
 
 const CompanyHeader = () => (
   <div className="channel-list__header">
-    <p className="channel-list__header__text">KEVVLAR</p>
+    <p className="channel-list__header__text">Chat</p>
   </div>
 );
 

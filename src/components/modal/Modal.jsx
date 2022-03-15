@@ -70,9 +70,8 @@ const Modal = ({ closeModal, modalType }) => {
       );
     case CHAT_MODAL:
       return (
-        <div className="modal-wrapper">
+        <div>
           <div
-            className="modal-close-overlay"
             onClick={() => {
               closeModal();
             }}
