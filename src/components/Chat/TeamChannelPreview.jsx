@@ -18,19 +18,25 @@ const TeamChannelPreview = ({
   );
 
   const DirectPreview = () => {
-    const members = Object.values(channel.state.members).filter(
-      (user) => user.id !== client.userID
+    const members = Object.values(channel.state.members);
+    const filteredUsers = members.filter(
+      (user) => user.user_id !== client.userID
     );
+    console.log("Members: ", filteredUsers);
 
     return (
-      <div className="channel-preview__item single">
-        <Avatar
-          image={members[0]?.user?.photo}
-          name={members[0]?.user?.name}
-          size={24}
-        />
-        <p>{members[0]?.user?.name}</p>
-      </div>
+      <>
+        {filteredUsers.map((filteredUser, index) => (
+          <div key={index} className="channel-preview__item single">
+            <Avatar
+              image={filteredUser?.user?.photo}
+              name={filteredUser?.user?.name}
+              size={24}
+            />
+            <p>{filteredUser?.user?.name}</p>
+          </div>
+        ))}
+      </>
     );
   };
 
