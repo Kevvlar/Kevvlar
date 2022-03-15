@@ -30,8 +30,8 @@ const App = ({ user }) => {
             component={ActivityPage}
           />
           <PrivateRoute path="/boards" component={BoardsPage} />
-          {user.email === "superchidi@gmail.com" ||
-          user.email === "superevangel@gmail.com" ? (
+          {user.email === "evangel@gmail.com" ||
+          user.email === "Hotlovac.d@gmail.com" ? (
             <ChatButton />
           ) : null}
         </>
