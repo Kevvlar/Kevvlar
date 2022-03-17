@@ -4,10 +4,14 @@ import { ChannelList, useChatContext } from "stream-chat-react";
 import ChannelSearch from "./ChannelSearch";
 import TeamChannelList from "./TeamChannelList";
 import TeamChannelPreview from "./TeamChannelPreview";
+import { MinimizeIcon } from "../../assets/svg/iconlibrary";
 
 const CompanyHeader = () => (
   <div className="channel-list__header">
     <p className="channel-list__header__text">Chat</p>
+    <button className="chat-minimize-btn">
+      <MinimizeIcon />
+    </button>
   </div>
 );
 

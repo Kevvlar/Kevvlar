@@ -375,6 +375,10 @@ body {
   z-index: 1;
 }
 
+.str-chat__message-team {
+  padding: 0px 20px !important;
+}
+
 .str-chat__thread-list .str-chat__message-team {
   border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -513,6 +517,7 @@ body {
   border-right: 1px solid #00000033;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .channel-list__header__text {
@@ -987,7 +992,6 @@ body {
 }
 
 .team-channel-header__right {
-  flex: 0.55;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -1119,7 +1123,7 @@ body {
 }
 
 .str-chat__message-team:hover {
-  background: #2f2f2f;
+  background: #2d353d;
 }
 
 .str-chat__message-team-group {
@@ -1133,7 +1137,7 @@ body {
   font-style: normal;
   font-weight: normal;
   line-height: 120%;
-  color: #ffffff;
+  color: #c1c1c1;
   margin: 0;
   background: none;
 }
@@ -1156,13 +1160,13 @@ body {
 }
 
 .str-chat__message-team-meta time {
-  visibility: visible;
+  visibility: visible !important;
   z-index: 2;
   font-family: Helvetica Neue, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 10px;
-  color: rgb(156, 156, 156) !important;
+  color: rgb(202, 202, 202) !important;
   margin-top: 4px;
 }
 
@@ -1360,6 +1364,7 @@ ul.str-chat__simple-reactions-list:hover {
 
 .str-chat__textarea textarea {
   background: #2d353d !important;
+  color: white !important;
 }
 
 .str-chat__textarea textarea::placeholder {
@@ -1368,7 +1373,7 @@ ul.str-chat__simple-reactions-list:hover {
 
 .str-chat__edit-message-form textarea:focus {
   border: 1px solid var(--primary-color);
-  box-shadow: 0 0 0 1px var(--primary-color);
+  box-shadow: 0 0 0 3px #cacaca !important;
 }
 
 .str-chat__edit-message-form svg {
@@ -1519,6 +1524,7 @@ ul.str-chat__simple-reactions-list:hover {
   outline: none;
   box-shadow: none;
   background: #fff;
+  box-shadow: 0 0 0 3px #cacaca !important;
 }
 
 .team-message-input__wrapper .str-chat__textarea textarea::placeholder {
@@ -1774,6 +1780,7 @@ div.rta__autocomplete.str-chat__emojisearch {
   outline: none;
   box-shadow: none;
   background: #fff;
+  box-shadow: 0 0 0 3px #cacaca !important;
 }
 
 .thread-message-input__wrapper .str-chat__textarea textarea::placeholder {
@@ -1938,4 +1945,24 @@ div.rta__autocomplete.str-chat__emojisearch {
   width: 25px;
   height: 25px;
   background: red;
+}
+
+.chat-minimize-btn {
+  background: none;
+  color: #a0a0a0;
+  text-align: center;
+  line-height: 25px;
+  height: 35px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+  cursor: pointer;
+  white-space: nowrap;
+  border: none;
+}
+
+.chat-minimize-btn:hover {
+  opacity: 0.5;
 }
