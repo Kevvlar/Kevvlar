@@ -297,6 +297,14 @@ const DownloadIcon = () => {
   );
 };
 
+const MinimizeIcon = () => {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    < rect width="10" height="2" transform="matrix(1 0 0 -1 3 9)" fill="#A0A0A0"/>
+    </svg>
+  );
+};
+
 // const EditIcon = () => {
 //   return (
 //     <svg
@@ -386,4 +394,5 @@ export {
   CalendarIcon,
   TrashIcon,
   DownloadIcon,
+  MinimizeIcon,
 };
