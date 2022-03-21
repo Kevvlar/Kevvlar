@@ -1,4 +1,5 @@
 import axios from "axios";
+import { StreamChat } from "stream-chat";
 import {
   SIGN_UP_USER_REQUEST,
   SIGN_UP_USER_SUCCESS,
@@ -80,6 +81,19 @@ export const signUserUp = (userData, history) => {
       })
       .then((response) => {
         const user = response.data.data.user;
+
+        const client = StreamChat.getInstance(
+          process.env.REACT_APP_STREAM_API_KEY
+        );
+        client.connectUser(
+          {
+            id: user._id,
+            name: user.name,
+            photo: user.photo,
+            email: user.email,
+          },
+          user.chatToken
+        );
         dispatch(signUpUserSuccess(user));
         history.push("/boards");
       })
@@ -100,6 +114,19 @@ export const signUserIn = (userData, history) => {
       })
       .then((response) => {
         const user = response.data.data.user;
+
+        const client = StreamChat.getInstance(
+          process.env.REACT_APP_STREAM_API_KEY
+        );
+        client.connectUser(
+          {
+            id: user._id,
+            name: user.name,
+            photo: user.photo,
+            email: user.email,
+          },
+          user.chatToken
+        );
         dispatch(signInUserSuccess(user));
         history.push("/boards");
       })

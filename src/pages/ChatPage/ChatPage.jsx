@@ -1,26 +1,19 @@
 import React, { useState } from "react";
 import { Chat } from "stream-chat-react";
 import { connect } from "react-redux";
+import { StreamChat } from "stream-chat";
 
 import ChannelListContainer from "../../components/Chat/ChannelListContainer";
 import ChannelContainer from "../../components/Chat/ChannelContainer";
 
 import "./chatPage.css";
 
-const ChatPage = ({ client, user }) => {
+const ChatPage = () => {
   const [createType, setCreateType] = useState("");
   const [isCreating, setIsCreating] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
-  client.connectUser(
-    {
-      id: user._id,
-      name: user.name,
-      photo: user.photo,
-      email: user.email,
-    },
-    user.chatToken
-  );
+  const client = StreamChat.getInstance(process.env.REACT_APP_STREAM_API_KEY);
 
   return (
     <div className="chat-page-container">

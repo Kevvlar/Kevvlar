@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import { ChannelList, useChatContext } from "stream-chat-react";
+import { connect } from "react-redux";
 
 import ChannelSearch from "./ChannelSearch";
 import TeamChannelList from "./TeamChannelList";
 import TeamChannelPreview from "./TeamChannelPreview";
 import { MinimizeIcon } from "../../assets/svg/iconlibrary";
 
-const CompanyHeader = () => (
+import { closeModal } from "../../redux";
+
+const CompanyHeader = ({ closeModal }) => (
   <div className="channel-list__header">
     <p className="channel-list__header__text">Chat</p>
     <button className="chat-minimize-btn">
-      <MinimizeIcon />
+      <MinimizeIcon
+        closeChat={() => {
+          closeModal();
+        }}
+      />
     </button>
   </div>
 );
@@ -29,6 +36,7 @@ const ChannelListContent = ({
   setCreateType,
   setIsEditing,
   setToggleContainer,
+  closeModal,
 }) => {
   const { client } = useChatContext();
 
@@ -37,7 +45,7 @@ const ChannelListContent = ({
   return (
     <>
       <div className="channel-list__list__wrapper">
-        <CompanyHeader />
+        <CompanyHeader closeModal={closeModal} />
         <ChannelSearch setToggleContainer={setToggleContainer} />
         <ChannelList
           filters={filters}
@@ -96,6 +104,7 @@ const ChannelListContainer = ({
   setCreateType,
   setIsCreating,
   setIsEditing,
+  closeModal,
 }) => {
   const [toggleContainer, setToggleContainer] = useState(false);
 
@@ -106,6 +115,7 @@ const ChannelListContainer = ({
           setIsCreating={setIsCreating}
           setCreateType={setCreateType}
           setIsEditing={setIsEditing}
+          closeModal={closeModal}
         />
       </div>
 
@@ -133,4 +143,10 @@ const ChannelListContainer = ({
   );
 };
 
-export default ChannelListContainer;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    closeModal: () => dispatch(closeModal()),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ChannelListContainer);

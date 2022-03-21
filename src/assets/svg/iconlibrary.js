@@ -288,19 +288,37 @@ const TrashIcon = ({ handleDelete }) => {
 
 const DownloadIcon = () => {
   return (
-    <svg width="16" height="16" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path 
-        d="M8 6.5H6.5V1.5H5.5V6.5H4L6 8.5L8 6.5ZM2 9.5V10.5H10V9.5H2Z" 
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 12 12"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M8 6.5H6.5V1.5H5.5V6.5H4L6 8.5L8 6.5ZM2 9.5V10.5H10V9.5H2Z"
         fill="white"
       />
     </svg>
   );
 };
 
-const MinimizeIcon = () => {
+const MinimizeIcon = ({ closeChat }) => {
   return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    < rect width="10" height="2" transform="matrix(1 0 0 -1 3 9)" fill="#A0A0A0"/>
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      onClick={closeChat}
+    >
+      <rect
+        width="10"
+        height="2"
+        transform="matrix(1 0 0 -1 3 9)"
+        fill="#A0A0A0"
+      />
     </svg>
   );
 };

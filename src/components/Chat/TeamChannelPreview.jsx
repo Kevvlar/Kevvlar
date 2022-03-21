@@ -22,7 +22,6 @@ const TeamChannelPreview = ({
     const filteredUsers = members.filter(
       (user) => user.user_id !== client.userID
     );
-    console.log("Members: ", filteredUsers);
 
     return (
       <>
