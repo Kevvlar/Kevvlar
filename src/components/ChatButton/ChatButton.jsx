@@ -1,14 +1,34 @@
 import React from "react";
 import { connect } from "react-redux";
+import { StreamChat } from "stream-chat";
 
 import { setChatModal } from "../../redux";
 
 import "./chatButton.css";
 
-const ChatButton = ({ showChatModal }) => {
+const ChatButton = ({ showChatModal, user }) => {
   return (
     <div className="chat-button-container">
-      <button className="chat-button" onClick={() => showChatModal()}>
+      <button
+        className="chat-button"
+        onClick={() => {
+          const client = StreamChat.getInstance(
+            process.env.REACT_APP_STREAM_API_KEY
+          );
+
+          client.connectUser(
+            {
+              id: user._id,
+              name: user.name,
+              photo: user.photo,
+              email: user.email,
+            },
+            user.chatToken
+          );
+
+          showChatModal();
+        }}
+      >
         Chat
       </button>
     </div>

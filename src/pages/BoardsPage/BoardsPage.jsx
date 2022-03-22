@@ -7,6 +7,7 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import BoardList from "../../components/BoardList/BoardList";
 import RightSideNav from "../../components/sidenav-right/SideNavRight";
 import Modal from "../../components/modal/Modal";
+import ChatButton from "../../components/ChatButton/ChatButton";
 // import ErrorPage from "../ErrorPage/ErrorPage";
 
 import { LoadingIcon } from "../../assets/svg/iconlibrary";
@@ -54,6 +55,7 @@ class BoardsPage extends React.Component {
         </div>
         {this.props.showModal ? <Modal /> : null}
         {this.props.rightSideNav ? <RightSideNav /> : null}
+        <ChatButton />
       </div>
     );
   }

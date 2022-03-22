@@ -9,6 +9,7 @@ import ColumnHolder from "../../components/column-holder/ColumnHolder";
 import BoardNavBar from "../../components/board-nav-bar/BoardNavBar";
 import ActivityModal from "../../components/ActivityModal/ActivityModal";
 import FileModal from "../../components/FileModal/FileModal";
+import ChatButton from "../../components/ChatButton/ChatButton";
 
 import socket from "../../Socket";
 
@@ -142,6 +143,7 @@ class MainPage extends React.Component {
         {this.props.showModal ? <Modal /> : null}
         {this.props.activity ? <ActivityModal /> : null}
         {this.props.showFile ? <FileModal /> : null}
+        <ChatButton />
       </div>
     );
   }

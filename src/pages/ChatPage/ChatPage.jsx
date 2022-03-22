@@ -8,7 +8,7 @@ import ChannelContainer from "../../components/Chat/ChannelContainer";
 
 import "./chatPage.css";
 
-const ChatPage = () => {
+const ChatPage = ({ user }) => {
   const [createType, setCreateType] = useState("");
   const [isCreating, setIsCreating] = useState(false);
   const [isEditing, setIsEditing] = useState(false);

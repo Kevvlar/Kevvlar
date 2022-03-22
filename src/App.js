@@ -10,7 +10,6 @@ import SignUp from "./components/signup/SignUp";
 import SignIn from "./components/signin/SignIn";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import RedirectToMainPage from "./components/auth/RedirectToMainPage";
-import ChatButton from "./components/ChatButton/ChatButton";
 
 import "./App.css";
 import "stream-chat-react/dist/css/index.css";
@@ -23,18 +22,8 @@ const App = ({ user }) => {
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/error" component={ErrorPage} />
-        <>
-          <PrivateRoute
-            exact
-            path="/boards/:boardId"
-            component={ActivityPage}
-          />
-          <PrivateRoute path="/boards" component={BoardsPage} />
-          {user.email === "evangel@gmail.com" ||
-          user.email === "hotlovac.d@gmail.com" ? (
-            <ChatButton />
-          ) : null}
-        </>
+        <PrivateRoute exact path="/boards/:boardId" component={ActivityPage} />
+        <PrivateRoute path="/boards" component={BoardsPage} />
       </Switch>
     </div>
   );
