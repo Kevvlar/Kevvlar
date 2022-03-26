@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { StreamChat } from "stream-chat";
 
 import ChatPage from "../../../pages/ChatPage/ChatPage";
 
 import "./chatModal.css";
 
-const ChatModal = () => {
+const ChatModal = ({ user }) => {
+  useEffect(() => {
+    const client = StreamChat.getInstance(process.env.REACT_APP_STREAM_API_KEY);
+
+    const newNotification = client.on("message.new", (event) => {
+      console.log("New message alert");
+    });
+
+    return () => {
+      newNotification.unsubscribe();
+    };
+  }, []);
+
   return (
     <div className="chat-page-modal">
       <ChatPage />
@@ -19,4 +32,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(ChatModal);
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChatModal);

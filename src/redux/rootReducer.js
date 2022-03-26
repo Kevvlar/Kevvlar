@@ -11,6 +11,7 @@ import modalReducer from "./modal/modalReducer";
 import boardReducer from "./board/boardReducer";
 import columnReducer from "./column/columnReducer";
 import userReducer from "./user/userReducer";
+import chatReducer from "./chat/chatReducer";
 
 const persistConfig = {
   key: "root",
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   activity: activityReducer,
   file: fileReducer,
+  chat: chatReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

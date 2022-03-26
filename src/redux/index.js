@@ -16,6 +16,7 @@ export {
 } from "./left-side-nav/leftSideNavActions";
 
 export { toggleActivity } from "./activity/activityActions";
+
 export {
   toggleFileModal,
   uploadFile,
@@ -85,3 +86,5 @@ export {
   setCurrentColumnData,
   clearColumns,
 } from "./column/columnActions";
+
+export { setChatNotifyOn, setChatNotifyOff } from "./chat/chatActions";

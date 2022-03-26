@@ -6,7 +6,7 @@ import { setChatModal } from "../../redux";
 
 import "./chatButton.css";
 
-const ChatButton = ({ showChatModal, user }) => {
+const ChatButton = ({ showChatModal, user, turnOffChatNotify, notify }) => {
   return (
     <div className="chat-button-container">
       <button
@@ -38,6 +38,7 @@ const ChatButton = ({ showChatModal, user }) => {
 const mapStateToProps = (state) => {
   return {
     user: state.user.userData,
+    notify: state.chat.notify,
   };
 };
 

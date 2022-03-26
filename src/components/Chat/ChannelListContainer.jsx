@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { ChannelList, useChatContext } from "stream-chat-react";
 import { connect } from "react-redux";
-import { StreamChat } from "stream-chat";
 
 import ChannelSearch from "./ChannelSearch";
 import TeamChannelList from "./TeamChannelList";
@@ -16,10 +15,6 @@ const CompanyHeader = ({ closeModal }) => (
     <button className="chat-minimize-btn">
       <MinimizeIcon
         closeChat={() => {
-          const client = StreamChat.getInstance(
-            process.env.REACT_APP_STREAM_API_KEY
-          );
-          client.disconnectUser();
           closeModal();
         }}
       />

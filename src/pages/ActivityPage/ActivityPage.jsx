@@ -10,6 +10,9 @@ import BoardNavBar from "../../components/board-nav-bar/BoardNavBar";
 import ActivityModal from "../../components/ActivityModal/ActivityModal";
 import FileModal from "../../components/FileModal/FileModal";
 import ChatButton from "../../components/ChatButton/ChatButton";
+import ChatModal from "../../components/modal/ChatModal/ChatModal";
+
+import { CHAT_MODAL } from "../../redux/modal/modalTypes";
 
 import socket from "../../Socket";
 
@@ -139,6 +142,13 @@ class MainPage extends React.Component {
         <BoardNavBar />
         <ColumnHolder />
         <AppBar />
+        <span
+          style={{
+            display: this.props.modalType === CHAT_MODAL ? "block" : "none",
+          }}
+        >
+          <ChatModal />
+        </span>
         {this.props.rightSideNav ? <RightSideNav /> : null}
         {this.props.showModal ? <Modal /> : null}
         {this.props.activity ? <ActivityModal /> : null}
@@ -177,6 +187,7 @@ const mapStateToProps = (state) => {
     activity: state.activity.showActivity,
     showModal: state.modal.showModal,
     showFile: state.file.showFile,
+    modalType: state.modal.modalType,
   };
 };
 

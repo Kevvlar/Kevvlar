@@ -8,7 +8,10 @@ import BoardList from "../../components/BoardList/BoardList";
 import RightSideNav from "../../components/sidenav-right/SideNavRight";
 import Modal from "../../components/modal/Modal";
 import ChatButton from "../../components/ChatButton/ChatButton";
+import ChatModal from "../../components/modal/ChatModal/ChatModal";
 // import ErrorPage from "../ErrorPage/ErrorPage";
+
+import { CHAT_MODAL } from "../../redux/modal/modalTypes";
 
 import { LoadingIcon } from "../../assets/svg/iconlibrary";
 
@@ -35,6 +38,13 @@ class BoardsPage extends React.Component {
     return (
       <div className="boards-page-holder">
         <AppBar />
+        <span
+          style={{
+            display: this.props.modalType === CHAT_MODAL ? "block" : "none",
+          }}
+        >
+          <ChatModal />
+        </span>
         <div className="boards-page">
           <div className="board-main">
             <SearchBar />
@@ -67,6 +77,7 @@ const mapStateToProps = (state) => {
     showModal: state.modal.showModal,
     user: state.user.userData,
     boardState: state.board.loading,
+    modalType: state.modal.modalType,
   };
 };
 
