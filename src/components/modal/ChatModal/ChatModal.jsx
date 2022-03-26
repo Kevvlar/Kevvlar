@@ -3,20 +3,17 @@ import { connect } from "react-redux";
 import { StreamChat } from "stream-chat";
 
 import ChatPage from "../../../pages/ChatPage/ChatPage";
+import { setChatNotifyOn } from "../../../redux";
 
 import "./chatModal.css";
 
-const ChatModal = ({ user }) => {
+const ChatModal = ({ user, turnChatNotificationOn }) => {
   useEffect(() => {
     const client = StreamChat.getInstance(process.env.REACT_APP_STREAM_API_KEY);
 
-    const newNotification = client.on("message.new", (event) => {
-      console.log("New message alert");
+    client.on("message.new", (event) => {
+      turnChatNotificationOn();
     });
-
-    return () => {
-      newNotification.unsubscribe();
-    };
   }, []);
 
   return (
@@ -33,7 +30,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    turnChatNotificationOn: () => dispatch(setChatNotifyOn()),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatModal);

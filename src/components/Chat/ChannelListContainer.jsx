@@ -5,22 +5,7 @@ import { connect } from "react-redux";
 import ChannelSearch from "./ChannelSearch";
 import TeamChannelList from "./TeamChannelList";
 import TeamChannelPreview from "./TeamChannelPreview";
-import { MinimizeIcon } from "../../assets/svg/iconlibrary";
-
-import { closeModal } from "../../redux";
-
-const CompanyHeader = ({ closeModal }) => (
-  <div className="channel-list__header">
-    <p className="channel-list__header__text">Chat</p>
-    <button className="chat-minimize-btn">
-      <MinimizeIcon
-        closeChat={() => {
-          closeModal();
-        }}
-      />
-    </button>
-  </div>
-);
+import CompanyHeader from "./CompanyHeader";
 
 const customChannelTeamFilter = (channels) => {
   return channels.filter((channel) => channel.type === "team");
@@ -45,7 +30,7 @@ const ChannelListContent = ({
   return (
     <>
       <div className="channel-list__list__wrapper">
-        <CompanyHeader closeModal={closeModal} />
+        <CompanyHeader />
         <ChannelSearch setToggleContainer={setToggleContainer} />
         <ChannelList
           filters={filters}
@@ -104,7 +89,6 @@ const ChannelListContainer = ({
   setCreateType,
   setIsCreating,
   setIsEditing,
-  closeModal,
 }) => {
   const [toggleContainer, setToggleContainer] = useState(false);
 
@@ -115,7 +99,6 @@ const ChannelListContainer = ({
           setIsCreating={setIsCreating}
           setCreateType={setCreateType}
           setIsEditing={setIsEditing}
-          closeModal={closeModal}
         />
       </div>
 
@@ -144,9 +127,7 @@ const ChannelListContainer = ({
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    closeModal: () => dispatch(closeModal()),
-  };
+  return {};
 };
 
 export default connect(null, mapDispatchToProps)(ChannelListContainer);
