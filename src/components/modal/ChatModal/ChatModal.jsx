@@ -11,9 +11,13 @@ const ChatModal = ({ user, turnChatNotificationOn }) => {
   useEffect(() => {
     const client = StreamChat.getInstance(process.env.REACT_APP_STREAM_API_KEY);
 
-    client.on("message.new", (event) => {
+    const newNotification = client.on("message.new", (event) => {
       turnChatNotificationOn();
     });
+
+    return () => {
+      newNotification.unsubscribe();
+    };
   }, []);
 
   return (
