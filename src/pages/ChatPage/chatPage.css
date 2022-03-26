@@ -369,6 +369,7 @@ body {
 .channel__container {
   height: 100%;
   width: 100%;
+  background-color: #343d45 !important;
 }
 
 .str-chat__thread {
@@ -447,6 +448,7 @@ body {
   /* height: 800px; */
   height: 100%;
   box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #666666;
 }
 
 .channel-list__sidebar {
@@ -475,7 +477,7 @@ body {
 .channel-list__list__wrapper {
   display: flex;
   flex-direction: column;
-  background: #343d46;
+  background: #2a323a;
   width: 240px;
   border-top-left-radius: 5px;
 }
@@ -513,11 +515,11 @@ body {
 
 .channel-list__header {
   padding-left: 16px;
-  height: 62px;
-  border-right: 1px solid #00000033;
+  height: 61px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid #666666;
 }
 
 .channel-list__header__text {
@@ -535,7 +537,6 @@ body {
   justify-content: center;
   align-items: center;
   padding-top: 16px;
-  border-top: 1px solid #00000033;
 }
 
 .channel-search__input__wrapper {
@@ -678,7 +679,7 @@ body {
   font-weight: bold;
   font-size: 18px;
   line-height: 22px;
-  color: #2c2c30;
+  color: white;
   margin-left: 20px;
 }
 
@@ -727,22 +728,20 @@ body {
 
 .create-channel__button-wrapper {
   height: 82px;
-  background: #f7f6f8;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   border-bottom-right-radius: 16px;
-
   padding: 0px 10px;
 }
 
 .create-channel__button-wrapper p {
-  background: var(--primary-color);
+  border: 1px solid #03a9f4;
   font-family: Helvetica Neue, sans-serif;
   font-weight: bold;
   font-size: 18px;
   padding: 10px 20px;
-  color: #ffffff;
+  color: #03a9f4;
   border-radius: 8px;
   cursor: pointer;
 }
@@ -793,7 +792,7 @@ body {
 }
 
 .user-item__wrapper:hover {
-  background: #f7f6f8;
+  background: rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
 
@@ -930,7 +929,7 @@ body {
   align-items: center;
   padding: 0 20px;
   background: #343d46 !important;
-  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #666666;
   z-index: 1;
 }
 
@@ -1845,7 +1844,7 @@ div.rta__autocomplete.str-chat__emojisearch {
 .str-chat__input-flat {
   width: 100%;
   padding: 10px;
-  background: #1f2529 !important;
+  background: #343d45 !important;
 }
 
 @media screen and (max-width: 960px) {
@@ -1939,6 +1938,7 @@ div.rta__autocomplete.str-chat__emojisearch {
 
 .str-chat__list {
   flex: 0.55 1 !important;
+  background: #343d45;
 }
 
 .chat-close-button {
