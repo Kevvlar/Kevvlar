@@ -1059,7 +1059,8 @@ body {
   height: 37px;
   display: flex;
   align-items: center;
-  background: #2d353d !important;
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   font-weight: bold;
@@ -1082,7 +1083,7 @@ body {
   align-items: center;
   font-family: Helvetica Neue, sans-serif;
   font-size: 14px;
-  color: #ffffff;
+  color: #bebebe;
   padding: 0px 20px;
   height: 100%;
   width: 100%;
