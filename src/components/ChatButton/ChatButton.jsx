@@ -35,13 +35,13 @@ const ChatButton = ({ showChatModal, user, turnOffChatNotify, notify }) => {
           style={
             notify
               ? {
-                  backgroundColor: "#03A9F4",
+                  backgroundColor: "#c72c2c",
                   borderRadius: "20px",
-                  width: "10px",
-                  height: "10px",
+                  width: "15px",
+                  height: "15px",
                   position: "fixed",
-                  right: "15px",
-                  bottom: "35px",
+                  right: "13px",
+                  bottom: "29px",
                 }
               : {}
           }
