@@ -314,7 +314,7 @@ export const removeMemberFromBoard = (token, removeObj) => {
       })
       .catch((error) => {
         dispatch(removeMemberFromBoardFailure("Could not add user to board"));
-        console.log("Could not add user to board");
+        console.log("Could not remove user to board");
       });
   };
 };
