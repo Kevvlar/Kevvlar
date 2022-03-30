@@ -12,7 +12,7 @@ import "./chatPage.css";
 const cookies = new Cookies();
 const client = StreamChat.getInstance(process.env.REACT_APP_STREAM_API_KEY);
 
-if (!client._user) {
+if (!client._user && cookies.get("chatToken")) {
   client.connectUser(
     {
       id: cookies.get("id"),
