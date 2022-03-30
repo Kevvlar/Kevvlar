@@ -1,4 +1,6 @@
 import axios from "axios";
+import Cookies from "universal-cookie";
+import { StreamChat } from "stream-chat";
 import {
   SIGN_UP_USER_REQUEST,
   SIGN_UP_USER_SUCCESS,
@@ -15,6 +17,9 @@ import {
   SET_NOTIFY_STATUS,
   IS_READ,
 } from "./userTypes";
+
+const client = StreamChat.getInstance(process.env.REACT_APP_STREAM_API_KEY);
+const cookies = new Cookies();
 
 export const signUpUserRequest = () => {
   return {
@@ -81,6 +86,22 @@ export const signUserUp = (userData, history) => {
       .then((response) => {
         const user = response.data.data.user;
 
+        client.connectUser(
+          {
+            id: user._id,
+            name: user.name,
+            photo: user.photo,
+            email: user.email,
+          },
+          user.chatToken
+        );
+
+        cookies.set("chatToken", user.chatToken);
+        cookies.set("id", user._id);
+        cookies.set("name", user.name);
+        cookies.set("photo", user.photo);
+        cookies.set("email", user.email);
+
         dispatch(signUpUserSuccess(user));
         history.push("/boards");
       })
@@ -101,6 +122,23 @@ export const signUserIn = (userData, history) => {
       })
       .then((response) => {
         const user = response.data.data.user;
+
+        client.connectUser(
+          {
+            id: user._id,
+            name: user.name,
+            photo: user.photo,
+            email: user.email,
+          },
+          user.chatToken
+        );
+
+        cookies.set("chatToken", user.chatToken);
+        cookies.set("id", user._id);
+        cookies.set("name", user.name);
+        cookies.set("photo", user.photo);
+        cookies.set("email", user.email);
+
         dispatch(signInUserSuccess(user));
         history.push("/boards");
       })

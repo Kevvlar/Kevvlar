@@ -2,6 +2,7 @@ import { SET_IS_CHAT_NOTIFY_ON, SET_IS_CHAT_NOTIFY_OFF } from "./chatTypes";
 
 const initialState = {
   notify: false,
+  event: {},
 };
 
 const chatReducer = (state = initialState, action) => {

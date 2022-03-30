@@ -1,5 +1,7 @@
 import React from "react";
-import { Avatar, useChatContext } from "stream-chat-react";
+import { useChatContext } from "stream-chat-react";
+
+import PreviewItem from "./PreviewItem";
 
 const TeamChannelPreview = ({
   setActiveChannel,
@@ -26,14 +28,7 @@ const TeamChannelPreview = ({
     return (
       <>
         {filteredUsers.map((filteredUser, index) => (
-          <div key={index} className="channel-preview__item single">
-            <Avatar
-              image={filteredUser?.user?.photo}
-              name={filteredUser?.user?.name}
-              size={24}
-            />
-            <p>{filteredUser?.user?.name}</p>
-          </div>
+          <PreviewItem key={index} filteredUser={filteredUser} />
         ))}
       </>
     );

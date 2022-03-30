@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { StreamChat } from "stream-chat";
 
@@ -7,27 +7,29 @@ import { setChatNotifyOn } from "../../../redux";
 
 import "./chatModal.css";
 
-const ChatModal = ({ user, turnChatNotificationOn }) => {
-  useEffect(() => {
-    const client = StreamChat.getInstance(process.env.REACT_APP_STREAM_API_KEY);
+const client = StreamChat.getInstance(process.env.REACT_APP_STREAM_API_KEY);
 
-    const newNotification = client.on("message.new", (event) => {
-      if (event.user.id !== user._id) {
-        turnChatNotificationOn();
+class ChatModal extends React.Component {
+  componentDidMount() {
+    this.newNotification = client.on("message.new", (event) => {
+      if (event.user.id !== this.props.user._id) {
+        this.props.turnChatNotificationOn(event);
       }
     });
+  }
 
-    return () => {
-      newNotification.unsubscribe();
-    };
-  }, []);
+  componentWillUnmount() {
+    this.newNotification.unsubscribe();
+  }
 
-  return (
-    <div className="chat-page-modal">
-      <ChatPage />
-    </div>
-  );
-};
+  render() {
+    return (
+      <div className="chat-page-modal">
+        <ChatPage />
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -37,7 +39,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    turnChatNotificationOn: () => dispatch(setChatNotifyOn()),
+    turnChatNotificationOn: (event) => dispatch(setChatNotifyOn(event)),
   };
 };
 
