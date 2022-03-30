@@ -87,4 +87,8 @@ export {
   clearColumns,
 } from "./column/columnActions";
 
-export { setChatNotifyOn, setChatNotifyOff } from "./chat/chatActions";
+export {
+  setChatNotifyOn,
+  setChatNotifyOff,
+  setChatNotifyInnerOff,
+} from "./chat/chatActions";

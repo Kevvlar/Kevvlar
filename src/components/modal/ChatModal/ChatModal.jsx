@@ -15,6 +15,7 @@ class ChatModal extends React.Component {
       if (event.user.id !== this.props.user._id) {
         this.props.turnChatNotificationOn(event);
       }
+      console.log(event);
     });
   }
 
@@ -39,7 +40,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    turnChatNotificationOn: (event) => dispatch(setChatNotifyOn(event)),
+    turnChatNotificationOn: (data) => dispatch(setChatNotifyOn(data)),
   };
 };
 
