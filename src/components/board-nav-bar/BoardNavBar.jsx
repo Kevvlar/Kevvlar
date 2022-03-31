@@ -20,6 +20,7 @@ import {
   AddUserIcon,
   FileshareIcon,
   ActivityIcon,
+  MeetingIcon,
 } from "../../assets/svg/iconlibrary";
 
 import "./boardnavbar.css";
@@ -80,6 +81,15 @@ const BoardNavBar = ({
       </div>
       <div className="boardnavbar-group">
         <CardSearchBar />
+        <button
+          className="boardnavbar-btn"
+          onClick={() => {
+            
+          }}
+        >
+          <MeetingIcon />
+          <div className="boardnavbar-boardtitle">Meeting</div>
+        </button>
         <button
           className="boardnavbar-btn"
           onClick={() => {
