@@ -91,4 +91,5 @@ export {
   setChatNotifyOn,
   setChatNotifyOff,
   setChatNotifyInnerOff,
+  setIsOpen,
 } from "./chat/chatActions";

@@ -12,7 +12,7 @@ const client = StreamChat.getInstance(process.env.REACT_APP_STREAM_API_KEY);
 class ChatModal extends React.Component {
   componentDidMount() {
     this.newNotification = client.on("message.new", (event) => {
-      if (event.user.id !== this.props.user._id) {
+      if (event.user.id !== this.props.user._id && this.props.isOpen !== true) {
         this.props.turnChatNotificationOn(event);
       }
       console.log(event);
@@ -35,6 +35,7 @@ class ChatModal extends React.Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user.userData,
+    isOpen: state.chat.isOpen,
   };
 };
 

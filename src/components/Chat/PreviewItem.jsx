@@ -14,7 +14,7 @@ const PreviewItem = ({
     <div
       className="channel-preview__item single"
       onClick={() => {
-        if (filteredUser?.user?.id === event.user.id) {
+        if (filteredUser?.user?.id === event?.user?.id) {
           turnOffChatNotifyInner();
         }
       }}
@@ -28,7 +28,7 @@ const PreviewItem = ({
       <span
         style={
           innerNotify &&
-          filteredUser?.user?.id === event.user.id &&
+          filteredUser?.user?.id === event?.user?.id &&
           event.channel_type === "messaging"
             ? {
                 backgroundColor: "#c72c2c",

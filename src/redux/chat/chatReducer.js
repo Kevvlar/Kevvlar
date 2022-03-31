@@ -2,9 +2,11 @@ import {
   SET_IS_CHAT_NOTIFY_ON,
   SET_IS_CHAT_NOTIFY_OFF,
   SET_IS_CHAT_NOTIFY_INNER_OFF,
+  SET_IS_OPEN,
 } from "./chatTypes";
 
 const initialState = {
+  isOpen: false,
   notify: false,
   innerNotify: false,
   event: {},
@@ -24,6 +26,7 @@ const chatReducer = (state = initialState, action) => {
       return {
         ...state,
         notify: false,
+        event: {},
       };
 
     case SET_IS_CHAT_NOTIFY_INNER_OFF:
@@ -31,6 +34,12 @@ const chatReducer = (state = initialState, action) => {
         ...state,
         innerNotify: false,
         event: {},
+      };
+
+    case SET_IS_OPEN:
+      return {
+        ...state,
+        isOpen: action.payLoad,
       };
 
     default:

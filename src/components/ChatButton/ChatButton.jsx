@@ -1,17 +1,24 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { setChatModal, setChatNotifyOff } from "../../redux";
+import { setChatModal, setChatNotifyOff, setIsOpen } from "../../redux";
 
 import "./chatButton.css";
 
-const ChatButton = ({ showChatModal, user, turnOffChatNotify, notify }) => {
+const ChatButton = ({
+  showChatModal,
+  user,
+  turnOffChatNotify,
+  notify,
+  toggleOpenChat,
+}) => {
   return (
     <div className="chat-button-container">
       <button
         className="chat-button"
         onClick={() => {
           turnOffChatNotify();
+          toggleOpenChat(true);
           showChatModal();
         }}
       >
@@ -47,6 +54,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     showChatModal: () => dispatch(setChatModal()),
     turnOffChatNotify: () => dispatch(setChatNotifyOff()),
+    toggleOpenChat: (bool) => dispatch(setIsOpen(bool)),
   };
 };
 

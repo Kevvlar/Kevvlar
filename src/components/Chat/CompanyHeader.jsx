@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 
 import { MinimizeIcon } from "../../assets/svg/iconlibrary";
 
-import { closeModal, setChatNotifyOff } from "../../redux";
+import { closeModal, setChatNotifyOff, setIsOpen } from "../../redux";
 
-const CompanyHeader = ({ closeModal, turnOffChatNotify }) => {
+const CompanyHeader = ({ closeModal, turnOffChatNotify, toggleOpenChat }) => {
   return (
     <div className="channel-list__header">
       <p className="channel-list__header__text">Chat</p>
@@ -13,6 +13,7 @@ const CompanyHeader = ({ closeModal, turnOffChatNotify }) => {
         <MinimizeIcon
           closeChat={() => {
             turnOffChatNotify();
+            toggleOpenChat(false);
             closeModal();
           }}
         />
@@ -25,6 +26,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
     turnOffChatNotify: () => dispatch(setChatNotifyOff()),
+    toggleOpenChat: (bool) => dispatch(setIsOpen(bool)),
   };
 };
 
