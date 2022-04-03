@@ -2,21 +2,14 @@ import React from "react";
 import { Avatar } from "stream-chat-react";
 import { connect } from "react-redux";
 
-import { setChatNotifyInnerOff } from "../../redux";
+import { removeEvent } from "../../redux";
 
-const PreviewItem = ({
-  filteredUser,
-  innerNotify,
-  event,
-  turnOffChatNotifyInner,
-}) => {
+const PreviewItem = ({ filteredUser, events, removeChannelNotify }) => {
   return (
     <div
       className="channel-preview__item single"
       onClick={() => {
-        if (filteredUser?.user?.id === event?.user?.id) {
-          turnOffChatNotifyInner();
-        }
+        removeChannelNotify(filteredUser.user.name);
       }}
     >
       <Avatar
@@ -27,9 +20,7 @@ const PreviewItem = ({
       <p>{filteredUser?.user?.name}</p>
       <span
         style={
-          innerNotify &&
-          filteredUser?.user?.id === event?.user?.id &&
-          event.channel_type === "messaging"
+          events.includes(filteredUser.user.name)
             ? {
                 backgroundColor: "#c72c2c",
                 borderRadius: "20px",
@@ -47,14 +38,13 @@ const PreviewItem = ({
 const mapStateToProps = (state) => {
   return {
     user: state.user.userData,
-    innerNotify: state.chat.innerNotify,
-    event: state.chat.event,
+    events: state.chat.events,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    turnOffChatNotifyInner: () => dispatch(setChatNotifyInnerOff()),
+    removeChannelNotify: (eventName) => dispatch(removeEvent(eventName)),
   };
 };
 

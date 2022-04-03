@@ -1,15 +1,15 @@
 import {
   SET_IS_CHAT_NOTIFY_ON,
   SET_IS_CHAT_NOTIFY_OFF,
-  SET_IS_CHAT_NOTIFY_INNER_OFF,
   SET_IS_OPEN,
+  REMOVE_EVENT,
 } from "./chatTypes";
 
 const initialState = {
   isOpen: false,
   notify: false,
   innerNotify: false,
-  event: {},
+  events: [],
 };
 
 const chatReducer = (state = initialState, action) => {
@@ -19,21 +19,19 @@ const chatReducer = (state = initialState, action) => {
         ...state,
         notify: true,
         innerNotify: true,
-        event: action.payLoad,
+        events: [...state.events, action.payLoad],
+      };
+
+    case REMOVE_EVENT:
+      return {
+        ...state,
+        events: state.events.filter((event) => event !== action.payLoad),
       };
 
     case SET_IS_CHAT_NOTIFY_OFF:
       return {
         ...state,
         notify: false,
-        event: {},
-      };
-
-    case SET_IS_CHAT_NOTIFY_INNER_OFF:
-      return {
-        ...state,
-        innerNotify: false,
-        event: {},
       };
 
     case SET_IS_OPEN:

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import PreviewItem from "./PreviewItem";
 
-import { setChatNotifyInnerOff } from "../../redux";
+import { removeEvent } from "../../redux";
 
 const TeamChannelPreview = ({
   setActiveChannel,
@@ -13,9 +13,8 @@ const TeamChannelPreview = ({
   channel,
   type,
   setToggleContainer,
-  innerNotify,
-  event,
-  turnOffChatNotifyInner,
+  events,
+  removeChannelNotify,
 }) => {
   const { channel: activeChannel, client } = useChatContext();
 
@@ -23,17 +22,13 @@ const TeamChannelPreview = ({
     <p
       className="channel-preview__item"
       onClick={() => {
-        if (channel?.data?.id === event.channel_id) {
-          turnOffChatNotifyInner();
-        }
+        removeChannelNotify(channel.data.id);
       }}
     >
       # {channel?.data?.id}{" "}
       <span
         style={
-          innerNotify &&
-          channel?.data?.id === event.channel_id &&
-          event.channel_type === "team"
+          events.includes(channel.data.id)
             ? {
                 backgroundColor: "#c72c2c",
                 borderRadius: "20px",
@@ -88,14 +83,13 @@ const TeamChannelPreview = ({
 const mapStateToProps = (state) => {
   return {
     user: state.user.userData,
-    innerNotify: state.chat.innerNotify,
-    event: state.chat.event,
+    events: state.chat.events,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    turnOffChatNotifyInner: () => dispatch(setChatNotifyInnerOff()),
+    removeChannelNotify: (eventName) => dispatch(removeEvent(eventName)),
   };
 };
 
