@@ -1,8 +1,8 @@
 import {
   SET_IS_CHAT_NOTIFY_ON,
   SET_IS_CHAT_NOTIFY_OFF,
-  SET_IS_CHAT_NOTIFY_INNER_OFF,
   SET_IS_OPEN,
+  REMOVE_EVENT,
 } from "./chatTypes";
 
 export const setChatNotifyOn = (event) => {
@@ -12,15 +12,16 @@ export const setChatNotifyOn = (event) => {
   };
 };
 
-export const setChatNotifyOff = () => {
+export const removeEvent = (event) => {
   return {
-    type: SET_IS_CHAT_NOTIFY_OFF,
+    type: REMOVE_EVENT,
+    payLoad: event,
   };
 };
 
-export const setChatNotifyInnerOff = () => {
+export const setChatNotifyOff = () => {
   return {
-    type: SET_IS_CHAT_NOTIFY_INNER_OFF,
+    type: SET_IS_CHAT_NOTIFY_OFF,
   };
 };
 

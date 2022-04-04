@@ -1,5 +1,4 @@
 import axios from "axios";
-import Cookies from "universal-cookie";
 import { StreamChat } from "stream-chat";
 import {
   SIGN_UP_USER_REQUEST,
@@ -19,7 +18,6 @@ import {
 } from "./userTypes";
 
 const client = StreamChat.getInstance(process.env.REACT_APP_STREAM_API_KEY);
-const cookies = new Cookies();
 
 export const signUpUserRequest = () => {
   return {
@@ -96,11 +94,11 @@ export const signUserUp = (userData, history) => {
           user.chatToken
         );
 
-        cookies.set("chatToken", user.chatToken);
-        cookies.set("id", user._id);
-        cookies.set("name", user.name);
-        cookies.set("photo", user.photo);
-        cookies.set("email", user.email);
+        localStorage.setItem("chatToken", user.chatToken);
+        localStorage.setItem("id", user._id);
+        localStorage.setItem("name", user.name);
+        localStorage.setItem("photo", user.photo);
+        localStorage.setItem("email", user.email);
 
         dispatch(signUpUserSuccess(user));
         history.push("/boards");
@@ -133,11 +131,11 @@ export const signUserIn = (userData, history) => {
           user.chatToken
         );
 
-        cookies.set("chatToken", user.chatToken);
-        cookies.set("id", user._id);
-        cookies.set("name", user.name);
-        cookies.set("photo", user.photo);
-        cookies.set("email", user.email);
+        localStorage.setItem("chatToken", user.chatToken);
+        localStorage.setItem("id", user._id);
+        localStorage.setItem("name", user.name);
+        localStorage.setItem("photo", user.photo);
+        localStorage.setItem("email", user.email);
 
         dispatch(signInUserSuccess(user));
         history.push("/boards");

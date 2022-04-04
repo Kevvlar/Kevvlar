@@ -90,6 +90,6 @@ export {
 export {
   setChatNotifyOn,
   setChatNotifyOff,
-  setChatNotifyInnerOff,
   setIsOpen,
+  removeEvent,
 } from "./chat/chatActions";

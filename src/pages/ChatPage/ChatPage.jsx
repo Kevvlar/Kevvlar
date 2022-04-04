@@ -1,26 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Chat } from "stream-chat-react";
 import { connect } from "react-redux";
 import { StreamChat } from "stream-chat";
-import Cookies from "universal-cookie";
 
 import ChannelListContainer from "../../components/Chat/ChannelListContainer";
 import ChannelContainer from "../../components/Chat/ChannelContainer";
 
 import "./chatPage.css";
 
-const cookies = new Cookies();
 const client = StreamChat.getInstance(process.env.REACT_APP_STREAM_API_KEY);
 
-if (!client._user && cookies.get("chatToken")) {
+if (!client._user && localStorage.getItem("chatToken")) {
   client.connectUser(
     {
-      id: cookies.get("id"),
-      name: cookies.get("name"),
-      photo: cookies.get("photo"),
-      email: cookies.get("email"),
+      id: localStorage.getItem("id"),
+      name: localStorage.getItem("name"),
+      photo: localStorage.getItem("photo"),
+      email: localStorage.getItem("email"),
     },
-    cookies.get("chatToken")
+    localStorage.getItem("chatToken")
   );
 }
 

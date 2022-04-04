@@ -11,6 +11,7 @@ const ChatButton = ({
   turnOffChatNotify,
   notify,
   toggleOpenChat,
+  isOpen,
 }) => {
   return (
     <div className="chat-button-container">
@@ -25,7 +26,7 @@ const ChatButton = ({
         Chat
         <div
           style={
-            notify
+            notify && isOpen !== true
               ? {
                   backgroundColor: "#c72c2c",
                   borderRadius: "20px",
@@ -47,6 +48,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.user.userData,
     notify: state.chat.notify,
+    isOpen: state.chat.isOpen,
   };
 };
 
