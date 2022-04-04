@@ -22,10 +22,10 @@ const PreviewItem = ({ filteredUser, events, removeChannelNotify }) => {
         style={
           events.includes(filteredUser.user.name)
             ? {
-                backgroundColor: "#c72c2c",
+                backgroundColor: "#e54343",
                 borderRadius: "20px",
-                width: "15px",
-                height: "15px",
+                width: "8px",
+                height: "8px",
                 marginLeft: "10px",
               }
             : {}
