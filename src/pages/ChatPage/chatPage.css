@@ -72,6 +72,10 @@
   justify-content: center;
 }
 
+#root > div > div > span > div > div > div.channel__container > div > div > div > div {
+  width: 500px;
+}
+
 :root {
   --primary-color: #343d46;
   --primary-color-alpha: #005fff1a;
