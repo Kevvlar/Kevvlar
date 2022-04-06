@@ -4,6 +4,7 @@ import {
   COLUMN_MODAL,
   CARD_MODAL,
   USER_MODAL,
+  MEETING_MODAL,
   CHAT_MODAL,
   ADD,
 } from "./modalTypes";
@@ -24,6 +25,13 @@ export const setBoardModal = (actionType = ADD) => {
 export const setUserModal = (actionType = ADD) => {
   return {
     type: USER_MODAL,
+    payLoad: actionType,
+  };
+};
+
+export const setMeetingModal = (actionType = ADD) => {
+  return {
+    type: MEETING_MODAL,
     payLoad: actionType,
   };
 };

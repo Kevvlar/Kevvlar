@@ -5,6 +5,7 @@ import {
   CARD_MODAL,
   USER_MODAL,
   CHAT_MODAL,
+  MEETING_MODAL,
 } from "./modalTypes";
 
 const initialState = {
@@ -44,6 +45,14 @@ const modalReducer = (state = initialState, action) => {
         ...state,
         showModal: true,
         modalType: USER_MODAL,
+        modalActionType: action.payLoad,
+      };
+
+    case MEETING_MODAL:
+      return {
+        ...state,
+        showModal: true,
+        modalType: MEETING_MODAL,
         modalActionType: action.payLoad,
       };
 

@@ -7,6 +7,7 @@ import AdminAvatar from "../admin-avatar/AdminAvatar";
 
 import {
   setUserModal,
+  setMeetingModal,
   clearColumns,
   toggleActivity,
   toggleFileModal,
@@ -29,6 +30,7 @@ const BoardNavBar = ({
   board,
   history,
   showUserModal,
+  showMeetingModal,
   emptyColumns,
   user,
   showActivity,
@@ -84,7 +86,7 @@ const BoardNavBar = ({
         <button
           className="boardnavbar-btn"
           onClick={() => {
-            
+            showMeetingModal();
           }}
         >
           <MeetingIcon />
@@ -124,7 +126,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    showUserModal: (type) => dispatch(setUserModal(type)),
+    showUserModal: () => dispatch(setUserModal()),
+    showMeetingModal: () => dispatch(setMeetingModal()),
     emptyColumns: () => dispatch(clearColumns()),
     showActivity: () => dispatch(toggleActivity()),
     showFile: () => dispatch(toggleFileModal()),
