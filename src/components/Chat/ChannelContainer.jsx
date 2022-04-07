@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Avatar,
-  Channel,
-  MessageTeam,
-  useChatContext,
-} from "stream-chat-react";
+import { Channel, MessageTeam } from "stream-chat-react";
 
 import ChannelInner from "./ChannelInner";
 import CreateChannel from "./CreateChannel";
@@ -17,8 +12,6 @@ const ChannelContainer = ({
   setIsEditing,
   createType,
 }) => {
-  const { client } = useChatContext();
-
   if (isCreating) {
     return (
       <div className="channel__container">
@@ -51,7 +44,6 @@ const ChannelContainer = ({
       <Channel
         EmptyStateIndicator={EmptyState}
         Message={(messageProps, i) => <MessageTeam key={i} {...messageProps} />}
-        Avatar={() => <Avatar image={client._user.photo} size={30} />}
       >
         <ChannelInner setIsEditing={setIsEditing} />
       </Channel>
