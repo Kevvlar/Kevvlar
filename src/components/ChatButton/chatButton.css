@@ -7,16 +7,15 @@
 
 .chat-button {
   background: transparent;
-  height: 30px;
-  border: 1px solid #03a9f4;
-  border-radius: 4px;
-  color: #03a9f4;
-  width: fit-content;
+  height: 40px;
+  border: 1px solid #A0A0A0;
+  border-radius: 51px;
+  color: #b9b9b9;
   text-align: center;
-  width: 70px;
+  width: 40px;
 }
 
 .chat-button:hover {
-  background-color: #03a9f4;
+  background-color: #2A323A;
   color: white;
 }

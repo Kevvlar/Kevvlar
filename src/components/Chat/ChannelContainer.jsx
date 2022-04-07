@@ -51,7 +51,7 @@ const ChannelContainer = ({
       <Channel
         EmptyStateIndicator={EmptyState}
         Message={(messageProps, i) => <MessageTeam key={i} {...messageProps} />}
-        Avatar={() => <Avatar image={client._user.photo} size={40} />}
+        Avatar={() => <Avatar image={client._user.photo} size={30} />}
       >
         <ChannelInner setIsEditing={setIsEditing} />
       </Channel>

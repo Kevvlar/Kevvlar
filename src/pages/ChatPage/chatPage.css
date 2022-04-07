@@ -72,10 +72,6 @@
   justify-content: center;
 }
 
-#root > div > div > span > div > div > div.channel__container > div > div > div > div {
-  width: 500px;
-}
-
 :root {
   --primary-color: #343d46;
   --primary-color-alpha: #005fff1a;
@@ -386,6 +382,10 @@ body {
 
 .str-chat__message-team {
   padding: 0px 20px !important;
+}
+
+.str-chat__message-team .str-chat__avatar {
+  background-color: #23232373;
 }
 
 .str-chat__thread-list .str-chat__message-team {
@@ -991,6 +991,7 @@ body {
 
 .team-channel-header__name-wrapper .str-chat__avatar {
   margin-right: 8px;
+  background-color: #23232373;
 }
 
 .team-channel-header__name.user {
@@ -1105,6 +1106,7 @@ body {
 
 .channel-preview__item.single .str-chat__avatar {
   margin-right: 12px;
+  background-color: #23232373;
 }
 
 .channel-preview__item.multi .str-chat__avatar {

@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { ChatIcon } from "../../assets/svg/iconlibrary";
 
 import { setChatModal, setChatNotifyOff, setIsOpen } from "../../redux";
 
@@ -23,7 +24,7 @@ const ChatButton = ({
           showChatModal();
         }}
       >
-        Chat
+        <ChatIcon />
         <div
           style={
             notify && isOpen !== true
@@ -34,7 +35,7 @@ const ChatButton = ({
                   height: "15px",
                   position: "fixed",
                   right: "13px",
-                  bottom: "29px",
+                  bottom: "34px",
                 }
               : {}
           }
