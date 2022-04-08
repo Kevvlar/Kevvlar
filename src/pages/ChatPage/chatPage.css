@@ -282,7 +282,7 @@ body {
 }
 
 .str-chat-channel {
-  height: 100%;
+  height: 100% !important;
 }
 
 .str-chat__load-more-button {
@@ -1949,7 +1949,6 @@ div.rta__autocomplete.str-chat__emojisearch {
 }
 
 .str-chat__list {
-  flex: 0.55 1 !important;
   background: #343d45;
 }
 
