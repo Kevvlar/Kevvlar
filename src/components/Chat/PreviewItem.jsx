@@ -12,11 +12,30 @@ const PreviewItem = ({ filteredUser, events, removeChannelNotify }) => {
         removeChannelNotify(filteredUser.user.name);
       }}
     >
-      <Avatar
-        image={filteredUser?.user?.photo}
-        name={filteredUser?.user?.name}
-        size={24}
-      />
+      <span style={{ position: "relative" }}>
+        <Avatar
+          image={filteredUser?.user?.photo}
+          name={filteredUser?.user?.name}
+          size={24}
+        />
+        <div
+          style={
+            filteredUser.user.online
+              ? {
+                  backgroundColor: "#3BA55D",
+                  borderRadius: "20px",
+                  width: "8px",
+                  height: "8px",
+                  position: "absolute",
+                  left: "15px",
+                  bottom: "0",
+                }
+              : {}
+          }
+        >
+          {console.log(filteredUser)}
+        </div>
+      </span>
       <p>{filteredUser?.user?.name}</p>
       <span
         style={
