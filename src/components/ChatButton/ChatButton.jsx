@@ -29,7 +29,7 @@ const ChatButton = ({
           style={
             notify && isOpen !== true
               ? {
-                  backgroundColor: "#c72c2c",
+                  backgroundColor: "#03a9f4",
                   borderRadius: "20px",
                   width: "15px",
                   height: "15px",
