@@ -27,7 +27,6 @@ class ChatModal extends React.Component {
           this.props.turnChatNotificationOn(event.user.name);
         }
       }
-      console.log(event);
     });
   }
 

@@ -32,9 +32,7 @@ const PreviewItem = ({ filteredUser, events, removeChannelNotify }) => {
                 }
               : {}
           }
-        >
-          {console.log(filteredUser)}
-        </div>
+        ></div>
       </span>
       <p>{filteredUser?.user?.name}</p>
       <span
