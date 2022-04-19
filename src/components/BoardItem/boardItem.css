@@ -24,6 +24,8 @@
 
 .board-item-info-container {
   min-height: 70px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .sub-color {
@@ -58,4 +60,27 @@
 
 .admin-name {
   color: #ffffff54;
+}
+
+.board-graph {
+  display: flex;
+  width: 98px;
+  height: 48px;
+  overflow: hidden;
+  justify-content: flex-end;
+  align-items: flex-end;
+  border-bottom: 1px dotted #8498aaab;
+  margin-left: 10px;
+}
+
+.graph-square {
+  width: 5px;
+  height: 5px;
+  border-radius: 1px;
+  background-color: rgba(93, 118, 139, 0.56);
+  margin: 1px;
+}
+
+.graph-square:hover {
+  background-color: rgba(166, 197, 224, 0.56);
 }
