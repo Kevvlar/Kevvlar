@@ -59,6 +59,7 @@ const BoardModal = ({
       >
         <h2 className="modal-title">Add New Board</h2>
         <input
+          autoFocus
           className="modal-board-text"
           type="text"
           name="boardName"
@@ -95,6 +96,7 @@ const BoardModal = ({
       >
         <h2 className="modal-title">Edit Board</h2>
         <input
+          autoFocus
           className="modal-board-text"
           type="text"
           name="editBoardName"

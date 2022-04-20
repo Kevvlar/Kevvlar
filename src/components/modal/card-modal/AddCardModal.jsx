@@ -178,6 +178,7 @@ const AddCardModal = ({
       <div className="big-card-container">
         <div className="input-description-container">
           <input
+            autoFocus
             type="text"
             id="input-big"
             maxLength={75}

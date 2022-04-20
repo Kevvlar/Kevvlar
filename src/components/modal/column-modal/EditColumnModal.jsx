@@ -44,6 +44,7 @@ const EditColumnModal = ({
         <div className="modal-body">
           <h2 className="modal-title">Edit Column</h2>
           <input
+            autoFocus
             className="modal-board-text"
             type="text"
             placeholder="Edit Column"

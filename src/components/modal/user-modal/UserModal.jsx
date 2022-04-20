@@ -44,6 +44,7 @@ const UserModal = ({
       >
         <h2 className="modal-title">Add User To Board</h2>
         <input
+          autoFocus
           className="modal-board-text"
           type="email"
           name="userEmail"
