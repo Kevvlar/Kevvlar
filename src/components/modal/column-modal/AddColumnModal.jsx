@@ -53,6 +53,7 @@ const AddColumnModal = ({
         <div className="modal-body">
           <h2 className="modal-title">Add New Column</h2>
           <input
+            autoFocus
             className="modal-board-text"
             type="text"
             placeholder="New Column"

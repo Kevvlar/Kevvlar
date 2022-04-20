@@ -149,4 +149,5 @@ input[type="file"]::file-selector-button:hover {
 .file-input {
   color: rgb(211, 211, 211);
   font-size: 14px;
+  width: 275px;
 }

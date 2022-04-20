@@ -37,19 +37,6 @@ const mapOrder = (array, order, key) => {
   return array;
 };
 
-const enableScrolling = () => {
-  // var parent = document.getElementsByClassName("scroll-enabled")[0];
-  // parent.classList.add('indiana-scroll-container');
-  // parent.classList.remove('testing');
-  // parent.classList.add('indiana-scroll-container--hide-scrollbars');
-};
-
-const disableScrolling = () => {
-  // var parent = document.getElementsByClassName("scroll-enabled")[0];
-  // parent.classList.remove('indiana-scroll-container');
-  // parent.classList.add('testing');
-  // parent.classList.remove('indiana-scroll-container--hide-scrollbars');
-};
 
 const ColumnHolder = ({
   columns,
@@ -69,7 +56,6 @@ const ColumnHolder = ({
   addActivity,
 }) => {
   const onDragEnd = (result) => {
-    enableScrolling();
     const now = Date.now();
     const { destination, draggableId, source, type } = result;
 
@@ -163,7 +149,7 @@ const ColumnHolder = ({
   };
 
   return (
-    <DragDropContext onDragEnd={onDragEnd} onDragStart={disableScrolling}>
+    <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="all-columns" direction="horizontal" type="column">
         {(provided) => (
           <div

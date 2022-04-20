@@ -8,7 +8,7 @@
   transition: right 300ms ease-out;
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 375px;
 }
 
 .sidenav-right-close-wrapper {
