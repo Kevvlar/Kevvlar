@@ -30,6 +30,7 @@ const NotificationItem = ({
     <div className="task-item">
       <span
         className="board-title-link"
+        title={info.cardTitle}
         onClick={() => {
           socket.emit("exit", boardId);
           socket.disconnect();

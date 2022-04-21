@@ -79,7 +79,6 @@ const EditCardModal = ({
   const [editCardUsers, setEditCardUsers] = useState(currentCard.users);
   const [newCheckedUsers, setNewCheckedUsers] = useState([]);
   const [showDropDown, setShowDropDown] = useState(false);
-
   const rteChange = (content, delta, source, editor) => {
     setEditCardBody(editor.getHTML());
     // console.log(editor.getHTML()); // rich text
@@ -261,6 +260,18 @@ const EditCardModal = ({
                   </li>
                 ))}
               </ul>
+            </div>
+            <div className="assigned-user-container">
+              {editCardUsers.map((person, index) => (
+                <div className="admin-avatar-container" key={index}>
+                  <img
+                    className="admin-avatar-image"
+                    alt="img"
+                    src={person?.photo}
+                    title={person?.name}
+                  />
+                </div>
+              ))}
             </div>
           </div>
           <div className="save-delete-container">

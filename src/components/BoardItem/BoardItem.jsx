@@ -23,8 +23,6 @@ const BoardItem = ({
 }) => {
 
   const [graphdata, setGraphdata] = useState([]);
-  const currentDate = new Date();
-  const currentDay = currentDate.getDate();
 
   useEffect(() => {
     axios
@@ -70,8 +68,6 @@ const BoardItem = ({
       barChartArray[index]++
     }
   })
-
-  console.log(barChartArray);
 
   const finalchart = () => {
 

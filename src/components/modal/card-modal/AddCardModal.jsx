@@ -267,6 +267,18 @@ const AddCardModal = ({
                 ))}
               </ul>
             </div>
+            <div className="assigned-user-container">
+              {assignedUsers.map((person, index) => (
+                <div className="admin-avatar-container" key={index}>
+                  <img
+                    className="admin-avatar-image"
+                    alt="img"
+                    src={person?.photo}
+                    title={person?.name}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
           <button className="modal-board-button" type="submit">
             Save

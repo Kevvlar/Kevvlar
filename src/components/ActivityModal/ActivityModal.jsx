@@ -39,7 +39,7 @@ const ActivityModal = ({
                 <div className="activity-assigned-user">
                   {activity?.info?.userAssigned}&nbsp;
                 </div>
-                <div className="activity-card-title">
+                <div className="activity-card-title" title={activity?.info?.cardTitle}>
                   {activity?.info?.cardTitle}&nbsp;
                 </div>
               </div>
