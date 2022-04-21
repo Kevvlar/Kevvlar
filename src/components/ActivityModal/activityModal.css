@@ -51,6 +51,7 @@
 .activity-info-holder {
   display: flex;
   height: 18px;
+  font-size: 14px;
   overflow: hidden;
 }
 
@@ -65,8 +66,13 @@
 }
 
 .activity-card-title {
-  color: white;
+  color: #03a9f4;
   white-space: nowrap;
+  cursor: pointer;
+}
+
+.activity-card-title:hover {
+  opacity: 0.5;
 }
 
 .activity-assigned-user {
