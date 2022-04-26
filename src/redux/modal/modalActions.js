@@ -6,7 +6,28 @@ import {
   USER_MODAL,
   CHAT_MODAL,
   ADD,
+  SHOW_CONFERENCE_MODAL,
+  MINIMIZE_CONFERENCE_MODAL,
+  CLOSE_CONFERENCE_MODAL,
 } from "./modalTypes";
+
+export const showConferenceModal = () => {
+  return {
+    type: SHOW_CONFERENCE_MODAL,
+  };
+};
+
+export const minimizeConferenceModal = () => {
+  return {
+    type: MINIMIZE_CONFERENCE_MODAL,
+  };
+};
+
+export const closeConferenceModal = () => {
+  return {
+    type: CLOSE_CONFERENCE_MODAL,
+  };
+};
 
 export const closeModal = () => {
   return {

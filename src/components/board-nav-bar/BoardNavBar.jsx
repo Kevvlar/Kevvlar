@@ -11,6 +11,7 @@ import {
   toggleActivity,
   toggleFileModal,
   fetchFiles,
+  showConferenceModal,
 } from "../../redux";
 
 import {
@@ -34,6 +35,8 @@ const BoardNavBar = ({
   showActivity,
   showFile,
   getFiles,
+  startMeeting,
+  conferenceState,
 }) => {
   return (
     <div className="boardnavbar">
@@ -84,11 +87,13 @@ const BoardNavBar = ({
         <button
           className="boardnavbar-btn"
           onClick={() => {
-            
+            startMeeting();
           }}
         >
           <MeetingIcon />
-          <div className="boardnavbar-boardtitle">Meeting</div>
+          <div className="boardnavbar-boardtitle">
+            {conferenceState === "mini" ? "Show Meeting" : "Meeting"}
+          </div>
         </button>
         <button
           className="boardnavbar-btn"
@@ -119,6 +124,7 @@ const mapStateToProps = (state) => {
     boardState: state.board.loading,
     user: state.user.userData,
     activities: state.column.activities,
+    conferenceState: state.modal.conferenceState,
   };
 };
 
@@ -129,6 +135,7 @@ const mapDispatchToProps = (dispatch) => {
     showActivity: () => dispatch(toggleActivity()),
     showFile: () => dispatch(toggleFileModal()),
     getFiles: (token, boardId) => dispatch(fetchFiles(token, boardId)),
+    startMeeting: () => dispatch(showConferenceModal()),
   };
 };
 

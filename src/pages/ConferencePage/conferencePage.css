@@ -1,0 +1,18 @@
+.conference-page {
+    border-radius: 10px;
+    background-color: #1f2529;
+    position: relative;
+    box-shadow: 0 1px 8px 3px rgb(0 0 0 / 11%);
+    box-sizing: border-box;
+    width: 700px;
+    max-width: 900px;
+    height: 600px;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    align-items: center;
+    justify-content: center;
+}

@@ -8,3 +8,7 @@ export const ADD = "ADD";
 export const REMOVE = "REMOVE";
 export const EDIT = "EDIT";
 export const DELETE = "DELETE";
+
+export const SHOW_CONFERENCE_MODAL = "SHOW_CONFERENCE_MODAL";
+export const MINIMIZE_CONFERENCE_MODAL = "MINIMIZE_CONFERENCE_MODAL";
+export const CLOSE_CONFERENCE_MODAL = "CLOSE_CONFERENCE_MODAL";

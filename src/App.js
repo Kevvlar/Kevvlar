@@ -14,7 +14,7 @@ import RedirectToMainPage from "./components/auth/RedirectToMainPage";
 import "./App.css";
 import "stream-chat-react/dist/css/index.css";
 
-const App = ({ user }) => {
+const App = () => {
   return (
     <div className="App">
       <Switch>
