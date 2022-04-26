@@ -54,7 +54,7 @@ const EditCardModal = ({
       ["emoji"],
     ],
     clipboard: {
-      matchVisual: false,
+      matchVisual: true,
     },
     ImageResize: {
       modules: ["Resize", "DisplaySize"],
@@ -183,6 +183,7 @@ const EditCardModal = ({
               onChange={rteChange}
               value={editCardBody}
               className="big-editor"
+              id="ql-editor-big"
             />
           </div>
         </div>
@@ -262,7 +263,7 @@ const EditCardModal = ({
               </ul>
             </div>
             <div className="assigned-user-container">
-              {editCardUsers.map((person, index) => (
+              {editCardUsers?.map((person, index) => (
                 <div className="admin-avatar-container" key={index}>
                   <img
                     className="admin-avatar-image"

@@ -38,6 +38,35 @@
   right: 0px;
 }
 
+.close-icon:hover {
+  opacity: 0.5;
+}
+
+.fullscreen-icon {
+  color: white;
+  padding: 10px;
+  float: right;
+  cursor: pointer;
+  position: absolute;
+  top: 1px;
+  right: 20px;
+}
+
+.fullscreen-icon:hover {
+  opacity: 0.5;
+}
+
+.fullscreen-modal {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+}
+
+.fullscreen-modal-big-card {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
 .modal-body-title {
   background: transparent;
   font-weight: 600;
@@ -302,6 +331,7 @@
   .input-description-container {
     height: 70%;
     width: 100%;
+    max-width: 100%;
   }
 
   .modal-wrapper {
