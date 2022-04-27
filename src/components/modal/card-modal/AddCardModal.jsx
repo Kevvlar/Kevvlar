@@ -173,7 +173,7 @@ const AddCardModal = ({
         if (text.includes('iframe')) {
           console.log('iframe - detected');
 
-          const editor = document.getElementsByClassName('ql-editor')[1];
+          const editor = document.getElementById('ql-editor-big').getElementsByTagName('div')[1].getElementsByTagName('div')[0];
           const figmasrc = text.match(/src\=([^\s]*)\s/)[1];
           const finalsrc = figmasrc.substring(1,figmasrc.length - 1);
           console.log(finalsrc);
@@ -225,6 +225,7 @@ const AddCardModal = ({
               onChange={rteChange}
               value={cardBody}
               className="big-editor"
+              id="ql-editor-big"
             />
           </div>
         </div>
