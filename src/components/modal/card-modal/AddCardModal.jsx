@@ -166,6 +166,37 @@ const AddCardModal = ({
     }
   };
 
+  const pasteEvent = () => {
+    navigator.clipboard.readText()
+      .then(text => {
+        console.log(text);
+        if (text.includes('iframe')) {
+          console.log('iframe - detected');
+
+          const editor = document.getElementsByClassName('ql-editor')[1];
+          const figmasrc = text.match(/src\=([^\s]*)\s/)[1];
+          const finalsrc = figmasrc.substring(1,figmasrc.length - 1);
+          console.log(finalsrc);
+          const figmaObject = `<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="100%" height="70%" src="${finalsrc}" allowfullscreen></iframe>`;
+          console.log(figmaObject);
+          // editor.append(figmaObject);
+          editor.insertAdjacentHTML('beforeend', figmaObject);
+
+          for (const p of document.querySelectorAll("p")) {
+            if (p.textContent.includes("iframe")) {
+              p.remove();
+            }
+          }
+        }
+        else {
+          console.log('no iframe detected');
+        }
+      })
+      .catch(err => {
+        console.error('Failed to read clipboard contents: ', err);
+      });
+  };
+
   return (
     <form
       onSubmit={(e) => {
@@ -187,7 +218,7 @@ const AddCardModal = ({
             onChange={(e) => setCardTitle(e.target.value)}
           />
 
-          <div className="modal-body-description">
+          <div className="modal-body-description" onPaste={pasteEvent}>
             <ReactQuill
               theme="snow"
               modules={MODULES}
