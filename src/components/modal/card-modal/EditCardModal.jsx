@@ -8,7 +8,6 @@ import ImageResize from "quill-image-resize";
 import MagicUrl from "quill-magic-url";
 import * as Emoji from "quill-emoji";
 import dateFormat from "dateformat";
-import { Markup } from 'interweave';
 
 import "quill-emoji/dist/quill-emoji.css";
 
