@@ -210,6 +210,7 @@ const AddCardModal = ({
             className="modal-body-title"
             value={cardTitle}
             onChange={(e) => setCardTitle(e.target.value)}
+            autoFocus
           />
 
           <div className="modal-body-description" onPaste={pasteEvent}>

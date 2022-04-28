@@ -58,6 +58,7 @@ const AddColumnModal = ({
             placeholder="New Column"
             value={columnTitle}
             onChange={(e) => setColumnTitle(e.target.value)}
+            autoFocus
           />
 
           <button className="modal-board-button" type="submit">

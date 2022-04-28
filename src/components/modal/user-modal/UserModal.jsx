@@ -49,6 +49,7 @@ const UserModal = ({
           name="userEmail"
           value={userEmail}
           onChange={(e) => setUserEmail(e.target.value)}
+          autoFocus
         />
         <div className="modal-button-container">
           <button className="modal-board-button" type="submit">

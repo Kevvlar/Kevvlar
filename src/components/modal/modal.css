@@ -43,6 +43,14 @@
 .modal-board-text::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
 	color: #9b9b9ba9;
 	opacity: 1; /* Firefox */
+  text-align: center;
+}
+
+.modal-board-text::-webkit-input-placeholder {
+  text-align: center;
+}
+.modal-board-text:-moz-placeholder {
+  text-align: center;
 }
 
 .modal-delete-button:hover {
