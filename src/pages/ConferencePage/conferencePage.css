@@ -14,5 +14,10 @@
     flex-direction: column;
     row-gap: 10px;
     align-items: center;
-    justify-content: center;
+}
+
+.conference-buttons {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
 }
