@@ -65,6 +65,7 @@ const BoardModal = ({
           value={boardName}
           onChange={(e) => setBoardName(e.target.value)}
           placeholder="New Board"
+          autoFocus
         />
         <button className="modal-board-button" type="submit">
           Save
@@ -100,6 +101,7 @@ const BoardModal = ({
           name="editBoardName"
           value={editBoardName}
           onChange={(e) => setEditBoardName(e.target.value)}
+          autoFocus
         />
         <button className="modal-board-button" type="submit">
           Save

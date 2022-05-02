@@ -9,6 +9,7 @@
     "axios": "^0.22.0",
     "dateformat": "^5.0.2",
     "firebase-tools": "^10.0.1",
+    "html-react-parser": "^1.4.12",
     "moment": "^2.29.1",
     "quill-emoji": "^0.2.0",
     "quill-image-compress": "^1.2.21",
