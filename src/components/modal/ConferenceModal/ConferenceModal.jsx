@@ -6,8 +6,10 @@ import "./conferenceModal.css";
 
 const conferenceModal = () => {
   return (
-    <div className="conference-modal">
-      <ConferencePage />
+    <div className="modal-wrapper">
+      <div className="conference-modal">
+        <ConferencePage />
+      </div>
     </div>
   );
 };
