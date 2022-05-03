@@ -22,6 +22,7 @@ import {
   FileshareIcon,
   ActivityIcon,
   MeetingIcon,
+  MeetingRedIcon
 } from "../../assets/svg/iconlibrary";
 
 import "./boardnavbar.css";
@@ -84,7 +85,22 @@ const BoardNavBar = ({
       </div>
       <div className="boardnavbar-group">
         <CardSearchBar />
-        <button
+        {conferenceState === "mini" ?
+          (<button
+          className="boardnavbar-btn in-meeting"
+          onClick={() => {
+            startMeeting();
+          }}
+        >
+          <MeetingRedIcon
+          className="in-meeting-icon" 
+          />
+          <div className="boardnavbar-boardtitle in-meeting-title">
+            In Meeting
+          </div>
+        </button>)
+        :
+        (<button
           className="boardnavbar-btn"
           onClick={() => {
             startMeeting();
@@ -92,9 +108,9 @@ const BoardNavBar = ({
         >
           <MeetingIcon />
           <div className="boardnavbar-boardtitle">
-            {conferenceState === "mini" ? "Show Meeting" : "Meeting"}
+            Meeting
           </div>
-        </button>
+        </button>)}
         <button
           className="boardnavbar-btn"
           onClick={() => {
