@@ -86,3 +86,11 @@
   display: flex;
   padding-left: 15px;
 }
+
+.in-meeting {
+  border: 1px solid #E34B4B;
+}
+
+.in-meeting-title {
+  color: #E34B4B !important;
+}

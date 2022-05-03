@@ -365,6 +365,15 @@ const FullscreenIcon = () => {
   );
 };
 
+const MeetingRedIcon = () => {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12.75 7.875V5.25C12.75 4.8375 12.4125 4.5 12 4.5H3C2.5875 4.5 2.25 4.8375 2.25 5.25V12.75C2.25 13.1625 2.5875 13.5 3 13.5H12C12.4125 13.5 12.75 13.1625 12.75 12.75V10.125L15.75 13.125V4.875L12.75 7.875Z" 
+      fill="#E34B4B"/>
+    </svg>
+  );
+};
+
 // const EditIcon = () => {
 //   return (
 //     <svg
@@ -458,4 +467,5 @@ export {
   MeetingIcon,
   ChatIcon,
   FullscreenIcon,
+  MeetingRedIcon,
 };

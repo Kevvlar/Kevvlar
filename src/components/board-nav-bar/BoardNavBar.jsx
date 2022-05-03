@@ -11,6 +11,7 @@ import {
   toggleActivity,
   toggleFileModal,
   fetchFiles,
+  showConferenceModal,
 } from "../../redux";
 
 import {
@@ -21,6 +22,7 @@ import {
   FileshareIcon,
   ActivityIcon,
   MeetingIcon,
+  MeetingRedIcon
 } from "../../assets/svg/iconlibrary";
 
 import "./boardnavbar.css";
@@ -34,6 +36,8 @@ const BoardNavBar = ({
   showActivity,
   showFile,
   getFiles,
+  startMeeting,
+  conferenceState,
 }) => {
   return (
     <div className="boardnavbar">
@@ -81,15 +85,32 @@ const BoardNavBar = ({
       </div>
       <div className="boardnavbar-group">
         <CardSearchBar />
-        <button
+        {conferenceState === "mini" ?
+          (<button
+          className="boardnavbar-btn in-meeting"
+          onClick={() => {
+            startMeeting();
+          }}
+        >
+          <MeetingRedIcon
+          className="in-meeting-icon" 
+          />
+          <div className="boardnavbar-boardtitle in-meeting-title">
+            In Meeting
+          </div>
+        </button>)
+        :
+        (<button
           className="boardnavbar-btn"
           onClick={() => {
-            
+            startMeeting();
           }}
         >
           <MeetingIcon />
-          <div className="boardnavbar-boardtitle">Meeting</div>
-        </button>
+          <div className="boardnavbar-boardtitle">
+            Meeting
+          </div>
+        </button>)}
         <button
           className="boardnavbar-btn"
           onClick={() => {
@@ -119,6 +140,7 @@ const mapStateToProps = (state) => {
     boardState: state.board.loading,
     user: state.user.userData,
     activities: state.column.activities,
+    conferenceState: state.modal.conferenceState,
   };
 };
 
@@ -129,6 +151,7 @@ const mapDispatchToProps = (dispatch) => {
     showActivity: () => dispatch(toggleActivity()),
     showFile: () => dispatch(toggleFileModal()),
     getFiles: (token, boardId) => dispatch(fetchFiles(token, boardId)),
+    startMeeting: () => dispatch(showConferenceModal()),
   };
 };
 

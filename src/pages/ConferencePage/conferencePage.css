@@ -1,0 +1,39 @@
+.conference-page {
+    border-radius: 10px;
+    background-color: #1f2529;
+    position: relative;
+    box-shadow: 0 1px 8px 3px rgb(0 0 0 / 11%);
+    box-sizing: border-box;
+    width: 90%;
+    max-width: 90%;
+    height: 90%;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.conference-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    width: 100%;
+    height: 30px;
+}
+
+.meeting-iframe {
+    border: none;
+    border-radius: 5px;
+}
+
+.meeting-close-icon{
+    padding: 7px;
+    color: #a0a0a0;
+    cursor: pointer;
+}
+
+.meeting-close-icon:hover {
+    opacity: 0.5;
+}
