@@ -6,7 +6,13 @@ import { minimizeConferenceModal, closeConferenceModal } from "../../redux";
 
 import "./conferencePage.css";
 
-const ConferencePage = ({ minimizeMeeting, closeMeeting, boardId, user }) => {
+const ConferencePage = ({
+  minimizeMeeting,
+  closeMeeting,
+  boardId,
+  user,
+  boardName,
+}) => {
   return (
     <div className="conference-page">
       <div className="conference-buttons">
@@ -39,13 +45,13 @@ const ConferencePage = ({ minimizeMeeting, closeMeeting, boardId, user }) => {
         />
       </div>
       <iframe
-        src="https://video-app-8861-6948-dev.twil.io?passcode=73562688616948"
+        src="https://video-app-8308-1724-dev.twil.io?passcode=76674183081724"
         title="Kevvlar Video Conference"
         allow="camera;microphone;display-capture;"
         width="100%"
         height="100%"
         className="meeting-iframe"
-        name={`${boardId}+${user.name}`}
+        name={`${boardId}+${user.name}+${boardName}`}
       ></iframe>
     </div>
   );
@@ -54,6 +60,7 @@ const ConferencePage = ({ minimizeMeeting, closeMeeting, boardId, user }) => {
 const mapStateToProps = (state) => {
   return {
     boardId: state.board.selectBoard.id,
+    boardName: state.board.selectBoard.title,
     user: state.user.userData,
   };
 };
