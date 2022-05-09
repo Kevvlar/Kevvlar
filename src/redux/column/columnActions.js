@@ -520,6 +520,28 @@ export const setCurrentCardData = (cardObj) => {
   };
 };
 
+export const fetchCard = (token, boardId, cardId) => {
+  return (dispatch) => {
+    axios
+      .get(`https://kevvlar.herokuapp.com/api/v1/cards/${cardId}`, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          boardId,
+        },
+      })
+      .then((response) => {
+        const card = response.data.data.card;
+        dispatch(setCurrentCardData(card));
+      })
+      .catch((error) => {
+        dispatch(fetchColumnsFailure(error.message));
+      });
+  };
+};
+
 export const emitCreateNewColumnIO = (socket, data) => {
   return () => {
     socket.emit("add-new-column", data);

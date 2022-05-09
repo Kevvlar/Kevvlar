@@ -22,8 +22,11 @@ const App = () => {
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/error" component={ErrorPage} />
-        <PrivateRoute exact path="/boards/:boardId" component={ActivityPage} />
-        <PrivateRoute path="/boards" component={BoardsPage} />
+        <PrivateRoute
+          path="/boards/:boardId/:cardId?"
+          component={ActivityPage}
+        />
+        <PrivateRoute exact path="/boards" component={BoardsPage} />
       </Switch>
     </div>
   );

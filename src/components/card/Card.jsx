@@ -5,7 +5,7 @@ import { FaEllipsisH } from "react-icons/fa";
 import { Draggable } from "react-beautiful-dnd";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
-import parse from 'html-react-parser';
+import parse from "html-react-parser";
 
 import {
   setCardModal,
@@ -28,11 +28,12 @@ const Card = ({
   const currentDescription = card?.description;
 
   const newDescription = parse(currentDescription, {
-    replace: domNode => {
-      if (domNode.attribs && domNode.name === 'iframe') {
+    replace: (domNode) => {
+      if (domNode.attribs && domNode.name === "iframe") {
         return <span>//figma iframe</span>;
       }
-  }});
+    },
+  });
 
   return (
     <Draggable draggableId={card.id} index={index}>
