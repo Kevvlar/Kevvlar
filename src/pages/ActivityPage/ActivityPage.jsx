@@ -57,7 +57,7 @@ class MainPage extends React.Component {
       this.props.getBoard(this.props.user.token, boardId);
       this.props.getCardData(this.props.user.token, boardId, cardId);
       this.props.getColumns(this.props.user.token, boardId);
-      this.props.editCardModal("EDIT");
+      // this.props.editCardModal("EDIT");
     }
     socket.emit("join-board", this.props.boardId);
     this.props.getNotifyStatus(this.props.user.token);
