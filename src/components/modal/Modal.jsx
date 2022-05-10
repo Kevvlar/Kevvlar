@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import { closeModal } from "../../redux/index";
 import {
@@ -7,6 +8,7 @@ import {
   COLUMN_MODAL,
   CARD_MODAL,
   USER_MODAL,
+  EDIT,
 } from "../../redux/modal/modalTypes";
 
 import BoardModal from "./board-modal/BoardModal";
@@ -16,7 +18,13 @@ import UserModal from "./user-modal/UserModal";
 
 import "./modal.css";
 
-const Modal = ({ closeModal, modalType }) => {
+const Modal = ({
+  closeModal,
+  modalType,
+  currentBoardId,
+  history,
+  actionType,
+}) => {
   switch (modalType) {
     case BOARD_MODAL:
       return (
@@ -36,6 +44,9 @@ const Modal = ({ closeModal, modalType }) => {
           <div
             className="modal-close-overlay"
             onClick={() => {
+              if (actionType === EDIT) {
+                history.push(`/boards/${currentBoardId}`);
+              }
               closeModal();
             }}
           ></div>
@@ -74,6 +85,8 @@ const Modal = ({ closeModal, modalType }) => {
 const mapStateToProps = (state) => {
   return {
     modalType: state.modal.modalType,
+    actionType: state.modal.modalActionType,
+    currentBoardId: state.board.selectBoard.id,
   };
 };
 
@@ -83,4 +96,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Modal);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Modal));
