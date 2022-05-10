@@ -40,8 +40,6 @@ import "./activityPage.css";
 
 class MainPage extends React.Component {
   componentDidMount() {
-    socket.connect();
-    socket.emit("newUser", this.props.user._id);
     this.props.getNotifyStatus(this.props.user.token);
     if (
       this.props.match.params.cardId !== undefined &&
@@ -49,14 +47,20 @@ class MainPage extends React.Component {
       this.props.match.params.boardId !== undefined &&
       this.props.match.params.boardId !== null
     ) {
+      socket.emit("exit", this.props.boardId);
+      socket.disconnect();
       const cardId = this.props.match.params.cardId;
       const boardId = this.props.match.params.boardId;
 
+      socket.connect();
+      socket.emit("newUser", this.props.user._id);
       socket.emit("join-board", boardId);
       this.props.getBoard(this.props.user.token, boardId);
       this.props.getColumns(this.props.user.token, boardId);
       this.props.getCard(this.props.user.token, boardId, cardId);
     } else {
+      socket.connect();
+      socket.emit("newUser", this.props.user._id);
       socket.emit("join-board", this.props.boardId);
       this.props.getColumns(this.props.user.token, this.props.boardId);
     }
