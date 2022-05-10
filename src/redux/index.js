@@ -87,6 +87,7 @@ export {
   handleChangeCardColumnLocal,
   enterCardSearchKey,
   setCurrentColumnData,
+  fetchCard,
   clearColumns,
 } from "./column/columnActions";
 

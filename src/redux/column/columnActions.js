@@ -39,6 +39,7 @@ import {
   addColumnToColumnsOrderLocal,
   fetchBoard,
   removeColumnFromColumnsOrderLocal,
+  setCardModal,
 } from "../index";
 
 // FETCH COLUMNS
@@ -517,6 +518,29 @@ export const setCurrentCardData = (cardObj) => {
   return {
     type: SET_CURRENT_CARD_DATA,
     payLoad: cardObj,
+  };
+};
+
+export const fetchCard = (token, boardId, cardId) => {
+  return (dispatch) => {
+    axios
+      .get(`https://kevvlar.herokuapp.com/api/v1/cards/${cardId}`, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          boardId,
+        },
+      })
+      .then((response) => {
+        const card = response.data.data.card;
+        dispatch(setCurrentCardData(card));
+        dispatch(setCardModal("EDIT"));
+      })
+      .catch((error) => {
+        dispatch(fetchColumnsFailure(error.message));
+      });
   };
 };
 

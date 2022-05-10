@@ -8,6 +8,7 @@ import ImageResize from "quill-image-resize";
 import MagicUrl from "quill-magic-url";
 import * as Emoji from "quill-emoji";
 import dateFormat from "dateformat";
+import { withRouter } from "react-router-dom";
 
 import "quill-emoji/dist/quill-emoji.css";
 
@@ -38,6 +39,7 @@ const EditCardModal = ({
   notify,
   notifyOff,
   addActivity,
+  history,
 }) => {
   Quill.register("modules/imageCompress", ImageCompress);
   Quill.register("modules/ImageResize", ImageResize);
@@ -139,6 +141,7 @@ const EditCardModal = ({
     }
 
     socket.emit("edit-card", cardObj);
+    history.push(`/boards/${currentBoardId}`);
     closeModal();
   };
 
@@ -157,29 +160,32 @@ const EditCardModal = ({
   };
 
   const pasteEvent = () => {
-    navigator.clipboard.readText()
-      .then(text => {
-        if (text.includes('iframe' && 'figma')) {
-          const editor = document.getElementById('ql-editor-big').getElementsByTagName('div')[1].getElementsByTagName('div')[0];
+    navigator.clipboard
+      .readText()
+      .then((text) => {
+        if (text.includes("iframe" && "figma")) {
+          const editor = document
+            .getElementById("ql-editor-big")
+            .getElementsByTagName("div")[1]
+            .getElementsByTagName("div")[0];
           const figmasrc = text.match(/src\=([^\s]*)\s/)[1];
-          const finalsrc = figmasrc.substring(1,figmasrc.length - 1);
+          const finalsrc = figmasrc.substring(1, figmasrc.length - 1);
           const figmaObject = `<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="100%" height="70%" src="${finalsrc}" allowfullscreen></iframe>`;
-          editor.insertAdjacentHTML('beforeend', figmaObject);
+          editor.insertAdjacentHTML("beforeend", figmaObject);
 
           for (const p of document.querySelectorAll("p")) {
             if (p.textContent.includes("iframe" && "figma")) {
               p.remove();
             }
           }
-        }
-        else {
-          console.log('Not a figma iframe');
+        } else {
+          console.log("Not a figma iframe");
         }
       })
-      .catch(err => {
-        console.error('Failed to read clipboard contents: ', err);
+      .catch((err) => {
+        console.error("Failed to read clipboard contents: ", err);
       });
-  }
+  };
 
   return (
     <form
@@ -329,6 +335,7 @@ const EditCardModal = ({
                   boardId: currentBoardId,
                 });
                 socket.emit("delete-card", deleteObj);
+                history.push(`/boards/${currentBoardId}`);
                 closeModal();
               }}
             >
@@ -368,4 +375,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditCardModal);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(EditCardModal));
