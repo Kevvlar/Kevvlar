@@ -32,7 +32,6 @@ import {
   clearColumns,
   closeModal,
   fetchBoard,
-  setCardModal,
   setCurrentColumnData,
   fetchCard,
 } from "../../redux";
@@ -43,25 +42,24 @@ class MainPage extends React.Component {
   componentDidMount() {
     socket.connect();
     socket.emit("newUser", this.props.user._id);
+    this.props.getNotifyStatus(this.props.user.token);
     if (
       this.props.match.params.cardId !== undefined &&
       this.props.match.params.cardId !== null &&
       this.props.match.params.boardId !== undefined &&
       this.props.match.params.boardId !== null
     ) {
-      this.props.emptyColumns();
       const cardId = this.props.match.params.cardId;
       const boardId = this.props.match.params.boardId;
 
       socket.emit("join-board", boardId);
       this.props.getBoard(this.props.user.token, boardId);
-      this.props.getCardData(this.props.user.token, boardId, cardId);
       this.props.getColumns(this.props.user.token, boardId);
-      // this.props.editCardModal("EDIT");
+      this.props.getCard(this.props.user.token, boardId, cardId);
+    } else {
+      socket.emit("join-board", this.props.boardId);
+      this.props.getColumns(this.props.user.token, this.props.boardId);
     }
-    socket.emit("join-board", this.props.boardId);
-    this.props.getNotifyStatus(this.props.user.token);
-    this.props.getColumns(this.props.user.token, this.props.boardId);
 
     window.onoffline = () => {
       this.props.history.push("/error");
@@ -217,9 +215,8 @@ const mapDispatchToProps = (dispatch) => {
     emptyColumns: () => dispatch(clearColumns()),
     closeModal: () => dispatch(closeModal()),
     getBoard: (token, boardId) => dispatch(fetchBoard(token, boardId)),
-    editCardModal: (type) => dispatch(setCardModal(type)),
     getColumnData: (columnObj) => dispatch(setCurrentColumnData(columnObj)),
-    getCardData: (token, boardId, cardId) =>
+    getCard: (token, boardId, cardId) =>
       dispatch(fetchCard(token, boardId, cardId)),
   };
 };
