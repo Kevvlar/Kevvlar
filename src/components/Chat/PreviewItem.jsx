@@ -1,10 +1,12 @@
 import React from "react";
-import { Avatar } from "stream-chat-react";
+import { Avatar, useChatContext } from "stream-chat-react";
 import { connect } from "react-redux";
 
 import { removeEvent } from "../../redux";
 
 const PreviewItem = ({ filteredUser, events, removeChannelNotify }) => {
+  const { client } = useChatContext();
+
   return (
     <div
       className="channel-preview__item single"
@@ -18,6 +20,8 @@ const PreviewItem = ({ filteredUser, events, removeChannelNotify }) => {
           name={filteredUser?.user?.name}
           size={24}
         />
+        {console.log(filteredUser)}
+
         <div
           style={
             filteredUser.user.online
