@@ -28,6 +28,7 @@ const Card = ({
   boardId,
   user,
   isMe,
+  searchKeyWord,
 }) => {
   const currentDescription = card?.description;
   const history = useHistory();
@@ -41,10 +42,34 @@ const Card = ({
   });
 
   const checkIfUserAssignedToCard = (usersArray) => {
-    if (usersArray.length > 0) {
+    if (usersArray.length > 0 && isMe) {
       if (usersArray.some((userItem) => userItem._id === user._id)) {
         return true;
       }
+    }
+  };
+
+  const searchMatch = (title, description) => {
+    const parsedTitle = title.toLowerCase().replace(/\s/g, "");
+    const parsedDescription = description.toLowerCase().replace(/\s/g, "");
+
+    if (searchKeyWord) {
+      if (
+        parsedTitle.includes(searchKeyWord) ||
+        parsedDescription.includes(searchKeyWord)
+      ) {
+        return true;
+      }
+    }
+  };
+
+  const isHighLighted = (userArray, title, description) => {
+    if (checkIfUserAssignedToCard(userArray)) {
+      return true;
+    } else if (searchMatch(title, description)) {
+      return true;
+    } else {
+      return false;
     }
   };
 
@@ -54,7 +79,8 @@ const Card = ({
         <div
           className={classNames(
             `card ${
-              isMe && checkIfUserAssignedToCard(card.users) && "highlight-color"
+              isHighLighted(card.users, card.title, card.description) &&
+              "highlight-color"
             }`,
             snapshot.isDragging && "dragging"
           )}
@@ -134,6 +160,7 @@ const mapStateToProps = (state) => {
     boardId: state.board.selectBoard.id,
     isMe: state.column.isMe,
     user: state.user.userData,
+    searchKeyWord: state.column.cardSearchKeyWord,
   };
 };
 
