@@ -96,5 +96,5 @@
 }
 
 .highlight-color {
-  border: 1px solid #ffc107b0;
+  box-shadow: 0 0 6px 0px #ffc107b0;
 }
