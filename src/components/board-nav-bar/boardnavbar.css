@@ -94,3 +94,7 @@
 .in-meeting-title {
   color: #E34B4B !important;
 }
+
+.highlight-color {
+  border: 1px solid #ffc107b0;
+}

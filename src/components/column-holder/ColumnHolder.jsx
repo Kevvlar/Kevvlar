@@ -67,6 +67,7 @@ const ColumnHolder = ({
   addNewColumnModal,
   removecardFromColumn,
   addActivity,
+  isMe,
 }) => {
   const onDragEnd = (result) => {
     enableScrolling();
@@ -110,7 +111,7 @@ const ColumnHolder = ({
           cardTitle: selectCard.title,
           date: dateFormat(now, "mmm dS, yyyy"),
           time: dateFormat(now, "h:MM TT"),
-          user: user.name
+          user: user.name,
         },
         boardId: board.id,
       });
@@ -181,7 +182,9 @@ const ColumnHolder = ({
               {provided.placeholder}
               <button
                 onClick={() => {
-                  addNewColumnModal();
+                  if (!isMe) {
+                    addNewColumnModal();
+                  }
                 }}
                 className="new-column-button"
               >
@@ -204,6 +207,7 @@ const mapStateToProps = (state) => {
     columnId: state.column.selectColumn.id,
     selectCard: state.column.selectCard,
     user: state.user.userData,
+    isMe: state.column.isMe,
   };
 };
 

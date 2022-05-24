@@ -12,6 +12,7 @@ import {
   toggleFileModal,
   fetchFiles,
   showConferenceModal,
+  toggleAssignedMe,
 } from "../../redux";
 
 import {
@@ -22,7 +23,7 @@ import {
   FileshareIcon,
   ActivityIcon,
   MeetingIcon,
-  MeetingRedIcon
+  MeetingRedIcon,
 } from "../../assets/svg/iconlibrary";
 
 import "./boardnavbar.css";
@@ -38,6 +39,8 @@ const BoardNavBar = ({
   getFiles,
   startMeeting,
   conferenceState,
+  sortByMe,
+  isMe,
 }) => {
   return (
     <div className="boardnavbar">
@@ -59,6 +62,14 @@ const BoardNavBar = ({
         <button className="boardnavbar-btn">
           <TeamIcon />
           <div className="boardnavbar-boardtitle">Team Name</div>
+        </button>
+        <button
+          className={`boardnavbar-btn ${isMe && "highlight-color"}`}
+          onClick={() => {
+            sortByMe();
+          }}
+        >
+          <div className="boardnavbar-boardtitle">Assigned To Me</div>
         </button>
         {board.admins.map((admin, index) => (
           <AdminAvatar key={index} admin={admin} />
@@ -85,32 +96,29 @@ const BoardNavBar = ({
       </div>
       <div className="boardnavbar-group">
         <CardSearchBar />
-        {conferenceState === "mini" ?
-          (<button
-          className="boardnavbar-btn in-meeting"
-          onClick={() => {
-            startMeeting();
-          }}
-        >
-          <MeetingRedIcon
-          className="in-meeting-icon" 
-          />
-          <div className="boardnavbar-boardtitle in-meeting-title">
-            In Meeting
-          </div>
-        </button>)
-        :
-        (<button
-          className="boardnavbar-btn"
-          onClick={() => {
-            startMeeting();
-          }}
-        >
-          <MeetingIcon />
-          <div className="boardnavbar-boardtitle">
-            Meeting
-          </div>
-        </button>)}
+        {conferenceState === "mini" ? (
+          <button
+            className="boardnavbar-btn in-meeting"
+            onClick={() => {
+              startMeeting();
+            }}
+          >
+            <MeetingRedIcon className="in-meeting-icon" />
+            <div className="boardnavbar-boardtitle in-meeting-title">
+              In Meeting
+            </div>
+          </button>
+        ) : (
+          <button
+            className="boardnavbar-btn"
+            onClick={() => {
+              startMeeting();
+            }}
+          >
+            <MeetingIcon />
+            <div className="boardnavbar-boardtitle">Meeting</div>
+          </button>
+        )}
         <button
           className="boardnavbar-btn"
           onClick={() => {
@@ -141,6 +149,7 @@ const mapStateToProps = (state) => {
     user: state.user.userData,
     activities: state.column.activities,
     conferenceState: state.modal.conferenceState,
+    isMe: state.column.isMe,
   };
 };
 
@@ -152,6 +161,7 @@ const mapDispatchToProps = (dispatch) => {
     showFile: () => dispatch(toggleFileModal()),
     getFiles: (token, boardId) => dispatch(fetchFiles(token, boardId)),
     startMeeting: () => dispatch(showConferenceModal()),
+    sortByMe: () => dispatch(toggleAssignedMe()),
   };
 };
 

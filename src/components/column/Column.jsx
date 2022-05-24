@@ -39,6 +39,7 @@ const Column = ({
   deleteColumnModal,
   getColumnData,
   searchKeyWord,
+  isMe,
 }) => {
   const [addFinishedClass, setAddFinishedClass] = useState(false);
 
@@ -96,26 +97,16 @@ const Column = ({
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
-                {mapOrder(column?.cards, column?.cardsOrder, "id")
-                  .filter(
-                    (cardItem) =>
-                      cardItem.title
-                        .toLowerCase()
-                        .replace(/\s/g, "")
-                        .includes(searchKeyWord) ||
-                      cardItem.description
-                        .toLowerCase()
-                        .replace(/\s/g, "")
-                        .includes(searchKeyWord)
-                  )
-                  .map((card, index) => (
+                {mapOrder(column?.cards, column?.cardsOrder, "id").map(
+                  (card, index) => (
                     <Card
                       key={card.id}
                       card={card}
                       index={index}
                       column={column}
                     />
-                  ))}
+                  )
+                )}
 
                 {provided.placeholder}
               </div>
@@ -139,6 +130,7 @@ const Column = ({
 const mapStateToProps = (state) => {
   return {
     searchKeyWord: state.column.cardSearchKeyWord,
+    isMe: state.column.isMe,
   };
 };
 

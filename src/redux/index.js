@@ -89,6 +89,7 @@ export {
   setCurrentColumnData,
   fetchCard,
   clearColumns,
+  toggleAssignedMe,
 } from "./column/columnActions";
 
 export {

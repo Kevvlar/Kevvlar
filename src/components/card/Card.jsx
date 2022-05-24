@@ -26,6 +26,8 @@ const Card = ({
   getCardData,
   currentCard,
   boardId,
+  user,
+  isMe,
 }) => {
   const currentDescription = card?.description;
   const history = useHistory();
@@ -38,11 +40,24 @@ const Card = ({
     },
   });
 
+  const checkIfUserAssignedToCard = (usersArray) => {
+    if (usersArray.length > 0) {
+      if (usersArray.some((userItem) => userItem._id === user._id)) {
+        return true;
+      }
+    }
+  };
+
   return (
     <Draggable draggableId={card.id} index={index}>
       {(provided, snapshot) => (
         <div
-          className={classNames("card", snapshot.isDragging && "dragging")}
+          className={classNames(
+            `card ${
+              isMe && checkIfUserAssignedToCard(card.users) && "highlight-color"
+            }`,
+            snapshot.isDragging && "dragging"
+          )}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
@@ -117,6 +132,8 @@ const mapStateToProps = (state) => {
     isGrid: state.sideNavRight.isGrid,
     currentCard: state.column.selectCard,
     boardId: state.board.selectBoard.id,
+    isMe: state.column.isMe,
+    user: state.user.userData,
   };
 };
 

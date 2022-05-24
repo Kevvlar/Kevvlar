@@ -33,6 +33,7 @@ import {
   CLEAR_COLUMNS,
   REMOVE_CARD_FROM_SOURCE_COLUMN_IO,
   CHANGE_CARD_COLUMN_IO,
+  TOGGLE_ASSIGNED_TO_ME,
 } from "./columnTypes";
 
 import {
@@ -547,5 +548,11 @@ export const fetchCard = (token, boardId, cardId) => {
 export const emitCreateNewColumnIO = (socket, data) => {
   return () => {
     socket.emit("add-new-column", data);
+  };
+};
+
+export const toggleAssignedMe = () => {
+  return {
+    type: TOGGLE_ASSIGNED_TO_ME,
   };
 };

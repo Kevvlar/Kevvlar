@@ -31,6 +31,7 @@ import {
   CLEAR_COLUMNS,
   REMOVE_CARD_FROM_SOURCE_COLUMN_IO,
   CHANGE_CARD_COLUMN_IO,
+  TOGGLE_ASSIGNED_TO_ME,
 } from "./columnTypes";
 
 const initialState = {
@@ -41,6 +42,7 @@ const initialState = {
   loading: false,
   columns: [],
   activities: [],
+  isMe: false,
 };
 
 const columnReducer = (state = initialState, action) => {
@@ -346,6 +348,12 @@ const columnReducer = (state = initialState, action) => {
         columns: [],
         selectColumn: {},
         selectCard: {},
+      };
+
+    case TOGGLE_ASSIGNED_TO_ME:
+      return {
+        ...state,
+        isMe: !state.isMe,
       };
 
     default:

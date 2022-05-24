@@ -20,7 +20,6 @@ const PreviewItem = ({ filteredUser, events, removeChannelNotify }) => {
           name={filteredUser?.user?.name}
           size={24}
         />
-        {console.log(filteredUser)}
 
         <div
           style={
