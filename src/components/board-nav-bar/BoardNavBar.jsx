@@ -70,19 +70,6 @@ const BoardNavBar = ({
           <div className="boardnavbar-boardtitle">Team Name</div>
         </button>
 
-        <label className="switch">
-          <input
-            type="checkbox"
-            onClick={() => {
-              clearCardSearch();
-              sortByMe();
-            }}
-            readOnly
-            checked={isMe}
-          />
-          <span className="slider round"></span>
-        </label>
-
         {board.admins.map((admin, index) => (
           <AdminAvatar key={index} admin={admin} />
         ))}
@@ -108,7 +95,21 @@ const BoardNavBar = ({
       </div>
       <div className="boardnavbar-group">
         <CardSearchBar />
-
+        <div className="assigned-to-me-holder">
+          <label className="switch">
+            <input
+              type="checkbox"
+              onClick={() => {
+                clearCardSearch();
+                sortByMe();
+              }}
+              readOnly
+              checked={isMe}
+            />
+            <span className="slider round"></span>
+          </label>
+          <div className="assigned-title">Assigned To Me</div>
+        </div>
         {conferenceState === "mini" ? (
           <button
             className="boardnavbar-btn in-meeting"
