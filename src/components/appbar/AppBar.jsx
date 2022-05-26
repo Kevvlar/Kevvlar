@@ -6,19 +6,21 @@ import UserProfile from "../profile-image/ProfileImage";
 import { HomeIcon } from "../../assets/svg/iconlibrary";
 import { withRouter } from "react-router";
 
-import { clearColumns } from "../../redux";
+import { clearColumns, resetIsMe, clearCardSearchKey } from "../../redux";
 import { KevvlarLogo } from "../../assets/svg/iconlibrary";
 
 import "./appbar.css";
 import "./kevvlar-logo.svg";
 
-const AppBar = ({ history, emptyColumns }) => (
+const AppBar = ({ history, emptyColumns, clearIsMe, clearCardSearch }) => (
   <div className="appbar-container">
     <div className="appbar-menu-container">
       <div className="appbar-ham-icon-container">
         <button
           className="appbar-logo"
           onClick={() => {
+            clearCardSearch();
+            clearIsMe();
             emptyColumns();
             history.push("/boards");
           }}
@@ -47,6 +49,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     emptyColumns: () => dispatch(clearColumns()),
+    clearIsMe: () => dispatch(resetIsMe()),
+    clearCardSearch: () => dispatch(clearCardSearchKey()),
   };
 };
 

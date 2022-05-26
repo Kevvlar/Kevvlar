@@ -32,6 +32,8 @@ import {
   REMOVE_CARD_FROM_SOURCE_COLUMN_IO,
   CHANGE_CARD_COLUMN_IO,
   TOGGLE_ASSIGNED_TO_ME,
+  RESET_IS_ME,
+  CLEAR_CARD_SEARCH_KEY,
 } from "./columnTypes";
 
 const initialState = {
@@ -342,6 +344,12 @@ const columnReducer = (state = initialState, action) => {
         cardSearchKeyWord: action.payLoad,
       };
 
+    case CLEAR_CARD_SEARCH_KEY:
+      return {
+        ...state,
+        cardSearchKeyWord: "",
+      };
+
     case CLEAR_COLUMNS:
       return {
         ...state,
@@ -354,6 +362,12 @@ const columnReducer = (state = initialState, action) => {
       return {
         ...state,
         isMe: !state.isMe,
+      };
+
+    case RESET_IS_ME:
+      return {
+        ...state,
+        isMe: false,
       };
 
     default:

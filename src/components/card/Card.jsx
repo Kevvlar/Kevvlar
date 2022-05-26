@@ -12,6 +12,8 @@ import {
   setCardModal,
   setCurrentColumnData,
   setCurrentCardData,
+  resetIsMe,
+  clearCardSearchKey,
 } from "../../redux/index";
 
 import "./card.css";
@@ -29,6 +31,8 @@ const Card = ({
   user,
   isMe,
   searchKeyWord,
+  clearIsMe,
+  clearCardSearch,
 }) => {
   const currentDescription = card?.description;
   const history = useHistory();
@@ -169,6 +173,8 @@ const mapDispatchToProps = (dispatch) => {
     editCardModal: (type) => dispatch(setCardModal(type)),
     getColumnData: (columnObj) => dispatch(setCurrentColumnData(columnObj)),
     getCardData: (cardObj) => dispatch(setCurrentCardData(cardObj)),
+    clearIsMe: () => dispatch(resetIsMe()),
+    clearCardSearch: () => dispatch(clearCardSearchKey()),
   };
 };
 

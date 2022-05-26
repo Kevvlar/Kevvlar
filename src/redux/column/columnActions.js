@@ -34,6 +34,8 @@ import {
   REMOVE_CARD_FROM_SOURCE_COLUMN_IO,
   CHANGE_CARD_COLUMN_IO,
   TOGGLE_ASSIGNED_TO_ME,
+  RESET_IS_ME,
+  CLEAR_CARD_SEARCH_KEY,
 } from "./columnTypes";
 
 import {
@@ -502,6 +504,12 @@ export const enterCardSearchKey = (keyWord) => {
   };
 };
 
+export const clearCardSearchKey = () => {
+  return {
+    type: CLEAR_CARD_SEARCH_KEY,
+  };
+};
+
 export const clearColumns = () => {
   return {
     type: CLEAR_COLUMNS,
@@ -554,5 +562,11 @@ export const emitCreateNewColumnIO = (socket, data) => {
 export const toggleAssignedMe = () => {
   return {
     type: TOGGLE_ASSIGNED_TO_ME,
+  };
+};
+
+export const resetIsMe = () => {
+  return {
+    type: RESET_IS_ME,
   };
 };

@@ -13,6 +13,8 @@ import {
   fetchFiles,
   showConferenceModal,
   toggleAssignedMe,
+  resetIsMe,
+  clearCardSearchKey,
 } from "../../redux";
 
 import {
@@ -40,7 +42,9 @@ const BoardNavBar = ({
   startMeeting,
   conferenceState,
   sortByMe,
+  clearIsMe,
   isMe,
+  clearCardSearch,
 }) => {
   return (
     <div className="boardnavbar">
@@ -48,6 +52,8 @@ const BoardNavBar = ({
         <button
           className="boardnavbar-btn"
           onClick={() => {
+            clearCardSearch();
+            clearIsMe();
             emptyColumns();
             history.push("/boards");
           }}
@@ -63,14 +69,20 @@ const BoardNavBar = ({
           <TeamIcon />
           <div className="boardnavbar-boardtitle">Team Name</div>
         </button>
-        <button
-          className={`boardnavbar-btn ${isMe && "highlight-color"}`}
-          onClick={() => {
-            sortByMe();
-          }}
-        >
-          <div className="boardnavbar-boardtitle">Assigned To Me</div>
-        </button>
+
+        <label className="switch">
+          <input
+            type="checkbox"
+            onClick={() => {
+              clearCardSearch();
+              sortByMe();
+            }}
+            readOnly
+            checked={isMe}
+          />
+          <span className="slider round"></span>
+        </label>
+
         {board.admins.map((admin, index) => (
           <AdminAvatar key={index} admin={admin} />
         ))}
@@ -96,6 +108,7 @@ const BoardNavBar = ({
       </div>
       <div className="boardnavbar-group">
         <CardSearchBar />
+
         {conferenceState === "mini" ? (
           <button
             className="boardnavbar-btn in-meeting"
@@ -162,6 +175,8 @@ const mapDispatchToProps = (dispatch) => {
     getFiles: (token, boardId) => dispatch(fetchFiles(token, boardId)),
     startMeeting: () => dispatch(showConferenceModal()),
     sortByMe: () => dispatch(toggleAssignedMe()),
+    clearIsMe: () => dispatch(resetIsMe()),
+    clearCardSearch: () => dispatch(clearCardSearchKey()),
   };
 };
 
