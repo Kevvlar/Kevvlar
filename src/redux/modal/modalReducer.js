@@ -5,8 +5,8 @@ import {
   CARD_MODAL,
   USER_MODAL,
   CHAT_MODAL,
-  SHOW_CONFERENCE_MODAL,
-  MINIMIZE_CONFERENCE_MODAL,
+  CONFERENCE_MODAL,
+  TOGGLE_MINIMIZE,
   CLOSE_CONFERENCE_MODAL,
 } from "./modalTypes";
 
@@ -14,27 +14,22 @@ const initialState = {
   showModal: false,
   modalType: "",
   modalActionType: "",
-  conferenceState: "close",
+  conference: "",
+  minimize: false,
 };
 
 const modalReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SHOW_CONFERENCE_MODAL:
+    case CONFERENCE_MODAL:
       return {
         ...state,
-        conferenceState: "show",
+        conference: CONFERENCE_MODAL,
       };
 
-    case MINIMIZE_CONFERENCE_MODAL:
+    case TOGGLE_MINIMIZE:
       return {
         ...state,
-        conferenceState: "mini",
-      };
-
-    case CLOSE_CONFERENCE_MODAL:
-      return {
-        ...state,
-        conferenceState: "close",
+        minimize: !state.minimize,
       };
 
     case BOARD_MODAL:
@@ -84,6 +79,13 @@ const modalReducer = (state = initialState, action) => {
         modalType: "",
         modalActionType: "",
       };
+
+    case CLOSE_CONFERENCE_MODAL:
+      return {
+        ...state,
+        conference: "",
+      };
+
     default:
       return state;
   }

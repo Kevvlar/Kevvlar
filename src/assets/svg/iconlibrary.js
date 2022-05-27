@@ -323,53 +323,89 @@ const MinimizeIcon = ({ closeChat }) => {
   );
 };
 
+const Minimize = () => {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect
+        width="10"
+        height="2"
+        transform="matrix(1 0 0 -1 3 9)"
+        fill="#A0A0A0"
+      ></rect>
+    </svg>
+  );
+};
+
 const MeetingIcon = () => {
   return (
-    <svg 
-      width="18" 
-      height="18" 
-      viewBox="0 0 18 18" 
-      fill="none" 
-      xmlns="http://www.w3.org/2000/svg">
-        
-      <path d="M12.75 7.875V5.25C12.75 4.8375 12.4125 4.5 12 4.5H3C2.5875 4.5 2.25 4.8375 2.25 5.25V12.75C2.25 13.1625 2.5875 13.5 3 13.5H12C12.4125 13.5 12.75 13.1625 12.75 12.75V10.125L15.75 13.125V4.875L12.75 7.875Z" fill="#A0A0A0"/>
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12.75 7.875V5.25C12.75 4.8375 12.4125 4.5 12 4.5H3C2.5875 4.5 2.25 4.8375 2.25 5.25V12.75C2.25 13.1625 2.5875 13.5 3 13.5H12C12.4125 13.5 12.75 13.1625 12.75 12.75V10.125L15.75 13.125V4.875L12.75 7.875Z"
+        fill="#A0A0A0"
+      />
     </svg>
   );
 };
 
 const ChatIcon = () => {
   return (
-    <svg 
-      width="24" 
-      height="24" 
-      viewBox="0 0 24 24" 
-      fill="none" 
-      xmlns="http://www.w3.org/2000/svg">
-
-      <path d="M21 6H19V15H6V17C6 17.55 6.45 18 7 18H18L22 22V7C22 6.45 21.55 6 21 6ZM17 12V3C17 2.45 16.55 2 16 2H3C2.45 2 2 2.45 2 3V17L6 13H16C16.55 13 17 12.55 17 12Z" fill="#A0A0A0"/>
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M21 6H19V15H6V17C6 17.55 6.45 18 7 18H18L22 22V7C22 6.45 21.55 6 21 6ZM17 12V3C17 2.45 16.55 2 16 2H3C2.45 2 2 2.45 2 3V17L6 13H16C16.55 13 17 12.55 17 12Z"
+        fill="#A0A0A0"
+      />
     </svg>
   );
 };
 
 const FullscreenIcon = () => {
   return (
-    <svg 
-      width="24" 
-      height="24" 
-      viewBox="0 0 24 24" 
-      fill="none" 
-      xmlns="http://www.w3.org/2000/svg">
-
-      <path d="M7 14H5V19H10V17H7V14ZM5 10H7V7H10V5H5V10ZM17 17H14V19H19V14H17V17ZM14 5V7H17V10H19V5H14Z" fill="white"/>
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M7 14H5V19H10V17H7V14ZM5 10H7V7H10V5H5V10ZM17 17H14V19H19V14H17V17ZM14 5V7H17V10H19V5H14Z"
+        fill="white"
+      />
     </svg>
   );
 };
 
 const MeetingRedIcon = () => {
   return (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12.75 7.875V5.25C12.75 4.8375 12.4125 4.5 12 4.5H3C2.5875 4.5 2.25 4.8375 2.25 5.25V12.75C2.25 13.1625 2.5875 13.5 3 13.5H12C12.4125 13.5 12.75 13.1625 12.75 12.75V10.125L15.75 13.125V4.875L12.75 7.875Z" 
-      fill="#E34B4B"/>
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12.75 7.875V5.25C12.75 4.8375 12.4125 4.5 12 4.5H3C2.5875 4.5 2.25 4.8375 2.25 5.25V12.75C2.25 13.1625 2.5875 13.5 3 13.5H12C12.4125 13.5 12.75 13.1625 12.75 12.75V10.125L15.75 13.125V4.875L12.75 7.875Z"
+        fill="#E34B4B"
+      />
     </svg>
   );
 };
@@ -464,6 +500,7 @@ export {
   TrashIcon,
   DownloadIcon,
   MinimizeIcon,
+  Minimize,
   MeetingIcon,
   ChatIcon,
   FullscreenIcon,

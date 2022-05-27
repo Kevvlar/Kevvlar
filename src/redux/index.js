@@ -37,8 +37,8 @@ export {
   setCardModal,
   setUserModal,
   setChatModal,
-  showConferenceModal,
-  minimizeConferenceModal,
+  setConferenceModal,
+  toggleMinimize,
   closeConferenceModal,
 } from "./modal/modalActions";
 

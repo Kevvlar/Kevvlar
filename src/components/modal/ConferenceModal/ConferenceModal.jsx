@@ -1,17 +1,26 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import ConferencePage from "../../../pages/ConferencePage/ConferencePage";
 
 import "./conferenceModal.css";
 
-const conferenceModal = () => {
+const ConferenceModal = ({ minimizeState }) => {
   return (
-    <div className="modal-wrapper">
-      <div className="conference-modal">
-        <ConferencePage />
-      </div>
+    <div
+      className={`${
+        minimizeState ? "conference-minimize" : "conference-container"
+      }`}
+    >
+      <ConferencePage />
     </div>
   );
 };
 
-export default conferenceModal;
+const mapStateToProps = (state) => {
+  return {
+    minimizeState: state.modal.minimize,
+  };
+};
+
+export default connect(mapStateToProps, null)(ConferenceModal);

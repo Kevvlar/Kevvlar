@@ -18,69 +18,65 @@ import UserModal from "./user-modal/UserModal";
 
 import "./modal.css";
 
-const Modal = ({
-  closeModal,
-  modalType,
-  currentBoardId,
-  history,
-  actionType,
-}) => {
-  switch (modalType) {
-    case BOARD_MODAL:
-      return (
-        <div className="modal-wrapper">
-          <div
-            className="modal-close-overlay"
-            onClick={() => {
-              closeModal();
-            }}
-          ></div>
-          <BoardModal />
-        </div>
-      );
-    case CARD_MODAL:
-      return (
-        <div className="modal-wrapper">
-          <div
-            className="modal-close-overlay"
-            onClick={() => {
-              if (actionType === EDIT) {
-                history.push(`/boards/${currentBoardId}`);
-              }
-              closeModal();
-            }}
-          ></div>
-          <CardModal />
-        </div>
-      );
-    case COLUMN_MODAL:
-      return (
-        <div className="modal-wrapper">
-          <div
-            className="modal-close-overlay"
-            onClick={() => {
-              closeModal();
-            }}
-          ></div>
-          <ColumnModal />
-        </div>
-      );
-    case USER_MODAL:
-      return (
-        <div className="modal-wrapper">
-          <div
-            className="modal-close-overlay"
-            onClick={() => {
-              closeModal();
-            }}
-          ></div>
-          <UserModal />
-        </div>
-      );
-    default:
-      return null;
+const Modal = React.memo(
+  ({ closeModal, modalType, currentBoardId, history, actionType }) => {
+    switch (modalType) {
+      case BOARD_MODAL:
+        return (
+          <div className="modal-wrapper">
+            <div
+              className="modal-close-overlay"
+              onClick={() => {
+                closeModal();
+              }}
+            ></div>
+            <BoardModal />
+          </div>
+        );
+      case CARD_MODAL:
+        return (
+          <div className="modal-wrapper">
+            <div
+              className="modal-close-overlay"
+              onClick={() => {
+                if (actionType === EDIT) {
+                  history.push(`/boards/${currentBoardId}`);
+                }
+                closeModal();
+              }}
+            ></div>
+            <CardModal />
+          </div>
+        );
+      case COLUMN_MODAL:
+        return (
+          <div className="modal-wrapper">
+            <div
+              className="modal-close-overlay"
+              onClick={() => {
+                closeModal();
+              }}
+            ></div>
+            <ColumnModal />
+          </div>
+        );
+      case USER_MODAL:
+        return (
+          <div className="modal-wrapper">
+            <div
+              className="modal-close-overlay"
+              onClick={() => {
+                closeModal();
+              }}
+            ></div>
+            <UserModal />
+          </div>
+        );
+      default:
+        return null;
+    }
   }
-};
+);
 
 const mapStateToProps = (state) => {
   return {

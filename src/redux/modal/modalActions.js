@@ -6,28 +6,10 @@ import {
   USER_MODAL,
   CHAT_MODAL,
   ADD,
-  SHOW_CONFERENCE_MODAL,
-  MINIMIZE_CONFERENCE_MODAL,
+  CONFERENCE_MODAL,
+  TOGGLE_MINIMIZE,
   CLOSE_CONFERENCE_MODAL,
 } from "./modalTypes";
-
-export const showConferenceModal = () => {
-  return {
-    type: SHOW_CONFERENCE_MODAL,
-  };
-};
-
-export const minimizeConferenceModal = () => {
-  return {
-    type: MINIMIZE_CONFERENCE_MODAL,
-  };
-};
-
-export const closeConferenceModal = () => {
-  return {
-    type: CLOSE_CONFERENCE_MODAL,
-  };
-};
 
 export const closeModal = () => {
   return {
@@ -67,5 +49,23 @@ export const setCardModal = (actionType = ADD) => {
   return {
     type: CARD_MODAL,
     payLoad: actionType,
+  };
+};
+
+export const setConferenceModal = () => {
+  return {
+    type: CONFERENCE_MODAL,
+  };
+};
+
+export const toggleMinimize = () => {
+  return {
+    type: TOGGLE_MINIMIZE,
+  };
+};
+
+export const closeConferenceModal = () => {
+  return {
+    type: CLOSE_CONFERENCE_MODAL,
   };
 };

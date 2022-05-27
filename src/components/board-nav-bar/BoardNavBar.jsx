@@ -11,11 +11,13 @@ import {
   toggleActivity,
   toggleFileModal,
   fetchFiles,
-  showConferenceModal,
   toggleAssignedMe,
   resetIsMe,
   clearCardSearchKey,
+  setConferenceModal,
 } from "../../redux";
+
+import { CONFERENCE_MODAL } from "../../redux/modal/modalTypes";
 
 import {
   LockIcon,
@@ -40,11 +42,11 @@ const BoardNavBar = ({
   showFile,
   getFiles,
   startMeeting,
-  conferenceState,
   sortByMe,
   clearIsMe,
   isMe,
   clearCardSearch,
+  modalType,
 }) => {
   return (
     <div className="boardnavbar">
@@ -110,19 +112,7 @@ const BoardNavBar = ({
           </label>
           <div className="assigned-title">Assigned To Me</div>
         </div>
-        {conferenceState === "mini" ? (
-          <button
-            className="boardnavbar-btn in-meeting"
-            onClick={() => {
-              startMeeting();
-            }}
-          >
-            <MeetingRedIcon className="in-meeting-icon" />
-            <div className="boardnavbar-boardtitle in-meeting-title">
-              In Meeting
-            </div>
-          </button>
-        ) : (
+        {modalType !== CONFERENCE_MODAL && (
           <button
             className="boardnavbar-btn"
             onClick={() => {
@@ -162,8 +152,8 @@ const mapStateToProps = (state) => {
     boardState: state.board.loading,
     user: state.user.userData,
     activities: state.column.activities,
-    conferenceState: state.modal.conferenceState,
     isMe: state.column.isMe,
+    modalType: state.modal.conference,
   };
 };
 
@@ -174,7 +164,7 @@ const mapDispatchToProps = (dispatch) => {
     showActivity: () => dispatch(toggleActivity()),
     showFile: () => dispatch(toggleFileModal()),
     getFiles: (token, boardId) => dispatch(fetchFiles(token, boardId)),
-    startMeeting: () => dispatch(showConferenceModal()),
+    startMeeting: () => dispatch(setConferenceModal()),
     sortByMe: () => dispatch(toggleAssignedMe()),
     clearIsMe: () => dispatch(resetIsMe()),
     clearCardSearch: () => dispatch(clearCardSearchKey()),

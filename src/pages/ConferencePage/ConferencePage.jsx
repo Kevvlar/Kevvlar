@@ -1,46 +1,35 @@
 import React from "react";
 import { connect } from "react-redux";
 import { FaTimes } from "react-icons/fa";
+import { FullscreenIcon, Minimize } from "../../assets/svg/iconlibrary";
 
-import { minimizeConferenceModal, closeConferenceModal } from "../../redux";
+import { closeConferenceModal, toggleMinimize } from "../../redux";
 
 import "./conferencePage.css";
 
 const ConferencePage = ({
-  minimizeMeeting,
-  closeMeeting,
   boardId,
   user,
   boardName,
+  closeConferenceModal,
+  minimize,
+  miniMizeState,
 }) => {
   return (
-    <div className="conference-page">
+    <div className={`conference-page`} style={{ width: "90%", height: "90%" }}>
       <div className="conference-buttons">
         <button
           className="chat-minimize-btn"
           onClick={() => {
-            minimizeMeeting();
+            minimize();
           }}
         >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect
-              width="10"
-              height="2"
-              transform="matrix(1 0 0 -1 3 9)"
-              fill="#A0A0A0"
-            ></rect>
-          </svg>
+          {miniMizeState ? <FullscreenIcon /> : <Minimize />}
         </button>
         <FaTimes
           className="meeting-close-icon"
           onClick={() => {
-            closeMeeting();
+            closeConferenceModal();
           }}
         />
       </div>
@@ -62,13 +51,14 @@ const mapStateToProps = (state) => {
     boardId: state.board.selectBoard.id,
     boardName: state.board.selectBoard.title,
     user: state.user.userData,
+    miniMizeState: state.modal.minimize,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    minimizeMeeting: () => dispatch(minimizeConferenceModal()),
-    closeMeeting: () => dispatch(closeConferenceModal()),
+    closeConferenceModal: () => dispatch(closeConferenceModal()),
+    minimize: () => dispatch(toggleMinimize()),
   };
 };
 

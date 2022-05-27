@@ -11,7 +11,6 @@ import ActivityModal from "../../components/ActivityModal/ActivityModal";
 import FileModal from "../../components/FileModal/FileModal";
 import ChatButton from "../../components/ChatButton/ChatButton";
 import ChatModal from "../../components/modal/ChatModal/ChatModal";
-import ConferenceModal from "../../components/modal/ConferenceModal/ConferenceModal";
 
 import { CHAT_MODAL } from "../../redux/modal/modalTypes";
 
@@ -159,25 +158,6 @@ class MainPage extends React.Component {
     this.props.emptyColumns();
   }
 
-  handleShowConferenceModal = () => {
-    switch (this.props.conferenceState) {
-      case "show":
-        return (
-          <span style={{ display: "block" }}>
-            <ConferenceModal />
-          </span>
-        );
-      case "mini":
-        return (
-          <span style={{ display: "none" }}>
-            <ConferenceModal />
-          </span>
-        );
-      default:
-        return null;
-    }
-  };
-
   render() {
     return (
       <div className="todopage">
@@ -191,7 +171,6 @@ class MainPage extends React.Component {
         >
           <ChatModal />
         </span>
-        {this.handleShowConferenceModal()}
         {this.props.rightSideNav ? <RightSideNav /> : null}
         {this.props.showModal ? <Modal /> : null}
         {this.props.activity ? <ActivityModal /> : null}
@@ -235,7 +214,6 @@ const mapStateToProps = (state) => {
     showModal: state.modal.showModal,
     showFile: state.file.showFile,
     modalType: state.modal.modalType,
-    conferenceState: state.modal.conferenceState,
   };
 };
 
