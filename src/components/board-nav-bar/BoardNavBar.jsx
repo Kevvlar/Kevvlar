@@ -27,7 +27,6 @@ import {
   FileshareIcon,
   ActivityIcon,
   MeetingIcon,
-  MeetingRedIcon,
 } from "../../assets/svg/iconlibrary";
 
 import "./boardnavbar.css";

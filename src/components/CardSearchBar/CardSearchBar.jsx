@@ -1,32 +1,36 @@
 import React from "react";
 import { connect } from "react-redux";
 import { FaSearch } from "react-icons/fa";
-import { useState } from "react";
 
-import { enterCardSearchKey, resetIsMe } from "../../redux/index";
+import {
+  enterCardSearchKey,
+  resetIsMe,
+  clearCardSearchKey,
+} from "../../redux/index";
 
 import "./Cardsearchbar.css";
 
-function CardSearchBar({ inputSearchKey, clearIsMe, searchKeyWord }) {
-  const [inputValue, setInputValue] = useState(searchKeyWord);
-
+function CardSearchBar({
+  inputSearchKey,
+  clearIsMe,
+  searchKeyWord,
+  isMe,
+  clearCardSearch,
+}) {
   const handleInputChange = (e) => {
     e.preventDefault();
     clearIsMe();
-    setInputValue(e.target.value);
     inputSearchKey(e.target.value.toLocaleLowerCase().replace(/\s/g, ""));
   };
 
-  const clearInput = (e) => {
-    e.preventDefault();
-    setInputValue((e.target.value = ""));
-    inputSearchKey((e.target.value = ""));
+  const clearInput = () => {
+    clearCardSearch();
   };
 
   return (
     <div
       className={
-        inputValue.trim()
+        searchKeyWord !== "" && !isMe
           ? "cardsearch-bar-container cardsearch-margin-fix"
           : "cardsearch-bar-container"
       }
@@ -36,12 +40,14 @@ function CardSearchBar({ inputSearchKey, clearIsMe, searchKeyWord }) {
         type="text"
         placeholder="Search"
         className={
-          inputValue.trim() ? "cards-search search-focused" : "cards-search"
+          searchKeyWord !== "" && !isMe
+            ? "cards-search search-focused"
+            : "cards-search"
         }
         value={searchKeyWord}
         onChange={handleInputChange}
       />
-      {inputValue ? (
+      {searchKeyWord !== "" && !isMe ? (
         <div className="clear-search-button" onClick={clearInput}>
           x
         </div>
@@ -53,6 +59,7 @@ function CardSearchBar({ inputSearchKey, clearIsMe, searchKeyWord }) {
 const mapStateToProps = (state) => {
   return {
     searchKeyWord: state.column.cardSearchKeyWord,
+    isMe: state.column.isMe,
   };
 };
 
@@ -60,6 +67,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     inputSearchKey: (keyWord) => dispatch(enterCardSearchKey(keyWord)),
     clearIsMe: () => dispatch(resetIsMe()),
+    clearCardSearch: () => dispatch(clearCardSearchKey()),
   };
 };
 
