@@ -9,14 +9,14 @@ const CompanyHeader = ({ closeModal, turnOffChatNotify, toggleOpenChat }) => {
   return (
     <div className="channel-list__header">
       <p className="channel-list__header__text">Chat</p>
-      <button className="chat-minimize-btn">
-        <MinimizeIcon
-          closeChat={() => {
-            turnOffChatNotify();
-            toggleOpenChat(false);
-            closeModal();
-          }}
-        />
+      <button 
+        className="chat-minimize-btn" 
+        onClick={() => {
+          turnOffChatNotify();
+          toggleOpenChat(false);
+          closeModal();
+        }}>
+        <MinimizeIcon />
       </button>
     </div>
   );
