@@ -168,7 +168,7 @@ const EditCardModal = ({
             .getElementById("ql-editor-big")
             .getElementsByTagName("div")[1]
             .getElementsByTagName("div")[0];
-          const figmasrc = text.match(/src\=([^\s]*)\s/)[1];
+          const figmasrc = text.match(/src=([^\s]*)\s/)[1]; // removed /src"\"=([^\s]*)\s/
           const finalsrc = figmasrc.substring(1, figmasrc.length - 1);
           const figmaObject = `<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="100%" height="70%" src="${finalsrc}" allowfullscreen></iframe>`;
           editor.insertAdjacentHTML("beforeend", figmaObject);

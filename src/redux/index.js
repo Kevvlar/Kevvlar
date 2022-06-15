@@ -97,6 +97,7 @@ export {
 export {
   setChatNotifyOn,
   setChatNotifyOff,
+  setActiveChannel,
   setIsOpen,
   removeEvent,
 } from "./chat/chatActions";

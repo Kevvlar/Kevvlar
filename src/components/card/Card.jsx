@@ -3,7 +3,7 @@ import * as classNames from "classnames";
 import { connect } from "react-redux";
 import { FaEllipsisH } from "react-icons/fa";
 import { Draggable } from "react-beautiful-dnd";
-import ReactQuill from "react-quill";
+// import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
 import parse from "html-react-parser";
 import { useHistory } from "react-router-dom";
@@ -40,7 +40,7 @@ const Card = ({
   const newDescription = parse(currentDescription, {
     replace: (domNode) => {
       if (domNode.attribs && domNode.name === "iframe") {
-        return <span>//figma iframe</span>;
+        return <span></span>; // remove this from span "//figma iframe"
       }
     },
   });

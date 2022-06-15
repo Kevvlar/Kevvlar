@@ -38,7 +38,9 @@ const TeamChannelPreview = ({
               }
             : {}
         }
-      ></span>
+      >
+        {/* {console.lof(activeChannel)} */}
+      </span>
     </p>
   );
 

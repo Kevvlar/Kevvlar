@@ -1,6 +1,7 @@
 import {
   SET_IS_CHAT_NOTIFY_ON,
   SET_IS_CHAT_NOTIFY_OFF,
+  SET_ACTIVE_CHANNEL,
   SET_IS_OPEN,
   REMOVE_EVENT,
 } from "./chatTypes";
@@ -8,6 +9,7 @@ import {
 const initialState = {
   isOpen: false,
   notify: false,
+  activeChannel: "",
   innerNotify: false,
   events: [],
 };
@@ -20,6 +22,12 @@ const chatReducer = (state = initialState, action) => {
         notify: true,
         innerNotify: true,
         events: [...state.events, action.payLoad],
+      };
+
+    case SET_ACTIVE_CHANNEL:
+      return {
+        ...state,
+        activeChannel: action.payLoad,
       };
 
     case REMOVE_EVENT:

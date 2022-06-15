@@ -167,27 +167,30 @@ const AddCardModal = ({
   };
 
   const pasteEvent = () => {
-    navigator.clipboard.readText()
-      .then(text => {
-        if (text.includes('iframe' && 'figma')) {
-          const editor = document.getElementById('ql-editor-big').getElementsByTagName('div')[1].getElementsByTagName('div')[0];
-          const figmasrc = text.match(/src\=([^\s]*)\s/)[1];
-          const finalsrc = figmasrc.substring(1,figmasrc.length - 1);
+    navigator.clipboard
+      .readText()
+      .then((text) => {
+        if (text.includes("iframe" && "figma")) {
+          const editor = document
+            .getElementById("ql-editor-big")
+            .getElementsByTagName("div")[1]
+            .getElementsByTagName("div")[0];
+          const figmasrc = text.match(/src=([^\s]*)\s/)[1]; // removed /src"\"=([^\s]*)\s/
+          const finalsrc = figmasrc.substring(1, figmasrc.length - 1);
           const figmaObject = `<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="100%" height="70%" src="${finalsrc}" allowfullscreen></iframe>`;
-          editor.insertAdjacentHTML('beforeend', figmaObject);
+          editor.insertAdjacentHTML("beforeend", figmaObject);
 
           for (const p of document.querySelectorAll("p")) {
             if (p.textContent.includes("iframe" && "figma")) {
               p.remove();
             }
           }
-        }
-        else {
-          console.log('Not a figma iframe');
+        } else {
+          console.log("Not a figma iframe");
         }
       })
-      .catch(err => {
-        console.error('Failed to read clipboard contents: ', err);
+      .catch((err) => {
+        console.error("Failed to read clipboard contents: ", err);
       });
   };
 
