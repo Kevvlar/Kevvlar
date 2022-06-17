@@ -91,7 +91,13 @@ const Card = ({
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
-          onMouseDownCapture={() => {
+          onMouseDown={() => {
+            console.log("mouse-down");
+            getCardData(card);
+            getColumnData(column);
+          }}
+          onTouchStart={() => {
+            console.log("touch");
             getCardData(card);
             getColumnData(column);
           }}

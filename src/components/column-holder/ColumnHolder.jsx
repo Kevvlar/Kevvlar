@@ -72,12 +72,9 @@ const ColumnHolder = ({
   const onDragEnd = (result) => {
     enableScrolling();
     const now = Date();
-    console.log(now);
     const { destination, draggableId, source, type } = result;
 
-    if (!destination) {
-      return;
-    }
+    if (!result.destination) return;
 
     // move column
     if (type === "column" && destination.index !== source.index) {
