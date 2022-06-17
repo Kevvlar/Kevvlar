@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import socket from "../../Socket";
+import dateFormat from "dateformat";
 
 import {
   toggleRightSideNav,
@@ -25,43 +26,53 @@ const NotificationItem = ({
   getBoard,
   boardId,
   toggleRead,
-}) => (
-  <div className="task-item-holder">
-    <div className="task-item">
-      <span
-        className="board-title-link"
-        title={info.cardTitle}
-        onClick={() => {
-          socket.emit("exit", boardId);
-          socket.disconnect();
-          resetColumns();
-          getBoard(user.token, info.boardId);
-          getColumns(user.token, info.boardId);
-          toggleRead(user.token, id);
-          socket.connect();
-          socket.emit("join-board", info.boardId);
-          socket.emit("newUser", user._id);
-          history.push({
-            pathname: `/boards/${info.boardId}`,
-          });
-          toggleRightSideNav();
-        }}
-      >
-        {info.title} | {info.cardTitle}
-      </span>
-      <div className="task-item-board">
-        {info.date} at {info.time}
+}) => {
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  return (
+    <div className="task-item-holder">
+      <div className="task-item">
+        <span
+          className="board-title-link"
+          title={info.cardTitle}
+          onClick={() => {
+            socket.emit("exit", boardId);
+            socket.disconnect();
+            resetColumns();
+            getBoard(user.token, info.boardId);
+            getColumns(user.token, info.boardId);
+            toggleRead(user.token, id);
+            socket.connect();
+            socket.emit("join-board", info.boardId);
+            socket.emit("newUser", user._id);
+            history.push({
+              pathname: `/boards/${info.boardId}`,
+            });
+            toggleRightSideNav();
+          }}
+        >
+          {info.title} | {info.cardTitle}
+        </span>
+        <div className="task-item-board">
+          {info.date} at{" "}
+          {info.realTime
+            ? dateFormat(
+                info.realTime.toLocaleString("en-US", {
+                  timeZone: timezone,
+                }),
+                "h:MM TT"
+              )
+            : info.time}
+        </div>
+        <div
+          onClick={() => {
+            toggleRead(user.token, id);
+          }}
+          className={read === false ? "task-item-notification" : null}
+        ></div>
       </div>
-      <div
-        onClick={() => {
-          toggleRead(user.token, id);
-        }}
-        className={read === false ? "task-item-notification" : null}
-      ></div>
     </div>
-  </div>
-);
-
+  );
+};
 const mapStateToProps = (state) => {
   return {
     user: state.user.userData,

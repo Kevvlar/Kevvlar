@@ -71,7 +71,8 @@ const ColumnHolder = ({
 }) => {
   const onDragEnd = (result) => {
     enableScrolling();
-    const now = Date.now();
+    const now = Date();
+    console.log(now);
     const { destination, draggableId, source, type } = result;
 
     if (!destination) {
@@ -110,7 +111,7 @@ const ColumnHolder = ({
           columnTitle: currentColumn.title,
           cardTitle: selectCard.title,
           date: dateFormat(now, "mmm dS, yyyy"),
-          time: dateFormat(now, "h:MM TT"),
+          realTime: now,
           user: user.name,
         },
         boardId: board.id,
@@ -148,7 +149,7 @@ const ColumnHolder = ({
           columnTitle: targetColumn.title,
           cardTitle: selectCard.title,
           date: dateFormat(now, "mmm dS, yyyy"),
-          time: dateFormat(now, "h:MM TT"),
+          realTime: now,
           user: user.name,
         },
         boardId: board.id,

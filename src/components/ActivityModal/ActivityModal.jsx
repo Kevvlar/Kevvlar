@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import dateFormat from "dateformat";
 
 import "./activityModal.css";
 
@@ -12,6 +13,7 @@ const ActivityModal = ({
   showActivity,
   getActivities,
 }) => {
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   useEffect(() => {
     getActivities(user.token, board.id);
   }, [user.token, board.id, getActivities]);
@@ -39,12 +41,23 @@ const ActivityModal = ({
                 <div className="activity-assigned-user">
                   {activity?.info?.userAssigned}&nbsp;
                 </div>
-                <div className="activity-card-title" title={activity?.info?.cardTitle}>
+                <div
+                  className="activity-card-title"
+                  title={activity?.info?.cardTitle}
+                >
                   {activity?.info?.cardTitle}&nbsp;
                 </div>
               </div>
               <div className="task-item-board">
-                {activity?.info?.date} at {activity?.info?.time}
+                {activity?.info?.date} at{" "}
+                {activity?.info?.realTime
+                  ? dateFormat(
+                      activity?.info?.realTime.toLocaleString("en-US", {
+                        timeZone: timezone,
+                      }),
+                      "h:MM TT"
+                    )
+                  : activity?.info?.time}
               </div>
             </div>
           ))}

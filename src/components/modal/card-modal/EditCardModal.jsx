@@ -106,14 +106,14 @@ const EditCardModal = ({
 
     if (newCheckedUsers.length > 0) {
       for (let i = 0; i < newCheckedUsers.length; i++) {
-        const now = Date.now();
+        const now = Date();
         notify(user.token, currentBoardId, {
           user: newCheckedUsers[i]._id,
           type: "assign",
           info: {
             boardId: currentBoardId,
             date: dateFormat(now, "mmm dS, yyyy"),
-            time: dateFormat(now, "h:MM TT"),
+            realTime: now,
             cardTitle: editCardTitle,
             title: "Assigned Card",
           },
@@ -125,7 +125,7 @@ const EditCardModal = ({
             userAssigned: newCheckedUsers[i].name,
             cardTitle: editCardTitle,
             date: dateFormat(now, "mmm dS, yyyy"),
-            time: dateFormat(now, "h:MM TT"),
+            realTime: now,
           },
           boardId: currentBoardId,
         });
@@ -313,7 +313,7 @@ const EditCardModal = ({
             <div
               className="delete-button"
               onClick={() => {
-                const now = Date.now();
+                const now = Date();
                 const deleteObj = {
                   columnId: currentCard.columnId,
                   cardId: currentCard.id,
@@ -330,7 +330,7 @@ const EditCardModal = ({
                     user: user.name,
                     cardTitle: currentCard.title,
                     date: dateFormat(now, "mmm dS, yyyy"),
-                    time: dateFormat(now, "h:MM TT"),
+                    realTime: now,
                   },
                   boardId: currentBoardId,
                 });
