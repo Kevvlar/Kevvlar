@@ -2,7 +2,7 @@
   height: 50px;
   display: flex;
   justify-content: space-between;
-  padding-top: 15px;
+  margin-top: 15px;
   position: fixed;
   top: 50px;
   width: 100%;
