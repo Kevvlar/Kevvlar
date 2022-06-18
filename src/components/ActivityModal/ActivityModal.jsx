@@ -39,7 +39,7 @@ const ActivityModal = ({
           showActivity();
         }}
       >
-        {console.log(activities)}
+        {/* {console.log(activities)} */}
       </div>
       <div className="activity-profile-menu">
         <div className="activity-main-title">Activity</div>
