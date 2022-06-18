@@ -105,8 +105,11 @@ const ColumnHolder = ({
       addActivity(user.token, board.id, {
         info: {
           title: "order changed",
-          columnTitle: currentColumn.title,
-          cardTitle: selectCard.title,
+          column: currentColumn,
+          card: {
+            id: selectCard.id,
+            title: selectCard.title,
+          },
           date: dateFormat(now, "mmm dS, yyyy"),
           realTime: now,
           user: user.name,
@@ -143,8 +146,11 @@ const ColumnHolder = ({
       addActivity(user.token, board.id, {
         info: {
           title: "dragged card",
-          columnTitle: targetColumn.title,
-          cardTitle: selectCard.title,
+          column: targetColumn,
+          card: {
+            id: selectCard.id,
+            title: selectCard.title,
+          },
           date: dateFormat(now, "mmm dS, yyyy"),
           realTime: now,
           user: user.name,

@@ -92,12 +92,12 @@ const Card = ({
           {...provided.dragHandleProps}
           ref={provided.innerRef}
           onMouseDown={() => {
-            console.log("mouse-down");
+            // console.log("mouse-down");
             getCardData(card);
             getColumnData(column);
           }}
           onTouchStart={() => {
-            console.log("touch");
+            // console.log("touch");
             getCardData(card);
             getColumnData(column);
           }}

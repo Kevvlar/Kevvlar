@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import dateFormat from "dateformat";
+import { withRouter } from "react-router";
 
 import "./activityModal.css";
 
-import { toggleActivity, fetchActivities } from "../../redux";
+import { toggleActivity, fetchActivities, fetchCard } from "../../redux";
 
 const ActivityModal = ({
   user,
@@ -12,11 +13,23 @@ const ActivityModal = ({
   activities,
   showActivity,
   getActivities,
+  history,
+  getCard,
+  editCardModal,
 }) => {
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   useEffect(() => {
     getActivities(user.token, board.id);
   }, [user.token, board.id, getActivities]);
+
+  const showCard = (activityTitle, card) => {
+    if (activityTitle === "deleted card") return;
+    if (card) {
+      history.push(`/boards/${board.id}/${card.id}`);
+      showActivity();
+      getCard(user.token, board.id, card.id);
+    }
+  };
 
   return (
     <div>
@@ -25,7 +38,9 @@ const ActivityModal = ({
         onClick={() => {
           showActivity();
         }}
-      ></div>
+      >
+        {console.log(activities)}
+      </div>
       <div className="activity-profile-menu">
         <div className="activity-main-title">Activity</div>
         <div className="activity-item-wrapper">
@@ -43,9 +58,15 @@ const ActivityModal = ({
                 </div>
                 <div
                   className="activity-card-title"
-                  title={activity?.info?.cardTitle}
+                  onClick={() => {
+                    activity.info.card &&
+                      showCard(activity?.info?.title, activity?.info?.card);
+                  }}
                 >
-                  {activity?.info?.cardTitle}&nbsp;
+                  {activity.info.card
+                    ? activity?.info?.card?.title
+                    : activity?.info?.cardTitle}
+                  &nbsp;
                 </div>
               </div>
               <div className="task-item-board">
@@ -80,7 +101,12 @@ const mapDispatchToProps = (dispatch) => {
     showActivity: () => dispatch(toggleActivity()),
     getActivities: (token, boardId) =>
       dispatch(fetchActivities(token, boardId)),
+    getCard: (token, boardId, cardId) =>
+      dispatch(fetchCard(token, boardId, cardId)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ActivityModal);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(ActivityModal));

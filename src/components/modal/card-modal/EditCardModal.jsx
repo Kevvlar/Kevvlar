@@ -34,6 +34,7 @@ const EditCardModal = ({
   user,
   currentBoardId,
   currentCard,
+  currentColumn,
   admins,
   members,
   notify,
@@ -114,7 +115,8 @@ const EditCardModal = ({
             boardId: currentBoardId,
             date: dateFormat(now, "mmm dS, yyyy"),
             realTime: now,
-            cardTitle: editCardTitle,
+            cardTitle: cardObj.title,
+            cardId: cardObj.id,
             title: "Assigned Card",
           },
         });
@@ -123,7 +125,10 @@ const EditCardModal = ({
             title: "assigned user",
             user: user.name,
             userAssigned: newCheckedUsers[i].name,
-            cardTitle: editCardTitle,
+            card: {
+              id: currentCard.id,
+              title: editCardTitle,
+            },
             date: dateFormat(now, "mmm dS, yyyy"),
             realTime: now,
           },
@@ -328,7 +333,10 @@ const EditCardModal = ({
                   info: {
                     title: "deleted card",
                     user: user.name,
-                    cardTitle: currentCard.title,
+                    card: {
+                      id: currentCard.id,
+                      title: editCardTitle,
+                    },
                     date: dateFormat(now, "mmm dS, yyyy"),
                     realTime: now,
                   },
@@ -353,6 +361,7 @@ const mapStateToProps = (state) => {
     user: state.user.userData,
     currentBoardId: state.board.selectBoard.id,
     currentCard: state.column.selectCard,
+    currentColumn: state.column.selectColumn,
     admins: state.board.selectBoard.admins,
     members: state.board.selectBoard.members,
   };

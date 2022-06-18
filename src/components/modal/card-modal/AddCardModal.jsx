@@ -87,8 +87,9 @@ const AddCardModal = ({
 
   const handleSubmit = () => {
     const now = Date();
+    const _cardId = uuidv4();
     const cardObj = {
-      id: uuidv4(),
+      id: _cardId,
       columnId: currentColumnId,
       boardId: currrentBoardId,
       title: cardTitle,
@@ -103,7 +104,10 @@ const AddCardModal = ({
       info: {
         title: "created card",
         user: user.name,
-        cardTitle: cardTitle,
+        card: {
+          id: _cardId,
+          title: cardTitle,
+        },
         date: dateFormat(now, "mmm dS, yyyy"),
         realTime: now,
       },
@@ -120,6 +124,7 @@ const AddCardModal = ({
             date: dateFormat(now, "mmm dS, yyyy"),
             realTime: now,
             cardTitle: cardTitle,
+            cardId: _cardId,
             title: "Assigned Card",
           },
         });
@@ -128,7 +133,10 @@ const AddCardModal = ({
             title: "assigned user",
             user: user.name,
             userAssigned: assignedUsers[i].name,
-            cardTitle: cardTitle,
+            card: {
+              id: _cardId,
+              title: cardTitle,
+            },
             date: dateFormat(now, "mmm dS, yyyy"),
             realTime: now,
           },
