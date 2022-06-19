@@ -9,6 +9,7 @@ import {
   CONFERENCE_MODAL,
   TOGGLE_MINIMIZE,
   CLOSE_CONFERENCE_MODAL,
+  ERROR_MODAL,
 } from "./modalTypes";
 
 export const closeModal = () => {
@@ -35,6 +36,16 @@ export const setChatModal = (actionType = ADD) => {
   return {
     type: CHAT_MODAL,
     payLoad: actionType,
+  };
+};
+
+export const setErrorModal = (message) => {
+  return {
+    type: ERROR_MODAL,
+    payLoad: {
+      actionType: ADD,
+      message: message,
+    },
   };
 };
 

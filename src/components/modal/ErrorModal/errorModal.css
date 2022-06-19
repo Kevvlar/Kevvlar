@@ -1,0 +1,53 @@
+.modal-error {
+  border-radius: 10px;
+  background-color: #343d46;
+  background: #343d46;
+  position: relative;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
+  box-sizing: border-box;
+  width: 520px;
+  height: 200px;
+}
+
+.modal-error-body {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 80%;
+}
+
+.modal-error-button {
+  background: transparent;
+  padding: 12px 24px;
+  margin: 0px 5px;
+  height: 40px;
+  border: 1px solid #03a9f4;
+  border-radius: 4px;
+  color: #03a9f4;
+  width: fit-content;
+  width: 170px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.modal-error-button:hover {
+  background-color: #03a9f4;
+  color: #fff;
+}
+
+.modal-error-title {
+  text-align: center;
+  color: #fff;
+  margin-top: 0px;
+}
+
+/*RESPONSIVE BREAKPOINTS*/
+
+@media only screen and (max-width: 600px) {
+  .modal {
+    width: 100%;
+    height: 100%;
+  }
+}

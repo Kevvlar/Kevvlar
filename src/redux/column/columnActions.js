@@ -43,6 +43,7 @@ import {
   fetchBoard,
   removeColumnFromColumnsOrderLocal,
   setCardModal,
+  setErrorModal,
 } from "../index";
 
 // FETCH COLUMNS
@@ -544,8 +545,12 @@ export const fetchCard = (token, boardId, cardId) => {
       })
       .then((response) => {
         const card = response.data.data.card;
-        dispatch(setCurrentCardData(card));
-        dispatch(setCardModal("EDIT"));
+        if (!card) {
+          dispatch(setErrorModal(`Oops this card no longer exsits.`));
+        } else if (card) {
+          dispatch(setCurrentCardData(card));
+          dispatch(setCardModal("EDIT"));
+        }
       })
       .catch((error) => {
         dispatch(fetchColumnsFailure(error.message));

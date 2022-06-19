@@ -8,6 +8,7 @@ import {
   COLUMN_MODAL,
   CARD_MODAL,
   USER_MODAL,
+  ERROR_MODAL,
   EDIT,
 } from "../../redux/modal/modalTypes";
 
@@ -15,6 +16,7 @@ import BoardModal from "./board-modal/BoardModal";
 import ColumnModal from "./column-modal/ColumnModal";
 import CardModal from "./card-modal/CardModal";
 import UserModal from "./user-modal/UserModal";
+import ErrorModal from "./ErrorModal/ErrorModal";
 
 import "./modal.css";
 
@@ -70,6 +72,19 @@ const Modal = React.memo(
               }}
             ></div>
             <UserModal />
+          </div>
+        );
+      case ERROR_MODAL:
+        return (
+          <div className="modal-wrapper">
+            <div
+              className="modal-close-overlay"
+              onClick={() => {
+                history.push(`/boards/${currentBoardId}`);
+                closeModal();
+              }}
+            ></div>
+            <ErrorModal />
           </div>
         );
       default:

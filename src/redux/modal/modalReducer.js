@@ -8,6 +8,7 @@ import {
   CONFERENCE_MODAL,
   TOGGLE_MINIMIZE,
   CLOSE_CONFERENCE_MODAL,
+  ERROR_MODAL,
 } from "./modalTypes";
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
   modalActionType: "",
   conference: "",
   minimize: false,
+  errorMessage: "",
 };
 
 const modalReducer = (state = initialState, action) => {
@@ -72,18 +74,28 @@ const modalReducer = (state = initialState, action) => {
         modalActionType: action.payLoad,
       };
 
+    case CLOSE_CONFERENCE_MODAL:
+      return {
+        ...state,
+        conference: "",
+      };
+
+    case ERROR_MODAL:
+      return {
+        ...state,
+        showModal: true,
+        modalType: ERROR_MODAL,
+        modalActionType: action.payLoad.actionType,
+        errorMessage: action.payLoad.message,
+      };
+
     case CLOSE_MODAL:
       return {
         ...state,
         showModal: false,
         modalType: "",
         modalActionType: "",
-      };
-
-    case CLOSE_CONFERENCE_MODAL:
-      return {
-        ...state,
-        conference: "",
+        errorMessage: "",
       };
 
     default:

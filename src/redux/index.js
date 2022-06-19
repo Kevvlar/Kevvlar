@@ -40,6 +40,7 @@ export {
   setConferenceModal,
   toggleMinimize,
   closeConferenceModal,
+  setErrorModal,
 } from "./modal/modalActions";
 
 export {
