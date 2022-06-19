@@ -95,7 +95,7 @@ const EditCardModal = ({
   const handleSubmit = () => {
     const cardObj = {
       id: currentCard.id,
-      columnId: currentCard.columnId,
+      columnId: currentColumn.id,
       title: editCardTitle,
       description: editCardBody,
       date: editCardDate,
@@ -117,12 +117,12 @@ const EditCardModal = ({
             realTime: now,
             cardTitle: cardObj.title,
             cardId: cardObj.id,
-            title: "Assigned Card",
+            title: "Assigned User to Card",
           },
         });
         addActivity(user.token, currentBoardId, {
           info: {
-            title: "assigned user",
+            title: "Assigned User to Card",
             user: user.name,
             userAssigned: newCheckedUsers[i].name,
             card: {
@@ -320,7 +320,7 @@ const EditCardModal = ({
               onClick={() => {
                 const now = Date();
                 const deleteObj = {
-                  columnId: currentCard.columnId,
+                  columnId: currentColumn.id,
                   cardId: currentCard.id,
                 };
                 handleDeleteCardLocal(deleteObj);
