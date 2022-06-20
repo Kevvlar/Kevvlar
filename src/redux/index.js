@@ -93,6 +93,7 @@ export {
   toggleAssignedMe,
   resetIsMe,
   clearCardSearchKey,
+  fetchColumn,
 } from "./column/columnActions";
 
 export {

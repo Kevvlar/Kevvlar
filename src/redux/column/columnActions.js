@@ -531,6 +531,32 @@ export const setCurrentCardData = (cardObj) => {
   };
 };
 
+export const fetchColumn = (token, boardId, columnId) => {
+  return (dispatch) => {
+    axios
+      .get(`https://kevvlar.herokuapp.com/api/v1/columns/${columnId}`, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          boardId,
+        },
+      })
+      .then((response) => {
+        const column = response.data.data.column;
+        if (!column) {
+          dispatch(setErrorModal(`Oops this column no longer exsits.`));
+        } else if (column) {
+          dispatch(setCurrentColumnData(column));
+        }
+      })
+      .catch((error) => {
+        dispatch(fetchColumnsFailure(error.message));
+      });
+  };
+};
+
 export const fetchCard = (token, boardId, cardId) => {
   return (dispatch) => {
     axios
@@ -548,6 +574,7 @@ export const fetchCard = (token, boardId, cardId) => {
         if (!card) {
           dispatch(setErrorModal(`Oops this card no longer exsits.`));
         } else if (card) {
+          dispatch(fetchColumn(token, boardId, card.columnId));
           dispatch(setCurrentCardData(card));
           dispatch(setCardModal("EDIT"));
         }
