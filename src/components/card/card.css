@@ -48,7 +48,7 @@
   width: 252px;
   overflow-wrap: anywhere;
   resize: none;
-  height: 52px;
+  height: 54px;
   overflow: hidden;
   margin-bottom: 5px;
 }
@@ -68,8 +68,8 @@
 }
 
 .card-avatar-image {
-  width: 23px !important;
-  height: 23px !important;
+  width: 21px !important;
+  height: 21px !important;
 }
 
 .card-avatar-more {
