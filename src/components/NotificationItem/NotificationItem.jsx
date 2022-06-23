@@ -28,7 +28,6 @@ const NotificationItem = ({
   boardId,
   toggleRead,
   getCard,
-  isCardNull,
   selectCard,
 }) => {
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -51,17 +50,20 @@ const NotificationItem = ({
           className="board-title-link"
           title={info.cardTitle}
           onClick={() => {
-            socket.emit("exit", boardId);
-            socket.disconnect();
-            resetColumns();
-
-            getBoard(user.token, info.boardId);
-            getColumns(user.token, info.boardId);
+            if (info.boardId !== boardId) {
+              socket.emit("exit", boardId);
+              socket.disconnect();
+              resetColumns();
+              getBoard(user.token, info.boardId);
+              getColumns(user.token, info.boardId);
+            }
             showCard();
-            toggleRead(user.token, id);
-            socket.connect();
-            socket.emit("join-board", info.boardId);
-            socket.emit("newUser", user._id);
+            if (info.boardId !== boardId) {
+              toggleRead(user.token, id);
+              socket.connect();
+              socket.emit("join-board", info.boardId);
+              socket.emit("newUser", user._id);
+            }
             toggleRightSideNav();
           }}
         >
