@@ -35,3 +35,14 @@
 .meeting-close-icon:hover {
   opacity: 0.5;
 }
+
+.anchor-toggle {
+  background-color: transparent;
+  color: #e4745d;
+  border: none;
+}
+
+.anchor-toggle:hover {
+  cursor: pointer;
+  color: #f75130;
+}

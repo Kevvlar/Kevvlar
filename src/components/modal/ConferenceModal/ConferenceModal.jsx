@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import ConferencePage from "../../../pages/ConferencePage/ConferencePage";
@@ -6,13 +6,21 @@ import ConferencePage from "../../../pages/ConferencePage/ConferencePage";
 import "./conferenceModal.css";
 
 const ConferenceModal = ({ minimizeState }) => {
+  const [anchor, setAnchor] = useState("left");
+
   return (
     <div
       className={`${
-        minimizeState ? "conference-minimize" : "conference-container"
+        minimizeState
+          ? `conference-minimize ${
+              anchor === "left"
+                ? "conference-anchor-left"
+                : "conference-anchor-right"
+            }`
+          : "conference-container"
       }`}
     >
-      <ConferencePage />
+      <ConferencePage setAnchor={setAnchor} anchor={anchor} />
     </div>
   );
 };

@@ -14,7 +14,17 @@ const ConferencePage = ({
   closeConferenceModal,
   minimize,
   miniMizeState,
+  setAnchor,
+  anchor,
 }) => {
+  const handleSetAnchor = () => {
+    if (anchor === "left") {
+      setAnchor("right");
+    } else if (anchor === "right") {
+      setAnchor("left");
+    }
+  };
+
   return (
     <div className={`conference-page`} style={{ width: "90%", height: "90%" }}>
       <div className="conference-buttons">
@@ -26,6 +36,11 @@ const ConferencePage = ({
         >
           {miniMizeState ? <FullscreenIcon /> : <Minimize />}
         </button>
+        {miniMizeState && (
+          <button className="anchor-toggle" onClick={handleSetAnchor}>
+            anchor{` ${anchor === "left" ? "right" : "left"}`}
+          </button>
+        )}
         <FaTimes
           className="meeting-close-icon"
           onClick={() => {

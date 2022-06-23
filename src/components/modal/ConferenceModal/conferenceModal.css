@@ -13,6 +13,13 @@
   width: 30%;
   height: 35%;
   bottom: 5px;
-  left: 5px;
   z-index: 1000;
+}
+
+.conference-anchor-left {
+  left: 5px;
+}
+
+.conference-anchor-right {
+  right: 5px;
 }
