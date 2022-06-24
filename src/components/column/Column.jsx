@@ -38,8 +38,6 @@ const Column = ({
   editColumnModal,
   deleteColumnModal,
   getColumnData,
-  searchKeyWord,
-  isMe,
 }) => {
   const [addFinishedClass, setAddFinishedClass] = useState(false);
 
@@ -53,7 +51,7 @@ const Column = ({
 
   // needs to fire on render and after editing/creating a column
   const checkFinished = () => {
-    if (column.title.toLowerCase().includes("finished")) {
+    if (column.title.toLowerCase() === "finished") {
       setAddFinishedClass(true);
     } else {
       setAddFinishedClass(false);
@@ -109,18 +107,18 @@ const Column = ({
                 )}
 
                 {provided.placeholder}
+                <button
+                  onClick={() => {
+                    getColumnData(column);
+                    addNewCardModal();
+                  }}
+                  className={`new-card-button`}
+                >
+                  + Add New Card
+                </button>
               </div>
             )}
           </Droppable>
-          <button
-            onClick={() => {
-              getColumnData(column);
-              addNewCardModal();
-            }}
-            className="new-card-button"
-          >
-            + Add New Card
-          </button>
         </div>
       )}
     </Draggable>
@@ -128,10 +126,7 @@ const Column = ({
 };
 
 const mapStateToProps = (state) => {
-  return {
-    searchKeyWord: state.column.cardSearchKeyWord,
-    isMe: state.column.isMe,
-  };
+  return {};
 };
 
 const mapDispatchToProps = (dispatch) => {

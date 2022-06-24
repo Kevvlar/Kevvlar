@@ -13,10 +13,9 @@
 }
 
 .card-container {
-  min-height: 100px;
-  height: 100%;
-  overflow: hidden auto;
-  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
 }
 
 .card-container::-webkit-scrollbar {
@@ -92,10 +91,12 @@
   color: #6b6b6b;
   width: 100%;
   text-align: left;
+  opacity: 1;
 }
 
 .new-card-button:hover {
   box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+  cursor: pointer;
 }
 
 .new-card-button:active {

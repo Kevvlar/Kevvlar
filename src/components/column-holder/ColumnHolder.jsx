@@ -37,19 +37,19 @@ const mapOrder = (array, order, key) => {
   return array;
 };
 
-const enableScrolling = () => {
-  // var parent = document.getElementsByClassName("scroll-enabled")[0];
-  // parent.classList.add('indiana-scroll-container');
-  // parent.classList.remove('testing');
-  // parent.classList.add('indiana-scroll-container--hide-scrollbars');
-};
+// const enableScrolling = () => {
+//   // var parent = document.getElementsByClassName("scroll-enabled")[0];
+//   // parent.classList.add('indiana-scroll-container');
+//   // parent.classList.remove('testing');
+//   // parent.classList.add('indiana-scroll-container--hide-scrollbars');
+// };
 
-const disableScrolling = () => {
-  // var parent = document.getElementsByClassName("scroll-enabled")[0];
-  // parent.classList.remove('indiana-scroll-container');
-  // parent.classList.add('testing');
-  // parent.classList.remove('indiana-scroll-container--hide-scrollbars');
-};
+// const disableScrolling = () => {
+//   // var parent = document.getElementsByClassName("scroll-enabled")[0];
+//   // parent.classList.remove('indiana-scroll-container');
+//   // parent.classList.add('testing');
+//   // parent.classList.remove('indiana-scroll-container--hide-scrollbars');
+// };
 
 const ColumnHolder = ({
   columns,
@@ -67,10 +67,9 @@ const ColumnHolder = ({
   addNewColumnModal,
   removecardFromColumn,
   addActivity,
-  isMe,
 }) => {
   const onDragEnd = (result) => {
-    enableScrolling();
+    // enableScrolling();
     const now = Date();
     const { destination, draggableId, source, type } = result;
 
@@ -168,7 +167,7 @@ const ColumnHolder = ({
   };
 
   return (
-    <DragDropContext onDragEnd={onDragEnd} onDragStart={disableScrolling}>
+    <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="all-columns" direction="horizontal" type="column">
         {(provided) => (
           <div
@@ -176,25 +175,20 @@ const ColumnHolder = ({
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            <ScrollContainer
-              className="scroll-enabled"
-              ignoreElements=".card, .column-header-container"
-            >
+            <div className="column-container">
               {mapOrder(columns, columnsOrder, "id").map((column, index) => (
                 <Column key={column.id} column={column} index={index} />
               ))}
               {provided.placeholder}
               <button
                 onClick={() => {
-                  if (!isMe) {
-                    addNewColumnModal();
-                  }
+                  addNewColumnModal();
                 }}
                 className="new-column-button"
               >
                 + Add New Column
               </button>
-            </ScrollContainer>
+            </div>
           </div>
         )}
       </Droppable>
@@ -211,7 +205,6 @@ const mapStateToProps = (state) => {
     columnId: state.column.selectColumn.id,
     selectCard: state.column.selectCard,
     user: state.user.userData,
-    isMe: state.column.isMe,
   };
 };
 
