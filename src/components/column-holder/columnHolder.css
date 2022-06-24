@@ -26,6 +26,7 @@
   min-width: 300px;
   text-overflow: ellipsis;
   border-radius: 5px;
+  margin-top: 60px;
 }
 
 .new-column-button:hover {
