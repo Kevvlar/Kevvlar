@@ -5,7 +5,7 @@ import { StreamChat } from "stream-chat";
 import ChatPage from "../../../pages/ChatPage/ChatPage";
 import { setChatNotifyOn } from "../../../redux";
 
-import audio from "../../../assets/sound/notify.wav";
+import audio from "../../../assets/sound/chat-notification.wav";
 
 import "./chatModal.css";
 
