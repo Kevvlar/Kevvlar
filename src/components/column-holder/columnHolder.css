@@ -5,15 +5,11 @@
 
 .column-holder {
   height: calc(100% - 150px);
+  width: 100vw;
   display: flex;
   margin: 0px 10px;
   position: relative;
   top: 120px;
-}
-
-.column-container {
-  width: 100vw;
-  display: flex;
   overflow-x: scroll;
 }
 

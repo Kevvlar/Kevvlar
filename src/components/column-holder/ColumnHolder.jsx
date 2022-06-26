@@ -175,20 +175,18 @@ const ColumnHolder = ({
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            <div className="column-container">
-              {mapOrder(columns, columnsOrder, "id").map((column, index) => (
-                <Column key={column.id} column={column} index={index} />
-              ))}
-              {provided.placeholder}
-              <button
-                onClick={() => {
-                  addNewColumnModal();
-                }}
-                className="new-column-button"
-              >
-                + Add New Column
-              </button>
-            </div>
+            {mapOrder(columns, columnsOrder, "id").map((column, index) => (
+              <Column key={column.id} column={column} index={index} />
+            ))}
+            {provided.placeholder}
+            <button
+              onClick={() => {
+                addNewColumnModal();
+              }}
+              className="new-column-button"
+            >
+              + Add New Column
+            </button>
           </div>
         )}
       </Droppable>

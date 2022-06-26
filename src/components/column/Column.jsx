@@ -105,7 +105,6 @@ const Column = ({
                     />
                   )
                 )}
-
                 {provided.placeholder}
                 <button
                   onClick={() => {
