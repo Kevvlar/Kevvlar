@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { FaTimes } from "react-icons/fa";
-import { FullscreenIcon, Minimize } from "../../assets/svg/iconlibrary";
+import { FullscreenIcon, Minimize, LeftArrowIcon, RightArrowIcon, CloseIcon } from "../../assets/svg/iconlibrary";
 
 import { closeConferenceModal, toggleMinimize } from "../../redux";
 
@@ -37,16 +37,18 @@ const ConferencePage = ({
           {miniMizeState ? <FullscreenIcon /> : <Minimize />}
         </button>
         {miniMizeState && (
-          <button className="anchor-toggle" onClick={handleSetAnchor}>
-            anchor{` ${anchor === "left" ? "right" : "left"}`}
+          <button className="chat-minimize-btn" onClick={handleSetAnchor}>
+            {anchor === "left" ? <RightArrowIcon /> : <LeftArrowIcon />}
           </button>
         )}
-        <FaTimes
-          className="meeting-close-icon"
+        <button
+        className="chat-minimize-btn"
           onClick={() => {
             closeConferenceModal();
           }}
-        />
+        >
+          <CloseIcon />
+        </button>
       </div>
       <iframe
         src="https://video-app-4029-6765-dev.twil.io?passcode=27525240296765"
