@@ -4,8 +4,6 @@
   position: relative;
   box-shadow: 0 1px 8px 3px rgb(0 0 0 / 11%);
   box-sizing: border-box;
-  width: 700px;
-  max-width: 900px;
   height: 600px;
   display: flex;
   justify-content: space-between;
