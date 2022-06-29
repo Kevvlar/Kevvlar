@@ -278,6 +278,7 @@ body {
 
 .str-chat-channel-list {
   height: fit-content;
+  overflow: auto;
   margin-bottom: 8px;
 }
 
@@ -1217,6 +1218,8 @@ body {
 
 .str-chat__message-team-actions {
   right: -3px;
+  background: rgba(0, 0, 0, 0.2) !important;
+  border: none !important;
 }
 
 .str-chat__date-separator-date {
@@ -1635,6 +1638,7 @@ div.rta__autocomplete.str-chat__emojisearch {
   box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.1);
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+  border-left: 1px solid #666666;
 }
 
 .str-chat__thread-header {
@@ -1643,6 +1647,7 @@ div.rta__autocomplete.str-chat__emojisearch {
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
   border-top-left-radius: 5px !important;
   background: #343d46 !important;
+  border-bottom: 1px solid #666666;
 }
 
 .str-chat__thread-header-details {
@@ -1708,7 +1713,6 @@ div.rta__autocomplete.str-chat__emojisearch {
 .str-chat__thread-list {
   top: 62px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  height: 50% !important;
 }
 
 .str-chat__thread-start {
