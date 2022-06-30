@@ -2,7 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { ChatIcon } from "../../assets/svg/iconlibrary";
 
-import { setChatModal, setChatNotifyOff, setIsOpen } from "../../redux";
+import {
+  setChatModal,
+  setChatNotifyOff,
+  setIsOpen,
+  closeModal,
+} from "../../redux";
 
 import "./chatButton.css";
 
@@ -13,15 +18,22 @@ const ChatButton = ({
   notify,
   toggleOpenChat,
   isOpen,
+  isShowModal,
+  modalType,
+  closeModal,
 }) => {
   return (
     <div className="chat-button-container">
       <button
         className="chat-button"
         onClick={() => {
-          turnOffChatNotify();
-          toggleOpenChat(true);
-          showChatModal();
+          if (isShowModal && modalType === "CHAT_MODAL") {
+            closeModal();
+          } else {
+            turnOffChatNotify();
+            toggleOpenChat(true);
+            showChatModal();
+          }
         }}
       >
         <ChatIcon />
@@ -50,6 +62,8 @@ const mapStateToProps = (state) => {
     user: state.user.userData,
     notify: state.chat.notify,
     isOpen: state.chat.isOpen,
+    isShowModal: state.modal.showModal,
+    modalType: state.modal.modalType,
   };
 };
 
@@ -58,6 +72,7 @@ const mapDispatchToProps = (dispatch) => {
     showChatModal: () => dispatch(setChatModal()),
     turnOffChatNotify: () => dispatch(setChatNotifyOff()),
     toggleOpenChat: (bool) => dispatch(setIsOpen(bool)),
+    closeModal: () => dispatch(closeModal()),
   };
 };
 

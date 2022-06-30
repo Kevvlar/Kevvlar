@@ -4,9 +4,8 @@
   position: relative;
   box-shadow: 0 1px 8px 3px rgb(0 0 0 / 11%);
   box-sizing: border-box;
-  width: 700px;
-  max-width: 900px;
   height: 600px;
+  max-width: 950px;
   display: flex;
   justify-content: space-between;
 }
@@ -247,6 +246,10 @@ body {
   .auth__form-container_image img {
     object-fit: cover;
   }
+
+  .chat-page-container {
+    height: 90vh;
+  }
 }
 
 @media screen and (max-width: 375px) {
@@ -278,6 +281,7 @@ body {
 
 .str-chat-channel-list {
   height: fit-content;
+  overflow: auto;
   margin-bottom: 8px;
 }
 
@@ -970,6 +974,10 @@ body {
   scrollbar-width: none;
 }
 
+.str-chat__typing-indicator__dots {
+  background-color: #000 !important;
+}
+
 @media screen and (min-width: 1070px) {
   .team-channel-header__name-wrapper {
     max-width: 700px;
@@ -1217,6 +1225,8 @@ body {
 
 .str-chat__message-team-actions {
   right: -3px;
+  background: rgb(36 42 48) !important;
+  border: none !important;
 }
 
 .str-chat__date-separator-date {
@@ -1635,6 +1645,7 @@ div.rta__autocomplete.str-chat__emojisearch {
   box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.1);
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+  border-left: 1px solid #666666;
 }
 
 .str-chat__thread-header {
@@ -1643,6 +1654,7 @@ div.rta__autocomplete.str-chat__emojisearch {
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
   border-top-left-radius: 5px !important;
   background: #343d46 !important;
+  border-bottom: 1px solid #666666;
 }
 
 .str-chat__thread-header-details {
@@ -1708,7 +1720,6 @@ div.rta__autocomplete.str-chat__emojisearch {
 .str-chat__thread-list {
   top: 62px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  height: 50% !important;
 }
 
 .str-chat__thread-start {
@@ -1980,4 +1991,42 @@ div.rta__autocomplete.str-chat__emojisearch {
 
 .str-chat__date-separator-date {
   color: #e4745d !important;
+}
+
+.str-chat__simple-reactions-list {
+  background-color: #343d45 !important;
+  border: #343d45 !important;
+}
+
+.str-chat__simple-reactions-list-item--last-number {
+  color: white !important;
+}
+
+.str-chat__message-team .quoted-message {
+  background-color: #242a30 !important;
+}
+
+.str-chat__li .quoted-message-inner {
+  background-color: #242a30 !important;
+  color: #c1c1c1 !important;
+  font-size: 12px;
+}
+
+.str-chat__input-flat-quoted .quoted-message-preview-content {
+  background-color: #343d45 !important;
+  color: #c1c1c1;
+}
+
+.str-chat__input-flat-quoted .quoted-message-preview-header {
+  color: #c1c1c1 !important;
+}
+
+.str-chat__thread-list .quoted-message.mine .quoted-message-inner {
+  background-color: #242a30 !important;
+  color: #c1c1c1 !important;
+}
+
+.str-chat__input-flat .str-chat__textarea > textarea {
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
