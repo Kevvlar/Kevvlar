@@ -5,6 +5,7 @@
   box-shadow: 0 1px 8px 3px rgb(0 0 0 / 11%);
   box-sizing: border-box;
   height: 600px;
+  max-width: 950px;
   display: flex;
   justify-content: space-between;
 }
@@ -971,6 +972,10 @@ body {
   white-space: nowrap;
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.str-chat__typing-indicator__dots {
+  background-color: #000 !important;
 }
 
 @media screen and (min-width: 1070px) {
