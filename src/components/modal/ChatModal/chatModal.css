@@ -3,3 +3,14 @@
   right: 80px;
   bottom: 15px;
 }
+
+/*MOBILE BREAKPOINTS*/
+
+@media only screen and (max-width: 600px) {
+  .chat-page-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+  }
+}

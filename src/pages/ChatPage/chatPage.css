@@ -245,6 +245,10 @@ body {
   .auth__form-container_image img {
     object-fit: cover;
   }
+
+  .chat-page-container {
+    height: 90vh;
+  }
 }
 
 @media screen and (max-width: 375px) {
@@ -1216,7 +1220,7 @@ body {
 
 .str-chat__message-team-actions {
   right: -3px;
-  background: rgba(0, 0, 0, 0.2) !important;
+  background: rgb(36 42 48) !important;
   border: none !important;
 }
 
@@ -1994,12 +1998,13 @@ div.rta__autocomplete.str-chat__emojisearch {
 }
 
 .str-chat__message-team .quoted-message {
-  background-color: #343d45 !important;
+  background-color: #242a30 !important;
 }
 
 .str-chat__li .quoted-message-inner {
-  background-color: #343d45 !important;
+  background-color: #242a30 !important;
   color: #c1c1c1 !important;
+  font-size: 12px;
 }
 
 .str-chat__input-flat-quoted .quoted-message-preview-content {
@@ -2012,7 +2017,7 @@ div.rta__autocomplete.str-chat__emojisearch {
 }
 
 .str-chat__thread-list .quoted-message.mine .quoted-message-inner {
-  background-color: #343d45 !important;
+  background-color: #242a30 !important;
   color: #c1c1c1 !important;
 }
 
