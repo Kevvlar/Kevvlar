@@ -4,9 +4,11 @@ import { withRouter } from "react-router";
 import CardSearchBar from "../../components/CardSearchBar/CardSearchBar";
 import UserAvatar from "../user-avatar/UserAvatar";
 import AdminAvatar from "../admin-avatar/AdminAvatar";
+import { AiFillCalendar } from "react-icons/ai";
 
 import {
   setUserModal,
+  setCalendarModal,
   clearColumns,
   toggleActivity,
   toggleFileModal,
@@ -35,6 +37,7 @@ const BoardNavBar = ({
   board,
   history,
   showUserModal,
+  showCalendar,
   emptyColumns,
   user,
   showActivity,
@@ -125,6 +128,15 @@ const BoardNavBar = ({
         <button
           className="boardnavbar-btn"
           onClick={() => {
+            showCalendar();
+          }}
+        >
+          <AiFillCalendar />
+          <div className="boardnavbar-boardtitle">Calendar</div>
+        </button>
+        <button
+          className="boardnavbar-btn"
+          onClick={() => {
             showActivity();
           }}
         >
@@ -161,6 +173,7 @@ const mapDispatchToProps = (dispatch) => {
     showUserModal: (type) => dispatch(setUserModal(type)),
     emptyColumns: () => dispatch(clearColumns()),
     showActivity: () => dispatch(toggleActivity()),
+    showCalendar: () => dispatch(setCalendarModal()),
     showFile: () => dispatch(toggleFileModal()),
     getFiles: (token, boardId) => dispatch(fetchFiles(token, boardId)),
     startMeeting: () => dispatch(setConferenceModal()),

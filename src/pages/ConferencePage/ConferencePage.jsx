@@ -1,7 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import { FaTimes } from "react-icons/fa";
-import { FullscreenIcon, Minimize, LeftArrowIcon, RightArrowIcon, CloseIcon } from "../../assets/svg/iconlibrary";
+import {
+  FullscreenIcon,
+  Minimize,
+  LeftArrowIcon,
+  RightArrowIcon,
+  CloseIcon,
+} from "../../assets/svg/iconlibrary";
 
 import { closeConferenceModal, toggleMinimize } from "../../redux";
 
@@ -42,7 +47,7 @@ const ConferencePage = ({
           </button>
         )}
         <button
-        className="chat-minimize-btn"
+          className="chat-minimize-btn"
           onClick={() => {
             closeConferenceModal();
           }}

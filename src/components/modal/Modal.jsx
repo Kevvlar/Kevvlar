@@ -9,6 +9,7 @@ import {
   CARD_MODAL,
   USER_MODAL,
   ERROR_MODAL,
+  CALENDAR_MODAL,
   EDIT,
 } from "../../redux/modal/modalTypes";
 
@@ -16,6 +17,7 @@ import BoardModal from "./board-modal/BoardModal";
 import ColumnModal from "./column-modal/ColumnModal";
 import CardModal from "./card-modal/CardModal";
 import UserModal from "./user-modal/UserModal";
+import CalendarModal from "./CalendarModal/CalendarModal";
 import ErrorModal from "./ErrorModal/ErrorModal";
 
 import "./modal.css";
@@ -72,6 +74,18 @@ const Modal = React.memo(
               }}
             ></div>
             <UserModal />
+          </div>
+        );
+      case CALENDAR_MODAL:
+        return (
+          <div className="modal-wrapper">
+            <div
+              className="modal-close-overlay"
+              onClick={() => {
+                closeModal();
+              }}
+            ></div>
+            <CalendarModal />
           </div>
         );
       case ERROR_MODAL:

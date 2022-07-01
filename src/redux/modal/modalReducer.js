@@ -6,6 +6,7 @@ import {
   USER_MODAL,
   CHAT_MODAL,
   CONFERENCE_MODAL,
+  CALENDAR_MODAL,
   TOGGLE_MINIMIZE,
   CLOSE_CONFERENCE_MODAL,
   ERROR_MODAL,
@@ -39,6 +40,14 @@ const modalReducer = (state = initialState, action) => {
         ...state,
         showModal: true,
         modalType: BOARD_MODAL,
+        modalActionType: action.payLoad,
+      };
+
+    case CALENDAR_MODAL:
+      return {
+        ...state,
+        showModal: true,
+        modalType: CALENDAR_MODAL,
         modalActionType: action.payLoad,
       };
 
