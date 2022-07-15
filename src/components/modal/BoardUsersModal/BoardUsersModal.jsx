@@ -11,7 +11,7 @@ import {
   removeMemberFromBoard,
 } from "../../../redux";
 
-import "./userModal.css";
+import "./boardUsersModal.css";
 
 const UserModal = ({
   closeModal,
