@@ -9,6 +9,7 @@ import {
   TOGGLE_MINIMIZE,
   CLOSE_CONFERENCE_MODAL,
   ERROR_MODAL,
+  USERBOARDS_MODAL,
 } from "./modalTypes";
 
 const initialState = {
