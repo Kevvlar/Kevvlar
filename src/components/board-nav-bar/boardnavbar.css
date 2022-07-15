@@ -82,6 +82,10 @@
   font-size: 14px;
 }
 
+.avatar-more:hover {
+  cursor: pointer;
+}
+
 .boardnavbar-group {
   display: flex;
   padding-left: 15px;

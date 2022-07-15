@@ -66,6 +66,14 @@ const modalReducer = (state = initialState, action) => {
         modalActionType: action.payLoad,
       };
 
+    case USERBOARDS_MODAL:
+      return {
+        ...state,
+        showModal: true,
+        modalType: USERBOARDS_MODAL,
+        modalActionType: action.payLoad,
+      };
+
     case CHAT_MODAL:
       return {
         ...state,

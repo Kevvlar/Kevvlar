@@ -32,6 +32,13 @@ export const setUserModal = (actionType = ADD) => {
   };
 };
 
+export const setBoardUsersModal = (actionType = ADD) => {
+  return {
+    type: USERBOARDS_MODAL,
+    payLoad: actionType,
+  };
+};
+
 export const setChatModal = (actionType = ADD) => {
   return {
     type: CHAT_MODAL,

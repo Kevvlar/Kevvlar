@@ -1,0 +1,36 @@
+.modal-board-body {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 80%;
+}
+
+.modal-board-button:hover {
+  background-color: #03a9f4;
+  color: #fff;
+}
+
+.modal-board-title {
+  text-align: center;
+
+  margin-top: 0px;
+}
+
+.modal-title {
+  color: #e4745d;
+}
+
+.remove-user-email {
+  margin: 55px auto;
+}
+
+/*RESPONSIVE BREAKPOINTS*/
+
+@media only screen and (max-width: 600px) {
+  .modal {
+    width: 100%;
+    height: 100%;
+  }
+}
