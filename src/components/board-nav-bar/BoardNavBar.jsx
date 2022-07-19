@@ -15,14 +15,10 @@ import {
   resetIsMe,
   clearCardSearchKey,
   setConferenceModal,
-  setBoardUsersModal,
-  closeModal,
+  setBoardUsersModal
 } from "../../redux";
 
-import {
-  CONFERENCE_MODAL,
-  USERBOARDS_MODAL,
-} from "../../redux/modal/modalTypes";
+import { CONFERENCE_MODAL } from "../../redux/modal/modalTypes";
 
 import {
   LockIcon,
@@ -52,8 +48,6 @@ const BoardNavBar = ({
   clearCardSearch,
   modalType,
   showBoardUsersModal,
-  _modalType,
-  closeModal,
 }) => {
   return (
     <div className="boardnavbar">
@@ -86,23 +80,15 @@ const BoardNavBar = ({
           <UserAvatar key={index} user={member} />
         ))}
         {board?.members?.length > 2 ? (
-          <React.Fragment>
-            <div
-              className="avatar-more"
-              title={board?.members?.slice(2).map((member) => member.name)}
-              onClick={() => {
-                showBoardUsersModal();
-              }}
-            >
-              {"+" + (board?.members?.length - 2)}
-            </div>
-            {_modalType === USERBOARDS_MODAL && (
-              <div style={{ width: "80px", height: "100px" }}>
-                <p>Hello</p>
-                <button onClick={closeModal}>close</button>
-              </div>
-            )}
-          </React.Fragment>
+          <div
+            className="avatar-more"
+            title={board?.members?.slice(2).map((member) => member.name)}
+            onClick={() => {
+              showBoardUsersModal();
+            }}
+          >
+            {"+" + (board?.members?.length - 2)}
+          </div>
         ) : null}
         <button
           className="add-user-icon"
@@ -172,7 +158,6 @@ const mapStateToProps = (state) => {
     activities: state.column.activities,
     isMe: state.column.isMe,
     modalType: state.modal.conference,
-    _modalType: state.modal.modalType,
   };
 };
 
@@ -188,7 +173,6 @@ const mapDispatchToProps = (dispatch) => {
     sortByMe: () => dispatch(toggleAssignedMe()),
     clearIsMe: () => dispatch(resetIsMe()),
     clearCardSearch: () => dispatch(clearCardSearchKey()),
-    closeModal: () => dispatch(closeModal()),
   };
 };
 
