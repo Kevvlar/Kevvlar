@@ -281,7 +281,9 @@ function CalendarPage() {
     setDescription(event.description);
     setDate([event.start, event.end]);
     setAllDay(event.allDay || false);
-    setSelectUsers(event.users);
+    if (event.users) {
+      setSelectUsers([]);
+    }
   }, []);
 
   const onEventClick = React.useCallback(
