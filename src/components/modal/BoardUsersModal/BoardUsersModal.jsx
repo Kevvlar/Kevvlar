@@ -13,7 +13,7 @@ import {
 
 import "./boardUsersModal.css";
 
-const UserModal = ({
+const BoardUserModal = ({
   closeModal,
   type,
   addMember,
@@ -22,8 +22,11 @@ const UserModal = ({
   setUserEmail,
   userToRemoveEmail,
   removeMember,
+  admins,
+  members,
 }) => {
-  const AddUserModal = () => {
+  const users = [...admins, ...members];
+  const ManageUserModal = () => {
     const [userEmail, setUserEmail] = useState("");
 
     const handleSubmit = () => {
@@ -35,61 +38,60 @@ const UserModal = ({
     };
 
     return (
-      <form
+      <div
         onSubmit={(e) => {
           e.preventDefault();
           handleSubmit();
         }}
         className="modal-body"
       >
-        <h2 className="modal-title">Add User To Board</h2>
-        <input
-          className="modal-board-text"
-          type="email"
-          name="userEmail"
-          value={userEmail}
-          onChange={(e) => setUserEmail(e.target.value)}
-          autoFocus
-        />
-        <div className="modal-button-container">
-          <button className="modal-board-button" type="submit">
-            Add User
-          </button>
+        <h2 className="modal-title">Manage Users</h2>
+        <div className="manage-user-container">
+          {users.map((user, index) => (
+            <div className="manage-users-holder" key={index}>
+              <div className="assign-user-list-container">
+                <img
+                  className="user-avatar-image assign-user-image"
+                  alt="img"
+                  src={user?.photo}
+                  title={user?.name}
+                />
+                <div>
+                  <div className="assign-user-list-name">
+                    {user?.name}
+                  </div>
+                  <div className="assign-user-list-email">
+                    {user?.email}
+                  </div>
+                </div>
+              </div>
+              <button
+                  className="delete-button"
+                  style={{ margin: "0px" }}
+                  onClick={() => {
+                    removeMember(user.token, {
+                      userEmail: user.email,
+                      boardId: currrentBoardId,
+                    });
+                    socket.emit("remove-member", user.email);
+                    setUserEmail("");
+                    closeModal();
+                  }}
+                >
+                  Remove User
+                </button>
+            </div>
+          ))}
+          </div>
         </div>
-      </form>
     );
   };
 
-  const RemoveUserModal = () => (
-    <div className="modal-body">
-      <h2 className="modal-title">Remove User From Board</h2>
-      <div className="modal-button-container">
-        <p className="remove-user-email">{userToRemoveEmail}</p>
-        <button
-          className="delete-button"
-          style={{ margin: "0px" }}
-          onClick={() => {
-            removeMember(user.token, {
-              userEmail: userToRemoveEmail,
-              boardId: currrentBoardId,
-            });
-            socket.emit("remove-member", userToRemoveEmail);
-            setUserEmail("");
-            closeModal();
-          }}
-        >
-          Remove User
-        </button>
-      </div>
-    </div>
-  );
-
   return (
-    <div className="modal-board">
+    <div className="manage-users-modal-board">
       <div className="close-icon-container">
         <FaTimes onClick={closeModal} className="close-icon" />
-        {type === "ADD" ? <AddUserModal /> : null}
-        {type === "REMOVE" ? <RemoveUserModal /> : null}
+        {type === "ADD" ? <ManageUserModal /> : null}
       </div>
     </div>
   );
@@ -101,6 +103,8 @@ const mapStateToProps = (state) => {
     user: state.user.userData,
     currrentBoardId: state.board.selectBoard.id,
     userToRemoveEmail: state.board.userEmail,
+    admins: state.board.selectBoard.admins,
+    members: state.board.selectBoard.members,
   };
 };
 
@@ -114,4 +118,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserModal);
+export default connect(mapStateToProps, mapDispatchToProps)(BoardUserModal);
