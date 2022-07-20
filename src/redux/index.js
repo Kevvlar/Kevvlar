@@ -36,6 +36,7 @@ export {
   setColumnModal,
   setCardModal,
   setUserModal,
+  setBoardUsersModal,
   setChatModal,
   setConferenceModal,
   toggleMinimize,

@@ -15,6 +15,7 @@ import {
   resetIsMe,
   clearCardSearchKey,
   setConferenceModal,
+  setBoardUsersModal
 } from "../../redux";
 
 import { CONFERENCE_MODAL } from "../../redux/modal/modalTypes";
@@ -46,6 +47,7 @@ const BoardNavBar = ({
   isMe,
   clearCardSearch,
   modalType,
+  showBoardUsersModal,
 }) => {
   return (
     <div className="boardnavbar">
@@ -81,6 +83,9 @@ const BoardNavBar = ({
           <div
             className="avatar-more"
             title={board?.members?.slice(2).map((member) => member.name)}
+            onClick={() => {
+              showBoardUsersModal();
+            }}
           >
             {"+" + (board?.members?.length - 2)}
           </div>
@@ -158,6 +163,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    showBoardUsersModal: (type) => dispatch(setBoardUsersModal(type)),
     showUserModal: (type) => dispatch(setUserModal(type)),
     emptyColumns: () => dispatch(clearColumns()),
     showActivity: () => dispatch(toggleActivity()),

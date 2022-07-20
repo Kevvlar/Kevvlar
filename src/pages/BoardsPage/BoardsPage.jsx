@@ -38,20 +38,20 @@ class BoardsPage extends React.Component {
     return (
       <div className="boards-page-holder">
         <AppBar />
-        <span
+        <div
           style={{
             display: this.props.modalType === CHAT_MODAL ? "block" : "none",
           }}
         >
           <ChatModal />
-        </span>
+        </div>
         <div className="boards-page">
           <div className="board-main">
             <SearchBar />
             {this.props.boardState ? (
               <LoadingIcon />
             ) : (
-              <span>
+              <div>
                 <div className="boards-container">
                   <h2 className="all-boards-title">All Boards</h2>
                   <BoardList />
@@ -59,7 +59,7 @@ class BoardsPage extends React.Component {
                 <div className="boards-container">
                   <h2 className="all-boards-title">Team Boards</h2>
                 </div>
-              </span>
+              </div>
             )}
           </div>
         </div>

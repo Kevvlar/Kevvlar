@@ -9,6 +9,7 @@ import {
   TOGGLE_MINIMIZE,
   CLOSE_CONFERENCE_MODAL,
   ERROR_MODAL,
+  USERBOARDS_MODAL,
 } from "./modalTypes";
 
 const initialState = {
@@ -63,6 +64,14 @@ const modalReducer = (state = initialState, action) => {
         ...state,
         showModal: true,
         modalType: USER_MODAL,
+        modalActionType: action.payLoad,
+      };
+
+    case USERBOARDS_MODAL:
+      return {
+        ...state,
+        showModal: true,
+        modalType: USERBOARDS_MODAL,
         modalActionType: action.payLoad,
       };
 

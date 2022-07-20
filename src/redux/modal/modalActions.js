@@ -10,6 +10,7 @@ import {
   TOGGLE_MINIMIZE,
   CLOSE_CONFERENCE_MODAL,
   ERROR_MODAL,
+  USERBOARDS_MODAL,
 } from "./modalTypes";
 
 export const closeModal = () => {
@@ -28,6 +29,13 @@ export const setBoardModal = (actionType = ADD) => {
 export const setUserModal = (actionType = ADD) => {
   return {
     type: USER_MODAL,
+    payLoad: actionType,
+  };
+};
+
+export const setBoardUsersModal = (actionType = ADD) => {
+  return {
+    type: USERBOARDS_MODAL,
     payLoad: actionType,
   };
 };
