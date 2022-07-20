@@ -1,0 +1,16 @@
+.calendar-button {
+  background: transparent;
+  margin-right: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+.calendar-icon {
+  width: 23px;
+  height: 23px;
+  color: #a0a0a0;
+}
+
+.calendar-icon:hover {
+  filter: opacity(0.5);
+}

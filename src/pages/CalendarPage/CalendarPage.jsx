@@ -20,7 +20,7 @@ import {
   momentTimezone,
   Checkbox,
 } from "@mobiscroll/react";
-import "@mobiscroll/react/dist/css/mobiscroll.min.css";
+import "@mobiscroll/react/dist/css/mobiscroll.react.min.css";
 import "./calendarPage.css";
 
 // setup Mobiscroll Moment plugin

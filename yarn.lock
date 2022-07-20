@@ -1544,6 +1544,10 @@
   resolved "https://registry.npmjs.org/@jsdevtools/ono/-/ono-7.1.3.tgz"
   integrity sha512-4JQNk+3mVzK3xh2rqd6RB4J46qUR19azEHBneZyTZM+c456qOrbbM/5xcR8huNCCcbVt7+UmizG6GuUvPvKUYg==
 
+"@mobiscroll/react@file:./src/lib/mobiscroll-package/mobiscroll-react-v5.17.2.tgz":
+  version "5.17.2"
+  resolved "file:./src/lib/mobiscroll-package/mobiscroll-react-v5.17.2.tgz#dca4b7e449be154226ce8955382e8171ed71ad24"
+
 "@mobiscroll/react@https://npm.mobiscroll.com/@mobiscroll/react-trial/-/react-trial-5.17.2.tgz":
   version "5.17.2"
   resolved "https://npm.mobiscroll.com/@mobiscroll/react-trial/-/react-trial-5.17.2.tgz#b3391166244b7d8c8077a8140f9ca58d91b47497"
