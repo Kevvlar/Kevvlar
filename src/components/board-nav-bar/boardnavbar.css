@@ -84,6 +84,7 @@
 
 .avatar-more:hover {
   cursor: pointer;
+  background: #3e444a;
 }
 
 .boardnavbar-group {
