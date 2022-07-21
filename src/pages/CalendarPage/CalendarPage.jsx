@@ -21,7 +21,10 @@ import {
   Checkbox,
 } from "@mobiscroll/react";
 import "@mobiscroll/react/dist/css/mobiscroll.react.min.css";
+import { connect } from "react-redux";
 import "./calendarPage.css";
+
+import { addEvent, editEvent, deleteEvent } from "../../redux";
 
 // setup Mobiscroll Moment plugin
 momentTimezone.moment = moment;
@@ -536,4 +539,18 @@ function CalendarPage() {
   );
 }
 
-export default CalendarPage;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user.userData,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addNewEvent: (event) => dispatch(addEvent(event)),
+    updateEvent: (event) => dispatch(editEvent(event)),
+    deleteEvent: (eventId) => dispatch(deleteEvent(eventId)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CalendarPage);
