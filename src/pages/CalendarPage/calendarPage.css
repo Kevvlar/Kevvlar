@@ -107,3 +107,7 @@
   align-items: center;
   flex-direction: column;
 }
+
+.mbsc-windows-dark.mbsc-eventcalendar {
+  height: 100vh;
+}

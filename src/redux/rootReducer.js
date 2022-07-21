@@ -12,6 +12,7 @@ import boardReducer from "./board/boardReducer";
 import columnReducer from "./column/columnReducer";
 import userReducer from "./user/userReducer";
 import chatReducer from "./chat/chatReducer";
+import calendarReducer from "./calendar/calendarReducer";
 
 const persistConfig = {
   key: "root",
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   activity: activityReducer,
   file: fileReducer,
   chat: chatReducer,
+  calendar: calendarReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
