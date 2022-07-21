@@ -66,7 +66,7 @@ const myUsers = [
   },
 ];
 
-function CalendarPage() {
+const CalendarPage = ({ addNewEvent, updateEvent, handleDeleteEvent }) => {
   const [myEvents, setMyEvents] = React.useState([]);
   const [tempEvent, setTempEvent] = React.useState(null);
   const [isOpen, setOpen] = React.useState(false);
@@ -183,6 +183,7 @@ function CalendarPage() {
     } else {
       // add the new event to the list
       setMyEvents([...myEvents, newEvent]);
+      addEvent(newEvent);
       // here you can add the event to your storage as well
       // ...
     }
@@ -537,7 +538,7 @@ function CalendarPage() {
       </Popup>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => {
   return {
@@ -549,7 +550,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addNewEvent: (event) => dispatch(addEvent(event)),
     updateEvent: (event) => dispatch(editEvent(event)),
-    deleteEvent: (eventId) => dispatch(deleteEvent(eventId)),
+    handleDeleteEvent: (eventId) => dispatch(deleteEvent(eventId)),
   };
 };
 
