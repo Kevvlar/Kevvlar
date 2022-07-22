@@ -16,6 +16,7 @@ import { CONFERENCE_MODAL } from "./redux/modal/modalTypes";
 
 import "./App.css";
 import "stream-chat-react/dist/css/index.css";
+import "@mobiscroll/react/dist/css/mobiscroll.react.min.css";
 
 const App = ({ modalType }) => {
   return (

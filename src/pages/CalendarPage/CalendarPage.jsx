@@ -1,6 +1,7 @@
 import React from "react";
 import moment from "moment-timezone";
 import { v4 as uuidv4 } from "uuid";
+import { connect } from "react-redux";
 import {
   Eventcalendar,
   snackbar,
@@ -21,10 +22,9 @@ import {
   Checkbox,
 } from "@mobiscroll/react";
 import "@mobiscroll/react/dist/css/mobiscroll.react.min.css";
-import { connect } from "react-redux";
 import "./calendarPage.css";
 
-import { addEvent, editEvent, deleteEvent } from "../../redux";
+import { addEvent } from "../../redux";
 
 // setup Mobiscroll Moment plugin
 momentTimezone.moment = moment;
@@ -66,8 +66,8 @@ const myUsers = [
   },
 ];
 
-const CalendarPage = ({ addNewEvent, updateEvent, handleDeleteEvent }) => {
-  const [myEvents, setMyEvents] = React.useState([]);
+const CalendarPage = ({ addNewEvent, eventList }) => {
+  const [myEvents, setMyEvents] = React.useState(eventList);
   const [tempEvent, setTempEvent] = React.useState(null);
   const [isOpen, setOpen] = React.useState(false);
   const [isEdit, setEdit] = React.useState(false);
@@ -183,7 +183,7 @@ const CalendarPage = ({ addNewEvent, updateEvent, handleDeleteEvent }) => {
     } else {
       // add the new event to the list
       setMyEvents([...myEvents, newEvent]);
-      addEvent(newEvent);
+      addNewEvent(tempEvent);
       // here you can add the event to your storage as well
       // ...
     }
@@ -199,6 +199,7 @@ const CalendarPage = ({ addNewEvent, updateEvent, handleDeleteEvent }) => {
     popupEventTitle,
     tempEvent,
     selectUsers,
+    addNewEvent,
   ]);
 
   const deleteEvent = React.useCallback(
@@ -543,14 +544,13 @@ const CalendarPage = ({ addNewEvent, updateEvent, handleDeleteEvent }) => {
 const mapStateToProps = (state) => {
   return {
     user: state.user.userData,
+    eventList: state.calendar.eventList,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     addNewEvent: (event) => dispatch(addEvent(event)),
-    updateEvent: (event) => dispatch(editEvent(event)),
-    handleDeleteEvent: (eventId) => dispatch(deleteEvent(eventId)),
   };
 };
 
