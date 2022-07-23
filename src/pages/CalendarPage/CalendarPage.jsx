@@ -24,7 +24,7 @@ import {
 import "@mobiscroll/react/dist/css/mobiscroll.react.min.css";
 import "./calendarPage.css";
 
-import { addEvent } from "../../redux";
+import { addEvent, editEvent } from "../../redux";
 
 // setup Mobiscroll Moment plugin
 momentTimezone.moment = moment;
@@ -66,7 +66,7 @@ const myUsers = [
   },
 ];
 
-const CalendarPage = ({ addNewEvent, eventList }) => {
+const CalendarPage = ({ addNewEvent, eventList, updateEvent }) => {
   const [myEvents, setMyEvents] = React.useState(eventList);
   const [tempEvent, setTempEvent] = React.useState(null);
   const [isOpen, setOpen] = React.useState(false);
@@ -178,12 +178,15 @@ const CalendarPage = ({ addNewEvent, eventList }) => {
 
       newEventList.splice(index, 1, newEvent);
       setMyEvents(newEventList);
+      // updateEvent(tempEvent.id, newEvent);
+      console.log("UP: ", newEvent);
+      console.log("Li :", newEventList);
       // here you can update the event in your storage as well
       // ...
     } else {
       // add the new event to the list
       setMyEvents([...myEvents, newEvent]);
-      addNewEvent(tempEvent);
+      addNewEvent(newEvent);
       // here you can add the event to your storage as well
       // ...
     }
@@ -200,6 +203,7 @@ const CalendarPage = ({ addNewEvent, eventList }) => {
     tempEvent,
     selectUsers,
     addNewEvent,
+    updateEvent,
   ]);
 
   const deleteEvent = React.useCallback(
@@ -551,6 +555,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addNewEvent: (event) => dispatch(addEvent(event)),
+    updateEvent: (id, event) => dispatch(editEvent(id, event)),
   };
 };
 

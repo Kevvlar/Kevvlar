@@ -10,6 +10,7 @@ import {
   handleLogOutUser,
   clearBoards,
   clearColumns,
+  clearEvent,
 } from "../../redux/index.js";
 
 const client = StreamChat.getInstance(process.env.REACT_APP_STREAM_API_KEY);
@@ -20,6 +21,7 @@ const UserProfile = ({
   history,
   emptyBoards,
   emptyColumns,
+  emptyEventList,
 }) => {
   const [showMenu, setShowMenu] = useState(false);
 
@@ -52,6 +54,7 @@ const UserProfile = ({
   const handleSignOut = () => {
     emptyBoards();
     emptyColumns();
+    emptyEventList();
     logUserOut(history);
   };
 
@@ -82,6 +85,7 @@ const mapDispatchToProps = (dispatch) => {
     logUserOut: (history) => dispatch(handleLogOutUser(history)),
     emptyBoards: () => dispatch(clearBoards()),
     emptyColumns: () => dispatch(clearColumns()),
+    emptyEventList: () => dispatch(clearEvent()),
   };
 };
 
