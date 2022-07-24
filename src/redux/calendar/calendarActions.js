@@ -1,4 +1,9 @@
-import { ADD_EVENT, EDIT_EVENT, CLEAR_EVENTS } from "./calendarTypes";
+import {
+  ADD_EVENT,
+  EDIT_EVENT,
+  DELETE_EVENT,
+  CLEAR_EVENTS,
+} from "./calendarTypes";
 
 export const addEvent = (newEvent) => {
   return {
@@ -11,6 +16,13 @@ export const editEvent = (id, updatedEvent) => {
   return {
     type: EDIT_EVENT,
     payLoad: { eventId: id, event: updatedEvent },
+  };
+};
+
+export const deletEvent = (eventId) => {
+  return {
+    type: DELETE_EVENT,
+    payLoad: eventId,
   };
 };
 

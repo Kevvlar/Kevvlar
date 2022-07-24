@@ -105,4 +105,9 @@ export {
   removeEvent,
 } from "./chat/chatActions";
 
-export { addEvent, editEvent, clearEvent } from "./calendar/calendarActions";
+export {
+  addEvent,
+  editEvent,
+  deletEvent,
+  clearEvent,
+} from "./calendar/calendarActions";

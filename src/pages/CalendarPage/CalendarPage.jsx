@@ -24,7 +24,7 @@ import {
 import "@mobiscroll/react/dist/css/mobiscroll.react.min.css";
 import "./calendarPage.css";
 
-import { addEvent, editEvent } from "../../redux";
+import { addEvent, editEvent, deletEvent } from "../../redux";
 
 // setup Mobiscroll Moment plugin
 momentTimezone.moment = moment;
@@ -66,7 +66,7 @@ const myUsers = [
   },
 ];
 
-const CalendarPage = ({ addNewEvent, eventList, updateEvent }) => {
+const CalendarPage = ({ addNewEvent, eventList, updateEvent, removeEvent }) => {
   const [myEvents, setMyEvents] = React.useState(eventList);
   const [tempEvent, setTempEvent] = React.useState(null);
   const [isOpen, setOpen] = React.useState(false);
@@ -209,6 +209,7 @@ const CalendarPage = ({ addNewEvent, eventList, updateEvent }) => {
   const deleteEvent = React.useCallback(
     (event) => {
       setMyEvents(myEvents.filter((item) => item.id !== event.id));
+      removeEvent(event.id);
       setTimeout(() => {
         snackbar({
           button: {
@@ -556,6 +557,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addNewEvent: (event) => dispatch(addEvent(event)),
     updateEvent: (id, event) => dispatch(editEvent(id, event)),
+    removeEvent: (id) => dispatch(deletEvent(id)),
   };
 };
 

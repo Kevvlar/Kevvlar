@@ -1,4 +1,9 @@
-import { ADD_EVENT, EDIT_EVENT, CLEAR_EVENTS } from "./calendarTypes";
+import {
+  ADD_EVENT,
+  EDIT_EVENT,
+  DELETE_EVENT,
+  CLEAR_EVENTS,
+} from "./calendarTypes";
 
 const initialState = {
   eventList: [],
@@ -22,6 +27,12 @@ const calendarReducer = (state = initialState, action) => {
       return {
         ...state,
         eventList: newEventList,
+      };
+
+    case DELETE_EVENT:
+      return {
+        ...state,
+        eventList: state.eventList.filter((item) => item.id !== action.payLoad),
       };
 
     case CLEAR_EVENTS:
