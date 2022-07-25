@@ -18,15 +18,22 @@ const calendarReducer = (state = initialState, action) => {
       };
 
     case EDIT_EVENT:
-      const index = state.eventList.findIndex(
-        (event) => event.id === action.payLoad.eventId
-      );
-      const newEventList = [...state.eventList];
-
-      newEventList.splice(index, 1, action.payLoad.updatedEvent);
       return {
         ...state,
-        eventList: newEventList,
+        eventList: state.eventList.map((event) =>
+          event.id === action.payLoad.eventId
+            ? {
+                ...event,
+                title: action.payLoad.event?.title,
+                start: action.payLoad.event?.start,
+                end: action.payLoad.event?.end,
+                allDay: action.payLoad.event?.allDay,
+                users: action.payLoad.event?.users,
+                originUser: action.payLoad.event?.originUser,
+                // description: action.payLoad.event?.description,
+              }
+            : event
+        ),
       };
 
     case DELETE_EVENT:

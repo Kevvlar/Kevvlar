@@ -178,15 +178,14 @@ const CalendarPage = ({ addNewEvent, eventList, updateEvent, removeEvent }) => {
 
       newEventList.splice(index, 1, newEvent);
       setMyEvents(newEventList);
-      // updateEvent(tempEvent.id, newEvent);
-      console.log("UP: ", newEvent);
-      console.log("Li :", newEventList);
+      updateEvent(tempEvent.id, newEvent);
       // here you can update the event in your storage as well
       // ...
     } else {
       // add the new event to the list
       setMyEvents([...myEvents, newEvent]);
       addNewEvent(newEvent);
+      console.log(newEvent);
       // here you can add the event to your storage as well
       // ...
     }
@@ -222,7 +221,7 @@ const CalendarPage = ({ addNewEvent, eventList, updateEvent, removeEvent }) => {
         });
       });
     },
-    [myEvents]
+    [myEvents, removeEvent]
   );
 
   // handle popup form changes
@@ -329,10 +328,13 @@ const CalendarPage = ({ addNewEvent, eventList, updateEvent, removeEvent }) => {
     [deleteEvent]
   );
 
-  const onEventUpdated = React.useCallback((args) => {
-    // here you can update the event in your storage as well, after drag & drop or resize
-    // console.log("Add update code: ", args.event);
-  }, []);
+  const onEventUpdated = React.useCallback(
+    (args) => {
+      // here you can update the event in your storage as well, after drag & drop or resize
+      updateEvent(args.event.id, args.event);
+    },
+    [updateEvent]
+  );
 
   // datepicker options
   const controls = React.useMemo(
