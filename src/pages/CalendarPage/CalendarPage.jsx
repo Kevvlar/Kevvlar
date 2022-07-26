@@ -327,10 +327,14 @@ const CalendarPage = ({ addNewEvent, eventList, updateEvent, removeEvent }) => {
     [deleteEvent]
   );
 
-  const onEventUpdated = React.useCallback((args) => {
-    // here you can update the event in your storage as well, after drag & drop or resize
-    // ...
-  }, []);
+  const onEventUpdated = React.useCallback(
+    (args) => {
+      // here you can update the event in your storage as well, after drag & drop or resize
+      // ...
+      updateEvent(args.event.id, args.event);
+    },
+    [updateEvent]
+  );
 
   // datepicker options
   const controls = React.useMemo(
