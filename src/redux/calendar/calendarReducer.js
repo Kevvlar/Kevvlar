@@ -30,7 +30,7 @@ const calendarReducer = (state = initialState, action) => {
                 allDay: action.payLoad.event?.allDay,
                 users: action.payLoad.event?.users,
                 originUser: action.payLoad.event?.originUser,
-                // description: action.payLoad.event?.description,
+                description: action.payLoad.event?.description,
               }
             : event
         ),

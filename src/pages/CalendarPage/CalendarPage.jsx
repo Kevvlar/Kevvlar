@@ -162,7 +162,7 @@ const CalendarPage = ({ addNewEvent, eventList, updateEvent, removeEvent }) => {
 
   const saveEvent = React.useCallback(() => {
     const newEvent = {
-      id: uuidv4(),
+      id: isEdit ? tempEvent.id : uuidv4(),
       title: popupEventTitle,
       description: popupEventDescription,
       start: popupEventDate[0],
@@ -309,7 +309,6 @@ const CalendarPage = ({ addNewEvent, eventList, updateEvent, removeEvent }) => {
 
   const onEventCreated = React.useCallback(
     (args) => {
-      // createNewEvent(args.event, args.target)
       setEdit(false);
       setTempEvent(args.event);
       // fill popup form with event data
@@ -328,13 +327,10 @@ const CalendarPage = ({ addNewEvent, eventList, updateEvent, removeEvent }) => {
     [deleteEvent]
   );
 
-  const onEventUpdated = React.useCallback(
-    (args) => {
-      // here you can update the event in your storage as well, after drag & drop or resize
-      updateEvent(args.event.id, args.event);
-    },
-    [updateEvent]
-  );
+  const onEventUpdated = React.useCallback((args) => {
+    // here you can update the event in your storage as well, after drag & drop or resize
+    // ...
+  }, []);
 
   // datepicker options
   const controls = React.useMemo(
@@ -420,20 +416,6 @@ const CalendarPage = ({ addNewEvent, eventList, updateEvent, removeEvent }) => {
     );
   };
 
-  const renderScheduleEvent = React.useCallback((data) => {
-    return (
-      <div className="event-container">
-        <h5>{data.title}</h5>
-        <div>
-          {data.original.users &&
-            data.original.users.map((user, index) => (
-              <span key={index}>{user.name}</span>
-            ))}
-        </div>
-      </div>
-    );
-  }, []);
-
   return (
     <div>
       <Eventcalendar
@@ -444,10 +426,10 @@ const CalendarPage = ({ addNewEvent, eventList, updateEvent, removeEvent }) => {
         themeVariant="dark"
         view={calView}
         data={myEvents}
-        clickToCreate="double"
-        dragToCreate={true}
+        clickToCreate={true}
         dragToMove={true}
         dragToResize={true}
+        eventDelete={true}
         selectedDate={mySelectedDate}
         onSelectedDateChange={onSelectedDateChange}
         onEventClick={onEventClick}
@@ -455,7 +437,6 @@ const CalendarPage = ({ addNewEvent, eventList, updateEvent, removeEvent }) => {
         onEventDeleted={onEventDeleted}
         onEventUpdated={onEventUpdated}
         renderHeader={customWithNavButtons}
-        renderScheduleEvent={renderScheduleEvent}
         cssClass="md-switching-view-cont"
       />
       <Popup
