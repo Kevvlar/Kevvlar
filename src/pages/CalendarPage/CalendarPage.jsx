@@ -185,7 +185,6 @@ const CalendarPage = ({ addNewEvent, eventList, updateEvent, removeEvent }) => {
       // add the new event to the list
       setMyEvents([...myEvents, newEvent]);
       addNewEvent(newEvent);
-      console.log(newEvent);
       // here you can add the event to your storage as well
       // ...
     }

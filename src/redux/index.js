@@ -110,4 +110,5 @@ export {
   editEvent,
   deletEvent,
   clearEvent,
+  fetchEvents,
 } from "./calendar/calendarActions";

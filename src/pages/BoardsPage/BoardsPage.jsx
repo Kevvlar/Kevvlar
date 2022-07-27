@@ -78,6 +78,7 @@ const mapStateToProps = (state) => {
     user: state.user.userData,
     boardState: state.board.loading,
     modalType: state.modal.modalType,
+    selectBoardId: state.board.selectBoard.id,
   };
 };
 

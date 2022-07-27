@@ -33,6 +33,7 @@ import {
   fetchBoard,
   setCurrentColumnData,
   fetchCard,
+  fetchEvents,
 } from "../../redux";
 
 import "./activityPage.css";
@@ -62,6 +63,7 @@ class MainPage extends React.Component {
       socket.emit("newUser", this.props.user._id);
       socket.emit("join-board", this.props.boardId);
       this.props.getColumns(this.props.user.token, this.props.boardId);
+      this.props.getEvents(this.props.user.token, this.props.boardId);
     }
 
     window.onoffline = () => {
@@ -201,6 +203,7 @@ const mapDispatchToProps = (dispatch) => {
     getColumnData: (columnObj) => dispatch(setCurrentColumnData(columnObj)),
     getCard: (token, boardId, cardId) =>
       dispatch(fetchCard(token, boardId, cardId)),
+    getEvents: (token, boardId) => dispatch(fetchEvents(token, boardId)),
   };
 };
 
