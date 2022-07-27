@@ -24,7 +24,7 @@ import {
 import "@mobiscroll/react/dist/css/mobiscroll.react.min.css";
 import "./calendarPage.css";
 
-import { addEvent, editEvent, deletEvent } from "../../redux";
+import { addEvent, addEventServer, editEvent, deletEvent } from "../../redux";
 
 // setup Mobiscroll Moment plugin
 momentTimezone.moment = moment;
@@ -66,7 +66,15 @@ const myUsers = [
   },
 ];
 
-const CalendarPage = ({ addNewEvent, eventList, updateEvent, removeEvent }) => {
+const CalendarPage = ({
+  user,
+  boardId,
+  addNewEvent,
+  createEventServer,
+  eventList,
+  updateEvent,
+  removeEvent,
+}) => {
   const [myEvents, setMyEvents] = React.useState(eventList);
   const [tempEvent, setTempEvent] = React.useState(null);
   const [isOpen, setOpen] = React.useState(false);
@@ -169,7 +177,13 @@ const CalendarPage = ({ addNewEvent, eventList, updateEvent, removeEvent }) => {
       end: popupEventDate[1],
       allDay: popupEventAllDay,
       users: selectUsers,
-      originUser: myUsers[0],
+      originUser: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        photo: user.photo,
+      },
+      boardId: boardId,
     };
     if (isEdit) {
       // update the event in the list
@@ -183,8 +197,10 @@ const CalendarPage = ({ addNewEvent, eventList, updateEvent, removeEvent }) => {
       // ...
     } else {
       // add the new event to the list
+
       setMyEvents([...myEvents, newEvent]);
       addNewEvent(newEvent);
+      createEventServer(user.token, boardId, newEvent);
       // here you can add the event to your storage as well
       // ...
     }
@@ -202,6 +218,9 @@ const CalendarPage = ({ addNewEvent, eventList, updateEvent, removeEvent }) => {
     selectUsers,
     addNewEvent,
     updateEvent,
+    createEventServer,
+    user,
+    boardId,
   ]);
 
   const deleteEvent = React.useCallback(
@@ -536,12 +555,15 @@ const mapStateToProps = (state) => {
   return {
     user: state.user.userData,
     eventList: state.calendar.eventList,
+    boardId: state.board.selectBoard.id,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     addNewEvent: (event) => dispatch(addEvent(event)),
+    createEventServer: (token, boardId, eventObj) =>
+      dispatch(addEventServer(token, boardId, eventObj)),
     updateEvent: (id, event) => dispatch(editEvent(id, event)),
     removeEvent: (id) => dispatch(deletEvent(id)),
   };

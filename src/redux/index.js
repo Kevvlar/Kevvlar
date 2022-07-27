@@ -107,6 +107,7 @@ export {
 
 export {
   addEvent,
+  addEventServer,
   editEvent,
   deletEvent,
   clearEvent,

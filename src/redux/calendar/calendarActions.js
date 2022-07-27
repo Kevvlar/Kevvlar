@@ -6,6 +6,7 @@ import {
   FETCH_EVENTS_REQUEST,
   FETCH_EVENTS_SUCCESS,
   FETCH_EVENTS_FAILURE,
+  ADD_NEW_EVENT_SERVER_FAILURE,
 } from "./calendarTypes";
 import axios from "axios";
 
@@ -53,6 +54,31 @@ export const fetchEventsFailure = (error) => {
   return {
     type: FETCH_EVENTS_FAILURE,
     payLoad: error,
+  };
+};
+
+export const addNewEventServerFailure = (error) => {
+  return {
+    type: ADD_NEW_EVENT_SERVER_FAILURE,
+    payLoad: error,
+  };
+};
+
+export const addEventServer = (token, boardId, eventObj) => {
+  return (dispatch) => {
+    axios
+      .post(`https://kevvlar.herokuapp.com/api/v1/events`, eventObj, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          boardId,
+        },
+      })
+      .catch((error) => {
+        dispatch(addNewEventServerFailure(error.message));
+      });
   };
 };
 

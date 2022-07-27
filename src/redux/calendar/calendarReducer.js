@@ -6,6 +6,7 @@ import {
   FETCH_EVENTS_REQUEST,
   FETCH_EVENTS_SUCCESS,
   FETCH_EVENTS_FAILURE,
+  ADD_NEW_EVENT_SERVER_FAILURE,
 } from "./calendarTypes";
 
 const initialState = {
@@ -35,6 +36,12 @@ const calendarReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        error: action.payLoad,
+      };
+
+    case ADD_NEW_EVENT_SERVER_FAILURE:
+      return {
+        ...state,
         error: action.payLoad,
       };
 
