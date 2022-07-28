@@ -30,6 +30,7 @@ import {
   editEvent,
   editEventServer,
   deletEvent,
+  deleteEventServer,
 } from "../../redux";
 
 // setup Mobiscroll Moment plugin
@@ -81,6 +82,7 @@ const CalendarPage = ({
   updateEvent,
   updateEventServer,
   removeEvent,
+  removeEventServer,
 }) => {
   const [myEvents, setMyEvents] = React.useState(eventList);
   const [tempEvent, setTempEvent] = React.useState(null);
@@ -236,19 +238,9 @@ const CalendarPage = ({
     (event) => {
       setMyEvents(myEvents.filter((item) => item.id !== event.id));
       removeEvent(event.id);
-      setTimeout(() => {
-        snackbar({
-          button: {
-            action: () => {
-              setMyEvents((prevEvents) => [...prevEvents, event]);
-            },
-            text: "Undo",
-          },
-          message: "Event deleted",
-        });
-      });
+      removeEventServer(user.token, boardId, event.id);
     },
-    [myEvents, removeEvent]
+    [myEvents, removeEvent, removeEventServer, user, boardId]
   );
 
   // handle popup form changes
@@ -578,6 +570,8 @@ const mapDispatchToProps = (dispatch) => {
     updateEventServer: (token, boardId, eventId, eventObj) =>
       dispatch(editEventServer(token, boardId, eventId, eventObj)),
     removeEvent: (id) => dispatch(deletEvent(id)),
+    removeEventServer: (token, boardId, eventId) =>
+      dispatch(deleteEventServer(token, boardId, eventId)),
   };
 };
 

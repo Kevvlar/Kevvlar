@@ -10,6 +10,8 @@ import {
   ADD_NEW_EVENT_SERVER_FAILURE,
   EDIT_EVENT_SERVER_REQUEST,
   EDIT_EVENT_SERVER_FAILURE,
+  DELETE_EVENT_SERVER_REQUEST,
+  DELETE_EVENT_SERVER_FAILURE,
 } from "./calendarTypes";
 import axios from "axios";
 
@@ -37,26 +39,6 @@ export const deletEvent = (eventId) => {
 export const clearEvents = () => {
   return {
     type: CLEAR_EVENTS,
-  };
-};
-
-export const fetchEventsRequest = () => {
-  return {
-    type: FETCH_EVENTS_REQUEST,
-  };
-};
-
-export const fetchEventsSuccess = (events) => {
-  return {
-    type: FETCH_EVENTS_SUCCESS,
-    payLoad: events,
-  };
-};
-
-export const fetchEventsFailure = (error) => {
-  return {
-    type: FETCH_EVENTS_FAILURE,
-    payLoad: error,
   };
 };
 
@@ -125,6 +107,58 @@ export const editEventServer = (token, boardId, eventId, eventObj) => {
       .catch((error) => {
         dispatch(editEventServerFailure(error.message));
       });
+  };
+};
+
+export const deleteEventServerRequest = () => {
+  return {
+    type: DELETE_EVENT_SERVER_REQUEST,
+  };
+};
+
+export const deleteEventServerFailure = (error) => {
+  return {
+    type: DELETE_EVENT_SERVER_FAILURE,
+    payLoad: error,
+  };
+};
+
+export const deleteEventServer = (token, boardId, eventId) => {
+  return (dispatch) => {
+    dispatch(deleteEventServerRequest());
+    axios
+      .delete(`https://kevvlar.herokuapp.com/api/v1/events/${eventId}`, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          boardId,
+        },
+      })
+      .catch((error) => {
+        dispatch(deleteEventServerFailure(error.message));
+      });
+  };
+};
+
+export const fetchEventsRequest = () => {
+  return {
+    type: FETCH_EVENTS_REQUEST,
+  };
+};
+
+export const fetchEventsSuccess = (events) => {
+  return {
+    type: FETCH_EVENTS_SUCCESS,
+    payLoad: events,
+  };
+};
+
+export const fetchEventsFailure = (error) => {
+  return {
+    type: FETCH_EVENTS_FAILURE,
+    payLoad: error,
   };
 };
 

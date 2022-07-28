@@ -111,6 +111,7 @@ export {
   editEvent,
   editEventServer,
   deletEvent,
+  deleteEventServer,
   clearEvents,
   fetchEvents,
 } from "./calendar/calendarActions";
