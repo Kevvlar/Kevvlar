@@ -4,7 +4,6 @@ import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
 import {
   Eventcalendar,
-  snackbar,
   setOptions,
   Popup,
   Button,
@@ -52,28 +51,9 @@ const responsivePopup = {
   },
 };
 
-const myUsers = [
-  {
-    name: "Evangel",
-    id: 1,
-    photo:
-      "https://res.cloudinary.com/dfsv0vn6z/image/upload/v1655672117/Kevvkar/placeholder_profiles/profile7_inwzaw.jpg",
-  },
-  {
-    name: "Damir",
-    id: 2,
-    photo:
-      "https://res.cloudinary.com/dfsv0vn6z/image/upload/v1655672117/Kevvkar/placeholder_profiles/profile7_inwzaw.jpg",
-  },
-  {
-    name: "Chidi",
-    id: 3,
-    photo:
-      "https://res.cloudinary.com/dfsv0vn6z/image/upload/v1655672117/Kevvkar/placeholder_profiles/profile7_inwzaw.jpg",
-  },
-];
-
 const CalendarPage = ({
+  admins,
+  members,
   user,
   boardId,
   eventList,
@@ -84,6 +64,8 @@ const CalendarPage = ({
   removeEvent,
   removeEventServer,
 }) => {
+  const myUsers = [...admins, ...members];
+
   const [myEvents, setMyEvents] = React.useState(eventList);
   const [tempEvent, setTempEvent] = React.useState(null);
   const [isOpen, setOpen] = React.useState(false);
@@ -558,6 +540,8 @@ const mapStateToProps = (state) => {
     user: state.user.userData,
     eventList: state.calendar.eventList,
     boardId: state.board.selectBoard.id,
+    admins: state.board.selectBoard.admins,
+    members: state.board.selectBoard.members,
   };
 };
 
