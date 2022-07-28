@@ -6,7 +6,10 @@ import {
   FETCH_EVENTS_REQUEST,
   FETCH_EVENTS_SUCCESS,
   FETCH_EVENTS_FAILURE,
+  ADD_NEW_EVENT_SERVER_REQUEST,
   ADD_NEW_EVENT_SERVER_FAILURE,
+  EDIT_EVENT_SERVER_REQUEST,
+  EDIT_EVENT_SERVER_FAILURE,
 } from "./calendarTypes";
 import axios from "axios";
 
@@ -31,7 +34,7 @@ export const deletEvent = (eventId) => {
   };
 };
 
-export const clearEvent = () => {
+export const clearEvents = () => {
   return {
     type: CLEAR_EVENTS,
   };
@@ -57,6 +60,12 @@ export const fetchEventsFailure = (error) => {
   };
 };
 
+export const addNewEventServerRequest = () => {
+  return {
+    type: ADD_NEW_EVENT_SERVER_REQUEST,
+  };
+};
+
 export const addNewEventServerFailure = (error) => {
   return {
     type: ADD_NEW_EVENT_SERVER_FAILURE,
@@ -66,6 +75,7 @@ export const addNewEventServerFailure = (error) => {
 
 export const addEventServer = (token, boardId, eventObj) => {
   return (dispatch) => {
+    dispatch(addNewEventServerRequest());
     axios
       .post(`https://kevvlar.herokuapp.com/api/v1/events`, eventObj, {
         headers: {
@@ -78,6 +88,42 @@ export const addEventServer = (token, boardId, eventObj) => {
       })
       .catch((error) => {
         dispatch(addNewEventServerFailure(error.message));
+      });
+  };
+};
+
+export const editEventServerRequest = () => {
+  return {
+    type: EDIT_EVENT_SERVER_REQUEST,
+  };
+};
+
+export const editEventServerFailure = (error) => {
+  return {
+    type: EDIT_EVENT_SERVER_FAILURE,
+    payLoad: error,
+  };
+};
+
+export const editEventServer = (token, boardId, eventId, eventObj) => {
+  return (dispatch) => {
+    dispatch(editEventServerRequest());
+    axios
+      .patch(
+        `https://kevvlar.herokuapp.com/api/v1/events/${eventId}`,
+        eventObj,
+        {
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          params: {
+            boardId,
+          },
+        }
+      )
+      .catch((error) => {
+        dispatch(editEventServerFailure(error.message));
       });
   };
 };
@@ -96,7 +142,6 @@ export const fetchEvents = (token, boardId) => {
       })
       .then((response) => {
         const events = response.data.data.events;
-        console.log(events);
         dispatch(fetchEventsSuccess(events));
       })
       .catch((error) => {

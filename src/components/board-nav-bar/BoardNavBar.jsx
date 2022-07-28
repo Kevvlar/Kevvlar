@@ -15,6 +15,7 @@ import {
   resetIsMe,
   clearCardSearchKey,
   setConferenceModal,
+  clearEvents,
 } from "../../redux";
 
 import { CONFERENCE_MODAL } from "../../redux/modal/modalTypes";
@@ -46,6 +47,7 @@ const BoardNavBar = ({
   isMe,
   clearCardSearch,
   modalType,
+  emptyEvents,
 }) => {
   return (
     <div className="boardnavbar">
@@ -56,6 +58,7 @@ const BoardNavBar = ({
             clearCardSearch();
             clearIsMe();
             emptyColumns();
+            emptyEvents();
             history.push("/boards");
           }}
         >
@@ -167,6 +170,7 @@ const mapDispatchToProps = (dispatch) => {
     sortByMe: () => dispatch(toggleAssignedMe()),
     clearIsMe: () => dispatch(resetIsMe()),
     clearCardSearch: () => dispatch(clearCardSearchKey()),
+    emptyEvents: () => dispatch(clearEvents()),
   };
 };
 

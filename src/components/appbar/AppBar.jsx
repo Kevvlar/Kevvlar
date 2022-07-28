@@ -12,6 +12,7 @@ import {
   resetIsMe,
   clearCardSearchKey,
   setCalendarModal,
+  clearEvents,
 } from "../../redux";
 import { KevvlarLogo } from "../../assets/svg/iconlibrary";
 
@@ -24,6 +25,7 @@ const AppBar = ({
   clearIsMe,
   clearCardSearch,
   showCalendar,
+  emptyEvents,
 }) => (
   <div className="appbar-container">
     <div className="appbar-menu-container">
@@ -34,6 +36,7 @@ const AppBar = ({
             clearCardSearch();
             clearIsMe();
             emptyColumns();
+            emptyEvents();
             history.push("/boards");
           }}
         >
@@ -65,6 +68,7 @@ const mapDispatchToProps = (dispatch) => {
     clearIsMe: () => dispatch(resetIsMe()),
     clearCardSearch: () => dispatch(clearCardSearchKey()),
     showCalendar: () => dispatch(setCalendarModal()),
+    emptyEvents: () => dispatch(clearEvents()),
   };
 };
 

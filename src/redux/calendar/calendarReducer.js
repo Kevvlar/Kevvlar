@@ -6,7 +6,10 @@ import {
   FETCH_EVENTS_REQUEST,
   FETCH_EVENTS_SUCCESS,
   FETCH_EVENTS_FAILURE,
+  ADD_NEW_EVENT_SERVER_REQUEST,
   ADD_NEW_EVENT_SERVER_FAILURE,
+  EDIT_EVENT_SERVER_REQUEST,
+  EDIT_EVENT_SERVER_FAILURE,
 } from "./calendarTypes";
 
 const initialState = {
@@ -39,6 +42,12 @@ const calendarReducer = (state = initialState, action) => {
         error: action.payLoad,
       };
 
+    case ADD_NEW_EVENT_SERVER_REQUEST:
+      return {
+        ...state,
+        error: "",
+      };
+
     case ADD_NEW_EVENT_SERVER_FAILURE:
       return {
         ...state,
@@ -49,6 +58,18 @@ const calendarReducer = (state = initialState, action) => {
       return {
         ...state,
         eventList: [...state.eventList, action.payLoad],
+      };
+
+    case EDIT_EVENT_SERVER_REQUEST:
+      return {
+        ...state,
+        error: "",
+      };
+
+    case EDIT_EVENT_SERVER_FAILURE:
+      return {
+        ...state,
+        error: action.payLoad,
       };
 
     case EDIT_EVENT:
@@ -79,6 +100,7 @@ const calendarReducer = (state = initialState, action) => {
     case CLEAR_EVENTS:
       return {
         ...state,
+        error: "",
         eventList: [],
       };
 

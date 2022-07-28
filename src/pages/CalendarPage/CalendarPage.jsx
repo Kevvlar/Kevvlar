@@ -24,7 +24,13 @@ import {
 import "@mobiscroll/react/dist/css/mobiscroll.react.min.css";
 import "./calendarPage.css";
 
-import { addEvent, addEventServer, editEvent, deletEvent } from "../../redux";
+import {
+  addEvent,
+  addEventServer,
+  editEvent,
+  editEventServer,
+  deletEvent,
+} from "../../redux";
 
 // setup Mobiscroll Moment plugin
 momentTimezone.moment = moment;
@@ -69,10 +75,11 @@ const myUsers = [
 const CalendarPage = ({
   user,
   boardId,
+  eventList,
   addNewEvent,
   createEventServer,
-  eventList,
   updateEvent,
+  updateEventServer,
   removeEvent,
 }) => {
   const [myEvents, setMyEvents] = React.useState(eventList);
@@ -193,6 +200,7 @@ const CalendarPage = ({
       newEventList.splice(index, 1, newEvent);
       setMyEvents(newEventList);
       updateEvent(tempEvent.id, newEvent);
+      updateEventServer(user.token, boardId, newEvent.id, newEvent);
       // here you can update the event in your storage as well
       // ...
     } else {
@@ -221,6 +229,7 @@ const CalendarPage = ({
     createEventServer,
     user,
     boardId,
+    updateEventServer,
   ]);
 
   const deleteEvent = React.useCallback(
@@ -350,8 +359,9 @@ const CalendarPage = ({
       // here you can update the event in your storage as well, after drag & drop or resize
       // ...
       updateEvent(args.event.id, args.event);
+      updateEventServer(user.token, boardId, args.event.id, args.event);
     },
-    [updateEvent]
+    [updateEvent, updateEventServer, user, boardId]
   );
 
   // datepicker options
@@ -565,6 +575,8 @@ const mapDispatchToProps = (dispatch) => {
     createEventServer: (token, boardId, eventObj) =>
       dispatch(addEventServer(token, boardId, eventObj)),
     updateEvent: (id, event) => dispatch(editEvent(id, event)),
+    updateEventServer: (token, boardId, eventId, eventObj) =>
+      dispatch(editEventServer(token, boardId, eventId, eventObj)),
     removeEvent: (id) => dispatch(deletEvent(id)),
   };
 };
