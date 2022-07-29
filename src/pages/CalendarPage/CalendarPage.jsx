@@ -20,6 +20,7 @@ import {
   momentTimezone,
   Checkbox,
 } from "@mobiscroll/react";
+import socket from "../../Socket";
 import "@mobiscroll/react/dist/css/mobiscroll.react.min.css";
 import "./calendarPage.css";
 
@@ -66,7 +67,6 @@ const CalendarPage = ({
 }) => {
   const myUsers = [...admins, ...members];
 
-  const [myEvents, setMyEvents] = React.useState(eventList);
   const [tempEvent, setTempEvent] = React.useState(null);
   const [isOpen, setOpen] = React.useState(false);
   const [isEdit, setEdit] = React.useState(false);
@@ -178,20 +178,16 @@ const CalendarPage = ({
     };
     if (isEdit) {
       // update the event in the list
-      const index = myEvents.findIndex((x) => x.id === tempEvent.id);
-      const newEventList = [...myEvents];
-
-      newEventList.splice(index, 1, newEvent);
-      setMyEvents(newEventList);
       updateEvent(tempEvent.id, newEvent);
+      socket.emit("update-event", { id: tempEvent.id, event: newEvent });
       updateEventServer(user.token, boardId, newEvent.id, newEvent);
+
       // here you can update the event in your storage as well
       // ...
     } else {
       // add the new event to the list
-
-      setMyEvents([...myEvents, newEvent]);
       addNewEvent(newEvent);
+      socket.emit("create-event", newEvent);
       createEventServer(user.token, boardId, newEvent);
       // here you can add the event to your storage as well
       // ...
@@ -201,7 +197,6 @@ const CalendarPage = ({
     setOpen(false);
   }, [
     isEdit,
-    myEvents,
     popupEventAllDay,
     popupEventDate,
     popupEventDescription,
@@ -218,11 +213,11 @@ const CalendarPage = ({
 
   const deleteEvent = React.useCallback(
     (event) => {
-      setMyEvents(myEvents.filter((item) => item.id !== event.id));
       removeEvent(event.id);
+      socket.emit("delete-event", event.id);
       removeEventServer(user.token, boardId, event.id);
     },
-    [myEvents, removeEvent, removeEventServer, user, boardId]
+    [removeEvent, removeEventServer, user, boardId]
   );
 
   // handle popup form changes
@@ -333,6 +328,7 @@ const CalendarPage = ({
       // here you can update the event in your storage as well, after drag & drop or resize
       // ...
       updateEvent(args.event.id, args.event);
+      socket.emit("update-event", { id: args.event.id, event: args.event });
       updateEventServer(user.token, boardId, args.event.id, args.event);
     },
     [updateEvent, updateEventServer, user, boardId]
@@ -397,10 +393,11 @@ const CalendarPage = ({
   const onClose = React.useCallback(() => {
     if (!isEdit) {
       // refresh the list, if add popup was canceled, to remove the temporary event
-      setMyEvents([...myEvents]);
+      // setMyEvents([...myEvents]);
+      setTempEvent(null);
     }
     setOpen(false);
-  }, [isEdit, myEvents]);
+  }, [isEdit]);
 
   const customWithNavButtons = () => {
     return (
@@ -431,7 +428,7 @@ const CalendarPage = ({
         theme="auto"
         themeVariant="dark"
         view={calView}
-        data={myEvents}
+        data={eventList}
         clickToCreate={true}
         dragToMove={true}
         dragToResize={true}

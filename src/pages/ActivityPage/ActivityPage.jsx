@@ -34,6 +34,9 @@ import {
   setCurrentColumnData,
   fetchCard,
   fetchEvents,
+  addEvent,
+  editEvent,
+  deletEvent,
 } from "../../redux";
 
 import "./activityPage.css";
@@ -76,6 +79,19 @@ class MainPage extends React.Component {
 
     socket.off("kill").on("kill", (data) => {
       console.log(data);
+    });
+
+    socket.off("receive-event-new").on("receive-event-new", (data) => {
+      this.props.addNewEvent(data);
+    });
+
+    socket.off("receive-event-update").on("receive-event-update", (data) => {
+      console.log(data);
+      this.props.updateEvent(data.id, data.event);
+    });
+
+    socket.off("receive-event-delete").on("receive-event-delete", (id) => {
+      this.props.removeEvent(id);
     });
 
     socket.off("receive-column-order").on("receive-column-order", (data) => {
@@ -136,6 +152,12 @@ class MainPage extends React.Component {
     socket.off("kill");
 
     socket.off("receive-new-column");
+
+    socket.off("receive-event-new");
+
+    socket.off("receive-event-update");
+
+    socket.off("receive-event-delete");
 
     socket.off("receive-column-order");
 
@@ -204,6 +226,9 @@ const mapDispatchToProps = (dispatch) => {
     getCard: (token, boardId, cardId) =>
       dispatch(fetchCard(token, boardId, cardId)),
     getEvents: (token, boardId) => dispatch(fetchEvents(token, boardId)),
+    addNewEvent: (event) => dispatch(addEvent(event)),
+    updateEvent: (id, event) => dispatch(editEvent(id, event)),
+    removeEvent: (id) => dispatch(deletEvent(id)),
   };
 };
 
